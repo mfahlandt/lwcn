@@ -1,0 +1,64 @@
+<svg width="400px" height="250px" viewBox="0 0 400 250" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Last Week in Cloud Native - Final Organic Logo</title>
+
+    <g id="Cloud-Network" stroke="#50C8B4" stroke-width="3" fill="#50C8B4" stroke-linecap="round" stroke-linejoin="round">
+
+        <g id="Network-Lines" fill="none">
+            <path d="M100,60 C100,30 140,25 150,30 C160,10 240,10 250,30 C260,25 300,30 300,60 C330,60 350,90 340,130 C340,170 300,190 250,185 C230,210 170,210 150,185 C100,190 60,170 60,130 C50,90 70,60 100,60 Z" stroke-width="4"/>
+
+            <path d="M100,60 L150,80 L150,30"/>
+            <path d="M150,30 L200,60 L250,30"/>
+            <path d="M250,30 L250,80 L300,60"/>
+            <path d="M300,60 L315,100 L340,130"/>
+            <path d="M340,130 L290,140 L250,185"/>
+            <path d="M250,185 L200,165 L150,185"/>
+            <path d="M150,185 L110,140 L60,130"/>
+            <path d="M60,130 L85,100 L100,60"/>
+
+            <path d="M150,80 L200,85 L250,80"/>
+            <path d="M150,80 L130,130 L110,140"/>
+            <path d="M250,80 L270,130 L290,140"/>
+            <path d="M130,130 L200,145 L270,130"/>
+        </g>
+
+        <g id="Network-Nodes" stroke="none">
+            <circle cx="100" cy="60" r="7"/>
+            <circle cx="150" cy="30" r="7"/>
+            <circle cx="200" cy="15" r="7"/> <circle cx="250" cy="30" r="7"/>
+            <circle cx="300" cy="60" r="7"/>
+
+            <circle cx="340" cy="130" r="7"/>
+            <circle cx="250" cy="185" r="7"/>
+            <circle cx="200" cy="200" r="7"/>
+            <circle cx="150" cy="185" r="7"/>
+            <circle cx="60" cy="130" r="7"/>
+
+            <circle cx="150" cy="80" r="5"/>
+            <circle cx="250" cy="80" r="5"/>
+            <circle cx="200" cy="60" r="5"/>
+            <circle cx="130" cy="130" r="5"/>
+            <circle cx="270" cy="130" r="5"/>
+            <circle cx="200" cy="145" r="5"/>
+            <circle cx="200" cy="85" r="5"/>
+        </g>
+    </g>
+
+    <g id="Calendar-Deckblatt" transform="translate(165, 80)">
+        <rect x="3" y="3" width="70" height="85" rx="5" fill="black" opacity="0.1"/>
+
+        <rect x="0" y="0" width="70" height="85" rx="5" fill="#FFFFFF" stroke="#FF9F43" stroke-width="3"/>
+
+        <path d="M0,5 C0,2.2 2.2,0 5,0 L65,0 C67.8,0 70,2.2 70,5 L70,20 L0,20 L0,5 Z" fill="#FF9F43"/>
+
+        <rect x="15" y="-8" width="8" height="15" rx="4" fill="#FF9F43" stroke="#FFFFFF" stroke-width="2"/>
+        <rect x="47" y="-8" width="8" height="15" rx="4" fill="#FF9F43" stroke="#FFFFFF" stroke-width="2"/>
+
+        <g transform="translate(10, 30) scale(1.2)">
+            <path d="M36,18 C36,11 30,10 25,10 L19,10 L19,4 L10,11 L19,18 L19,13 L25,13 C28,13 31,14 31,18" fill="none" stroke="#FF9F43" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M19,4 L10,11 L19,18 Z" fill="#FF9F43"/>
+        </g>
+
+        <line x1="15" y1="70" x2="55" y2="70" stroke="#FF9F43" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+        <line x1="15" y1="76" x2="40" y2="76" stroke="#FF9F43" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+    </g>
+</svg>

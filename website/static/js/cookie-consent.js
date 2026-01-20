@@ -1,15 +1,56 @@
 (function() {
   const CONSENT_KEY = 'lwcn_cookie_consent';
+  const CONSENT_VERSION = '1'; // Increment to reset consent for all users
   const consentBanner = document.getElementById('cookie-consent');
+  const consentOverlay = document.getElementById('cookie-consent-overlay');
   const acceptBtn = document.getElementById('cookie-accept');
   const declineBtn = document.getElementById('cookie-decline');
 
+  // Use both localStorage and cookies for maximum compatibility
   function getConsent() {
-    return localStorage.getItem(CONSENT_KEY);
+    // Try localStorage first
+    try {
+      const stored = localStorage.getItem(CONSENT_KEY);
+      if (stored) {
+        const data = JSON.parse(stored);
+        if (data.version === CONSENT_VERSION) {
+          return data.consent;
+        }
+      }
+    } catch (e) {}
+
+    // Fallback to cookie
+    const match = document.cookie.match(new RegExp('(^| )' + CONSENT_KEY + '=([^;]+)'));
+    if (match) {
+      try {
+        const data = JSON.parse(decodeURIComponent(match[2]));
+        if (data.version === CONSENT_VERSION) {
+          return data.consent;
+        }
+      } catch (e) {}
+    }
+
+    return null;
   }
 
   function setConsent(value) {
-    localStorage.setItem(CONSENT_KEY, value);
+    const data = {
+      consent: value,
+      version: CONSENT_VERSION,
+      timestamp: new Date().toISOString()
+    };
+
+    // Store in localStorage
+    try {
+      localStorage.setItem(CONSENT_KEY, JSON.stringify(data));
+    } catch (e) {}
+
+    // Also store as cookie (expires in 1 year)
+    const expires = new Date();
+    expires.setFullYear(expires.getFullYear() + 1);
+    document.cookie = CONSENT_KEY + '=' + encodeURIComponent(JSON.stringify(data)) +
+      ';expires=' + expires.toUTCString() +
+      ';path=/;SameSite=Lax;Secure';
   }
 
   function loadGoogleAnalytics() {
@@ -17,6 +58,10 @@
     if (!gaId || gaId === '' || gaId.startsWith('G-XXXX')) {
       return;
     }
+
+    // Prevent double loading
+    if (window.gaLoaded) return;
+    window.gaLoaded = true;
 
     // Load gtag.js
     const script = document.createElement('script');
@@ -36,20 +81,32 @@
     if (consentBanner) {
       consentBanner.style.display = 'block';
     }
+    if (consentOverlay) {
+      consentOverlay.style.display = 'block';
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
   }
 
   function hideBanner() {
     if (consentBanner) {
       consentBanner.style.display = 'none';
     }
+    if (consentOverlay) {
+      consentOverlay.style.display = 'none';
+      document.body.style.overflow = ''; // Re-enable scrolling
+    }
   }
 
-  // Check existing consent
+  // Check existing consent on page load
   const consent = getConsent();
 
   if (consent === 'accepted') {
     loadGoogleAnalytics();
-  } else if (consent === null) {
+    hideBanner();
+  } else if (consent === 'declined') {
+    hideBanner();
+  } else {
+    // No consent yet - show banner
     showBanner();
   }
 

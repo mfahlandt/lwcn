@@ -1,79 +1,138 @@
+<!-- Cookie Consent Overlay - blocks interaction until user decides -->
+<div id="cookie-consent-overlay" class="cookie-consent-overlay" style="display: none;"></div>
+
+<!-- Cookie Consent Modal -->
 <div id="cookie-consent" class="cookie-consent" style="display: none;">
   <div class="cookie-consent-content">
+    <div class="cookie-consent-icon">🍪</div>
+    <h3 class="cookie-consent-title">Cookie Settings</h3>
     <p>
       We use cookies to analyze website traffic and optimize your experience.
-      By clicking "Accept", you consent to our use of cookies.
-      <a href="/datenschutz/">Learn more</a>
+      By clicking "Accept", you consent to our use of Google Analytics cookies.
+      <a href="/datenschutz/">Learn more about our privacy policy</a>
     </p>
     <div class="cookie-consent-buttons">
-      <button id="cookie-accept" class="cookie-btn accept">Accept</button>
+      <button id="cookie-accept" class="cookie-btn accept">Accept All</button>
       <button id="cookie-decline" class="cookie-btn decline">Decline</button>
     </div>
   </div>
 </div>
 
 <style>
-.cookie-consent {
+/* Overlay to block page interaction */
+.cookie-consent-overlay {
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
-  background: #2d3748;
-  color: #fff;
-  padding: 1rem;
-  z-index: 9999;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9998;
+  backdrop-filter: blur(2px);
 }
 
-.cookie-consent-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+/* Cookie consent modal */
+.cookie-consent {
+  position: fixed;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  background: #1a202c;
+  color: #fff;
+  padding: 2rem;
+  z-index: 9999;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+}
+
+.cookie-consent-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.cookie-consent-title {
+  font-size: 1.5rem;
+  margin: 0 0 1rem 0;
+  color: #fff;
 }
 
 .cookie-consent-content p {
-  margin: 0;
-  flex: 1;
-  min-width: 300px;
+  margin: 0 0 1.5rem 0;
+  color: #a0aec0;
+  line-height: 1.6;
 }
 
 .cookie-consent-content a {
   color: #63b3ed;
+  text-decoration: underline;
+}
+
+.cookie-consent-content a:hover {
+  color: #90cdf4;
 }
 
 .cookie-consent-buttons {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .cookie-btn {
-  padding: 0.5rem 1.5rem;
+  padding: 0.75rem 2rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   font-weight: 600;
-  transition: background 0.2s;
+  font-size: 1rem;
+  transition: all 0.2s;
+  min-width: 140px;
 }
 
 .cookie-btn.accept {
-  background: #48bb78;
+  background: linear-gradient(135deg, #48bb78, #38a169);
   color: #fff;
 }
 
 .cookie-btn.accept:hover {
-  background: #38a169;
+  background: linear-gradient(135deg, #38a169, #2f855a);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
 }
 
 .cookie-btn.decline {
-  background: #718096;
-  color: #fff;
+  background: transparent;
+  color: #a0aec0;
+  border: 2px solid #4a5568;
 }
 
 .cookie-btn.decline:hover {
   background: #4a5568;
+  color: #fff;
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .cookie-consent {
+    padding: 1.5rem;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: none;
+    border-radius: 12px 12px 0 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .cookie-consent-buttons {
+    flex-direction: column;
+  }
+
+  .cookie-btn {
+    width: 100%;
+  }
 }
 </style>

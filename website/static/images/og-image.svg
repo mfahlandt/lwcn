@@ -1,0 +1,44 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a202c"/>
+      <stop offset="100%" style="stop-color:#2d3748"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Decorative elements -->
+  <circle cx="100" cy="100" r="200" fill="#667eea" opacity="0.1"/>
+  <circle cx="1100" cy="530" r="250" fill="#764ba2" opacity="0.1"/>
+
+  <!-- Kubernetes wheel icon (simplified) -->
+  <g transform="translate(600, 200)">
+    <circle cx="0" cy="0" r="80" fill="none" stroke="#326ce5" stroke-width="8"/>
+    <circle cx="0" cy="0" r="25" fill="#326ce5"/>
+    <!-- Spokes -->
+    <line x1="0" y1="-80" x2="0" y2="-40" stroke="#326ce5" stroke-width="8"/>
+    <line x1="69" y1="-40" x2="35" y2="-20" stroke="#326ce5" stroke-width="8"/>
+    <line x1="69" y1="40" x2="35" y2="20" stroke="#326ce5" stroke-width="8"/>
+    <line x1="0" y1="80" x2="0" y2="40" stroke="#326ce5" stroke-width="8"/>
+    <line x1="-69" y1="40" x2="-35" y2="20" stroke="#326ce5" stroke-width="8"/>
+    <line x1="-69" y1="-40" x2="-35" y2="-20" stroke="#326ce5" stroke-width="8"/>
+  </g>
+
+  <!-- Title -->
+  <text x="600" y="380" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle">Last Week in Cloud Native</text>
+
+  <!-- Subtitle -->
+  <text x="600" y="440" font-family="system-ui, -apple-system, sans-serif" font-size="32" fill="#a0aec0" text-anchor="middle">Weekly Kubernetes &amp; CNCF Newsletter</text>
+
+  <!-- URL -->
+  <text x="600" y="560" font-family="system-ui, -apple-system, sans-serif" font-size="28" fill="#667eea" text-anchor="middle">lwcn.dev</text>
+
+  <!-- Bottom accent line -->
+  <rect x="400" y="590" width="400" height="4" fill="url(#accent)" rx="2"/>
+</svg>

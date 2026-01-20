@@ -8,8 +8,11 @@
 <section class="latest">
     <h2>Latest Issues</h2>
     <div class="newsletter-grid">
-        {{ range first 5 (where .Site.RegularPages "Section" "newsletter") }}
+        {{ $newsletters := where .Site.RegularPages "Section" "newsletter" }}
+        {{ range first 5 $newsletters }}
+        {{- if not (strings.Contains .File.Path "-articles") }}
         {{ partial "newsletter-card.html" . }}
+        {{- end }}
         {{ end }}
     </div>
     <a href="{{ "newsletter/" | relURL }}" class="btn btn-secondary">View All Issues</a>

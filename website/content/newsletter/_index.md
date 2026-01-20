@@ -1,6 +1,11 @@
 ---
 title: "Newsletter Archive"
-description: "All past issues of Last Week in Cloud Native"
+description: "Browse all past issues of Last Week in Cloud Native - your weekly source for Kubernetes releases, CNCF project updates, and cloud native ecosystem news."
+keywords:
+    - Cloud Native Newsletter Archive
+    - Kubernetes Weekly Updates
+    - CNCF Project Releases
+    - DevOps Newsletter
 ---
 
 ## Subscribe
