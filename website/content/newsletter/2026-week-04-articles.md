@@ -1,7 +1,7 @@
 ---
 title: "Week 4 Articles - January 2026"
 date: "2026-01-20"
-draft: true
+draft: false
 url: "/newsletter/2026-week-04/articles/"
 build:
   list: never
