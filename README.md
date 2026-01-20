@@ -205,6 +205,10 @@ make generate-newsletter # Generate newsletter draft with AI
 make generate-linkedin   # Generate only LinkedIn post
 make newsletter          # Full workflow (crawl + generate)
 
+# Backfill Historical Newsletters
+make backfill            # Generate newsletters for past 3 weeks
+make backfill WEEKS=5    # Generate newsletters for past 5 weeks
+
 # Hugo
 make hugo-serve          # Start Hugo development server
 make hugo-build          # Build Hugo site for production
@@ -226,6 +230,7 @@ lwcn/
 │   ├── release-crawler/    # News crawler CLI (RSS, Heise, HackerNews)
 │   ├── github-releases/    # GitHub releases crawler CLI
 │   ├── ai-processor/       # AI newsletter generator CLI
+│   ├── backfill-newsletter/ # Tool to generate historical newsletters
 │   └── debug-heise/        # Debug tool for Heise scraping
 ├── internal/
 │   ├── ai/                 # Gemini AI integration

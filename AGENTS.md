@@ -29,6 +29,8 @@ lwcn/
 │   │   └── main.go
 │   ├── ai-processor/       # AI newsletter generator CLI
 │   │   └── main.go
+│   ├── backfill-newsletter/ # Tool to generate historical newsletters
+│   │   └── main.go
 │   └── debug-heise/        # Debug tool for Heise scraping
 │       └── main.go
 ├── internal/
@@ -189,6 +191,10 @@ make crawl-all           # Fetch all sources
 make generate-newsletter # Generate newsletter draft with AI
 make generate-linkedin   # Generate only LinkedIn post
 make newsletter          # Full workflow (crawl + generate)
+
+# Backfill Historical Newsletters
+make backfill            # Generate newsletters for past 3 weeks
+make backfill WEEKS=5    # Generate newsletters for past 5 weeks
 
 # Hugo
 make hugo-serve          # Start Hugo dev server

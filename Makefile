@@ -5,6 +5,7 @@ ifeq ($(OS),Windows_NT)
     NEWS_CRAWLER = bin/release-crawler.exe
     GITHUB_RELEASES = bin/github-releases.exe
     AI_PROCESSOR = bin/ai-processor.exe
+    BACKFILL = bin/backfill-newsletter.exe
     MKDIR = if not exist bin mkdir bin
     RM_BIN = if exist bin rmdir /s /q bin
     RM_PUBLIC = if exist website\public rmdir /s /q website\public
@@ -12,6 +13,7 @@ else
     NEWS_CRAWLER = bin/release-crawler
     GITHUB_RELEASES = bin/github-releases
     AI_PROCESSOR = bin/ai-processor
+    BACKFILL = bin/backfill-newsletter
     MKDIR = mkdir -p bin
     RM_BIN = rm -rf bin/
     RM_PUBLIC = rm -rf website/public/
@@ -29,6 +31,7 @@ build:
 	go build -o $(NEWS_CRAWLER) ./cmd/release-crawler
 	go build -o $(GITHUB_RELEASES) ./cmd/github-releases
 	go build -o $(AI_PROCESSOR) ./cmd/ai-processor
+	go build -o $(BACKFILL) ./cmd/backfill-newsletter
 
 # Run tests
 test:
@@ -68,6 +71,13 @@ newsletter: crawl-all generate-newsletter
 	@echo "Newsletter draft generated!"
 	@echo "Review the draft in $(CONTENT_DIR)"
 	@echo "Run 'make hugo-serve' to preview"
+
+# Backfill past weeks (default: 3 weeks)
+# Usage: make backfill WEEKS=3
+WEEKS ?= 3
+backfill: build
+	@echo "Generating newsletters for past $(WEEKS) weeks..."
+	$(BACKFILL) -weeks $(WEEKS) -output $(CONTENT_DIR) -data $(DATA_DIR)
 
 # Debug: Show what's being loaded
 debug-config:

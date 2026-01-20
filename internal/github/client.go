@@ -28,9 +28,14 @@ func NewClient(token string) *Client {
 
 func (c *Client) GetReleasesLastWeek(ctx context.Context, owner, repo, category string) ([]models.Release, error) {
 	oneWeekAgo := time.Now().AddDate(0, 0, -7)
+	return c.GetReleasesInRange(ctx, owner, repo, category, oneWeekAgo, time.Now())
+}
+
+// GetReleasesInRange fetches releases published within the given time range
+func (c *Client) GetReleasesInRange(ctx context.Context, owner, repo, category string, start, end time.Time) ([]models.Release, error) {
 	var releases []models.Release
 
-	opts := &github.ListOptions{PerPage: 30}
+	opts := &github.ListOptions{PerPage: 100}
 	ghReleases, resp, err := c.gh.Repositories.ListReleases(ctx, owner, repo, opts)
 	if err != nil {
 		// Check for rate limit
@@ -42,12 +47,18 @@ func (c *Client) GetReleasesLastWeek(ctx context.Context, owner, repo, category 
 	}
 
 	for _, r := range ghReleases {
-		// Skip drafts and prereleases
+		// Skip drafts
 		if r.GetDraft() {
 			continue
 		}
 
-		if r.PublishedAt == nil || r.PublishedAt.Time.Before(oneWeekAgo) {
+		if r.PublishedAt == nil {
+			continue
+		}
+
+		// Check if release is within the time range
+		publishedAt := r.PublishedAt.Time
+		if publishedAt.Before(start) || publishedAt.After(end) {
 			continue
 		}
 
@@ -73,12 +84,20 @@ func (c *Client) GetReleasesLastWeek(ctx context.Context, owner, repo, category 
 }
 
 func (c *Client) FetchAllReleases(ctx context.Context, repos []models.Repository) ([]models.Release, error) {
+	oneWeekAgo := time.Now().AddDate(0, 0, -7)
+	return c.FetchReleasesInRange(ctx, repos, oneWeekAgo, time.Now())
+}
+
+// FetchReleasesInRange fetches all releases from all repos within the given time range
+func (c *Client) FetchReleasesInRange(ctx context.Context, repos []models.Repository, start, end time.Time) ([]models.Release, error) {
 	var allReleases []models.Release
+
+	log.Printf("Fetching releases from %s to %s", start.Format("2006-01-02"), end.Format("2006-01-02"))
 
 	for i, repo := range repos {
 		log.Printf("[%d/%d] Fetching %s/%s...", i+1, len(repos), repo.Owner, repo.Repo)
 
-		releases, err := c.GetReleasesLastWeek(ctx, repo.Owner, repo.Repo, repo.Category)
+		releases, err := c.GetReleasesInRange(ctx, repo.Owner, repo.Repo, repo.Category, start, end)
 		if err != nil {
 			log.Printf("  Error: %v", err)
 			continue

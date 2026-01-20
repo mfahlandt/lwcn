@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"strings"
+	"unicode/utf8"
 
 	"github.com/google/generative-ai-go/genai"
 	"github.com/mfahlandt/lwcn/internal/models"
@@ -130,8 +131,11 @@ STABLE RELEASES (pre-filtered, no RC/alpha/beta):
 `
 
 	for _, r := range stableReleases {
-		prompt += fmt.Sprintf("\n- %s/%s %s (%s)\n  URL: %s\n  Notes: %s\n",
-			r.RepoOwner, r.RepoName, r.TagName, r.Category, r.URL, truncateText(r.Body, 500))
+		// Sanitize all fields to remove invalid UTF-8 characters
+		body := sanitizeUTF8(r.Body)
+		name := sanitizeUTF8(r.Name)
+		prompt += fmt.Sprintf("\n- %s/%s %s (%s)\n  URL: %s\n  Name: %s\n  Notes: %s\n",
+			r.RepoOwner, r.RepoName, r.TagName, r.Category, r.URL, name, truncateText(body, 500))
 	}
 
 	prompt += fmt.Sprintf("\nTotal: %d stable releases\n", len(stableReleases))
@@ -139,13 +143,16 @@ STABLE RELEASES (pre-filtered, no RC/alpha/beta):
 	prompt += "\n\nNEWS ITEMS (use these to write summaries, DO NOT list them individually):\n"
 
 	for _, n := range news {
+		title := sanitizeUTF8(n.Title)
+		desc := sanitizeUTF8(n.Description)
 		prompt += fmt.Sprintf("\n- [%s] %s\n  URL: %s\n  Description: %s\n",
-			n.Source, n.Title, n.URL, truncateText(n.Description, 200))
+			n.Source, title, n.URL, truncateText(desc, 200))
 	}
 
 	prompt += "\n\nGenerate the newsletter content in Markdown (no code blocks, raw markdown only):"
 
-	return prompt
+	// Final sanitization of entire prompt
+	return sanitizeUTF8(prompt)
 }
 
 // filterStableReleases removes release candidates, alpha, beta, and test releases
@@ -198,10 +205,31 @@ func isPreRelease(tag string) bool {
 }
 
 func truncateText(s string, max int) string {
+	// First sanitize the text to remove invalid UTF-8
+	s = sanitizeUTF8(s)
 	if len(s) <= max {
 		return s
 	}
 	return s[:max] + "..."
+}
+
+// sanitizeUTF8 removes invalid UTF-8 characters from a string
+func sanitizeUTF8(s string) string {
+	if utf8.ValidString(s) {
+		return s
+	}
+	// Replace invalid UTF-8 sequences with empty string
+	v := make([]rune, 0, len(s))
+	for i, r := range s {
+		if r == utf8.RuneError {
+			_, size := utf8.DecodeRuneInString(s[i:])
+			if size == 1 {
+				continue // skip invalid byte
+			}
+		}
+		v = append(v, r)
+	}
+	return string(v)
 }
 
 func buildLinkedInPrompt(releases []models.Release, news []models.NewsItem) string {
@@ -257,7 +285,8 @@ THIS WEEK'S RELEASES:
 	for category, releases := range releasesByCategory {
 		prompt += fmt.Sprintf("\n%s:\n", strings.ToUpper(category))
 		for _, r := range releases {
-			prompt += fmt.Sprintf("- %s %s: %s\n", r.RepoName, r.TagName, truncateText(r.Body, 300))
+			body := sanitizeUTF8(r.Body)
+			prompt += fmt.Sprintf("- %s %s: %s\n", r.RepoName, r.TagName, truncateText(body, 300))
 		}
 	}
 
@@ -269,12 +298,14 @@ THIS WEEK'S RELEASES:
 	newsCount := 0
 	for _, n := range news {
 		if n.Source != "Hacker News" && newsCount < 15 {
-			prompt += fmt.Sprintf("- [%s] %s\n", n.Source, n.Title)
+			title := sanitizeUTF8(n.Title)
+			prompt += fmt.Sprintf("- [%s] %s\n", n.Source, title)
 			newsCount++
 		}
 	}
 
 	prompt += "\n\nGenerate the LinkedIn post (plain text, no markdown, under 3000 characters):"
 
-	return prompt
+	// Final sanitization of entire prompt
+	return sanitizeUTF8(prompt)
 }
