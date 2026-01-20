@@ -99,6 +99,40 @@ You can set your browser so that you are informed about the setting of cookies a
 
 **We use cookies only after you have given your consent through our cookie banner.**
 
+#### Manage Your Cookie Consent
+
+You can change your cookie consent at any time. Click the button below to revoke your current consent and see the cookie banner again:
+
+<div style="margin: 1.5rem 0;">
+  <p id="consent-status" style="margin-bottom: 1rem; padding: 0.75rem; background: var(--surface-color, #353B3C); border-radius: 8px; border: 1px solid var(--border-color, #4A4A4A);">
+    <strong>Current status:</strong> <span id="consent-status-text">Checking...</span>
+  </p>
+  <button id="revoke-consent-btn" onclick="if(window.LWCN_revokeConsent){window.LWCN_revokeConsent();document.getElementById('consent-status-text').textContent='Consent revoked - Banner will appear';}" style="padding: 0.75rem 1.5rem; background: var(--accent-color, #FFAD60); color: #1a1a1a; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem;">
+    Revoke Cookie Consent
+  </button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() {
+    var statusText = document.getElementById('consent-status-text');
+    if (statusText && window.LWCN_getConsentStatus) {
+      var status = window.LWCN_getConsentStatus();
+      if (status === 'accepted') {
+        statusText.textContent = 'Accepted ✓';
+        statusText.style.color = '#40C4AA';
+      } else if (status === 'declined') {
+        statusText.textContent = 'Declined ✗';
+        statusText.style.color = '#FFAD60';
+      } else {
+        statusText.textContent = 'Not yet decided';
+        statusText.style.color = '#B2BEC3';
+      }
+    }
+  }, 100);
+});
+</script>
+
 #### Google Analytics
 
 This website uses functions of the web analytics service Google Analytics, provided that you have consented. The provider is Google Ireland Limited ("Google"), Gordon House, Barrow Street, Dublin 4, Ireland.

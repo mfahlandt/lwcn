@@ -125,4 +125,30 @@
       hideBanner();
     });
   }
+
+  // Global function to revoke cookie consent (can be called from privacy page)
+  window.LWCN_revokeConsent = function() {
+    // Clear localStorage
+    try {
+      localStorage.removeItem(CONSENT_KEY);
+    } catch (e) {}
+
+    // Clear cookie
+    document.cookie = CONSENT_KEY + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;SameSite=Lax;Secure';
+
+    // Show banner again
+    showBanner();
+
+    // Disable GA if it was loaded (user needs to reload for full effect)
+    if (window.gtag) {
+      window['ga-disable-' + window.LWCN_GA_ID] = true;
+    }
+
+    return true;
+  };
+
+  // Get current consent status
+  window.LWCN_getConsentStatus = function() {
+    return getConsent();
+  };
 })();
