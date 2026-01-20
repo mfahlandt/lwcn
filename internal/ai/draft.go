@@ -30,7 +30,7 @@ func (g *DraftGenerator) GenerateDraft(newsletter *models.Newsletter) (string, e
 	metadata := models.DraftMetadata{
 		Title:      title,
 		Date:       now.Format("2006-01-02"),
-		Draft:      true,
+		Draft:      false,
 		Summary:    generateSummary(newsletter),
 		Highlights: extractHighlights(newsletter),
 	}
@@ -89,7 +89,7 @@ func (g *DraftGenerator) generateArticlesPage(newsletter *models.Newsletter, yea
 	content.WriteString(fmt.Sprintf(`---
 title: "Week %d Articles - %s"
 date: "%s"
-draft: true
+draft: false
 url: "/newsletter/%d-week-%02d/articles/"
 build:
   list: never
