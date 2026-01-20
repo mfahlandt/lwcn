@@ -28,11 +28,13 @@ func (g *DraftGenerator) GenerateDraft(newsletter *models.Newsletter) (string, e
 	filename := fmt.Sprintf("%d-week-%02d.md", year, week)
 
 	metadata := models.DraftMetadata{
-		Title:      title,
-		Date:       now.Format("2006-01-02"),
-		Draft:      false,
-		Summary:    generateSummary(newsletter),
-		Highlights: extractHighlights(newsletter),
+		Title:       title,
+		Date:        now.Format("2006-01-02"),
+		Draft:       false,
+		Summary:     generateSummary(newsletter),
+		Description: generateSEODescription(newsletter, week, year),
+		Keywords:    generateKeywords(newsletter),
+		Highlights:  extractHighlights(newsletter),
 	}
 
 	frontmatter, err := yaml.Marshal(metadata)
@@ -189,4 +191,33 @@ func min(a, b int) int {
 		return a
 	}
 	return b
+}
+
+// generateSEODescription creates a SEO-optimized description for the newsletter
+func generateSEODescription(newsletter *models.Newsletter, week, year int) string {
+	highlights := extractHighlights(newsletter)
+	highlightStr := ""
+	if len(highlights) > 0 {
+		maxHighlights := min(4, len(highlights))
+		highlightStr = strings.Join(highlights[:maxHighlights], ", ")
+	}
+
+	return fmt.Sprintf("Cloud Native Newsletter Week %d %d: %s and more Kubernetes ecosystem news.", week, year, highlightStr)
+}
+
+// generateKeywords extracts relevant keywords from the newsletter for SEO
+func generateKeywords(newsletter *models.Newsletter) []string {
+	keywords := []string{
+		"Cloud Native Newsletter",
+		"Kubernetes Releases",
+		"CNCF Projects",
+	}
+
+	// Add highlights as keywords
+	highlights := extractHighlights(newsletter)
+	for _, h := range highlights {
+		keywords = append(keywords, h)
+	}
+
+	return keywords
 }

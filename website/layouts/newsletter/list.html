@@ -2,8 +2,10 @@
 <section class="archive">
     <h1>Newsletter Archive</h1>
     <div class="newsletter-list">
-        {{ range .Pages.ByDate.Reverse }}
+        {{ range where .Pages.ByDate.Reverse "Params.hidden" "!=" true }}
+        {{- if not (strings.Contains .File.Path "-articles") }}
         {{ partial "newsletter-card.html" . }}
+        {{- end }}
         {{ end }}
     </div>
 </section>

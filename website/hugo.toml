@@ -3,6 +3,16 @@ languageCode = 'en'
 title = 'Last Week in Cloud Native'
 theme = 'PaperMod'
 
+# SEO Settings
+enableRobotsTXT = true
+canonifyURLs = true
+
+# Sitemap Configuration
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
 # RSS Feed Configuration
 [outputs]
   home = ["HTML", "RSS", "JSON"]
@@ -14,11 +24,16 @@ theme = 'PaperMod'
     baseName = "feed"
 
 [params]
-  description = "Weekly newsletter covering Cloud Native releases, Kubernetes news, and CNCF ecosystem updates"
+  description = "Weekly newsletter covering Cloud Native releases, Kubernetes news, and CNCF ecosystem updates. Stay informed about the latest in the CNCF ecosystem, including Kubernetes, Helm, ArgoCD, and more."
   author = "LWCN"
   ShowReadingTime = true
   ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowShareButtons = true
   env = "production"
+
+  # SEO params
+  keywords = ["Cloud Native", "Kubernetes", "CNCF", "DevOps", "Newsletter", "Container", "Docker", "Helm", "GitOps", "Service Mesh", "Observability", "Platform Engineering"]
 
   [params.homeInfoParams]
     Title = "Last Week in Cloud Native"

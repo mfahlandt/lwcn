@@ -14,9 +14,11 @@ type Newsletter struct {
 }
 
 type DraftMetadata struct {
-	Title      string   `yaml:"title"`
-	Date       string   `yaml:"date"`
-	Draft      bool     `yaml:"draft"`
-	Summary    string   `yaml:"summary"`
-	Highlights []string `yaml:"highlights"`
+	Title       string   `yaml:"title"`
+	Date        string   `yaml:"date"`
+	Draft       bool     `yaml:"draft"`
+	Summary     string   `yaml:"summary"`
+	Description string   `yaml:"description"`
+	Keywords    []string `yaml:"keywords"`
+	Highlights  []string `yaml:"highlights"`
 }

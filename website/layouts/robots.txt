@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: {{ "sitemap.xml" | absURL }}
+
+# Disallow admin/draft pages
+Disallow: /admin/
+Disallow: /*?*
+
+# Crawl-delay for polite bots
+Crawl-delay: 1
