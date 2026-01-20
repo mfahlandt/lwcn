@@ -1,13 +1,14 @@
-# AGENT.md - AI Assistant Guidelines
+# AGENTS.md - AI Assistant Guidelines
 
 This file provides context and guidelines for AI assistants working with this codebase.
 
 ## Project Overview
 
 **LWCN (Last Week in Cloud Native)** is an automated newsletter generation system that:
-1. Crawls GitHub releases from cloud-native projects
-2. Processes releases using Google Gemini AI to generate summaries
-3. Publishes content via a Hugo static website
+1. Crawls news from multiple sources
+2. Fetches GitHub releases from 100+ CNCF ecosystem repositories
+3. Processes content using Google Gemini AI to generate newsletter summaries and LinkedIn posts
+4. Publishes content via a Hugo static website at [https://lwcn.dev](https://lwcn.dev)
 
 ## Tech Stack
 
@@ -22,13 +23,23 @@ This file provides context and guidelines for AI assistants working with this co
 ``` 
 lwcn/
 ├── cmd/
-│   ├── release-crawler/    # CLI to fetch GitHub releases
+│   ├── release-crawler/    # News crawler CLI (RSS, Heise, HackerNews)
 │   │   └── main.go
-│   └── ai-processor/       # CLI to process releases with AI
+│   ├── github-releases/    # GitHub releases crawler CLI
+│   │   └── main.go
+│   ├── ai-processor/       # AI newsletter generator CLI
+│   │   └── main.go
+│   └── debug-heise/        # Debug tool for Heise scraping
 │       └── main.go
-├── internal/               # Shared internal packages
+├── internal/
+│   ├── ai/                 # Gemini AI integration (draft.go, gemini.go)
+│   ├── config/             # Configuration loader
+│   ├── github/             # GitHub API client
+│   ├── models/             # Data models (news, releases, newsletter)
+│   └── news/               # News fetchers (rss.go, scraper.go, hackernews.go)
 ├── config/
-│   └── repositories.yaml   # List of repos to track
+│   ├── repositories.yaml   # GitHub repos to track (100+ CNCF projects)
+│   └── news-sources.yaml   # RSS feeds, scrape sources, HackerNews keywords
 ├── data/                   # Generated JSON data (gitignored)
 ├── website/
 │   ├── hugo.toml           # Hugo configuration
@@ -37,20 +48,25 @@ lwcn/
 │   │   ├── impressum.md    # Legal imprint (German law)
 │   │   └── datenschutz.md  # Privacy policy (GDPR)
 │   ├── layouts/
-│   │   ├── _default/
+│   │   ├── _default/       # Base templates (baseof.html, single.html)
+│   │   ├── newsletter/     # Newsletter templates (list.html, single.html, rss.xml)
 │   │   └── partials/
 │   │       ├── header.html
 │   │       ├── footer.html
+│   │       ├── newsletter-card.html
 │   │       ├── cookie-consent.html
 │   │       └── cookie-consent-js.html
 │   └── static/
-│       └── js/
-│           └── cookie-consent.js
+│       ├── css/style.css
+│       └── js/cookie-consent.js
 ├── .github/
-│   └── workflows/          # GitHub Actions workflows
+│   └── workflows/
+│       ├── deploy.yml      # Hugo site deployment
+│       ├── newsletter.yml  # Weekly newsletter generation
+│       └── test.yml        # Go tests and linting
 ├── Makefile
 ├── README.md
-└── AGENT.md               # This file
+└── AGENTS.md               # This file
 ```
 
 ## Coding Conventions
@@ -88,11 +104,19 @@ if err != nil {
 
 | File | Purpose |
 |------|---------|
-| `cmd/release-crawler/main.go` | Entry point for release crawler |
-| `cmd/ai-processor/main.go` | Entry point for AI processor |
+| `cmd/release-crawler/main.go` | Entry point for news crawler (RSS, Heise, HackerNews) |
+| `cmd/github-releases/main.go` | Entry point for GitHub releases crawler |
+| `cmd/ai-processor/main.go` | Entry point for AI newsletter generator |
+| `internal/ai/gemini.go` | Gemini API client |
+| `internal/ai/draft.go` | Newsletter draft generation logic |
+| `internal/news/rss.go` | RSS feed parser |
+| `internal/news/scraper.go` | Heise web scraper |
+| `internal/news/hackernews.go` | Hacker News API client |
 | `config/repositories.yaml` | List of GitHub repos to monitor |
+| `config/news-sources.yaml` | RSS feeds, scrape sources, HackerNews config |
 | `website/hugo.toml` | Hugo site configuration |
 | `website/layouts/_default/baseof.html` | Base HTML template |
+| `website/layouts/newsletter/single.html` | Newsletter page template |
 | `.github/workflows/*.yml` | CI/CD pipelines |
 
 ## Common Tasks
@@ -106,6 +130,28 @@ repositories:
     repo: kubernetes
   - owner: new-owner    # Add new entry
     repo: new-repo
+```
+
+### Adding a New RSS Feed
+
+Edit `config/news-sources.yaml`:
+```yaml
+rss_feeds:
+  - name: "CNCF Blog"
+    url: "https://www.cncf.io/feed/"
+  - name: "New Feed"     # Add new entry
+    url: "https://example.com/feed/"
+```
+
+### Adding Hacker News Keywords
+
+Edit `config/news-sources.yaml`:
+```yaml
+hackernews:
+  enabled: true
+  keywords:
+    - "kubernetes"
+    - "new-keyword"      # Add new keyword
 ```
 
 ### Creating a New Hugo Partial
@@ -134,17 +180,25 @@ flag.Parse()
 # Build all binaries
 make build
 
-# Run release crawler
-make crawl-releases
+# Crawling
+make crawl-news          # Fetch news from RSS, Heise, HackerNews
+make crawl-releases      # Fetch GitHub releases from CNCF repos
+make crawl-all           # Fetch all sources
 
-# Run AI processor
-make process-releases
+# Newsletter Generation
+make generate-newsletter # Generate newsletter draft with AI
+make generate-linkedin   # Generate only LinkedIn post
+make newsletter          # Full workflow (crawl + generate)
 
-# Start Hugo dev server
-make hugo-serve
+# Hugo
+make hugo-serve          # Start Hugo dev server
+make hugo-build          # Build Hugo site for production
 
-# Full pipeline
-make run-all
+# Code Quality
+make fmt                 # Format Go code
+make lint                # Run linter
+make test                # Run tests
+make deps                # Download dependencies
 ```
 
 ## Testing
@@ -165,8 +219,6 @@ This project includes GDPR-compliant features:
 - Imprint page (`/impressum/`)
 - IP anonymization enabled for Google Analytics
 
-**Important**: The legal pages contain placeholder text that must be replaced with actual information before deployment.
-
 ## API Rate Limits
 
 - **GitHub API**: 5000 requests/hour with token, 60/hour without
@@ -178,8 +230,18 @@ This project includes GDPR-compliant features:
 
 2. **German Legal Requirements**: This project targets German users, so Impressum and Datenschutz pages are legally required.
 
-3. **Privacy First**: Always load analytics only after user consent.
+3. **Privacy First**: Always load analytics only after user consent. The cookie consent system uses both localStorage and cookies.
 
 4. **File Paths**: Use forward slashes in code, even on Windows.
 
 5. **Generated Content**: Files in `data/` and `website/content/newsletter/` are auto-generated - don't manually edit them.
+
+6. **Three CLIs**: The project has three separate CLI tools:
+   - `release-crawler`: Fetches news (RSS, Heise, HackerNews) → outputs to `data/news-YYYY-MM-DD.json`
+   - `github-releases`: Fetches GitHub releases → outputs to `data/releases-YYYY-MM-DD.json`
+   - `ai-processor`: Generates newsletter from data files → outputs to `website/content/newsletter/`
+
+7. **LinkedIn Posts**: The AI processor can generate LinkedIn posts separately with the `-linkedin` flag.
+
+8. **Weekly Workflow**: The newsletter workflow runs every Monday at 6:00 UTC via GitHub Actions and creates a PR for review.
+

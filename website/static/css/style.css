@@ -49,7 +49,10 @@ body {
     color: var(--text-main);
 }
 .logo:hover { color: var(--primary-color); }
-.logo-icon { font-size: 1.5rem; }
+.logo-img {
+    height: 36px;
+    width: auto;
+}
 .nav-links { display: flex; list-style: none; gap: 1.5rem; }
 .nav-links a {
     color: var(--text-muted);
