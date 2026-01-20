@@ -1,0 +1,43 @@
+<footer class="site-footer">
+  <div class="footer-content">
+    <p>&copy; {{ now.Year }} Last Week in Cloud Native. All rights reserved.</p>
+    <nav class="footer-nav">
+      <a href="/impressum/">Imprint</a>
+      <a href="/datenschutz/">Privacy Policy</a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+.site-footer {
+  background: #1a202c;
+  color: #a0aec0;
+  padding: 2rem 1rem;
+  margin-top: 3rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-nav a {
+  color: #a0aec0;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-nav a:hover {
+  color: #fff;
+}
+</style>

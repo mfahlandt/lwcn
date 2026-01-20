@@ -1,0 +1,15 @@
+- name: newsletter
+  color: "0052CC"
+  description: "Newsletter related"
+
+- name: draft
+  color: "FBCA04"
+  description: "Draft content for review"
+
+- name: dependencies
+  color: "0366D6"
+  description: "Dependency updates"
+
+- name: ci
+  color: "5319E7"
+  description: "CI/CD related"

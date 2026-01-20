@@ -1,0 +1,46 @@
+name: Build & Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Download Dependencies
+        run: go mod download
+
+      - name: Build
+        run: |
+          go build -v ./cmd/release-crawler
+          go build -v ./cmd/github-releases
+          go build -v ./cmd/ai-processor
+
+      - name: Test
+        run: go test -v ./...
+
+  hugo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+
+      - name: Build Hugo Site
+        working-directory: website
+        run: hugo --minify

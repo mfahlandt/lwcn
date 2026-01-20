@@ -1,0 +1,12 @@
+<article class="newsletter-card">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+    <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+    {{ with .Params.summary }}
+    <p>{{ . }}</p>
+    {{ end }}
+    <div class="tags">
+        {{ range .Params.highlights }}
+        <span class="tag">{{ . }}</span>
+        {{ end }}
+    </div>
+</article>

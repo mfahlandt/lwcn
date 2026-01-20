@@ -1,0 +1,65 @@
+# News Sources Configuration for Last Week in Cloud Native
+
+rss_feeds:
+  # CNCF Blog
+  - name: "CNCF Blog"
+    url: "https://www.cncf.io/feed/"
+
+  # Kubernetes Blog
+  - name: "Kubernetes Blog"
+    url: "https://kubernetes.io/feed.xml"
+
+  # The New Stack
+  - name: "The New Stack"
+    url: "https://thenewstack.io/feed/"
+
+  # InfoQ Cloud Native
+  - name: "InfoQ Cloud Native"
+    url: "https://feed.infoq.com/cloud-computing/"
+
+  # AWS Blogs
+  - name: "AWS Open Source"
+    url: "https://aws.amazon.com/blogs/opensource/feed/"
+
+  - name: "AWS Containers"
+    url: "https://aws.amazon.com/blogs/containers/feed/"
+
+  - name: "AWS Compute"
+    url: "https://aws.amazon.com/blogs/compute/feed/"
+
+  # Microsoft / Azure Blogs
+  - name: "Microsoft Open Source"
+    url: "https://cloudblogs.microsoft.com/opensource/feed/"
+
+  - name: "Azure DevOps Blog"
+    url: "https://devblogs.microsoft.com/devops/feed/"
+
+  - name: "Azure Updates"
+    url: "https://azure.microsoft.com/en-us/updates/feed/"
+
+  # Google Cloud
+  - name: "Google Cloud Blog"
+    url: "https://cloud.google.com/blog/rss"
+
+scrape_sources:
+  # Heise with cloud filter
+  - name: "Heise Cloud"
+    url: "https://www.heise.de/thema/Cloud"
+    selector: "article.a-article-teaser"
+
+hackernews:
+  enabled: true
+  keywords:
+    - "kubernetes"
+    - "cloud native"
+    - "cncf"
+    - "docker"
+    - "containerization"
+    - "prometheus"
+    - "envoy"
+    - "istio"
+    - "helm"
+    - "argo"
+    - "flux"
+    - "opentelemetry"
+    - "grafana"

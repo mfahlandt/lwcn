@@ -1,0 +1,17 @@
+{{ define "main" }}
+<section class="hero">
+    <h1>Last Week in Cloud Native</h1>
+    <p class="tagline">Weekly digest of CNCF releases, news, and community updates</p>
+    <a href="{{ "feed.xml" | relURL }}" class="btn btn-primary">Subscribe via RSS</a>
+</section>
+
+<section class="latest">
+    <h2>Latest Issues</h2>
+    <div class="newsletter-grid">
+        {{ range first 5 (where .Site.RegularPages "Section" "newsletter") }}
+        {{ partial "newsletter-card.html" . }}
+        {{ end }}
+    </div>
+    <a href="{{ "newsletter/" | relURL }}" class="btn btn-secondary">View All Issues</a>
+</section>
+{{ end }}

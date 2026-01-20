@@ -1,0 +1,54 @@
+baseURL = 'https://lwcn.dev/'
+languageCode = 'en'
+title = 'Last Week in Cloud Native'
+theme = 'PaperMod'
+
+# RSS Feed Configuration
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  section = ["HTML", "RSS"]
+
+[outputFormats]
+  [outputFormats.RSS]
+    mediaType = "application/rss+xml"
+    baseName = "feed"
+
+[params]
+  description = "Weekly newsletter covering Cloud Native releases, Kubernetes news, and CNCF ecosystem updates"
+  author = "LWCN"
+  ShowReadingTime = true
+  ShowPostNavLinks = true
+  env = "production"
+
+  [params.homeInfoParams]
+    Title = "Last Week in Cloud Native"
+    Content = "Your weekly dose of Cloud Native news, releases, and community highlights. Subscribe via [RSS](/newsletter/feed.xml)."
+
+  [[params.socialIcons]]
+    name = "rss"
+    url = "/newsletter/feed.xml"
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/mfahlandt/lwcn"
+
+[menu]
+  [[menu.main]]
+    name = "Newsletter"
+    url = "/newsletter/"
+    weight = 1
+  [[menu.main]]
+    name = "RSS Feed"
+    url = "/newsletter/feed.xml"
+    weight = 2
+
+# Google Analytics
+[services]
+  [services.googleAnalytics]
+    ID = "G-XXXXXXXXXX"  # Replace with your GA4 Measurement ID
+
+[privacy]
+  [privacy.googleAnalytics]
+    disable = false
+    respectDoNotTrack = true
+    anonymizeIP = true

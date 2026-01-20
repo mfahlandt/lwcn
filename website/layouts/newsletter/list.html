@@ -1,0 +1,10 @@
+{{ define "main" }}
+<section class="archive">
+    <h1>Newsletter Archive</h1>
+    <div class="newsletter-list">
+        {{ range .Pages.ByDate.Reverse }}
+        {{ partial "newsletter-card.html" . }}
+        {{ end }}
+    </div>
+</section>
+{{ end }}

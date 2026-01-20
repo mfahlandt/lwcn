@@ -1,0 +1,108 @@
+name: Generate Weekly Newsletter
+
+on:
+  schedule:
+    # Every Monday at 6:00 UTC
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      skip_ai:
+        description: 'Skip AI generation (only crawl)'
+        required: false
+        default: 'false'
+        type: boolean
+
+env:
+  GO_VERSION: '1.22'
+
+jobs:
+  generate-newsletter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+      - name: Cache Go modules
+        uses: actions/cache@v4
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      - name: Build binaries
+        run: |
+          go mod download
+          go build -o bin/release-crawler ./cmd/release-crawler
+          go build -o bin/github-releases ./cmd/github-releases
+          go build -o bin/ai-processor ./cmd/ai-processor
+
+      - name: Crawl News Sources
+        run: |
+          echo "📰 Crawling RSS feeds, Heise, and Hacker News..."
+          ./bin/release-crawler -config config/news-sources.yaml -output data
+
+      - name: Crawl GitHub Releases
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          echo "🚀 Crawling GitHub releases from CNCF projects..."
+          ./bin/github-releases -config config/repositories.yaml -output data
+
+      - name: Generate Newsletter with AI
+        if: ${{ inputs.skip_ai != 'true' }}
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          echo "🤖 Generating newsletter draft with Gemini AI..."
+          ./bin/ai-processor -output website/content/newsletter
+
+      - name: Get week number
+        id: week
+        run: echo "number=$(date +%V)" >> $GITHUB_OUTPUT
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GH_PAT }}
+          commit-message: "📰 Newsletter draft for Week ${{ steps.week.outputs.number }}"
+          title: "📰 Newsletter Draft - Week ${{ steps.week.outputs.number }}, $(date +%Y)"
+          body: |
+            ## 🗞️ Automated Newsletter Draft
+            
+            This PR contains the automatically generated newsletter for **Week ${{ steps.week.outputs.number }}**.
+            
+            ### 📦 Contents
+            - `data/news-*.json` - Crawled news items
+            - `data/releases-*.json` - GitHub releases
+            - `website/content/newsletter/*.md` - Newsletter draft
+            - `website/content/newsletter/*-linkedin.txt` - LinkedIn post draft
+            
+            ### ✅ Review Checklist
+            - [ ] Review newsletter content for accuracy
+            - [ ] Check release descriptions
+            - [ ] Verify news summaries
+            - [ ] Review LinkedIn post
+            - [ ] Change `draft: true` to `draft: false` when ready
+            
+            ### 🚀 To Publish
+            1. Review and edit the content
+            2. Set `draft: false` in the frontmatter
+            3. Merge this PR
+            4. The site will auto-deploy to GitHub Pages
+            
+            ---
+            *Generated automatically on $(date)*
+          branch: newsletter/week-${{ steps.week.outputs.number }}
+          delete-branch: true
+          labels: |
+            newsletter
+            automated
