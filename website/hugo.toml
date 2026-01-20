@@ -37,7 +37,7 @@ canonifyURLs = true
 
   [params.homeInfoParams]
     Title = "Last Week in Cloud Native"
-    Content = "Your weekly dose of Cloud Native news, releases, and community highlights. Subscribe via [RSS](/newsletter/feed.xml)."
+    Content = "Your weekly dose of Cloud Native news, releases, and community highlights. Subscribe via [Email](#subscribe) or [RSS](/newsletter/feed.xml)."
 
   [[params.socialIcons]]
     name = "rss"

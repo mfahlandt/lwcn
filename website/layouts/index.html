@@ -2,7 +2,28 @@
 <section class="hero">
     <h1>Last Week in Cloud Native</h1>
     <p class="tagline">Weekly digest of CNCF releases, news, and community updates</p>
-    <a href="{{ "feed.xml" | relURL }}" class="btn btn-primary">Subscribe via RSS</a>
+    <div class="hero-buttons">
+        <a href="{{ "feed.xml" | relURL }}" class="btn btn-secondary">Subscribe via RSS</a>
+    </div>
+</section>
+
+<!-- Newsletter Subscribe Section -->
+<section class="subscribe-section" id="subscribe">
+    <div class="subscribe-box">
+        <h2>📬 Get LWCN in your inbox</h2>
+        <p>Subscribe to receive the weekly newsletter every Monday. No spam, unsubscribe anytime.</p>
+        <form
+            action="https://buttondown.com/api/emails/embed-subscribe/lwcn"
+            method="post"
+            target="popupwindow"
+            onsubmit="window.open('https://buttondown.com/lwcn', 'popupwindow')"
+            class="subscribe-form"
+        >
+            <input type="email" name="email" id="bd-email" placeholder="your@email.com" required />
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+        <p class="subscribe-note">Powered by <a href="https://buttondown.com" target="_blank" rel="noopener">Buttondown</a></p>
+    </div>
 </section>
 
 <section class="latest">

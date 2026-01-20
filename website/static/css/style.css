@@ -70,7 +70,7 @@ body {
 .rss-link::before { content: '📡'; }
 
 /* Hero */
-.hero { text-align: center; padding: 4rem 0; }
+.hero { text-align: center; padding: 4rem 0 2rem; }
 .hero h1 {
     font-size: 3rem;
     margin-bottom: 0.5rem;
@@ -79,7 +79,70 @@ body {
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
-.tagline { color: var(--text-muted); font-size: 1.25rem; margin-bottom: 2rem; }
+.tagline { color: var(--text-muted); font-size: 1.25rem; margin-bottom: 1.5rem; }
+.hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* Subscribe Section */
+.subscribe-section {
+    padding: 2rem 0 3rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+.subscribe-box {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 2rem;
+    text-align: center;
+}
+.subscribe-box h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+}
+.subscribe-box > p {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+.subscribe-form {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 500px;
+    margin: 0 auto;
+}
+.subscribe-form input[type="email"] {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    background: var(--bg-color);
+    color: var(--text-main);
+    font-size: 1rem;
+}
+.subscribe-form input[type="email"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+.subscribe-form input[type="email"]::placeholder {
+    color: var(--text-muted);
+}
+.subscribe-note {
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+.subscribe-note a {
+    color: var(--text-muted);
+    text-decoration: underline;
+}
+.subscribe-note a:hover {
+    color: var(--primary-color);
+}
 
 /* Buttons */
 .btn {

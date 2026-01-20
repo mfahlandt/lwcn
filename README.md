@@ -123,7 +123,7 @@ GEMINI_API_KEY=xxx ./bin/ai-processor -output website/content/newsletter -linked
 
 ## GitHub Actions Setup
 
-The project includes three automated workflows:
+The project includes four automated workflows:
 
 ### Workflows
 
@@ -131,6 +131,7 @@ The project includes three automated workflows:
 |----------|------|---------|-------------|
 | **Deploy** | `.github/workflows/deploy.yml` | Push to main | Builds and deploys Hugo site to GitHub Pages |
 | **Newsletter** | `.github/workflows/newsletter.yml` | Weekly (Monday 6:00 UTC) or Manual | Crawls news, generates newsletter, creates PR |
+| **Send Email** | `.github/workflows/send-newsletter.yml` | Newsletter merged to main | Creates draft email in Buttondown |
 | **Test** | `.github/workflows/test.yml` | On PR | Runs Go tests and linting |
 
 ### 1. Repository Secrets
@@ -141,10 +142,22 @@ Go to **Settings → Secrets and variables → Actions → Secrets** and add:
 |--------|-------------|------------|
 | `GH_PAT` | GitHub Personal Access Token | [Create PAT](https://github.com/settings/tokens) with `repo` scope |
 | `GEMINI_API_KEY` | Google AI Studio API Key | [Get API Key](https://aistudio.google.com/app/apikey) |
+| `BUTTONDOWN_API_KEY` | Buttondown API Key (optional) | [Get API Key](https://buttondown.com/settings/api) |
 
 > **Note:** `GITHUB_TOKEN` is automatically provided but has limited permissions. `GH_PAT` is needed to create PRs.
 
-### 2. Enable GitHub Pages
+### 2. Email Newsletter Setup (Optional)
+
+To enable email subscriptions via [Buttondown](https://buttondown.com) (free up to 100 subscribers):
+
+1. Create a Buttondown account at [buttondown.com](https://buttondown.com)
+2. Set your newsletter username to `lwcn` (or update `website/layouts/index.html`)
+3. Get your API key from Settings → API
+4. Add `BUTTONDOWN_API_KEY` to your repository secrets
+5. When a newsletter is merged, a draft email is automatically created in Buttondown
+6. Review and send from the Buttondown dashboard
+
+### 3. Enable GitHub Pages
 
 1. Go to **Settings → Pages**
 2. Under **Source**, select **"GitHub Actions"**

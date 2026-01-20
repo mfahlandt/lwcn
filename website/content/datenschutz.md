@@ -153,6 +153,19 @@ You can prevent Google from collecting and processing your data by downloading a
 
 For more information on how Google Analytics handles user data, please see Google's privacy policy: [https://support.google.com/analytics/answer/6004245?hl=en](https://support.google.com/analytics/answer/6004245?hl=en).
 
+#### Newsletter (Buttondown)
+
+If you subscribe to our newsletter, we use Buttondown as our newsletter service provider. Buttondown is a service provided by Buttondown, LLC.
+
+When you subscribe, the following data is collected:
+- Your email address
+
+This data is used solely for sending you the newsletter. Your email address is stored by Buttondown until you unsubscribe. You can unsubscribe at any time using the unsubscribe link in every newsletter email.
+
+The use of Buttondown is based on your consent according to Art. 6 para. 1 lit. a GDPR. Consent can be revoked at any time by unsubscribing.
+
+For more information, please see Buttondown's privacy policy: [https://buttondown.com/legal/privacy](https://buttondown.com/legal/privacy).
+
 ---
 
 ### 5. Your Rights
