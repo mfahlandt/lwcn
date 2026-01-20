@@ -67,3 +67,10 @@ canonifyURLs = true
     disable = false
     respectDoNotTrack = true
     anonymizeIP = true
+
+# Allow raw HTML in Markdown files
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
