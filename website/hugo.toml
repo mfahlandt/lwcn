@@ -45,7 +45,7 @@ theme = 'PaperMod'
 # Google Analytics
 [services]
   [services.googleAnalytics]
-    ID = "G-XXXXXXXXXX"  # Replace with your GA4 Measurement ID
+    ID = "G-9CCG0NSZKN"
 
 [privacy]
   [privacy.googleAnalytics]
