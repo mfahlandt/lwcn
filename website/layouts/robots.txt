@@ -1,12 +1,19 @@
 User-agent: *
 Allow: /
 
-# Sitemap
+# Sitemap location
 Sitemap: {{ "sitemap.xml" | absURL }}
+
+# Allow important crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
 
 # Disallow admin/draft pages
 Disallow: /admin/
 Disallow: /*?*
 
-# Crawl-delay for polite bots
+# Crawl-delay for polite bots (not applicable to Googlebot)
 Crawl-delay: 1

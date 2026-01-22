@@ -7,6 +7,12 @@ theme = 'PaperMod'
 enableRobotsTXT = true
 canonifyURLs = true
 
+# URL Structure - ensures consistent trailing slashes
+# Hugo generates /page/index.html which serves as /page/
+# This prevents duplicate content issues
+trailingSlash = true
+relativeURLs = false
+
 # Sitemap Configuration
 [sitemap]
   changefreq = "weekly"
@@ -15,8 +21,14 @@ canonifyURLs = true
 
 # RSS Feed Configuration
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+  home = ["HTML", "RSS", "JSON", "SITEMAP"]
   section = ["HTML", "RSS"]
+
+[outputFormats.SITEMAP]
+  mediaType = "application/xml"
+  baseName = "sitemap"
+  isPlainText = false
+  notAlternative = true
 
 [outputFormats]
   [outputFormats.RSS]

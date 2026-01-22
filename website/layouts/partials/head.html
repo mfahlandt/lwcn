@@ -1,7 +1,34 @@
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ if .IsHome }}{{ .Site.Title }} - Weekly Cloud Native Newsletter{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
-<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Params.summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
+{{- /* Dynamic page title variable for use in meta tags */ -}}
+{{- $pageTitle := .Title -}}
+{{- $pageDescription := "" -}}
+{{- $projectList := "" -}}
+{{- if and (eq .Section "newsletter") .Params.highlights .IsPage -}}
+  {{- $highlights := first 3 .Params.highlights -}}
+  {{- $capitalizedHighlights := slice -}}
+  {{- range $highlights -}}
+    {{- $capitalizedHighlights = $capitalizedHighlights | append (. | title) -}}
+  {{- end -}}
+  {{- $projectList = delimit $capitalizedHighlights ", " " & " -}}
+  {{- $pageTitle = printf "%s: %s Updates" .Title $projectList -}}
+  {{- /* Dynamic meta description with project names - always use for newsletter pages */ -}}
+  {{- $pageDescription = printf "Cloud Native updates for %s. Featuring releases from %s and more Kubernetes ecosystem news." .Title $projectList -}}
+{{- end -}}
+
+{{- /* For newsletter pages with highlights, always use dynamic description */ -}}
+{{- $finalDescription := $pageDescription -}}
+{{- if not $pageDescription -}}
+  {{- with .Description -}}
+    {{- $finalDescription = . -}}
+  {{- else -}}
+    {{- with .Params.summary -}}
+      {{- $finalDescription = . -}}
+    {{- else -}}
+      {{- $finalDescription = $.Site.Params.description -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<meta name="description" content="{{ $finalDescription }}">
 
 <!-- Canonical URL -->
 <link rel="canonical" href="{{ .Permalink }}">
@@ -20,8 +47,8 @@
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
-<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }} - Weekly Cloud Native Newsletter{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
-<meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Params.summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
+<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }} - Weekly Cloud Native Newsletter{{ else }}{{ $pageTitle }} | {{ .Site.Title }}{{ end }}">
+<meta property="og:description" content="{{ $finalDescription }}">
 <meta property="og:site_name" content="{{ .Site.Title }}">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="{{ "images/og-image.svg" | absURL }}">
@@ -43,8 +70,8 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="{{ .Permalink }}">
-<meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }} - Weekly Cloud Native Newsletter{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
-<meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Params.summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
+<meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }} - Weekly Cloud Native Newsletter{{ else }}{{ $pageTitle }} | {{ .Site.Title }}{{ end }}">
+<meta name="twitter:description" content="{{ $finalDescription }}">
 <meta name="twitter:image" content="{{ "images/og-image.svg" | absURL }}">
 <meta name="twitter:image:alt" content="Last Week in Cloud Native - Weekly Kubernetes and CNCF Newsletter">
 
@@ -55,14 +82,18 @@
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "{{ .Title }}",
-  "description": "{{ with .Params.summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}",
+  "description": "{{ $finalDescription }}",
   "image": "{{ "images/og-image.svg" | absURL }}",
   "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
   "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
   "author": {
     "@type": "Organization",
-    "name": "{{ .Site.Params.author | default "LWCN" }}",
-    "url": "{{ .Site.BaseURL }}"
+    "name": "LWCN",
+    "url": "{{ .Site.BaseURL }}about/",
+    "description": "Cloud Native practitioners curating weekly updates from the CNCF ecosystem",
+    "sameAs": [
+      "https://github.com/mfahlandt/lwcn"
+    ]
   },
   "publisher": {
     "@type": "Organization",
@@ -71,11 +102,19 @@
     "logo": {
       "@type": "ImageObject",
       "url": "{{ "images/og-image.svg" | absURL }}"
-    }
+    },
+    "sameAs": [
+      "https://github.com/mfahlandt/lwcn"
+    ]
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "{{ .Permalink }}"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "Cloud Native Computing",
+    "sameAs": "https://www.cncf.io/"
   }
 }
 </script>

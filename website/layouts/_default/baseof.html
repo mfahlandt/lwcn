@@ -3,7 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
+  {{- /* Dynamic title with featured projects for newsletter pages */ -}}
+  {{- $pageTitle := .Title -}}
+  {{- if and (eq .Section "newsletter") .Params.highlights .IsPage -}}
+    {{- $highlights := first 3 .Params.highlights -}}
+    {{- $capitalizedHighlights := slice -}}
+    {{- range $highlights -}}
+      {{- $capitalizedHighlights = $capitalizedHighlights | append (. | title) -}}
+    {{- end -}}
+    {{- $projectList := delimit $capitalizedHighlights ", " " & " -}}
+    {{- $pageTitle = printf "%s: %s Updates" .Title $projectList -}}
+  {{- end -}}
+  <title>{{ if .IsHome }}{{ .Site.Title }} - Weekly Cloud Native Newsletter{{ else }}{{ $pageTitle }} | {{ .Site.Title }}{{ end }}</title>
   {{ partial "head.html" . }}
 </head>
 <body>

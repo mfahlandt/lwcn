@@ -1,0 +1,34 @@
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n" | safeHTML -}}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  {{- /* Homepage */ -}}
+  <url>
+    <loc>{{ .Site.BaseURL }}</loc>
+    <lastmod>{{ now.Format "2006-01-02T15:04:05-07:00" }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  {{- /* All regular pages and sections */ -}}
+  {{- range .Site.AllPages -}}
+  {{- if and (not .Params.noindex) (ne .Kind "home") }}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    {{- if not .Lastmod.IsZero }}
+    <lastmod>{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" }}</lastmod>
+    {{- end -}}
+    {{- if eq .Section "newsletter" -}}
+      {{- if eq .Kind "section" }}
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+      {{- else }}
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+      {{- end -}}
+    {{- else }}
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    {{- end }}
+  </url>
+  {{- end -}}
+  {{- end }}
+</urlset>
