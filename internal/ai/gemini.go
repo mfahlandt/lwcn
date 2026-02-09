@@ -5,12 +5,16 @@ import (
 	"fmt"
 	"log"
 	"strings"
+	"time"
 	"unicode/utf8"
 
 	"github.com/google/generative-ai-go/genai"
 	"github.com/mfahlandt/lwcn/internal/models"
 	"google.golang.org/api/option"
 )
+
+// DefaultAPITimeout is the default timeout for Gemini API calls
+const DefaultAPITimeout = 5 * time.Minute
 
 type GeminiClient struct {
 	client *genai.Client
@@ -39,9 +43,13 @@ func (c *GeminiClient) Close() error {
 }
 
 func (c *GeminiClient) GenerateLinkedInPost(ctx context.Context, releases []models.Release, news []models.NewsItem) (string, error) {
+	// Create a context with timeout for the API call
+	apiCtx, cancel := context.WithTimeout(ctx, DefaultAPITimeout)
+	defer cancel()
+
 	prompt := buildLinkedInPrompt(releases, news)
 
-	resp, err := c.model.GenerateContent(ctx, genai.Text(prompt))
+	resp, err := c.model.GenerateContent(apiCtx, genai.Text(prompt))
 	if err != nil {
 		return "", fmt.Errorf("failed to generate LinkedIn post: %w", err)
 	}
@@ -55,9 +63,13 @@ func (c *GeminiClient) GenerateLinkedInPost(ctx context.Context, releases []mode
 }
 
 func (c *GeminiClient) GenerateNewsletter(ctx context.Context, releases []models.Release, news []models.NewsItem) (*models.Newsletter, error) {
+	// Create a context with timeout for the API call
+	apiCtx, cancel := context.WithTimeout(ctx, DefaultAPITimeout)
+	defer cancel()
+
 	prompt := buildPrompt(releases, news)
 
-	resp, err := c.model.GenerateContent(ctx, genai.Text(prompt))
+	resp, err := c.model.GenerateContent(apiCtx, genai.Text(prompt))
 	if err != nil {
 		return nil, fmt.Errorf("failed to generate content: %w", err)
 	}
