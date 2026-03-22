@@ -15,12 +15,17 @@ type Release struct {
 }
 
 type Repository struct {
-	Owner    string `yaml:"owner"`
-	Repo     string `yaml:"repo"`
-	Name     string `yaml:"name"`
-	Category string `yaml:"category"`
+	Owner      string `yaml:"owner" json:"owner"`
+	Repo       string `yaml:"repo" json:"repo"`
+	Name       string `yaml:"name" json:"name"`
+	Category   string `yaml:"category" json:"category"`
+	CNCFStatus string `yaml:"cncf_status,omitempty" json:"cncf_status,omitempty"`
 }
 
 type RepositoryConfig struct {
 	Repositories []Repository `yaml:"repositories"`
+}
+
+type AdditionalReposConfig struct {
+	AdditionalRepositories []Repository `yaml:"additional_repositories"`
 }

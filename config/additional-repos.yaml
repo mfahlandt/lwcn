@@ -1,0 +1,127 @@
+# Additional repositories to track that are NOT part of the CNCF landscape.
+# These will be merged with the auto-synced CNCF projects.
+#
+# Format:
+#   - owner: <github-org-or-user>
+#     repo: <repo-name>
+#     name: <display-name>
+#     category: <category-slug>
+#
+# Example:
+#   - owner: containers
+#     repo: podman
+#     name: Podman
+#     category: container-runtime
+
+additional_repositories:
+  # Container Tools
+  - owner: containers
+    repo: podman
+    name: Podman
+    category: container-runtime
+  - owner: containers
+    repo: buildah
+    name: Buildah
+    category: build
+  - owner: containers
+    repo: skopeo
+    name: Skopeo
+    category: container-tools
+
+  # Kubernetes CLI & Tools
+  - owner: derailed
+    repo: k9s
+    name: k9s
+    category: cli-tools
+  - owner: ahmetb
+    repo: kubectx
+    name: kubectx
+    category: cli-tools
+  - owner: kubernetes-sigs
+    repo: kind
+    name: kind
+    category: development
+  - owner: kubernetes-sigs
+    repo: kustomize
+    name: Kustomize
+    category: configuration
+  - owner: kubernetes-sigs
+    repo: cluster-api
+    name: Cluster API
+    category: cluster-management
+  - owner: kubernetes-sigs
+    repo: descheduler
+    name: Descheduler
+    category: scheduling
+  - owner: kubernetes-sigs
+    repo: gateway-api
+    name: Gateway API
+    category: networking
+  - owner: kubernetes-sigs
+    repo: secrets-store-csi-driver
+    name: Secrets Store CSI Driver
+    category: security
+  - owner: kubernetes-csi
+    repo: external-snapshotter
+    name: CSI Snapshotter
+    category: storage
+
+  # Edge
+  - owner: k3s-io
+    repo: k3s
+    name: K3s
+    category: edge
+
+  # Databases
+  - owner: cockroachdb
+    repo: cockroach
+    name: CockroachDB
+    category: database
+  - owner: crate
+    repo: crate
+    name: CrateDB
+    category: database
+  - owner: scylladb
+    repo: scylla-operator
+    name: ScyllaDB Operator
+    category: database
+
+  # Build Tools
+  - owner: google
+    repo: ko
+    name: ko
+    category: build
+
+  # Security
+  - owner: aquasecurity
+    repo: trivy
+    name: Trivy
+    category: security
+  - owner: sigstore
+    repo: cosign
+    name: Cosign
+    category: security
+  - owner: sigstore
+    repo: rekor
+    name: Rekor
+    category: security
+
+  # Identity
+  - owner: dexidp
+    repo: dex
+    name: Dex
+    category: identity
+
+  # Backup
+  - owner: vmware-tanzu
+    repo: velero
+    name: Velero
+    category: backup
+
+  # SBOM
+  - owner: seebom-labs
+    repo: seebom
+    name: SeeBOM
+    category: security
+
+

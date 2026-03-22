@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 env:
-  HUGO_VERSION: '0.121.0'
+  HUGO_VERSION: '0.158.0'
 
 # Sets permissions of the GITHUB_TOKEN
 permissions:
@@ -34,7 +34,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: ${{ env.HUGO_VERSION }}
           extended: true

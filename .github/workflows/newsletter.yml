@@ -44,6 +44,12 @@ jobs:
           go build -o bin/release-crawler ./cmd/release-crawler
           go build -o bin/github-releases ./cmd/github-releases
           go build -o bin/ai-processor ./cmd/ai-processor
+          go build -o bin/sync-cncf-projects ./cmd/sync-cncf-projects
+
+      - name: Sync CNCF Projects
+        run: |
+          echo "🔄 Syncing CNCF project list from Landscape API..."
+          ./bin/sync-cncf-projects -output config/repositories.yaml -additional config/additional-repos.yaml
 
       - name: Crawl News Sources
         run: |
@@ -65,43 +71,46 @@ jobs:
           echo "🤖 Generating newsletter draft with Gemini AI..."
           ./bin/ai-processor -output website/content/newsletter
 
-      - name: Get week number
+      - name: Get week number and date
         id: week
-        run: echo "number=$(date +%V)" >> $GITHUB_OUTPUT
+        run: |
+          echo "number=$(date +%V)" >> $GITHUB_OUTPUT
+          echo "year=$(date +%Y)" >> $GITHUB_OUTPUT
+          echo "date=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GH_PAT }}
-          commit-message: "📰 Newsletter draft for Week ${{ steps.week.outputs.number }}"
-          title: "📰 Newsletter Draft - Week ${{ steps.week.outputs.number }}, $(date +%Y)"
+          commit-message: "📰 Newsletter draft for Week ${{ steps.week.outputs.number }}, ${{ steps.week.outputs.year }}"
+          title: "📰 Newsletter Draft - Week ${{ steps.week.outputs.number }}, ${{ steps.week.outputs.year }}"
           body: |
             ## 🗞️ Automated Newsletter Draft
             
-            This PR contains the automatically generated newsletter for **Week ${{ steps.week.outputs.number }}**.
+            This PR contains the automatically generated newsletter for **Week ${{ steps.week.outputs.number }}, ${{ steps.week.outputs.year }}**.
             
             ### 📦 Contents
             - `data/news-*.json` - Crawled news items
             - `data/releases-*.json` - GitHub releases
             - `website/content/newsletter/*.md` - Newsletter draft
-            - `website/content/newsletter/*-linkedin.txt` - LinkedIn post draft
+            - `website/content/newsletter/*-linkedin.txt` - LinkedIn newsletter post
+            - `website/content/newsletter/*-linkedin-short.txt` - LinkedIn short teaser post
             
             ### ✅ Review Checklist
             - [ ] Review newsletter content for accuracy
             - [ ] Check release descriptions
             - [ ] Verify news summaries
-            - [ ] Review LinkedIn post
-            - [ ] Change `draft: true` to `draft: false` when ready
+            - [ ] Review LinkedIn newsletter post
+            - [ ] Review LinkedIn short teaser post
             
             ### 🚀 To Publish
             1. Review and edit the content
-            2. Set `draft: false` in the frontmatter
-            3. Merge this PR
-            4. The site will auto-deploy to GitHub Pages
+            2. Merge this PR
+            3. The site will auto-deploy to GitHub Pages
             
             ---
-            *Generated automatically on $(date)*
-          branch: newsletter/week-${{ steps.week.outputs.number }}
+            *Generated automatically on ${{ steps.week.outputs.date }}*
+          branch: newsletter/week-${{ steps.week.outputs.number }}-${{ steps.week.outputs.year }}
           delete-branch: true
           labels: |
             newsletter

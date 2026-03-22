@@ -6,8 +6,9 @@ A fully automated newsletter generation system that aggregates Cloud Native rele
 
 ## Features
 
+- 🔄 **CNCF Project Sync**: Automatically fetches the latest CNCF project list from the [Landscape API](https://landscape.cncf.io)
 - 🔍 **News Crawler**: Aggregates news from multiple sources
-- 📦 **GitHub Releases**: Tracks releases from 100+ CNCF ecosystem repositories
+- 📦 **GitHub Releases**: Tracks releases from CNCF ecosystem repositories + configurable additional projects
 - 🤖 **AI Processor**: Uses Google Gemini AI to generate:
   - Weekly newsletter summaries with categorized content
   - Separate articles page for curated news
@@ -33,16 +34,39 @@ cd lwcn
 make build
 
 # Or build individually:
-go build -o bin/release-crawler ./cmd/release-crawler    # News crawler (RSS, Heise, HackerNews)
-go build -o bin/github-releases ./cmd/github-releases    # GitHub releases crawler
-go build -o bin/ai-processor ./cmd/ai-processor          # AI newsletter generator
+go build -o bin/release-crawler ./cmd/release-crawler         # News crawler (RSS, Heise, HackerNews)
+go build -o bin/github-releases ./cmd/github-releases         # GitHub releases crawler
+go build -o bin/ai-processor ./cmd/ai-processor               # AI newsletter generator
+go build -o bin/sync-cncf-projects ./cmd/sync-cncf-projects   # CNCF project sync
 ```
 
 ## Configuration
 
 ### Repository Configuration
 
-Configure the GitHub repositories to track in `config/repositories.yaml`.
+The list of GitHub repositories to track is **auto-generated** from two sources:
+
+1. **CNCF Landscape API** — all graduated, incubating, and sandbox projects are fetched automatically
+2. **`config/additional-repos.yaml`** — manually curated non-CNCF repos (e.g., Podman, k9s, Trivy)
+
+Run the sync to (re)generate `config/repositories.yaml`:
+
+```bash
+make sync-repos          # Fetch + merge → writes config/repositories.yaml
+make sync-repos-dry      # Preview without writing
+```
+
+To add a non-CNCF project, edit `config/additional-repos.yaml`:
+
+```yaml
+additional_repositories:
+  - owner: my-org
+    repo: my-project
+    name: My Project
+    category: my-category
+```
+
+> **Note:** Do NOT edit `config/repositories.yaml` manually — it is auto-generated.
 
 ### News Sources Configuration
 
@@ -183,9 +207,11 @@ You can manually trigger the newsletter generation:
 ```
 Monday 6:00 UTC
     ↓
+Sync CNCF projects from Landscape API
+    ↓
 Crawl RSS feeds, Heise, Hacker News
     ↓
-Crawl GitHub Releases (107 CNCF repos)
+Crawl GitHub Releases (CNCF + additional repos)
     ↓
 Generate Newsletter with Gemini AI
     ↓
@@ -208,6 +234,10 @@ make test
 # Clean build artifacts
 make clean
 
+# CNCF Project Sync
+make sync-repos          # Sync CNCF projects from Landscape API + additional repos
+make sync-repos-dry      # Dry-run sync (preview without writing)
+
 # Crawling
 make crawl-news          # Fetch news from RSS, Heise, HackerNews
 make crawl-releases      # Fetch GitHub releases from CNCF repos
@@ -216,7 +246,7 @@ make crawl-all           # Fetch all sources
 # Newsletter Generation
 make generate-newsletter # Generate newsletter draft with AI
 make generate-linkedin   # Generate only LinkedIn post
-make newsletter          # Full workflow (crawl + generate)
+make newsletter          # Full workflow (sync + crawl + generate)
 
 # Backfill Historical Newsletters
 make backfill            # Generate newsletters for past 3 weeks
@@ -244,15 +274,18 @@ lwcn/
 │   ├── github-releases/    # GitHub releases crawler CLI
 │   ├── ai-processor/       # AI newsletter generator CLI
 │   ├── backfill-newsletter/ # Tool to generate historical newsletters
+│   ├── sync-cncf-projects/ # Syncs CNCF projects from Landscape API
 │   └── debug-heise/        # Debug tool for Heise scraping
 ├── internal/
 │   ├── ai/                 # Gemini AI integration
+│   ├── cncf/               # CNCF Landscape API client
 │   ├── config/             # Configuration loader
 │   ├── github/             # GitHub API client
 │   ├── models/             # Data models (news, releases, newsletter)
 │   └── news/               # News fetchers (RSS, scraper, HackerNews)
 ├── config/
-│   ├── repositories.yaml   # GitHub repositories to track
+│   ├── repositories.yaml   # Auto-generated from CNCF Landscape + additional repos
+│   ├── additional-repos.yaml # Manually curated non-CNCF repos to track
 │   └── news-sources.yaml   # RSS feeds, scrape sources, HackerNews keywords
 ├── data/                   # Output data (releases, news JSON files)
 ├── website/

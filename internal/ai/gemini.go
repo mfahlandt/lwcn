@@ -62,6 +62,25 @@ func (c *GeminiClient) GenerateLinkedInPost(ctx context.Context, releases []mode
 	return content, nil
 }
 
+func (c *GeminiClient) GenerateLinkedInShortPost(ctx context.Context, releases []models.Release, news []models.NewsItem) (string, error) {
+	apiCtx, cancel := context.WithTimeout(ctx, DefaultAPITimeout)
+	defer cancel()
+
+	prompt := buildLinkedInShortPrompt(releases, news)
+
+	resp, err := c.model.GenerateContent(apiCtx, genai.Text(prompt))
+	if err != nil {
+		return "", fmt.Errorf("failed to generate LinkedIn short post: %w", err)
+	}
+
+	if len(resp.Candidates) == 0 || len(resp.Candidates[0].Content.Parts) == 0 {
+		return "", fmt.Errorf("no content generated")
+	}
+
+	content := fmt.Sprintf("%v", resp.Candidates[0].Content.Parts[0])
+	return content, nil
+}
+
 func (c *GeminiClient) GenerateNewsletter(ctx context.Context, releases []models.Release, news []models.NewsItem) (*models.Newsletter, error) {
 	// Create a context with timeout for the API call
 	apiCtx, cancel := context.WithTimeout(ctx, DefaultAPITimeout)
@@ -247,7 +266,12 @@ func sanitizeUTF8(s string) string {
 func buildLinkedInPrompt(releases []models.Release, news []models.NewsItem) string {
 	stableReleases := filterStableReleases(releases)
 
-	prompt := `You are writing a LinkedIn post for a Cloud Native expert and Kubernetes enthusiast. 
+	now := time.Now()
+	year, week := now.ISOWeek()
+	newsletterURL := fmt.Sprintf("https://www.lwcn.dev/newsletter/%d-week-%02d/", year, week)
+
+	prompt := `You are writing a LinkedIn newsletter article for a Cloud Native expert and Kubernetes enthusiast.
+This will be published as a LinkedIn Newsletter article, so it can be slightly longer and more detailed than a regular post.
 
 WRITING STYLE (match this tone and format):
 - Start with an emoji and attention-grabbing headline about the week's biggest story
@@ -271,10 +295,11 @@ STRUCTURE:
 4. 📰 Notable news/trends summary (2-4 sentences)
 5. 💬 Community highlights (if interesting)
 6. Personal take or call-to-action question
-7. Hashtags
+7. A line saying: "📖 Read the full newsletter with all releases and articles: NEWSLETTER_URL"
+8. Hashtags
 
 IMPORTANT:
-- Keep it under 3000 characters (LinkedIn limit)
+- This is for a LinkedIn NEWSLETTER so it can be up to 4000 characters
 - Focus on 3-5 most impactful releases/news items
 - Be enthusiastic but authentic and not over the top
 - Do not use the tree metapher from the example create something unique that fits the news
@@ -282,6 +307,9 @@ IMPORTANT:
 - do not repeat the highlight topic in the notable news/trends block take a different topic there 
 - the personal note should also not duplicate topics
 - DO NOT Have duplications in the topics - no repeat in the blocks
+- MUST include at the bottom before the hashtags: "📖 Read the full newsletter with all releases and articles: NEWSLETTER_URL"
+
+Replace NEWSLETTER_URL with: ` + newsletterURL + `
 
 ---
 
@@ -316,8 +344,69 @@ THIS WEEK'S RELEASES:
 		}
 	}
 
-	prompt += "\n\nGenerate the LinkedIn post (plain text, no markdown, under 3000 characters):"
+	prompt += "\n\nGenerate the LinkedIn newsletter article (plain text, no markdown, include the website link at the bottom):"
 
 	// Final sanitization of entire prompt
+	return sanitizeUTF8(prompt)
+}
+
+func buildLinkedInShortPrompt(releases []models.Release, news []models.NewsItem) string {
+	stableReleases := filterStableReleases(releases)
+
+	now := time.Now()
+	year, week := now.ISOWeek()
+
+	prompt := fmt.Sprintf(`You are writing a SHORT LinkedIn post to promote this week's edition of the "Last Week in Cloud Native" (LWCN) LinkedIn newsletter.
+
+This is a TEASER post that links people to the full LinkedIn newsletter article. Keep it short, punchy, and engaging.
+
+RULES:
+- Maximum 500 characters (very short!)
+- Start with an emoji and a catchy one-liner about the week's biggest story
+- Mention 2-3 key highlights in bullet points (use emojis, no markdown)
+- End with a call-to-action to read the full newsletter
+- End with the text: "👉 Link in the comments!" or "👉 Check out the latest edition in my newsletter!"
+- NO markdown formatting - plain text with emojis only
+- NO hashtags in this short version (save space)
+- Be enthusiastic but concise
+
+EXAMPLE:
+"🚀 Kubernetes 1.35 just dropped!
+
+Key highlights this week:
+⚡ In-Place Pod Resizing goes stable
+🛡️ Critical Envoy security patches
+📦 Harbor 2.15 with smarter garbage collection
+
+All the details in this week's Last Week in Cloud Native newsletter! 👉 Check it out!"
+
+---
+
+THIS WEEK'S TOP RELEASES (%d stable releases total):
+`, len(stableReleases))
+
+	// Only include top 5 most notable releases
+	count := 0
+	for _, r := range stableReleases {
+		if count >= 5 {
+			break
+		}
+		prompt += fmt.Sprintf("- %s %s (%s)\n", r.RepoName, r.TagName, r.Category)
+		count++
+	}
+
+	prompt += "\nTOP NEWS:\n"
+	newsCount := 0
+	for _, n := range news {
+		if n.Source != "Hacker News" && newsCount < 5 {
+			title := sanitizeUTF8(n.Title)
+			prompt += fmt.Sprintf("- %s\n", title)
+			newsCount++
+		}
+	}
+
+	prompt += fmt.Sprintf("\nThis is Week %d of %d.\n", week, year)
+	prompt += "\nGenerate the short LinkedIn teaser post (plain text, under 500 characters):"
+
 	return sanitizeUTF8(prompt)
 }

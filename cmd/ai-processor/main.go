@@ -57,17 +57,7 @@ func main() {
 
 	// Generate LinkedIn post
 	if *linkedinOnly {
-		log.Println("Generating LinkedIn post with Gemini...")
-		linkedinPost, err := gemini.GenerateLinkedInPost(ctx, releases, news)
-		if err != nil {
-			log.Fatalf("Failed to generate LinkedIn post: %v", err)
-		}
-
-		linkedinPath := saveLinkedInPost(*outputDir, linkedinPost)
-		log.Printf("LinkedIn post created: %s", linkedinPath)
-		fmt.Println("\n--- LinkedIn Post ---")
-		fmt.Println(linkedinPost)
-		fmt.Println("--- End ---")
+		generateLinkedInPosts(ctx, gemini, releases, news, *outputDir)
 		return
 	}
 
@@ -86,21 +76,42 @@ func main() {
 
 	log.Printf("Newsletter draft created: %s", draftPath)
 
-	// Also generate LinkedIn post
-	log.Println("Generating LinkedIn post with Gemini...")
+	// Also generate LinkedIn posts (newsletter + short teaser)
+	generateLinkedInPosts(ctx, gemini, releases, news, *outputDir)
+}
+
+func generateLinkedInPosts(ctx context.Context, gemini *ai.GeminiClient, releases []models.Release, news []models.NewsItem, outputDir string) {
+	// Generate LinkedIn Newsletter post (longer version with website link)
+	log.Println("Generating LinkedIn newsletter post with Gemini...")
 	linkedinPost, err := gemini.GenerateLinkedInPost(ctx, releases, news)
 	if err != nil {
-		log.Printf("Warning: Failed to generate LinkedIn post: %v", err)
+		log.Printf("Warning: Failed to generate LinkedIn newsletter post: %v", err)
 	} else {
-		linkedinPath := saveLinkedInPost(*outputDir, linkedinPost)
-		log.Printf("LinkedIn post created: %s", linkedinPath)
+		linkedinPath := saveLinkedInFile(outputDir, linkedinPost, "linkedin")
+		log.Printf("LinkedIn newsletter post created: %s", linkedinPath)
+		fmt.Println("\n--- LinkedIn Newsletter Post ---")
+		fmt.Println(linkedinPost)
+		fmt.Println("--- End ---")
+	}
+
+	// Generate LinkedIn Short post (teaser to link to the newsletter)
+	log.Println("Generating LinkedIn short post with Gemini...")
+	shortPost, err := gemini.GenerateLinkedInShortPost(ctx, releases, news)
+	if err != nil {
+		log.Printf("Warning: Failed to generate LinkedIn short post: %v", err)
+	} else {
+		shortPath := saveLinkedInFile(outputDir, shortPost, "linkedin-short")
+		log.Printf("LinkedIn short post created: %s", shortPath)
+		fmt.Println("\n--- LinkedIn Short Post ---")
+		fmt.Println(shortPost)
+		fmt.Println("--- End ---")
 	}
 }
 
-func saveLinkedInPost(outputDir, content string) string {
+func saveLinkedInFile(outputDir, content, suffix string) string {
 	now := time.Now()
 	year, week := now.ISOWeek()
-	filename := fmt.Sprintf("%d-week-%02d-linkedin.txt", year, week)
+	filename := fmt.Sprintf("%d-week-%02d-%s.txt", year, week, suffix)
 	outputPath := filepath.Join(outputDir, filename)
 
 	os.MkdirAll(outputDir, 0755)

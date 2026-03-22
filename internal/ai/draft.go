@@ -49,8 +49,8 @@ func (g *DraftGenerator) GenerateDraft(newsletter *models.Newsletter) (string, e
 	contentWithLink = strings.ReplaceAll(contentWithLink, "📚 **[View all articles from this week →](2026-week-XX/)**", "")
 	// Trim trailing whitespace and add the correct link
 	contentWithLink = strings.TrimRight(contentWithLink, "\n\r\t ")
-	// Link to the articles page with the correct URL
-	articlesURL := fmt.Sprintf("/newsletter/%d-week-%02d/articles/", year, week)
+	// Link to the articles page with the correct absolute URL
+	articlesURL := fmt.Sprintf("https://www.lwcn.dev/newsletter/%d-week-%02d/articles/", year, week)
 	contentWithLink += fmt.Sprintf("\n\n📚 **[View all articles from this week →](%s)**\n", articlesURL)
 
 	content := fmt.Sprintf("---\n%s---\n\n%s", string(frontmatter), contentWithLink)
@@ -129,7 +129,7 @@ A complete list of all cloud native articles and news from this week.
 		content.WriteString("\n")
 	}
 
-	content.WriteString(fmt.Sprintf("\n---\n\n[← Back to Newsletter](/%d-week-%02d/)\n", year, week))
+	content.WriteString(fmt.Sprintf("\n---\n\n[← Back to Newsletter](https://www.lwcn.dev/newsletter/%d-week-%02d/)\n", year, week))
 
 	// Write the file
 	outputPath := filepath.Join(g.outputDir, filename)

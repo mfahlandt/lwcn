@@ -31,16 +31,20 @@ lwcn/
 │   │   └── main.go
 │   ├── backfill-newsletter/ # Tool to generate historical newsletters
 │   │   └── main.go
+│   ├── sync-cncf-projects/ # Syncs CNCF projects from Landscape API
+│   │   └── main.go
 │   └── debug-heise/        # Debug tool for Heise scraping
 │       └── main.go
 ├── internal/
 │   ├── ai/                 # Gemini AI integration (draft.go, gemini.go)
+│   ├── cncf/               # CNCF Landscape API client
 │   ├── config/             # Configuration loader
 │   ├── github/             # GitHub API client
 │   ├── models/             # Data models (news, releases, newsletter)
 │   └── news/               # News fetchers (rss.go, scraper.go, hackernews.go)
 ├── config/
-│   ├── repositories.yaml   # GitHub repos to track (100+ CNCF projects)
+│   ├── repositories.yaml   # Auto-generated from CNCF Landscape + additional repos
+│   ├── additional-repos.yaml # Manually curated non-CNCF repos to track
 │   └── news-sources.yaml   # RSS feeds, scrape sources, HackerNews keywords
 ├── data/                   # Generated JSON data (gitignored)
 ├── website/
@@ -109,12 +113,15 @@ if err != nil {
 | `cmd/release-crawler/main.go` | Entry point for news crawler (RSS, Heise, HackerNews) |
 | `cmd/github-releases/main.go` | Entry point for GitHub releases crawler |
 | `cmd/ai-processor/main.go` | Entry point for AI newsletter generator |
+| `cmd/sync-cncf-projects/main.go` | Entry point for CNCF project sync |
 | `internal/ai/gemini.go` | Gemini API client |
 | `internal/ai/draft.go` | Newsletter draft generation logic |
+| `internal/cncf/landscape.go` | CNCF Landscape API client |
 | `internal/news/rss.go` | RSS feed parser |
 | `internal/news/scraper.go` | Heise web scraper |
 | `internal/news/hackernews.go` | Hacker News API client |
-| `config/repositories.yaml` | List of GitHub repos to monitor |
+| `config/repositories.yaml` | Auto-generated list of GitHub repos to monitor |
+| `config/additional-repos.yaml` | Manually curated non-CNCF repos |
 | `config/news-sources.yaml` | RSS feeds, scrape sources, HackerNews config |
 | `website/hugo.toml` | Hugo site configuration |
 | `website/layouts/_default/baseof.html` | Base HTML template |
@@ -125,13 +132,25 @@ if err != nil {
 
 ### Adding a New Repository to Track
 
-Edit `config/repositories.yaml`:
+CNCF projects are auto-synced from the Landscape API. To add a **non-CNCF** repository,
+edit `config/additional-repos.yaml`:
 ```yaml
-repositories:
-  - owner: kubernetes
-    repo: kubernetes
-  - owner: new-owner    # Add new entry
+additional_repositories:
+  - owner: new-owner
     repo: new-repo
+    name: My Project
+    category: my-category
+```
+
+Then run `make sync-repos` to regenerate `config/repositories.yaml`.
+
+> **Note:** Do NOT edit `config/repositories.yaml` manually — it is auto-generated.
+
+### Syncing CNCF Projects
+
+```bash
+make sync-repos          # Fetch CNCF projects + merge additional repos → repositories.yaml
+make sync-repos-dry      # Preview without writing
 ```
 
 ### Adding a New RSS Feed
@@ -182,6 +201,10 @@ flag.Parse()
 # Build all binaries
 make build
 
+# CNCF Sync
+make sync-repos          # Sync CNCF projects from Landscape API + additional repos
+make sync-repos-dry      # Dry-run sync (preview without writing)
+
 # Crawling
 make crawl-news          # Fetch news from RSS, Heise, HackerNews
 make crawl-releases      # Fetch GitHub releases from CNCF repos
@@ -190,7 +213,7 @@ make crawl-all           # Fetch all sources
 # Newsletter Generation
 make generate-newsletter # Generate newsletter draft with AI
 make generate-linkedin   # Generate only LinkedIn post
-make newsletter          # Full workflow (crawl + generate)
+make newsletter          # Full workflow (sync + crawl + generate)
 
 # Backfill Historical Newsletters
 make backfill            # Generate newsletters for past 3 weeks
@@ -242,12 +265,16 @@ This project includes GDPR-compliant features:
 
 5. **Generated Content**: Files in `data/` and `website/content/newsletter/` are auto-generated - don't manually edit them.
 
-6. **Three CLIs**: The project has three separate CLI tools:
+6. **Four CLIs**: The project has four separate CLI tools:
    - `release-crawler`: Fetches news (RSS, Heise, HackerNews) → outputs to `data/news-YYYY-MM-DD.json`
    - `github-releases`: Fetches GitHub releases → outputs to `data/releases-YYYY-MM-DD.json`
    - `ai-processor`: Generates newsletter from data files → outputs to `website/content/newsletter/`
+   - `sync-cncf-projects`: Syncs CNCF projects from Landscape API → outputs to `config/repositories.yaml`
 
-7. **LinkedIn Posts**: The AI processor can generate LinkedIn posts separately with the `-linkedin` flag.
+7. **LinkedIn Posts**: The AI processor generates two LinkedIn posts:
+   - `YYYY-week-XX-linkedin.txt`: Longer newsletter article for LinkedIn Newsletter (includes link to website)
+   - `YYYY-week-XX-linkedin-short.txt`: Short teaser post to promote the LinkedIn newsletter
+   Use the `-linkedin` flag to generate only LinkedIn posts without the full newsletter.
 
 8. **Weekly Workflow**: The newsletter workflow runs every Monday at 6:00 UTC via GitHub Actions and creates a PR for review.
 

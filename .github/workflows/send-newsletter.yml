@@ -9,6 +9,7 @@ on:
       - 'website/content/newsletter/2*-week-*.md'
       - '!website/content/newsletter/*-articles.md'
       - '!website/content/newsletter/*-linkedin.txt'
+      - '!website/content/newsletter/*-linkedin-short.txt'
   # Manual trigger
   workflow_dispatch:
     inputs:
