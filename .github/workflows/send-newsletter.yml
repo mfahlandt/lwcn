@@ -62,6 +62,10 @@ jobs:
           # Extract content (everything after the second ---)
           CONTENT=$(awk '/^---$/{p++} p==2{if(NR>1)print}' "$FILE" | tail -n +2)
           
+          # Convert relative links to absolute URLs with the domain
+          # Matches markdown links like [text](/path/) and converts to [text](https://lwcn.dev/path/)
+          CONTENT=$(echo "$CONTENT" | sed 's|\](\(/[^)]*\))|\](https://lwcn.dev\1)|g')
+          
           # Save to files for the API call
           echo "$TITLE" > /tmp/newsletter_title.txt
           echo "$CONTENT" > /tmp/newsletter_content.md

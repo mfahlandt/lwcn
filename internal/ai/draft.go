@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"regexp"
 	"sort"
 	"strings"
 	"time"
@@ -42,15 +43,14 @@ func (g *DraftGenerator) GenerateDraft(newsletter *models.Newsletter) (string, e
 		return "", fmt.Errorf("failed to marshal frontmatter: %w", err)
 	}
 
-	// Replace any placeholder article link with the correct one
+	// Remove any AI-generated article link (various patterns) and add the correct one
 	contentWithLink := newsletter.Content
-	// Remove any existing article link placeholder and add the correct one
-	contentWithLink = strings.ReplaceAll(contentWithLink, "📚 **[View all articles from this week →](articles/)**", "")
-	contentWithLink = strings.ReplaceAll(contentWithLink, "📚 **[View all articles from this week →](2026-week-XX/)**", "")
-	// Trim trailing whitespace and add the correct link
+	// Use regex to remove any "View all articles" link regardless of URL format
+	articlesLinkRe := regexp.MustCompile(`(?m)\n*📚\s*\*{0,2}\[View all articles[^\]]*\]\([^)]*\)\*{0,2}\s*\n*`)
+	contentWithLink = articlesLinkRe.ReplaceAllString(contentWithLink, "")
 	contentWithLink = strings.TrimRight(contentWithLink, "\n\r\t ")
-	// Link to the articles page with the correct absolute URL
-	articlesURL := fmt.Sprintf("https://www.lwcn.dev/newsletter/%d-week-%02d/articles/", year, week)
+	// Always use the full absolute URL with domain
+	articlesURL := fmt.Sprintf("https://lwcn.dev/newsletter/%d-week-%02d/articles/", year, week)
 	contentWithLink += fmt.Sprintf("\n\n📚 **[View all articles from this week →](%s)**\n", articlesURL)
 
 	content := fmt.Sprintf("---\n%s---\n\n%s", string(frontmatter), contentWithLink)
@@ -129,7 +129,7 @@ A complete list of all cloud native articles and news from this week.
 		content.WriteString("\n")
 	}
 
-	content.WriteString(fmt.Sprintf("\n---\n\n[← Back to Newsletter](https://www.lwcn.dev/newsletter/%d-week-%02d/)\n", year, week))
+	content.WriteString(fmt.Sprintf("\n---\n\n[← Back to Newsletter](https://lwcn.dev/newsletter/%d-week-%02d/)\n", year, week))
 
 	// Write the file
 	outputPath := filepath.Join(g.outputDir, filename)

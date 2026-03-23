@@ -82,8 +82,8 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GH_PAT }}
-          commit-message: "📰 Newsletter draft for Week ${{ steps.week.outputs.number }}, ${{ steps.week.outputs.year }}"
-          title: "📰 Newsletter Draft - Week ${{ steps.week.outputs.number }}, ${{ steps.week.outputs.year }}"
+          commit-message: "📰 Newsletter draft for Week ${{ steps.week.outputs.number }}, ${{ steps.week.outputs.year }} (${{ steps.week.outputs.date }})"
+          title: "📰 Newsletter Draft - Week ${{ steps.week.outputs.number }}, ${{ steps.week.outputs.year }} (${{ steps.week.outputs.date }})"
           body: |
             ## 🗞️ Automated Newsletter Draft
             
@@ -110,7 +110,7 @@ jobs:
             
             ---
             *Generated automatically on ${{ steps.week.outputs.date }}*
-          branch: newsletter/week-${{ steps.week.outputs.number }}-${{ steps.week.outputs.year }}
+          branch: newsletter/week-${{ steps.week.outputs.number }}-${{ steps.week.outputs.year }}-${{ steps.week.outputs.date }}
           delete-branch: true
           labels: |
             newsletter

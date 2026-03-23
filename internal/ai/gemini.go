@@ -268,7 +268,7 @@ func buildLinkedInPrompt(releases []models.Release, news []models.NewsItem) stri
 
 	now := time.Now()
 	year, week := now.ISOWeek()
-	newsletterURL := fmt.Sprintf("https://www.lwcn.dev/newsletter/%d-week-%02d/", year, week)
+	newsletterURL := fmt.Sprintf("https://lwcn.dev/newsletter/%d-week-%02d/", year, week)
 
 	prompt := `You are writing a LinkedIn newsletter article for a Cloud Native expert and Kubernetes enthusiast.
 This will be published as a LinkedIn Newsletter article, so it can be slightly longer and more detailed than a regular post.

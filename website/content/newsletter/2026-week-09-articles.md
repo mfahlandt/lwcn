@@ -212,4 +212,4 @@ A complete list of all cloud native articles and news from this week.
 
 ---
 
-[← Back to Newsletter](/2026-week-09/)
+[← Back to Newsletter](https://lwcn.dev/newsletter/2026-week-09/)

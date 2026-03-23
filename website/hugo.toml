@@ -3,6 +3,9 @@ languageCode = 'en'
 title = 'Last Week in Cloud Native'
 theme = 'PaperMod'
 
+# Disable unused taxonomies
+[taxonomies]
+
 # SEO Settings
 enableRobotsTXT = true
 canonifyURLs = true
@@ -21,7 +24,7 @@ relativeURLs = false
 
 # RSS Feed Configuration
 [outputs]
-  home = ["HTML", "RSS", "JSON", "SITEMAP"]
+  home = ["HTML", "RSS", "SITEMAP"]
   section = ["HTML", "RSS"]
 
 [outputFormats.SITEMAP]
