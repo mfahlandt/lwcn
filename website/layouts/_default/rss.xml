@@ -42,12 +42,15 @@
       <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
       {{ with site.Params.email }}<author>{{.}}{{ with site.Params.author }} ({{.}}){{end}}</author>{{end}}
       <guid>{{ .Permalink }}</guid>
-      <description><![CDATA[{{ with .Params.description }}{{ . }}{{ else }}{{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | plainify }}{{ end }}{{ end }}]]></description>
-      <content:encoded><![CDATA[{{ .Content }}{{ with $articlesPage }}<hr><h2>📚 All Articles</h2>{{ .Content }}{{ end }}]]></content:encoded>
+      <description>{{ with .Params.description }}{{ . }}{{ else }}{{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | plainify }}{{ end }}{{ end }}</description>
+      {{- $fullContent := .Content -}}
+      {{- with $articlesPage -}}{{- $fullContent = printf "%s<hr><h2>📚 All Articles</h2>%s" $fullContent .Content -}}{{- end -}}
+      <content:encoded>{{ printf "<![CDATA[%s]]>" $fullContent | safeHTML }}</content:encoded>
     </item>
     {{- end -}}
     {{- end -}}
   </channel>
 </rss>
+
 
 
