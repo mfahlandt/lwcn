@@ -1,0 +1,52 @@
+{{- $pctx := . -}}
+{{- if .IsHome -}}{{ $pctx = .Site }}{{- end -}}
+{{- $pages := slice -}}
+{{- /* For home, only show newsletter pages */ -}}
+{{- if $.IsHome -}}
+{{- $pages = where (where site.RegularPages "Section" "newsletter") ".Params.hidden" "!=" true -}}
+{{- else if $.IsSection -}}
+{{- $pages = $pctx.RegularPages -}}
+{{- else -}}
+{{- $pages = $pctx.Pages -}}
+{{- end -}}
+{{- $limit := .Site.Config.Services.RSS.Limit -}}
+{{- if ge $limit 1 -}}
+{{- $pages = $pages | first $limit -}}
+{{- end -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>{{ .Site.Title }}</title>
+    <link>{{ .Site.BaseURL }}</link>
+    <description>Weekly Cloud Native newsletter covering Kubernetes releases, CNCF projects, and ecosystem news. Stay informed about the latest in the CNCF ecosystem.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>{{ site.Language.LanguageCode }}</language>{{ with site.Params.email }}
+    <managingEditor>{{.}}{{ with site.Params.author }} ({{.}}){{end}}</managingEditor>{{end}}{{ with site.Params.email }}
+    <webMaster>{{.}}{{ with site.Params.author }} ({{.}}){{end}}</webMaster>{{end}}{{ with .Site.Copyright }}
+    <copyright>{{.}}</copyright>{{end}}{{ if not .Date.IsZero }}
+    <lastBuildDate>{{ (index $pages.ByLastmod.Reverse 0).Lastmod.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>{{ end }}
+    {{- with .OutputFormats.Get "RSS" -}}
+    {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
+    {{- end -}}
+    <image>
+      <url>{{ "images/logo.svg" | absURL }}</url>
+      <title>{{ .Site.Title }}</title>
+      <link>{{ .Site.BaseURL }}</link>
+    </image>
+    {{- range $pages -}}
+    {{- if not .Params.hidden }}
+    {{- $articlesPage := site.GetPage (printf "/newsletter/%s-articles" (path.BaseName .File.Path | strings.TrimSuffix ".md")) -}}
+    <item>
+      <title>{{ .Title }}</title>
+      <link>{{ .Permalink }}</link>
+      <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+      {{ with site.Params.email }}<author>{{.}}{{ with site.Params.author }} ({{.}}){{end}}</author>{{end}}
+      <guid>{{ .Permalink }}</guid>
+      <description>{{ with .Params.description }}{{ . }}{{ else }}{{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | html }}{{ end }}{{ end }}</description>
+      <content:encoded><![CDATA[{{ .Content }}{{ with $articlesPage }}<hr><h2>📚 All Articles</h2>{{ .Content }}{{ end }}]]></content:encoded>
+    </item>
+    {{- end -}}
+    {{- end -}}
+  </channel>
+</rss>
+
