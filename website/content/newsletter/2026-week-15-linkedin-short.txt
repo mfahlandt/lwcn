@@ -1,0 +1,8 @@
+🚀 SUSE & Vultr challenge hyperscalers for AI infra freedom!
+
+This week's LWCN highlights:
+🔒 GitOps policy-as-code for K8s security
+🤖 LLMs on K8s: Threat model insights
+📊 OpenTelemetry's future stewardship
+
+All the details in this week's Last Week in Cloud Native newsletter! 👉 Check it out!
