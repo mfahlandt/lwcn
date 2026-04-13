@@ -1,0 +1,188 @@
+---
+title: "Week 16 Articles - April 2026"
+date: "2026-04-13"
+draft: false
+url: "/newsletter/2026-week-16/articles/"
+build:
+  list: never
+  publishResources: true
+  render: always
+outputs:
+  - html
+---
+
+# 📚 All Articles from Week 16
+
+A complete list of all cloud native articles and news from this week.
+
+## AWS Compute (1)
+
+- [Building Memory-Intensive Apps with AWS Lambda Managed Instances](https://aws.amazon.com/blogs/compute/building-memory-intensive-apps-with-aws-lambda-managed-instances/)
+
+## AWS Containers (1)
+
+- [Building intelligent knowledge graphs for Amazon EKS operations using AWS DevOps Agent](https://aws.amazon.com/blogs/containers/building-intelligent-knowledge-graphs-for-amazon-eks-operations-using-aws-devops-agent/)
+
+## CNCF Blog (3)
+
+- [What I Learned at My First KubeCon + CloudNativeCon as a High School Speaker](https://www.cncf.io/blog/2026/04/11/what-i-learned-at-my-first-kubecon-cloudnativecon-as-a-high-school-speaker/)
+- [Rethinking platform engineering through diverse perspectives at KubeCon + CloudNativeCon EU Amsterdam](https://www.cncf.io/blog/2026/04/10/rethinking-platform-engineering-through-diverse-perspectives-at-kubecon-cloudnativecon-eu-amsterdam/)
+- [Peer-to-Peer acceleration for AI model distribution with Dragonfly](https://www.cncf.io/blog/2026/04/06/peer-to-peer-acceleration-for-ai-model-distribution-with-dragonfly/)
+
+## Hacker News (98)
+
+- [A3: Kubernetes for autonomous AI agent fleets](https://www.leonidasr.com/posts/a3-kubernetes-for-autonomous-ai-agent-fleets/)
+- [Show HN: Omen – A lightweight Kubernetes chaos operator with manual approval](https://github.com/k-krew/omen)
+- [DevGlish – I mispronounced "Kubernetes" for 2 years. So I built this](https://devglish.com/)
+- [Show HN: T4 – a versioned datastore with branching and time-travel (S3-backed)](https://github.com/t4db/t4)
+- [Show HN: CongaLine – Self-hosted isolated AI agent fleet (OpenClaw, Hermes)](https://github.com/cruxdigital-llc/congaline)
+- [Ask HN: What should I re-skill in?](https://news.ycombinator.com/item?id=47711279)
+- [Launch HN: Twill.ai (YC S25) – Delegate to cloud agents, get back PRs](https://twill.ai)
+- [Show HN: Steadcast – Free Mac podcast player for learning, not background noise](https://steadcast.co)
+- [Ask HN:Is there an open source project that combines coding agents & deployment](https://news.ycombinator.com/item?id=47702760)
+- [Tell HN: Docker pull fails in Spain due to football Cloudflare block](https://news.ycombinator.com/item?id=47738883)
+- [Show HN: Docker-whisper: Self-hosted Whisper speech-to-text server (OpenAI API)](https://github.com/hwdsl2/docker-whisper)
+- [Docker and the Linux Kernel Isolate Your Agent, and Where They Don't](https://timbreai.substack.com/p/how-docker-and-the-linux-kernel-isolate)
+- [We Spent €11/Month Testing Docker Swarm So You Don't Have To](https://raus.cloud/blog/docker-swarm-test-11-euro-lesson/)
+- [Running AI agents safely in a microVM using Docker sandbox](https://andrewlock.net/running-ai-agents-safely-in-a-microvm-using-docker-sandbox/)
+- [Launch HN: Relvy (YC F24) – On-call runbooks, automated](https://www.relvy.ai)
+- [Show HN: HyperFlow – A self-improving agent framework built on LangGraph](https://news.ycombinator.com/item?id=47727255)
+- [Show HN: Bx – macOS native sandbox for AI and coding tools](https://github.com/holtwick/bx-mac)
+- [Show HN: OpenFable – Open-source RAG engine using tree-structured indexes](https://github.com/alainbrown/openfable)
+- [Show HN: I got tired of juggling 4 tools for data work – built one instead](https://streams.dbconvert.com)
+- [The way every agent framework handles MCP is a latent security problem](https://news.ycombinator.com/item?id=47683498)
+- [Show HN: Idt – A Swiss Army Knife for UUID, ULID, Snowflake, and More](https://github.com/sh-cho/idt)
+- [Show HN: Stop paying for Dropbox/Google Drive, use your own S3 bucket instead](https://locker.dev)
+- [Ask HN: Software engineers who enjoy working with LLMs?](https://news.ycombinator.com/item?id=47714654)
+- [Free 1700 tailwind blocks. Enjoy](https://opentailwind.dev/)
+- [Show HN: Hormuz Havoc, a satirical game that got overrun by AI bots in 24 hours](https://www.hormuz-havoc.com/)
+- [Tell HN: See the AI Doc](https://news.ycombinator.com/item?id=47734011)
+- [Iran eyes crypto toll for oil tanker transits through Strait of Hormuz](https://www.coindesk.com/markets/2026/04/08/iran-eyes-crypto-toll-for-oil-tanker-transit-through-strait-of-hormuz)
+- [Help Keep Thunderbird Alive](https://updates.thunderbird.net/en-US/thunderbird/140.0/apr26-1e/donate/)
+- [OpenAI backs Illinois bill that would limit when AI labs can be held liable](https://www.wired.com/story/openai-backs-bill-exempt-ai-firms-model-harm-lawsuits/)
+- [Helium is hard to replace](https://www.construction-physics.com/p/helium-is-hard-to-replace)
+- [AI helps add 10k more photos to OldNYC](https://www.danvk.org/2026/03/08/oldnyc-updates.html)
+- [Show HN: Keeper – embedded secret store for Go (help me break it)](https://github.com/agberohq/keeper)
+- [Navy to use underwater drones to help clear Iranian mines from Strait of Hormuz](https://defensescoop.com/2026/04/11/strait-of-hormuz-mine-clearance-navy-centcom-underwater-drones/)
+- [Elizabeth Holmes is tweeting from jail. How? (2025)](https://sfstandard.com/2025/09/02/elizabeth-holmes-bryan-johnson-prison-tweets/)
+- [Help Denmark Buy California – Because Why Not?](https://denmarkification.com/)
+- [He Helped Stop Iran from Getting the Bomb](https://www.newyorker.com/magazine/2026/04/06/he-helped-stop-iran-from-getting-the-bomb)
+- [Show HN: Coderegon Trail – A retro game to help you explore open-source repos](https://www.davidtran.me/coderegon-trail/)
+- [How the hypercuriosity of ADHD may have helped humans thrive](https://aeon.co/essays/how-the-hypercuriosity-of-adhd-may-have-helped-humans-thrive)
+- [Yout.com Hopes Supreme Court's Cox Ruling Helps Its Case; RIAA Disagrees](https://torrentfreak.com/yout-com-hopes-supreme-courts-cox-ruling-helps-its-case-riaa-disagrees/)
+- [Personal Software with the Help of LLMs](https://danilafe.com/blog/llm_personal_software/)
+- [Coders and testers help me out](https://github.com/andlind/almondsrc)
+- [Want to help garden birds? Don't feed them in warmer months, says RSPB](https://www.bbc.co.uk/news/articles/c2lwvz1pl1no)
+- [A 'Self-Doxing' Rave Helps Trans People Stay Safe Online](https://www.404media.co/trans-rights-privacy-online-cybersecurity-workshop-deadname-not-found/)
+- [New WHO database helps countries turn health data into better policy](https://www.who.int/europe/news/item/08-04-2026-new-who-database-helps-countries-turn-health-data-into-better-policy)
+- [U.S. faces an air traffic controller shortage. It's turning to gamers for help](https://www.cbsnews.com/news/faa-video-gamers-increase-air-traffic-controllers/)
+- [Decentralized Training Can Help Solve AI's Energy Woes](https://spectrum.ieee.org/decentralized-ai-training-2676670858)
+- [China to help Cuba with solar energy amid US oil blockade](https://www.scmp.com/economy/china-economy/article/3346978/china-help-cuba-solar-energy-amid-us-oil-blockade-and-total-power-outage)
+- [Canon lenses help create the eye of MOTHRA](https://m.dpreview.com/articles/7253889286/canon-lenses-help-create-the-eye-of-mothra)
+- [Show HN: I built a Cargo-like build tool for C/C++](https://github.com/randerson112/craft)
+- [Show HN: FluidCAD – Parametric CAD with JavaScript](https://fluidcad.io/)
+- [Ask HN: How do you handle marketing as a solo technical founder?](https://news.ycombinator.com/item?id=47667504)
+- [Show HN: Claudraband – Claude Code for the Power User](https://github.com/halfwhey/claudraband)
+- [Zooming UIs in 2026: Prezi, impress.js, and why I built something different](https://news.ycombinator.com/item?id=47665194)
+- [Show HN: Eve – Managed OpenClaw for work](https://eve.new/login)
+- [Network Flow Algorithms](https://www.networkflowalgs.com/)
+- [Floyd's Sampling Algorithm](https://buttondown.com/jaffray/archive/floyds-sampling-algorithm/)
+- [Javier Milei's bribery scandal may have derailed Argentina's crypto investment](https://www.theguardian.com/world/2026/apr/12/crypto-javier-milei-bribery-argentina)
+- [There were penguins in America and Europe 200 years ago](https://en.wikipedia.org/wiki/Great_auk)
+- [Ask HN: Is there some sort of stigma around Qubes OS on HN?](https://news.ycombinator.com/item?id=47687910)
+- [The AI bubble isn't new – Marx explained the mechanisms behind it 150 years ago](https://theconversation.com/the-ai-bubble-isnt-new-karl-marx-explained-the-mechanisms-behind-it-nearly-150-years-ago-270663)
+- [Most businesses still run on spreadsheets built 10 years ago](https://www.chilcy.com/)
+- [What Happened to the Ancient Bug Giants of 300M Years Ago?](https://nautil.us/what-happened-to-the-ancient-bug-giants-of-300-million-years-ago-1279562)
+- [Show HN: We built the "LLM knowledge base" Karpathy described 9 yrs ago](https://mythos.one/me/brianswichkow/54528e)
+- [Launch HN: Freestyle – Sandboxes for Coding Agents](https://www.freestyle.sh/)
+- [Show HN: Gemma 4 Multimodal Fine-Tuner for Apple Silicon](https://github.com/mattmireles/gemma-tuner-multimodal)
+- [Show HN: CSS Studio. Design by hand, code by agent](https://cssstudio.ai)
+- [Show HN: Moon simulator game, ray-casting](https://mooncraft2000.com)
+- [Show HN: Finalrun – Spec-driven testing using English and vision for mobile apps](https://github.com/final-run/finalrun-agent)
+- [Ask HN: Hiring in the age of AI-assisted coding: what works?](https://news.ycombinator.com/item?id=47722081)
+- [Show HN: I built a database for AI agents](https://github.com/DinobaseHQ/dinobase)
+- [I collected startup ideas. It changed how I think about ideas completely](https://news.ycombinator.com/item?id=47728126)
+- [Claude Code limits are starting to feel like a psychological trick](https://news.ycombinator.com/item?id=47668813)
+- [Show HN: Kyoo v5 – self hosted media server](https://github.com/zoriya/kyoo)
+- [Show HN: Rocky and Caveman Speak in Claurst CLI Save Big Token Amaze Amaze Amaze](https://github.com/Kuberwastaken/claurst)
+- [My AI workflow evolved from prompts to a near-autonomous workflow](https://news.ycombinator.com/item?id=47728487)
+- [Show HN: MCP Gateway – Zero-Trust Access to MCP Tool Servers](https://github.com/openziti/mcp-gateway)
+- [Show HN: Bullseye2D – A Dart library for cross-platform 2D games](https://github.com/bullseye2d/bullseye2d)
+- [Show HN: Ship of Theseus License](https://github.com/tilework-tech/nori-skillsets/pull/465/files)
+- [Ask HN: What should I do with my app? 130 downloads 3 real subscribers](https://news.ycombinator.com/item?id=47736372)
+- [Ask HN: How do you promote apps which are vibe coded but has real life usecase?](https://news.ycombinator.com/item?id=47677971)
+- [Show HN: Topo maps and Meshtastic mesh networking in MGRS navigator](https://redgridtactical.com/mgrs)
+- [Ask HN: We got 100 stars. A weekend project got 12k. What are we missing?](https://news.ycombinator.com/item?id=47696872)
+- [Ask HN: Will we ever do something about patent trolls?](https://news.ycombinator.com/item?id=47718079)
+- [Can a non – coder build a high tech product?](https://news.ycombinator.com/item?id=47701941)
+- [Ask HN: How do you get feedback for your products?](https://news.ycombinator.com/item?id=47673575)
+- [Show HN: Onboardly – Ask questions about any GitHub codebase in plain English](https://onboardly-ruddy.vercel.app)
+- [447 TB/cm² at zero retention energy – atomic-scale memory on fluorographane](https://zenodo.org/records/19513269)
+- [Never been sick with the flu? Now scientists may know why](https://www.npr.org/2026/04/03/nx-s1-5763891/flu-resistance-peptide-sick-antiviral)
+- [Fluux Messenger 0.15.0 – A Modern Cross Platform XMPP Client (TypeScript)](https://www.process-one.net/blog/fluux-messenger-0-15/)
+- [Is "Tokenmaxxing" a Flex?](https://www.businessinsider.com/tokenmaxxing-ai-token-leaderboards-debate-2026-4)
+- [Show HN: Lingle – Voice agent to simulate zoom-based personal language lessons](https://lingle.ai/)
+- [Show HN: A reasoning hierarchical robotics pipeline you can run in the browser](https://avikde.github.io/vla-pipeline/)
+- [Fine-tuning Gemma 4 locally](https://news.ycombinator.com/item?id=47659208)
+- [I propose a new programming language, CPC](https://news.ycombinator.com/item?id=47735439)
+- ['Microshifting' puts a new spin on 9-to-5 schedules](https://apnews.com/article/microshifting-work-time-flexible-schedule-balance-97a98519916b447cd60c73261ffc0b4e)
+- [Bringing Observability to Your N8n Workflows: OpenTelemetry in Action](https://signoz.io/blog/n8n-monitoring-with-opentelemetry/)
+- [Show HN: Otel-GUI – an open source OpenTelemetry viewer for dev and debug](https://github.com/metafab/otel-gui)
+- [Show HN: PromptJuggler – A dev env and runner for prompts, workflows, agents](https://promptjuggler.com)
+
+## Heise Cloud (12)
+
+- [Digitale Souveränität in der Praxis – Cloud, KI und Security krisensicher machen](https://www.heise.de/news/Digitale-Souveraenitaet-in-der-Praxis-Cloud-KI-und-Security-krisensicher-machen-11222625.html)
+- [Nutanix: KI-Plattform, Bare-Metal-Kubernetes und Neocloud-Dienste](https://www.heise.de/news/Nutanix-KI-Plattform-Bare-Metal-Kubernetes-und-Neocloud-Dienste-11252808.html)
+- [Freitag: TikTok-Rechenzentrum für EU-Daten, OpenAIs Stargate-UK-Projekt auf Eis](https://www.heise.de/news/Freitag-TikTok-Rechenzentrum-fuer-EU-Daten-OpenAIs-Stargate-UK-Projekt-auf-Eis-11251426.html)
+- [Leitfaden für Unternehmen: Der Weg in die souveräne Cloud](https://www.heise.de/hintergrund/Leitfaden-fuer-Unternehmen-Der-Weg-in-die-souveraene-Cloud-11250423.html)
+- [Wie KI-gestützte Dokumentengeneration Cloud-Design-Prozesse vereinfacht](https://www.heise.de/ratgeber/Wie-KI-gestuetzte-Dokumentengeneration-Cloud-Design-Prozesse-vereinfacht-11246552.html)
+- [iX-Workshop: IT-Umgebungen mit Microsoft Defender XDR vor Angriffen schützen](https://www.heise.de/news/iX-Workshop-IT-Umgebungen-mit-Microsoft-Defender-XDR-vor-Angriffen-schuetzen-11229254.html)
+- [AWS macht S3 zum Dateisystem](https://www.heise.de/news/AWS-macht-S3-zum-Dateisystem-11249237.html)
+- [Microsoft ändert Löschverhalten von OneDrive](https://www.heise.de/news/Microsoft-aendert-Loeschverhalten-von-OneDrive-11248240.html)
+- [Digitale Souveränität: Vorträge gesucht!](https://www.heise.de/news/Digitale-Souveraenitaet-Vortraege-gesucht-11247192.html)
+- [iPhone ohne Apple: Was man beachten muss, wenn man iCloud nicht will](https://www.heise.de/hintergrund/iPhone-ohne-Apple-Was-man-beachten-muss-wenn-man-iCloud-nicht-will-11229359.html)
+- [BSI-Kriterienkatalog für Cloud-Computing C5 verlangt mehr](https://www.heise.de/news/BSI-Kriterienkatalog-fuer-Cloud-Computing-C5-verlangt-mehr-11247015.html)
+- [Ethical Hacking für Fortgeschrittene – sich selbst hacken, bevor es andere tun](https://www.heise.de/news/Ethical-Hacking-fuer-Fortgeschrittene-sich-selbst-hacken-bevor-es-andere-tun-11222507.html)
+
+## InfoQ Cloud Native (1)
+
+- [Presentation: Duolingo's Kubernetes Leap](https://www.infoq.com/presentations/duolingo-eks-kubernetes/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=Cloud+Computing)
+
+## Microsoft Open Source (1)
+
+- [How Drasi used GitHub Copilot to find documentation bugs](https://opensource.microsoft.com/blog/2026/04/09/how-drasi-used-github-copilot-to-find-documentation-bugs/)
+
+## The New Stack (26)
+
+- [Cursor, Claude Code, and Codex are merging into one AI coding stack nobody planned](https://thenewstack.io/ai-coding-tool-stack/)
+- [HPA-managed workloads: Why the obvious waste stays](https://thenewstack.io/hpa-managed-workloads-why-waste-stays/)
+- [Karpathy says developers have ‘AI Psychosis.’ Everyone else is next.](https://thenewstack.io/karpathy-says-developers-have-ai-psychosis-everyone-else-is-next/)
+- [Where are the guardrails everyone promised for AI?](https://thenewstack.io/skiplabs-ai-guardrails-skipper/)
+- [How to build an AI-powered private document search app with RAG, ChromaDB, and memory](https://thenewstack.io/build-rag-document-search/)
+- [Why data governance is the secret to AI agent success](https://thenewstack.io/data-governance-ai-agents/)
+- [PyTorch Foundation Expands AI Stack with Safetensors, ExecuTorch, and Helion](https://thenewstack.io/pytorch-ai-stack-expand/)
+- [OpenAI’s new $100 tier targets developers hitting Codex (and Claude Code) limits](https://thenewstack.io/openais-new-100-tier-targets-developers-hitting-codex-and-claude-code-limits/)
+- [Replit taps RevenueCat to help vibe-coders make money](https://thenewstack.io/replit-revenuecat-help-vibe-coders-monetize/)
+- [Anthropic takes Claude Cowork out of preview and straight into the enterprise](https://thenewstack.io/anthropic-takes-claude-cowork-out-of-preview-and-straight-into-the-enterprise/)
+- [AWS wants to register your AI agents](https://thenewstack.io/aws-wants-to-register-your-ai-agents/)
+- [The next stages of AI conformance in the cloud-native, open-source world](https://thenewstack.io/the-next-stages-of-ai-conformance-in-the-cloud-native-open-source-world/)
+- [Open source maintainers are drowning in AI-generated pull requests. Enterprise teams are next.](https://thenewstack.io/ai-generated-code-crisis/)
+- [Ramp targets AI’s fastest-growing cost: spend that’s hard to track](https://thenewstack.io/ramp-ai-token-spend-management/)
+- [Zencoder goes beyond coding](https://thenewstack.io/zencoder-goes-beyond-coding/)
+- [Niantic Spatial wants to map the 80% of the economy AI can’t see](https://thenewstack.io/niantic-spatial-scaniverse-world-models/)
+- [In the AI age, Java is more relevant than ever](https://thenewstack.io/in-the-ai-age-java-is-more-relevant-than-ever/)
+- [With Claude Managed Agents, Anthropic wants to run your AI agents for you](https://thenewstack.io/with-claude-managed-agents-anthropic-wants-to-run-your-ai-agents-for-you/)
+- [Microsoft wants to make service mesh invisible](https://thenewstack.io/microsoft-wants-to-make-service-mesh-invisible/)
+- [Open-source leaders question whether Meta’s Alexandr Wang will truly give away its AI models](https://thenewstack.io/meta-open-source-models/)
+- [Sam Altman promised billions for AI safety. Here’s what OpenAI actually spent.](https://thenewstack.io/altman-openai-ai-safety/)
+- [Amazon S3 Files gives the world’s biggest object store a file system](https://thenewstack.io/aws-s3-files-filesystem/)
+- [Anthropic’s Claude Mythos is now available, but not for you](https://thenewstack.io/anthropic-claude-mythos-cybersecurity/)
+- [Amazon EKS Auto Mode wants to end Kubernetes toil — one node at a time](https://thenewstack.io/eks-auto-mode-kubernetes/)
+- [True enterprise sovereignty is more approachable than ever, thanks to K8s-powered cloud-neutral PostgreSQL](https://thenewstack.io/sovereign-postgresql-kubernetes-portability/)
+- [Model Flop Utilization is the metric Aria Networks says will define the AI infrastructure era](https://thenewstack.io/aria-networks-ai-network/)
+
+
+---
+
+[← Back to Newsletter](https://lwcn.dev/newsletter/2026-week-16/)
