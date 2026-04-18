@@ -62,11 +62,15 @@ func (c *GeminiClient) GenerateLinkedInPost(ctx context.Context, releases []mode
 	return content, nil
 }
 
-func (c *GeminiClient) GenerateLinkedInShortPost(ctx context.Context, releases []models.Release, news []models.NewsItem) (string, error) {
+// GenerateLinkedInShortPost creates a short teaser post. It is derived from the
+// already-generated long LinkedIn newsletter post so that the highlights in the
+// teaser match the content of the long article. Releases/news are passed only
+// as fallback context.
+func (c *GeminiClient) GenerateLinkedInShortPost(ctx context.Context, longPost string, releases []models.Release, news []models.NewsItem) (string, error) {
 	apiCtx, cancel := context.WithTimeout(ctx, DefaultAPITimeout)
 	defer cancel()
 
-	prompt := buildLinkedInShortPrompt(releases, news)
+	prompt := buildLinkedInShortPrompt(longPost, releases, news)
 
 	resp, err := c.model.GenerateContent(apiCtx, genai.Text(prompt))
 	if err != nil {
@@ -350,25 +354,26 @@ THIS WEEK'S RELEASES:
 	return sanitizeUTF8(prompt)
 }
 
-func buildLinkedInShortPrompt(releases []models.Release, news []models.NewsItem) string {
+func buildLinkedInShortPrompt(longPost string, releases []models.Release, news []models.NewsItem) string {
 	stableReleases := filterStableReleases(releases)
 
 	now := time.Now()
 	year, week := now.ISOWeek()
 
-	prompt := fmt.Sprintf(`You are writing a SHORT LinkedIn post to promote this week's edition of the "Last Week in Cloud Native" (LWCN) LinkedIn newsletter.
+	prompt := fmt.Sprintf(`You are writing a SHORT LinkedIn teaser post to promote this week's edition of the "Last Week in Cloud Native" (LWCN) LinkedIn newsletter.
 
-This is a TEASER post that links people to the full LinkedIn newsletter article. Keep it short, punchy, and engaging.
+The teaser MUST be based on the long LinkedIn newsletter article provided below. Pick the SAME 2-3 top highlights that the long article focuses on (hook/main story + 2-3 key points). Do NOT introduce different topics.
 
 RULES:
 - Maximum 500 characters (very short!)
-- Start with an emoji and a catchy one-liner about the week's biggest story
-- Mention 2-3 key highlights in bullet points (use emojis, no markdown)
+- Start with an emoji and a catchy one-liner matching the long article's hook
+- Mention 2-3 key highlights in bullet points with emojis (use the SAME highlights as the long article)
 - End with a call-to-action to read the full newsletter
 - End with the text: "👉 Link in the comments!" or "👉 Check out the latest edition in my newsletter!"
 - NO markdown formatting - plain text with emojis only
 - NO hashtags in this short version (save space)
 - Be enthusiastic but concise
+- This is Week %d of %d
 
 EXAMPLE:
 "🚀 Kubernetes 1.35 just dropped!
@@ -382,10 +387,15 @@ All the details in this week's Last Week in Cloud Native newsletter! 👉 Check 
 
 ---
 
-THIS WEEK'S TOP RELEASES (%d stable releases total):
-`, len(stableReleases))
+LONG LINKEDIN NEWSLETTER ARTICLE (summarize THIS into the teaser, keep the same focus topics):
+"""
+%s
+"""
 
-	// Only include top 5 most notable releases
+`, week, year, sanitizeUTF8(longPost))
+
+	// Provide brief context as fallback/reference only
+	prompt += fmt.Sprintf("\nREFERENCE CONTEXT (only use if the long article is empty): %d stable releases this week.\n", len(stableReleases))
 	count := 0
 	for _, r := range stableReleases {
 		if count >= 5 {
@@ -394,19 +404,15 @@ THIS WEEK'S TOP RELEASES (%d stable releases total):
 		prompt += fmt.Sprintf("- %s %s (%s)\n", r.RepoName, r.TagName, r.Category)
 		count++
 	}
-
-	prompt += "\nTOP NEWS:\n"
 	newsCount := 0
 	for _, n := range news {
-		if n.Source != "Hacker News" && newsCount < 5 {
-			title := sanitizeUTF8(n.Title)
-			prompt += fmt.Sprintf("- %s\n", title)
+		if n.Source != "Hacker News" && newsCount < 3 {
+			prompt += fmt.Sprintf("- %s\n", sanitizeUTF8(n.Title))
 			newsCount++
 		}
 	}
 
-	prompt += fmt.Sprintf("\nThis is Week %d of %d.\n", week, year)
-	prompt += "\nGenerate the short LinkedIn teaser post (plain text, under 500 characters):"
+	prompt += "\nGenerate the short LinkedIn teaser post (plain text, under 500 characters, same highlights as the long article):"
 
 	return sanitizeUTF8(prompt)
 }
