@@ -1,0 +1,75 @@
+name: Social Publish
+
+# Publishes a short teaser on Bluesky and X (Twitter) whenever a new
+# newsletter issue is added to the Hugo site. Triggers:
+#   1. After the "Deploy Hugo Site" workflow completes successfully on main
+#      (i.e. the new edition is actually live at https://lwcn.dev/newsletter/...)
+#   2. Manual run via workflow_dispatch (for re-posting / testing)
+#
+# Credentials (GitHub repo secrets — all optional, platform is skipped if unset):
+#   BLUESKY_HANDLE          e.g. "lwcn.bsky.social"
+#   BLUESKY_APP_PASSWORD    Bluesky app password (NOT your account password)
+#   X_API_KEY               X developer app consumer key
+#   X_API_SECRET            X developer app consumer secret
+#   X_ACCESS_TOKEN          X user access token (with tweet.write scope)
+#   X_ACCESS_SECRET         X user access token secret
+
+on:
+  workflow_run:
+    workflows: ["Deploy Hugo Site"]
+    types:
+      - completed
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      week:
+        description: "ISO week number (leave empty for current week)"
+        required: false
+      year:
+        description: "ISO year (leave empty for current year)"
+        required: false
+      dry_run:
+        description: "Dry run (do not actually post)"
+        required: false
+        default: "false"
+
+jobs:
+  publish:
+    # Only run if the upstream deploy succeeded (or this was a manual dispatch)
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+          cache: true
+
+      - name: Build social-publisher
+        run: go build -o bin/social-publisher ./cmd/social-publisher
+
+      - name: Publish teaser
+        env:
+          BLUESKY_HANDLE:       ${{ secrets.BLUESKY_HANDLE }}
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+          X_API_KEY:            ${{ secrets.X_API_KEY }}
+          X_API_SECRET:         ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN:       ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET:      ${{ secrets.X_ACCESS_SECRET }}
+        run: |
+          ARGS="-content-dir website/content/newsletter"
+          if [ -n "${{ github.event.inputs.week }}" ]; then
+            ARGS="$ARGS -week ${{ github.event.inputs.week }}"
+          fi
+          if [ -n "${{ github.event.inputs.year }}" ]; then
+            ARGS="$ARGS -year ${{ github.event.inputs.year }}"
+          fi
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS -dry-run"
+          fi
+          ./bin/social-publisher $ARGS
+

@@ -145,7 +145,7 @@ Google Analytics uses technologies that enable the recognition of the user for t
 
 **IP Anonymization:** We have activated IP anonymization on this website. This means that your IP address is shortened by Google within member states of the European Union or in other contracting states of the Agreement on the European Economic Area before being transmitted to the USA.
 
-The use of this service is based on your consent according to Art. 6 para. 1 lit. a GDPR and § 25 para. 1 TTDSG. Consent can be revoked at any time.
+The use of this service is based on your consent according to Art. 6 para. 1 lit. a GDPR and § 25 para. 1 TDDDG (Telekommunikation-Digitale-Dienste-Datenschutz-Gesetz — successor to § 25 TTDSG since 14 May 2024). Consent can be revoked at any time.
 
 Data transfer to the USA is based on the standard contractual clauses of the EU Commission.
 
@@ -153,18 +153,106 @@ You can prevent Google from collecting and processing your data by downloading a
 
 For more information on how Google Analytics handles user data, please see Google's privacy policy: [https://support.google.com/analytics/answer/6004245?hl=en](https://support.google.com/analytics/answer/6004245?hl=en).
 
-#### Newsletter (Buttondown)
+#### Email Newsletter (Buttondown)
 
-If you subscribe to our newsletter, we use Buttondown as our newsletter service provider. Buttondown is a service provided by Buttondown, LLC.
+The homepage includes a subscription form that lets you receive the LWCN
+newsletter via email. Delivery is handled by **Buttondown, LLC** (Buttondown,
+LLC, Charlottesville, Virginia, USA), an external newsletter service
+provider.
 
-When you subscribe, the following data is collected:
-- Your email address
+**How the form works technically**
 
-This data is used solely for sending you the newsletter. Your email address is stored by Buttondown until you unsubscribe. You can unsubscribe at any time using the unsubscribe link in every newsletter email.
+- The form on `/` posts directly to `https://buttondown.com/api/emails/embed-subscribe/lwcn`.
+- Your email address therefore **does not pass through our server** (the
+  site itself is static HTML on GitHub Pages). It is transmitted directly
+  from your browser to Buttondown.
+- We do **not** receive your email address on the LWCN server.
 
-The use of Buttondown is based on your consent according to Art. 6 para. 1 lit. a GDPR. Consent can be revoked at any time by unsubscribing.
+**Data that Buttondown processes on our behalf**
 
-For more information, please see Buttondown's privacy policy: [https://buttondown.com/legal/privacy](https://buttondown.com/legal/privacy).
+- The email address you enter.
+- The timestamp of the subscription and a confirmation token
+  (double opt-in).
+- Delivery / open / click metadata as technically required to send the
+  newsletter.
+
+**Legal basis & international transfer**
+
+- Legal basis: Art. 6 para. 1 lit. a GDPR (your consent, given by
+  submitting the form and confirming via double opt-in).
+- Buttondown is located in the USA. The transfer is based on the
+  **EU-U.S. Data Privacy Framework** and, where applicable, the
+  Standard Contractual Clauses of the EU Commission.
+
+**Retention & your rights**
+
+- Your email address is stored by Buttondown until you unsubscribe.
+- Every newsletter email contains a one-click unsubscribe link.
+- You may revoke your consent at any time with effect for the future;
+  the legality of processing carried out prior to revocation is not
+  affected.
+
+**Further information:** Buttondown privacy policy —
+[https://buttondown.com/legal/privacy](https://buttondown.com/legal/privacy).
+
+#### Alternative Ways to Subscribe (no personal data)
+
+You may also follow the newsletter without giving us any personal data:
+
+- **LinkedIn Newsletter** — handled entirely by LinkedIn Ireland
+  Unlimited Company. Subscription, delivery and tracking are governed by
+  LinkedIn's own privacy policy:
+  [https://www.linkedin.com/legal/privacy-policy](https://www.linkedin.com/legal/privacy-policy).
+  We only receive aggregated subscriber statistics from LinkedIn.
+- **RSS Feed** — available at `/newsletter/feed.xml`. Retrieval is
+  anonymous; the only data we see are the standard server-log entries
+  already described under "Hosting with GitHub Pages".
+
+#### Social Media Posts (Bluesky, X / Twitter, LinkedIn)
+
+When a new edition is published, an automated teaser is posted to
+Bluesky, X (Twitter) and LinkedIn. These posts contain a link back to
+this website.
+
+- If you click through from one of these platforms, the respective
+  platform may record that click according to its own privacy policy.
+  We have no influence on that tracking.
+- We do **not** operate social plug-ins (like/share buttons that contact
+  social networks before you click) on this site. Outbound links to our
+  social profiles are plain `<a href>` links that only contact the
+  platform after you click them.
+- Relevant platform policies:
+  - Bluesky: [https://bsky.social/about/support/privacy-policy](https://bsky.social/about/support/privacy-policy)
+  - X / Twitter: [https://x.com/en/privacy](https://x.com/en/privacy)
+  - LinkedIn: [https://www.linkedin.com/legal/privacy-policy](https://www.linkedin.com/legal/privacy-policy)
+
+#### Sponsored Links & Sponsor Landing Pages
+
+LWCN may include clearly labeled sponsored or partner placements in the
+newsletter (see our [sponsorship policy](/about/#independence--sponsorship)
+and the [imprint disclosure](/impressum/#advertising--sponsored-content)).
+
+What this means for your data:
+
+- **We do not embed any sponsor-supplied tracking pixels, scripts, or
+  iframes on this site.** Every sponsored block is rendered by our own
+  Hugo shortcode using static HTML only.
+- **We do not share your personal data with sponsors.** We have no
+  individual-level analytics to share in the first place.
+- **Outbound sponsor links use `rel="sponsored nofollow noopener"`.**
+  The `noopener` attribute means the target page cannot access our
+  browsing-context window object.
+- **As soon as you click a sponsored link and leave this site, you
+  enter the sponsor's own website**, which is operated independently
+  and may set its own cookies, run its own analytics, or use fingerprint
+  techniques. We have **no influence** on what happens there. Please
+  consult the respective sponsor's privacy policy before submitting any
+  data on their landing page.
+- The legal basis for displaying the sponsored block itself is Art. 6
+  para. 1 lit. f GDPR (legitimate interest in financing the newsletter)
+  combined with § 22 MStV (clear separation and labeling of advertising).
+  No consent is required because the block is pure static HTML without
+  tracking technology.
 
 ---
 
@@ -181,4 +269,4 @@ You have the following rights with respect to your personal data:
 
 ---
 
-*Last updated: January 2026*
+*Last updated: April 2026*

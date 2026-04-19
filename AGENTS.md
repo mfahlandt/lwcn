@@ -245,25 +245,82 @@ go test -cover ./...
 This project includes GDPR-compliant features:
 - Cookie consent banner (must be accepted before Google Analytics loads)
 - Privacy policy page (`/datenschutz/`)
-- Imprint page (`/impressum/`)
+- Imprint page (`/impressum/`) — references **§ 5 DDG**, **§ 18 Abs. 2 MStV**, **§§ 7-10 DDG** and the **EU Digital Services Act (DSA)**. The old TMG / RStV references are no longer current and must not be reintroduced.
 - IP anonymization enabled for Google Analytics
+
+## Editorial & AI Policy
+
+All Gemini prompts in `internal/ai/gemini.go` include a shared
+`neutralityPolicy` constant that forbids:
+
+- Marketing / hype words ("revolutionary", "game-changing", "seamless", …)
+- Vendor pitches and promotional phrasing from release notes
+- Opinions / sentiment / hot takes from blog posts or Hacker News
+- Sponsored or partner content (rule #10 of the newsletter prompt) —
+  sponsors are **never** inserted by the AI; they are added manually
+  post-generation via the `{{< sponsored >}}` shortcode.
+
+The "Numbers of the Week" section is fed **exact, pre-computed numbers**
+from `internal/github/stats.go`. The AI must render them verbatim and
+never invent stats.
+
+## Sponsored & Partner Content
+
+LWCN may carry clearly labeled paid placements. The full workflow is
+documented in [`docs/SPONSORED_CONTENT.md`](docs/SPONSORED_CONTENT.md).
+
+- Shortcode: `website/layouts/shortcodes/sponsored.html`
+- Styling: `.sponsored` block in `website/static/css/style.css`
+- Public policy: `/about/#independence--sponsorship`
+- Legal disclosure: `/impressum/#advertising--sponsored-content`
+
+Never mix sponsored content into the AI-generated editorial sections.
+Always use the shortcode. Outbound sponsor links get
+`rel="sponsored nofollow noopener"` automatically.
+
+## Social Publishing
+
+After a newsletter PR is merged to `main`:
+
+1. `deploy.yml` (name: **Deploy Hugo Site**) builds & publishes the site.
+2. `social-publish.yml` triggers via `workflow_run` and posts a short
+   teaser to Bluesky + X (Twitter) if the respective credentials are
+   present in GitHub secrets.
+3. The teasers are generated **in a single combined Gemini call**
+   (`GenerateSocialShorts`) that returns a JSON object with
+   `linkedin_short`, `tweet`, `bluesky` — saving 2 API calls per
+   edition vs. generating them separately.
+
+Files written by `ai-processor`:
+- `YYYY-week-XX-linkedin.txt`       — long LinkedIn article
+- `YYYY-week-XX-linkedin-short.txt` — LinkedIn teaser
+- `YYYY-week-XX-tweet.txt`          — X / Twitter teaser (≤280 chars incl. URL)
+- `YYYY-week-XX-bluesky.txt`        — Bluesky teaser (≤300 chars incl. URL)
+
+Secrets used by the publisher (all optional — platform is skipped if any
+is missing):
+- `BLUESKY_HANDLE`, `BLUESKY_APP_PASSWORD`
+- `X_API_KEY`, `X_API_SECRET`, `X_ACCESS_TOKEN`, `X_ACCESS_SECRET`
 
 ## API Rate Limits
 
 - **GitHub API**: 5000 requests/hour with token, 60/hour without
-- **Gemini API**: Check current limits at Google AI Studio
+- **GitHub Search API** (used for `stats-*.json`): 30 req/min authenticated — `FetchAllStats` throttles to 2.5s/repo.
+- **Gemini API**: Check current limits at Google AI Studio. Weekly run costs 3 calls (newsletter + long LinkedIn + combined shorts).
 
 ## Notes for AI Assistants
 
 1. **Hugo Templates**: Avoid complex Go template logic inside `<script>` tags - it causes parsing errors. Use separate `.js` files instead.
 
-2. **German Legal Requirements**: This project targets German users, so Impressum and Datenschutz pages are legally required.
+2. **German Legal Requirements**: This project targets German users, so Impressum and Datenschutz pages are legally required. Use **DDG** and **MStV** citations, not the repealed TMG / RStV.
 
 3. **Privacy First**: Always load analytics only after user consent. The cookie consent system uses both localStorage and cookies.
 
 4. **File Paths**: Use forward slashes in code, even on Windows.
 
-5. **Generated Content**: Files in `data/` and `website/content/newsletter/` are auto-generated - don't manually edit them.
+5. **Generated Content**: Files in `data/` and `website/content/newsletter/` are auto-generated — don't manually edit them. EXCEPTION: a human editor may append a `{{< sponsored >}}` block at the end of a weekly file (before the "View all articles" link). Do not touch the AI-generated editorial sections above it.
+
+6. **Neutrality over engagement**: When extending prompts, keep the `neutralityPolicy` intact and never add hype adjectives or "engagement-optimizing" phrasing.
 
 6. **Four CLIs**: The project has four separate CLI tools:
    - `release-crawler`: Fetches news (RSS, Heise, HackerNews) → outputs to `data/news-YYYY-MM-DD.json`

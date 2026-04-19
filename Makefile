@@ -7,6 +7,7 @@ ifeq ($(OS),Windows_NT)
     AI_PROCESSOR = bin/ai-processor.exe
     BACKFILL = bin/backfill-newsletter.exe
     SYNC_CNCF = bin/sync-cncf-projects.exe
+    SOCIAL_PUB = bin/social-publisher.exe
     MKDIR = if not exist bin mkdir bin
     RM_BIN = if exist bin rmdir /s /q bin
     RM_PUBLIC = if exist website\public rmdir /s /q website\public
@@ -16,6 +17,7 @@ else
     AI_PROCESSOR = bin/ai-processor
     BACKFILL = bin/backfill-newsletter
     SYNC_CNCF = bin/sync-cncf-projects
+    SOCIAL_PUB = bin/social-publisher
     MKDIR = mkdir -p bin
     RM_BIN = rm -rf bin/
     RM_PUBLIC = rm -rf website/public/
@@ -35,6 +37,7 @@ build:
 	go build -o $(AI_PROCESSOR) ./cmd/ai-processor
 	go build -o $(BACKFILL) ./cmd/backfill-newsletter
 	go build -o $(SYNC_CNCF) ./cmd/sync-cncf-projects
+	go build -o $(SOCIAL_PUB) ./cmd/social-publisher
 
 # Run tests
 test:
@@ -92,6 +95,15 @@ WEEKS ?= 3
 backfill: build
 	@echo "Generating newsletters for past $(WEEKS) weeks..."
 	$(BACKFILL) -weeks $(WEEKS) -output $(CONTENT_DIR) -data $(DATA_DIR)
+
+# Publish social teasers (Bluesky + X) for the current ISO week
+publish-social: build
+	@echo "Publishing social teaser to Bluesky + X..."
+	$(SOCIAL_PUB) -content-dir $(CONTENT_DIR)
+
+# Dry-run social teaser (print what would be posted, no API calls)
+publish-social-dry: build
+	$(SOCIAL_PUB) -content-dir $(CONTENT_DIR) -dry-run
 
 # Debug: Show what's being loaded
 debug-config:

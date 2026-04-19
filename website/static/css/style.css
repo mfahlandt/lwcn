@@ -439,3 +439,61 @@ body {
     color: var(--text-muted);
     font-size: 0.9rem;
 }
+/* --- Sponsored / Partner blocks ---------------------------------------- */
+/* Visually separates paid placements from editorial content so readers can
+   immediately tell them apart (GDPR / press-law compliant labeling). */
+.sponsored {
+    margin: 2rem 0;
+    padding: 1rem 1.25rem 0.75rem;
+    border: 1px dashed var(--accent-color);
+    border-left: 4px solid var(--accent-color);
+    border-radius: 6px;
+    background: rgba(255, 173, 96, 0.06);
+    color: var(--text-main);
+}
+.sponsored__header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+}
+.sponsored__badge {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    background: var(--accent-color);
+    border-radius: 3px;
+}
+.sponsored__by {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+.sponsored__by a {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+.sponsored__body p:first-child { margin-top: 0; }
+.sponsored__body p:last-child  { margin-bottom: 0.5rem; }
+.sponsored__footer {
+    margin-top: 0.75rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+.sponsored__footer a {
+    color: var(--text-muted);
+    text-decoration: underline;
+}
+/* Light mode fallback — in case the theme switches */
+@media (prefers-color-scheme: light) {
+    .sponsored {
+        background: rgba(255, 173, 96, 0.12);
+    }
+}

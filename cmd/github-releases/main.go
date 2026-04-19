@@ -21,6 +21,7 @@ func main() {
 
 	configPath := flag.String("config", "config/repositories.yaml", "Path to repositories config")
 	outputDir := flag.String("output", "data", "Output directory for releases")
+	collectStats := flag.Bool("stats", true, "Also collect neutral repo activity stats (commits, merged PRs)")
 	flag.Parse()
 
 	// Get GitHub token from environment
@@ -72,4 +73,21 @@ func main() {
 	}
 
 	log.Printf("Releases saved to %s", outputPath)
+
+	// --- Neutral activity stats (commits, merged PRs) for "Numbers of the Week" ---
+	if *collectStats {
+		end := time.Now()
+		start := end.AddDate(0, 0, -7)
+		stats := client.FetchAllStats(ctx, cfg.Repositories, start, end)
+
+		statsFile := fmt.Sprintf("stats-%s.json", time.Now().Format("2006-01-02"))
+		statsPath := filepath.Join(*outputDir, statsFile)
+		if sdata, err := json.MarshalIndent(stats, "", "  "); err == nil {
+			if err := os.WriteFile(statsPath, sdata, 0644); err != nil {
+				log.Printf("Failed to write stats: %v", err)
+			} else {
+				log.Printf("Stats saved to %s (%d repos with activity)", statsPath, len(stats))
+			}
+		}
+	}
 }

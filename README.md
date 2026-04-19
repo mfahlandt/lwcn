@@ -265,6 +265,22 @@ make deps                # Download dependencies
 make help
 ```
 
+## Sponsored Content
+
+LWCN supports clearly labeled sponsored / partner placements via the
+`{{< sponsored >}}` Hugo shortcode. The full workflow (legal background,
+shortcode parameters, disclosure checklist) is documented in
+[`docs/SPONSORED_CONTENT.md`](docs/SPONSORED_CONTENT.md).
+
+Key rules:
+
+- **Never** insert sponsor copy into the AI-generated editorial sections.
+- Use the shortcode at the end of the weekly Markdown file, under a
+  `## 💼 Sponsored` heading.
+- Outbound sponsor links automatically carry `rel="sponsored nofollow noopener"`.
+- Public policy: <https://lwcn.dev/about/#independence--sponsorship>
+- Legal disclosure: <https://lwcn.dev/impressum/#advertising--sponsored-content>
+
 ## Project Structure
 
 ```

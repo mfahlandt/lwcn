@@ -1,0 +1,48 @@
+{{/*
+  sponsored.html — renders a clearly labeled, visually separated advertising
+  block inside a newsletter edition.
+
+  Usage in Markdown:
+
+    {{< sponsored sponsor="Acme Corp" url="https://acme.example/" >}}
+    Acme Corp launches new Kubernetes operator for X.
+    Free tier available for CNCF projects.
+    {{< /sponsored >}}
+
+  Optional parameters:
+    sponsor  Name shown in the label (default: "Partner")
+    url      If set, the sponsor name becomes a link
+    kind     "sponsored" (default) or "partner" — changes the badge label
+
+  All sponsored blocks are rendered inside <aside> with role="complementary"
+  and an explicit label so screen readers + search engines can tell them
+  apart from editorial content.
+*/}}
+{{- $sponsor := .Get "sponsor" | default "" -}}
+{{- $url     := .Get "url"     | default "" -}}
+{{- $kind    := .Get "kind"    | default "sponsored" -}}
+{{- $label   := "Sponsored" -}}
+{{- if eq $kind "partner" -}}{{- $label = "Partner" -}}{{- end -}}
+
+<aside class="sponsored" role="complementary" aria-label="{{ $label }} content">
+  <div class="sponsored__header">
+    <span class="sponsored__badge">{{ $label }}</span>
+    {{- with $sponsor }}
+      <span class="sponsored__by">by
+        {{- if $url }}
+          <a href="{{ $url }}" rel="sponsored nofollow noopener" target="_blank">{{ . }}</a>
+        {{- else }}
+          <span>{{ . }}</span>
+        {{- end -}}
+      </span>
+    {{- end }}
+  </div>
+  <div class="sponsored__body">
+    {{ .Inner | markdownify }}
+  </div>
+  <div class="sponsored__footer">
+    This is a paid {{ $label | lower }} placement. It does not influence
+    editorial coverage. See our <a href="/about/#independence--sponsorship">sponsorship policy</a>.
+  </div>
+</aside>
+

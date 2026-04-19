@@ -8,6 +8,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/joho/godotenv"
@@ -47,6 +48,14 @@ func main() {
 	}
 	log.Printf("Loaded %d news items", len(news))
 
+	// Load neutral activity stats (optional — missing file is OK)
+	stats, err := loadStats("")
+	if err != nil {
+		log.Printf("No stats file loaded: %v", err)
+	} else {
+		log.Printf("Loaded %d repo stats entries", len(stats))
+	}
+
 	ctx := context.Background()
 
 	gemini, err := ai.NewGeminiClient(ctx, apiKey)
@@ -63,7 +72,7 @@ func main() {
 
 	// Generate full newsletter
 	log.Println("Generating newsletter with Gemini...")
-	newsletter, err := gemini.GenerateNewsletter(ctx, releases, news)
+	newsletter, err := gemini.GenerateNewsletter(ctx, releases, news, stats)
 	if err != nil {
 		log.Fatalf("Failed to generate newsletter: %v", err)
 	}
@@ -95,19 +104,34 @@ func generateLinkedInPosts(ctx context.Context, gemini *ai.GeminiClient, release
 	fmt.Println(linkedinPost)
 	fmt.Println("--- End ---")
 
-	// Generate LinkedIn Short post (teaser) — derived from the long post so the
-	// highlights line up with the long LinkedIn newsletter article.
-	log.Println("Generating LinkedIn short post with Gemini (based on long post)...")
-	shortPost, err := gemini.GenerateLinkedInShortPost(ctx, linkedinPost, releases, news)
+	// Generate all three short-format posts (LinkedIn teaser, tweet, bluesky)
+	// in a SINGLE combined Gemini call to save free-tier quota.
+	now := time.Now()
+	year, week := now.ISOWeek()
+	newsletterURL := fmt.Sprintf("https://lwcn.dev/newsletter/%d-week-%02d/", year, week)
+
+	log.Println("Generating short-format posts (LinkedIn teaser + tweet + bluesky) in ONE Gemini call...")
+	shorts, err := gemini.GenerateSocialShorts(ctx, linkedinPost, newsletterURL)
 	if err != nil {
-		log.Printf("Warning: Failed to generate LinkedIn short post: %v", err)
+		log.Printf("Warning: Failed to generate social shorts: %v", err)
 		return
 	}
 
-	shortPath := saveLinkedInFile(outputDir, shortPost, "linkedin-short")
-	log.Printf("LinkedIn short post created: %s", shortPath)
-	fmt.Println("\n--- LinkedIn Short Post ---")
-	fmt.Println(shortPost)
+	shortPath := saveLinkedInFile(outputDir, shorts.LinkedInShort, "linkedin-short")
+	log.Printf("LinkedIn short post created (%d chars): %s", len([]rune(shorts.LinkedInShort)), shortPath)
+
+	tweetPath := saveLinkedInFile(outputDir, strings.TrimSpace(shorts.Tweet), "tweet")
+	log.Printf("Tweet created (%d chars body): %s", len([]rune(shorts.Tweet)), tweetPath)
+
+	bskyPath := saveLinkedInFile(outputDir, strings.TrimSpace(shorts.Bluesky), "bluesky")
+	log.Printf("Bluesky post created (%d chars body): %s", len([]rune(shorts.Bluesky)), bskyPath)
+
+	fmt.Println("\n--- LinkedIn Short ---")
+	fmt.Println(shorts.LinkedInShort)
+	fmt.Println("\n--- Tweet ---")
+	fmt.Println(shorts.Tweet)
+	fmt.Println("\n--- Bluesky ---")
+	fmt.Println(shorts.Bluesky)
 	fmt.Println("--- End ---")
 }
 
@@ -157,6 +181,27 @@ func loadNews(path string) ([]models.NewsItem, error) {
 	}
 
 	return news, nil
+}
+
+// loadStats loads the most recent repo activity stats file (stats-*.json).
+// Missing file is not a fatal error — stats are optional context for the
+// "Numbers of the Week" section.
+func loadStats(path string) ([]models.RepoStats, error) {
+	if path == "" {
+		path = findLatestFile("data", "stats-")
+	}
+	if path == "" {
+		return nil, fmt.Errorf("no stats file found")
+	}
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	var stats []models.RepoStats
+	if err := json.Unmarshal(data, &stats); err != nil {
+		return nil, err
+	}
+	return stats, nil
 }
 
 func findLatestFile(dir, prefix string) string {

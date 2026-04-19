@@ -145,7 +145,7 @@ func main() {
 
 		// Generate newsletter
 		log.Printf("Generating newsletter with Gemini AI...")
-		newsletter, err := gemini.GenerateNewsletter(ctx, releases, nil)
+		newsletter, err := gemini.GenerateNewsletter(ctx, releases, nil, nil)
 		if err != nil {
 			log.Printf("Error generating newsletter: %v", err)
 			continue
