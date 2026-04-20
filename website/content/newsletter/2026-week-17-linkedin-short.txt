@@ -1,0 +1,7 @@
+🛡️ Critical security updates this week in Cloud Native.
+
+* Dapr v1.17.5+ fixed a critical service invocation path traversal vulnerability.
+* Containerd v2.2.3+ patched CVE-2026-35469 in its spdystream component.
+* Prometheus v3.11.2+ resolved a Stored XSS vulnerability in the web UI.
+
+👉 Check out the latest edition in my newsletter!
