@@ -1,0 +1,5 @@
+🛡️ Dapr, Containerd, Prometheus security updates.
+* Dapr v1.17.5+ fixed critical service invocation path traversal.
+* Containerd v2.2.3+ patched CVE-2026-35469 (spdystream).
+* Prometheus v3.11.2+ fixed Stored XSS in web UI.
+Full breakdown:

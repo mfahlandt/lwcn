@@ -1,0 +1,5 @@
+🛡️ Cloud Native security updates for Dapr, Containerd, and Prometheus.
+* Dapr: Critical service invocation path traversal fix.
+* Containerd: CVE-2026-35469 patch (spdystream).
+* Prometheus: Stored XSS fix in web UI.
+Full breakdown:

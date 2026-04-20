@@ -1,0 +1,33 @@
+🛡️ Dapr Addresses Critical Service Invocation Path Traversal Vulnerability
+
+This week, Dapr released multiple patch versions to address a critical security vulnerability related to service invocation. Containerd also issued security updates for a vulnerability in its spdystream component, and Prometheus fixed a stored XSS issue in its web UI.
+
+🚀 Key Releases
+
+Dapr v1.17.5, v1.16.14, v1.15.14
+These updates contain a critical security fix for a service invocation path traversal vulnerability. This issue could bypass access control policies. Dapr v1.15.14 also includes a Go runtime update to v1.25.9.
+
+Containerd v2.2.3, v2.1.7, v2.0.8, v1.7.31
+These patch releases include security updates for CVE-2026-35469 in the spdystream component. This affects various supported containerd versions.
+
+Prometheus v3.11.2, v3.5.2
+These releases fix a Stored XSS vulnerability in the Prometheus web UI. The vulnerability could be triggered via crafted metric names and label values displayed in tooltips and the metrics explorer.
+
+Backstage v1.50.0
+This release introduced breaking changes. Subsequent patch releases, v1.50.1 and v1.50.2, addressed issues such as outdated configuration schema values, config path resolution for embedded-postgres, and updated React Aria dependencies to monopackage imports.
+
+Argo CD v3.3.7, v3.2.9, v3.1.14
+These releases highlighted a potential bug where the application controller may fail to refresh applications. This could result in applications not syncing or resources appearing out of sync.
+
+📰 Notable News and Trends
+
+CNCF published an article detailing the implementation of K3s on on-prem infrastructures using a GitOps approach, specifically focusing on writing custom k0rdent templates. Another CNCF blog post discussed the technical implications of AI-driven vulnerability discovery for both maintainers and bug finders in open-source projects. Additionally, a CNCF article outlined the process and technical considerations for migrating internal services from ingress-nginx to Envoy Gateway within their cluster environment.
+
+💬 Community Highlights
+
+The topic of AI-driven vulnerability discovery generated discussion regarding the evolving landscape of security in Cloud Native projects. Maintainers are assessing how this shift impacts their processes for identifying and addressing security flaws.
+
+What are your experiences with integrating security fixes into your Cloud Native CI/CD pipelines?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-17/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps
