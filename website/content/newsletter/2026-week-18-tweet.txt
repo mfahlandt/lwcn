@@ -1,0 +1,1 @@
+⚙️ Kubernetes v1.36 released: User Namespaces & Kubelet API Auth GA. Kyverno v1.16.4 fixed CVE-2025-68121. cert-manager v1.19.5 resolved CVEs. Full breakdown:
