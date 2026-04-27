@@ -219,7 +219,7 @@ repositories:
     name: Keycloak
     owner: keycloak
     repo: keycloak
-  - category: ml-serving
+  - category: framework
     cncf_status: incubating
     name: KServe
     owner: kserve

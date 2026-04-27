@@ -1,0 +1,33 @@
+⚙️ Kubernetes v1.36 Releases with User Namespaces and Fine-Grained Kubelet API Authorization GA
+
+This week, Kubernetes v1.36 was released, marking several features as Generally Available (GA), including User Namespaces and Fine-Grained Kubelet API Authorization. These advancements enhance security isolation and granular access control within Kubernetes clusters.
+
+🚀 Key releases
+
+Kubernetes v1.36.0
+  Introduced User Namespaces to GA, enabling containers to run with non-root user IDs mapped to root within the container, which enhances security isolation. Fine-Grained Kubelet API Authorization also graduated to GA, providing more granular access control for Kubelet APIs. SELinux Volume Label Changes reached GA, improving security by correctly applying SELinux labels on persistent volumes. Gateway API v1.5 moved several features to Stable, indicating API maturity for ingress and egress management.
+
+Envoy v1.38.0
+  This release includes breaking changes: the `max_early_data_bytes` field in `tcp_proxy` must now be explicitly set for `upstream_connect_mode` values other than `IMMEDIATE`, and missing configurations will cause startup validation failures. Additionally, the `on_demand` filter no longer performs internal redirections.
+
+cert-manager v1.19.5
+  A patch release was published to address reported vulnerabilities. This version includes dependency bumps for Go, which resolve several CVEs.
+
+kyverno v1.16.4
+  A patch release fixed CVE-2025-68121. It also included a fix for policy report creation for namespaced policies during admission and background scans.
+
+CoreDNS v1.14.3
+  This version adds Windows service support and introduces full TSIG verification across DoH, DoH3, QUIC, and gRPC transports. It also includes improved TSIG propagation, DoH request validation, and optional TLS for the metrics endpoint.
+
+📰 Notable news/trends summary
+
+The CNCF Blog featured an article on auto-diagnosing Kubernetes alerts using HolmesGPT and other CNCF tools, detailing a practical application of AI in operational monitoring. The New Stack reported that Jaeger is adopting OpenTelemetry at its core, indicating a shift towards standardized observability practices for distributed tracing, particularly in scenarios involving AI agents.
+
+💬 Community highlights
+
+Discussions centered on leveraging AI for various cloud-native tasks, including migrating resources and auto-diagnosing alerts. Topics also included the use of AI agents for code review and generation, as seen with tools like KubeStellar and Cursor 3, and the implications of OpenAI's Workspace Agents for development workflows.
+
+What technical challenges or benefits do you foresee with the GA of User Namespaces in Kubernetes?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-18/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps
