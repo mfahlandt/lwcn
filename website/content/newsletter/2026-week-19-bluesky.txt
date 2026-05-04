@@ -1,0 +1,4 @@
+⚠️ Strimzi Kafka Operator 1.0.0: `v1` CRD API enforced, older APIs removed.
+- Argo CD v3.3.9/v3.2.11: Fixes critical vulnerability GHSA-3v3m-wc6v-x4x3.
+- Prometheus v3.11.3/v3.5.3: Fixes remote-read & AzureAD OAuth vulnerabilities.
+Full breakdown:
