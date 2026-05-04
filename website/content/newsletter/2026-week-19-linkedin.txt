@@ -1,0 +1,24 @@
+⚠️ Strimzi Kafka Operator 1.0.0 Enforces v1 CRD API
+
+Strimzi Kafka Operator 1.0.0 was released, enforcing the `v1` Custom Resource Definition (CRD) API. This version removes support for older `v1beta2`, `v1beta1`, and `v1alpha1` APIs. Upgrading to 1.0.0 requires converting existing custom resources to `v1`.
+
+🚀 Key Releases
+
+*   Strimzi Kafka Operator 1.0.0: This major release enforces the `v1` Custom Resource Definition (CRD) API. It removes support for the `v1beta2`, `v1beta1`, and `v1alpha1` APIs. Upgrading to this version requires prior conversion of all custom resources to the `v1` API.
+*   Argo CD v3.3.9 and v3.2.11: These patch releases include a security fix for a critical vulnerability identified as GHSA-3v3m-wc6v-x4x3.
+*   containerd v2.3.0 and api/v1.11.0: containerd v2.3.0 is a minor release focusing on stability and new features. The associated API v1.11.0 release adds transfer types for container filesystem copy operations and updates the sandbox API to include specific fields.
+*   Vitess v24.0.0: This major release introduces new support for window function pushdown for sharded keyspaces and adds functionality for view routing rules.
+*   Prometheus v3.11.3 and v3.5.3: These releases address multiple security issues, including a remote-read snappy decode vulnerability and an AzureAD OAuth `client_secret` vulnerability.
+
+📰 Notable News and Updates
+
+*   Kubernetes v1.36 development highlights included the alpha introduction of Pod-Level Resource Managers and the graduation of In-Place Vertical Scaling for Pod-Level Resources to beta. Other features mentioned were Tiered Memory Protection with Memory QoS, Staleness Mitigation and Observability for Controllers, and Mutable Pod Resources for Suspended Jobs reaching beta.
+*   CNCF published analyses on AI sandboxing and the current state of AI integration within CNCF projects, presenting initial data.
+*   Reports from The New Stack discussed mainframe modernization as a requirement for AI-driven enterprises and explored OpenSearch's role as an AI data layer.
+
+💬 Discussion Question
+
+What are the technical implications of the Strimzi Kafka Operator 1.0.0 API changes for your existing deployments?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-19/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps
