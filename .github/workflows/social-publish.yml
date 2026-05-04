@@ -42,17 +42,39 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check if newsletter was added
+        id: check
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "should_post=true" >> "$GITHUB_OUTPUT"
+          else
+            # Check if any newsletter .md file was added/modified in the triggering commit
+            CHANGED=$(git diff --name-only HEAD~1 HEAD -- 'website/content/newsletter/' | grep -E '^website/content/newsletter/[0-9]{4}-week-[0-9]+\.md$' || true)
+            if [ -n "$CHANGED" ]; then
+              echo "should_post=true" >> "$GITHUB_OUTPUT"
+              echo "Newsletter changed: $CHANGED"
+            else
+              echo "should_post=false" >> "$GITHUB_OUTPUT"
+              echo "No newsletter changes detected, skipping social post."
+            fi
+          fi
 
       - name: Set up Go
+        if: steps.check.outputs.should_post == 'true'
         uses: actions/setup-go@v5
         with:
           go-version: '1.22'
           cache: true
 
       - name: Build social-publisher
+        if: steps.check.outputs.should_post == 'true'
         run: go build -o bin/social-publisher ./cmd/social-publisher
 
       - name: Publish teaser
+        if: steps.check.outputs.should_post == 'true'
         env:
           BLUESKY_HANDLE:       ${{ secrets.BLUESKY_HANDLE }}
           BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
