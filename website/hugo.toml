@@ -1,10 +1,18 @@
 baseURL = 'https://lwcn.dev/'
-languageCode = 'en'
+defaultContentLanguage = 'en'
+
+[languages]
+  [languages.en]
+    locale = 'en-US'
+    label = 'English'
 title = 'Last Week in Cloud Native'
 theme = 'PaperMod'
 
-# Disable unused taxonomies
-[taxonomies]
+# Disable taxonomies entirely (prevents term pages like /true and /false)
+taxonomies = {}
+
+# Also disable taxonomy kinds explicitly for safety
+disableKinds = ["taxonomy", "term"]
 
 # SEO Settings
 enableRobotsTXT = true
@@ -16,6 +24,9 @@ canonifyURLs = true
 trailingSlash = true
 relativeURLs = false
 
+# Keep social draft text artifacts out of public site output
+ignoreFiles = ["content/newsletter/.*\\.txt$"]
+
 # Sitemap Configuration
 [sitemap]
   changefreq = "weekly"
@@ -24,7 +35,7 @@ relativeURLs = false
 
 # RSS Feed Configuration
 [outputs]
-  home = ["HTML", "RSS", "SITEMAP"]
+  home = ["HTML", "RSS", "SITEMAP", "ROBOTS"]
   section = ["HTML", "RSS"]
 
 [outputFormats.SITEMAP]

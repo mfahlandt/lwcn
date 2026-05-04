@@ -17,7 +17,7 @@
     <link>{{ .Permalink }}</link>
     <description>Weekly Cloud Native newsletter covering Kubernetes releases, CNCF projects, and ecosystem news</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>{{ site.Language.LanguageCode }}</language>{{ with site.Params.email }}
+    <language>{{ site.Language.Lang }}</language>{{ with site.Params.email }}
     <managingEditor>{{.}}{{ with site.Params.author }} ({{.}}){{end}}</managingEditor>{{end}}{{ with site.Params.email }}
     <webMaster>{{.}}{{ with site.Params.author }} ({{.}}){{end}}</webMaster>{{end}}{{ with .Site.Copyright }}
     <copyright>{{.}}</copyright>{{end}}{{ if not .Date.IsZero }}

@@ -136,7 +136,7 @@ A complete list of all cloud native articles and news from this week.
 - [Show HN: Mystral Native – Run JavaScript games natively with WebGPU (no browser)](https://github.com/mystralengine/mystralnative)
 - [Fluux Messenger: A Modern Cross Platform XMPP Client](https://www.process-one.net/blog/introducing-fluux-messenger-a-modern-xmpp-client-born-from-a-holiday-coding-session/)
 - [Show HN: I built an AI conversation partner to practice speaking languages](https://apps.apple.com/us/app/talkbits-speak-naturally/id6756824177)
-- [Show HN: Nomod payment integrated into usage-based billing stack](http://Link:admin.flexprice.io)
+- [Show HN: Nomod payment integrated into usage-based billing stack](https://admin.flexprice.io)
 - [Show HN: We built a type-safe Python ORM for RedisGraph/FalkorDB](https://news.ycombinator.com/item?id=46796602)
 - [Show HN: Akshen – A community-driven library for verified AI prompts](https://akshen.com/)
 - [Show HN: I got tired of checking 5 dashboards, so I built a simpler one](https://anypanel.io/)

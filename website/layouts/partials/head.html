@@ -36,8 +36,8 @@
 <!-- Keywords -->
 <meta name="keywords" content="Cloud Native, Kubernetes, CNCF, DevOps, Container, Docker, Helm, GitOps, Service Mesh, Observability, Platform Engineering{{ with .Params.keywords }}, {{ delimit . ", " }}{{ end }}{{ with .Params.highlights }}, {{ delimit . ", " }}{{ end }}">
 <meta name="author" content="{{ .Site.Params.author | default "LWCN" }}">
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-<meta name="googlebot" content="index, follow">
+<meta name="robots" content="{{ if or .Params.noindex (eq .Kind "404") }}noindex, nofollow{{ else }}index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1{{ end }}">
+<meta name="googlebot" content="{{ if or .Params.noindex (eq .Kind "404") }}noindex, nofollow{{ else }}index, follow{{ end }}">
 
 <!-- Language -->
 <meta http-equiv="content-language" content="en">
@@ -51,7 +51,7 @@
 <meta property="og:description" content="{{ $finalDescription }}">
 <meta property="og:site_name" content="{{ .Site.Title }}">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="{{ "images/og-image.svg" | absURL }}">
+<meta property="og:image" content="{{ "images/og-image.png" | absURL }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Last Week in Cloud Native - Weekly Kubernetes and CNCF Newsletter">
@@ -72,7 +72,7 @@
 <meta name="twitter:url" content="{{ .Permalink }}">
 <meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }} - Weekly Cloud Native Newsletter{{ else }}{{ $pageTitle }} | {{ .Site.Title }}{{ end }}">
 <meta name="twitter:description" content="{{ $finalDescription }}">
-<meta name="twitter:image" content="{{ "images/og-image.svg" | absURL }}">
+<meta name="twitter:image" content="{{ "images/og-image.png" | absURL }}">
 <meta name="twitter:image:alt" content="Last Week in Cloud Native - Weekly Kubernetes and CNCF Newsletter">
 
 <!-- Schema.org structured data -->
@@ -83,7 +83,7 @@
   "@type": "Article",
   "headline": "{{ .Title }}",
   "description": "{{ $finalDescription }}",
-  "image": "{{ "images/og-image.svg" | absURL }}",
+  "image": "{{ "images/og-image.png" | absURL }}",
   "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
   "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
   "author": {
@@ -101,7 +101,7 @@
     "url": "{{ .Site.BaseURL }}",
     "logo": {
       "@type": "ImageObject",
-      "url": "{{ "images/og-image.svg" | absURL }}"
+      "url": "{{ "images/og-image.png" | absURL }}"
     },
     "sameAs": [
       "https://github.com/mfahlandt/lwcn"
@@ -158,7 +158,7 @@
   "name": "{{ .Site.Title }}",
   "description": "{{ .Site.Params.description }}",
   "url": "{{ .Site.BaseURL }}",
-  "image": "{{ "images/og-image.svg" | absURL }}",
+  "image": "{{ "images/og-image.png" | absURL }}",
   "potentialAction": {
     "@type": "SearchAction",
     "target": "{{ .Site.BaseURL }}?q={search_term_string}",
@@ -174,7 +174,7 @@
   "@type": "Organization",
   "name": "{{ .Site.Title }}",
   "url": "{{ .Site.BaseURL }}",
-  "logo": "{{ "images/og-image.svg" | absURL }}",
+  "logo": "{{ "images/og-image.png" | absURL }}",
   "sameAs": [
     "https://github.com/mfahlandt/lwcn"
   ]

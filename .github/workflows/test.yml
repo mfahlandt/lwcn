@@ -44,3 +44,33 @@ jobs:
       - name: Build Hugo Site
         working-directory: website
         run: hugo --minify
+
+      - name: Verify Hugo Artifacts
+        working-directory: website
+        run: |
+          required_files=(
+            "public/feed.xml"
+            "public/newsletter/feed.xml"
+            "public/robots.txt"
+            "public/sitemap.xml"
+          )
+
+          for file in "${required_files[@]}"; do
+            if [[ ! -f "$file" ]]; then
+              echo "Missing required Hugo artifact: $file"
+              exit 1
+            fi
+          done
+
+          echo "All required Hugo artifacts are present."
+
+      - name: Check Sitemap for regressions
+        working-directory: website
+        run: |
+          if grep -qE '/true/|/false/' public/sitemap.xml; then
+            echo "ERROR: sitemap.xml contains unwanted /true/ or /false/ URLs"
+            grep -E '/true/|/false/' public/sitemap.xml
+            exit 1
+          fi
+          echo "Sitemap regression check passed."
+

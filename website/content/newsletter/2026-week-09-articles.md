@@ -147,7 +147,7 @@ A complete list of all cloud native articles and news from this week.
 - [FDA Reverses Decision and Agrees to Review Moderna's Flu Vaccine](https://www.nytimes.com/2026/02/18/health/fda-moderna-flu-vaccine-mrna.html)
 - [Show HN: Breadboard – A modern HyperCard for building web apps on the canvas](https://breadboards.io/)
 - [Show HN: Pg-workflows – Lightweight workflows for Node.js using Postgres](https://sokratisvidros.github.io/pg-workflows/)
-- [Show HN: Credit-to-currency conversion controls for wallet-based billing](http://Link:admin.flexprice.io)
+- [Show HN: Credit-to-currency conversion controls for wallet-based billing](https://admin.flexprice.io)
 - [Ask HN: Anyone else exhausted by too rapid development of news?](https://news.ycombinator.com/item?id=47090622)
 - [Show HN: Voquill - free, open source, cross-platform alternative to WisprFlow](https://github.com/josiahsrc/voquill)
 - [Show HN: Tropes.fyi – Name and shame AI writing](https://tropes.fyi/)

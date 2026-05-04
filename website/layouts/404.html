@@ -1,0 +1,19 @@
+{{ define "main" }}
+<article class="newsletter-issue">
+    <header class="issue-header">
+        <h1>404 – Page Not Found</h1>
+        <p class="summary">The page you're looking for doesn't exist or has been moved.</p>
+    </header>
+
+    <div class="issue-content">
+        <p>Here are some helpful links:</p>
+        <ul>
+            <li><a href="{{ .Site.BaseURL }}">🏠 Homepage</a></li>
+            <li><a href="{{ "newsletter/" | relURL }}">📰 Newsletter Archive</a></li>
+            <li><a href="{{ "newsletter/feed.xml" | relURL }}">📡 RSS Feed</a></li>
+            <li><a href="{{ "about/" | relURL }}">ℹ️ About LWCN</a></li>
+        </ul>
+    </div>
+</article>
+{{ end }}
+

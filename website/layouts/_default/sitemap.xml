@@ -9,8 +9,8 @@
     <priority>1.0</priority>
   </url>
   {{- /* All regular pages and sections */ -}}
-  {{- range .Site.AllPages -}}
-  {{- if and (not .Params.noindex) (ne .Kind "home") }}
+  {{- range where .Site.Pages "Kind" "ne" "home" -}}
+  {{- if not .Params.noindex }}
   <url>
     <loc>{{ .Permalink }}</loc>
     {{- if not .Lastmod.IsZero }}
