@@ -191,7 +191,20 @@
 <!-- Favicon -->
 <link rel="icon" href="{{ "favicon.ico" | relURL }}">
 <link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}" sizes="180x180">
+<link rel="manifest" href="{{ "site.webmanifest" | relURL }}">
+<meta name="theme-color" content="#48bb78">
 
 <!-- Preconnect for performance -->
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+<!-- Prev/Next for newsletter series -->
+{{- if eq .Section "newsletter" }}
+{{- with .PrevInSection }}
+<link rel="prev" href="{{ .Permalink }}">
+{{- end }}
+{{- with .NextInSection }}
+<link rel="next" href="{{ .Permalink }}">
+{{- end }}
+{{- end }}
+

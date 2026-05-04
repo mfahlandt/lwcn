@@ -102,7 +102,7 @@ A complete list of all cloud native articles and news from this week.
 - [50 years ago, a young Bill Gates took on the 'software pirates'](https://thenewstack.io/50-years-ago-a-young-bill-gates-took-on-the-software-pirates/)
 - [Groop – No AI. No Influencers. No Algorithms. No Tracking](https://www.joingroop.app/)
 - [Implementing CRDT Algorithms with MoonBit](https://www.moonbitlang.com/blog/crdt-algorithms-moonbit)
-- [Flying Around the World in under 80 Days](http://pinchito.local/2026/avis-lxxx)
+- [Flying Around the World in under 80 Days](https://pinchito.es/2026/avis-lxxx)
 - [I watched the Challenger shuttle disaster from Mission Control – 40 years ago](https://www.zdnet.com/article/remembering-challenger-shuttle-disaster/)
 - [Apple updates iOS 12.5.8 for iPhone 5s from 13 years ago, iOS 15, 16, 18 too](https://www.iphoneincanada.ca/2026/01/26/apple-drops-ios-26-2-1-and-surprise-updates-for-older-iphones-and-ipads/)
 - [Show HN: Kolibri, a DIY music club in Sweden](https://kolibrinkpg.com/)
