@@ -1,0 +1,35 @@
+{{ define "main" }}
+<article class="newsletter-issue">
+    <header class="issue-header">
+        <h1>{{ .Title }}</h1>
+        <p class="summary">A complete overview of all pages on this site.</p>
+    </header>
+
+    <div class="issue-content">
+        <h2>📰 Newsletter Issues</h2>
+        <ul>
+            {{- range where .Site.RegularPages "Section" "newsletter" }}
+            {{- if not (strings.Contains .File.Path "-articles") }}
+            <li><a href="{{ .Permalink }}">{{ .Title }}</a> – <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></li>
+            {{- end }}
+            {{- end }}
+        </ul>
+
+        <h2>📄 Pages</h2>
+        <ul>
+            <li><a href="{{ "/" | relURL }}">Home</a></li>
+            <li><a href="{{ "newsletter/" | relURL }}">Newsletter Archive</a></li>
+            <li><a href="{{ "about/" | relURL }}">About</a></li>
+            <li><a href="{{ "impressum/" | relURL }}">Imprint</a></li>
+            <li><a href="{{ "datenschutz/" | relURL }}">Privacy Policy</a></li>
+        </ul>
+
+        <h2>📡 Feeds</h2>
+        <ul>
+            <li><a href="{{ "newsletter/feed.xml" | relURL }}">RSS Feed (Newsletter)</a></li>
+            <li><a href="{{ "sitemap.xml" | relURL }}">XML Sitemap</a></li>
+        </ul>
+    </div>
+</article>
+{{ end }}
+

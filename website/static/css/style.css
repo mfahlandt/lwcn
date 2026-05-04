@@ -1,3 +1,47 @@
+/* Self-hosted fonts for GDPR compliance (no Google Fonts CDN) */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/inter-400.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../fonts/inter-500.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('../fonts/inter-600.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../fonts/inter-700.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Source Code Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/source-code-pro-400.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Source Code Pro';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../fonts/source-code-pro-500.woff2') format('woff2');
+}
+
 :root {
     /* Dark Theme - Cloud Native Style */
     --bg-color: #2D3436;
@@ -15,7 +59,6 @@
     --radius: 8px;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -491,7 +534,7 @@ body {
     color: var(--text-muted);
     text-decoration: underline;
 }
-/* Light mode fallback — in case the theme switches */
+/* Light mode fallback ï¿½ in case the theme switches */
 @media (prefers-color-scheme: light) {
     .sponsored {
         background: rgba(255, 173, 96, 0.12);
