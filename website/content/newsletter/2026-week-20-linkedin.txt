@@ -1,0 +1,35 @@
+📰 Kubernetes v1.36 Released with Volume Group Snapshots GA
+
+This week, the Kubernetes project released version 1.36, introducing several new features and graduating existing ones to General Availability. This update brings enhancements across storage, API management, and cluster policy enforcement, affecting how applications are deployed and managed.
+
+🚀 Key Releases
+
+Kubernetes v1.36.0 (via k3s v1.36.0+k3s1 update and official blog posts):
+  - Volume Group Snapshots graduated to General Availability, providing stable APIs for creating consistent backups of persistent volumes.
+  - Declarative Validation graduated to General Availability, allowing CRD authors to define validation rules using Common Expression Language (CEL) with a stable API.
+  - Server-Side Sharded List and Watch was introduced, aiming to improve control-plane scalability by distributing API server watch requests across multiple instances.
+  - Admission Policies That Can't Be Deleted was introduced, enhancing cluster security by preventing accidental or malicious removal of critical admission policies.
+
+Volcano v1.14.2, v1.13.3, v1.12.4:
+  - Addressed security vulnerability CVE-2026-44247. This fix mitigates a webhook server Out-Of-Memory (OOM) issue caused by unbounded HTTP request body sizes, improving stability and security.
+
+baremetal-operator v0.13.0:
+  - Introduced breaking changes by uplifting Cluster API to v1.13.0-rc.1, Kubernetes group to v0.35.4, and controller-runtime to v0.23.3.
+  - Removed the iRMC driver and deprecated BMH.Spec.Firmware, requiring adjustments for deployments utilizing these components.
+
+Buildah v1.33.15, v1.29.8, v1.26.11:
+  - Addressed multiple security vulnerabilities, including CVE-2026-34986 (Go Jose), CVE-2025-49713 (x/crypto), and several CVEs within runc (CVE-2025-52881, CVE-2025-31133, CVE-2025-52565, CVE-2025-47913). These updates enhance container image build security.
+
+Argo CD v3.1.16:
+  - Announced the End-of-Life for the 3.1 release series. As of May 06th, 2026, this version will no longer receive bug fixes or security updates, requiring users to upgrade to a supported release.
+
+📰 Notable News
+
+Microcks became a CNCF incubating project. This signifies a progression in the project's maturity and community engagement within the Cloud Native Computing Foundation.
+
+Kyverno release 1.18 was announced.
+
+How do the new Kubernetes v1.36 features impact your cluster management or application deployment strategies?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-20/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps

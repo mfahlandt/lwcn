@@ -1,0 +1,8 @@
+🚀 Kubernetes v1.36.0 released.
+
+This week's LWCN highlights:
+- Volume Group Snapshots graduated to General Availability.
+- Declarative Validation graduated to General Availability.
+- Volcano v1.14.2, v1.13.3, v1.12.4 addressed CVE-2026-44247.
+
+👉 Check out the latest edition in my newsletter!

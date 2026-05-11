@@ -1,0 +1,5 @@
+🚀 Kubernetes v1.36.0 released.
+- Volume Group Snapshots GA.
+- Declarative Validation GA.
+- Volcano addressed CVE-2026-44247.
+Full breakdown:
