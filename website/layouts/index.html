@@ -30,12 +30,12 @@
     <h2>Latest Issues</h2>
     <div class="newsletter-grid">
         {{ $newsletters := where .Site.RegularPages "Section" "newsletter" }}
-        {{ range first 5 $newsletters }}
+        {{ $sorted := $newsletters.ByDate.Reverse }}
+        {{ range $sorted }}
         {{- if not (strings.Contains .File.Path "-articles") }}
         {{ partial "newsletter-card.html" . }}
         {{- end }}
         {{ end }}
     </div>
-    <a href="{{ "newsletter/" | relURL }}" class="btn btn-secondary">View All Issues</a>
 </section>
 {{ end }}

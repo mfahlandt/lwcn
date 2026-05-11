@@ -6,6 +6,9 @@ keywords:
     - Kubernetes Weekly Updates
     - CNCF Project Releases
     - DevOps Newsletter
+sitemap:
+    priority: 0.8
+    changefreq: weekly
 ---
 
 ## Subscribe

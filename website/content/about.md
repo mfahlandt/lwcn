@@ -9,6 +9,9 @@ keywords:
     - CNCF Ecosystem
     - Kubernetes News Curation
     - Mario Fahlandt
+sitemap:
+    priority: 0.7
+    changefreq: monthly
 ---
 
 ## About Last Week in Cloud Native

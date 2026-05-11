@@ -1,12 +1,14 @@
-<article class="newsletter-card">
-    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
-    <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+<article class="newsletter-card" itemscope itemtype="https://schema.org/Article">
+    <time datetime="{{ .Date.Format "2006-01-02" }}" itemprop="datePublished">{{ .Date.Format "January 2, 2006" }}</time>
+    <h3><a href="{{ .Permalink }}" itemprop="url"><span itemprop="headline">{{ .Title }}</span></a></h3>
     {{ with .Params.summary }}
-    <p>{{ . }}</p>
+    <p itemprop="description">{{ . }}</p>
     {{ end }}
+    {{ with .Params.highlights }}
     <div class="tags">
-        {{ range .Params.highlights }}
+        {{ range . }}
         <span class="tag">{{ . }}</span>
         {{ end }}
     </div>
+    {{ end }}
 </article>

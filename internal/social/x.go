@@ -18,17 +18,54 @@ import (
 )
 
 // Twitter/X v2 tweet limit. Free tier is write-limited but supports creating
-// tweets. Credentials come from https://developer.x.com/.
+// tweets via OAuth 1.0a user context.
+//
+// IMPORTANT: The X Developer Portal labels these secrets DIFFERENTLY than
+// what OAuth 1.0a calls them. Mapping:
+//
+//	Env var          X Developer Portal label            OAuth 1.0a name
+//	────────────     ────────────────────────            ────────────────
+//	X_API_KEY        "API Key" (Consumer Keys section)   oauth_consumer_key
+//	X_API_SECRET     "API Key Secret"                    (consumer secret, used in signing key only)
+//	X_ACCESS_TOKEN   "Access Token"                      oauth_token
+//	X_ACCESS_SECRET  "Access Token Secret"               (token secret, used in signing key only)
+//
+// All four values are required. They come from:
+//
+//	developer.x.com → your project → your app →
+//	  "Keys and tokens" tab →
+//	    - "Consumer Keys" section → API Key + API Key Secret
+//	    - "Authentication Tokens" section → Access Token + Access Token Secret
+//
+// The app MUST be configured with "Read and Write" permissions (User
+// authentication settings → App permissions = "Read and write"). If you
+// change permissions AFTER generating an Access Token, you MUST regenerate
+// the Access Token — otherwise POST /2/tweets returns 401 Unauthorized even
+// though the credentials look correct. This is the single most common
+// failure mode. See also: https://developer.x.com/en/docs/authentication/oauth-1-0a
 const xMaxChars = 280
 
 // XClient publishes tweets via the X API v2 using OAuth 1.0a user context
-// (required for POST /2/tweets).
+// (required for POST /2/tweets). See the constant block above for the
+// exact mapping of env vars to developer-portal labels.
 type XClient struct {
-	APIKey       string // a.k.a. consumer key
-	APISecret    string // a.k.a. consumer secret
-	AccessToken  string
+	// APIKey is the "API Key" from the Consumer Keys section.
+	// Sent as oauth_consumer_key.
+	APIKey string
+
+	// APISecret is the "API Key Secret" from the Consumer Keys section.
+	// Used only in the signing key (not transmitted directly).
+	APISecret string
+
+	// AccessToken is the "Access Token" from the Authentication Tokens section.
+	// Sent as oauth_token. Must be from an app with Read+Write permissions.
+	AccessToken string
+
+	// AccessSecret is the "Access Token Secret".
+	// Used only in the signing key (not transmitted directly).
 	AccessSecret string
-	HTTP         *http.Client
+
+	HTTP *http.Client
 }
 
 // Post publishes the given short post as a tweet.
@@ -56,7 +93,25 @@ func (c *XClient) Post(p Post) error {
 	respBody, _ := io.ReadAll(resp.Body)
 	resp.Body.Close()
 	if resp.StatusCode >= 300 {
-		return fmt.Errorf("x post failed (%d): %s", resp.StatusCode, string(respBody))
+		hint := ""
+		switch resp.StatusCode {
+		case 401:
+			hint = " — 401 usually means: wrong credential mapping (API Key vs Access Token swapped), " +
+				"app permissions are Read-only (must be Read+Write), or Access Token was generated " +
+				"BEFORE permissions were set to Read+Write (regenerate it)."
+		case 402:
+			hint = " — 402 CreditsDepleted: the X Free tier no longer includes write credits. " +
+				"POST /2/tweets now requires a paid tier (Basic $200/mo+) with posting credits. " +
+				"To disable X and keep only Bluesky, remove any one of the X_* GitHub secrets " +
+				"(X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET) — the publisher " +
+				"will then skip X silently."
+		case 403:
+			hint = " — 403 usually means: your X developer app is not attached to a Project (required " +
+				"for v2 endpoints), or your access tier does not allow posting tweets."
+		case 429:
+			hint = " — 429 means rate-limited. Free tier has very strict daily write limits."
+		}
+		return fmt.Errorf("x post failed (%d): %s%s", resp.StatusCode, string(respBody), hint)
 	}
 	return nil
 }

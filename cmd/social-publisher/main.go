@@ -26,6 +26,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/joho/godotenv"
@@ -112,6 +113,13 @@ func publishBluesky(p social.Post) {
 }
 
 func publishX(p social.Post) {
+	// Explicit opt-out without having to delete the X_* secrets. Useful while
+	// the X Free tier has no posting credits (HTTP 402 CreditsDepleted) and
+	// you only want to post to Bluesky.
+	if strings.EqualFold(os.Getenv("X_ENABLED"), "false") {
+		log.Printf("X: disabled via X_ENABLED=false — skipping")
+		return
+	}
 	key := os.Getenv("X_API_KEY")
 	secret := os.Getenv("X_API_SECRET")
 	token := os.Getenv("X_ACCESS_TOKEN")

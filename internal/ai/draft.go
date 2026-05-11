@@ -31,11 +31,16 @@ func (g *DraftGenerator) GenerateDraft(newsletter *models.Newsletter) (string, e
 	metadata := models.DraftMetadata{
 		Title:       title,
 		Date:        now.Format("2006-01-02"),
+		Lastmod:     now.Format("2006-01-02"),
 		Draft:       false,
 		Summary:     generateSummary(newsletter),
 		Description: generateSEODescription(newsletter, week, year),
 		Keywords:    generateKeywords(newsletter),
 		Highlights:  extractHighlights(newsletter),
+		Sitemap: &models.SitemapMetadata{
+			Priority:   0.9,
+			ChangeFreq: "weekly",
+		},
 	}
 
 	frontmatter, err := yaml.Marshal(metadata)
@@ -92,7 +97,11 @@ func (g *DraftGenerator) generateArticlesPage(newsletter *models.Newsletter, yea
 title: "Week %d Articles - %s"
 date: "%s"
 draft: false
+noindex: true
 url: "/newsletter/%d-week-%02d/articles/"
+sitemap:
+  priority: 0.3
+  changefreq: never
 build:
   list: never
   publishResources: true

@@ -69,3 +69,36 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # Notify search engines about the updated sitemap after deployment
+  ping-search-engines:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - name: Ping Google Sitemap
+        run: |
+          curl -s "https://www.google.com/ping?sitemap=https://lwcn.dev/sitemap.xml" || true
+          echo "Google sitemap ping sent"
+
+      - name: Ping Bing Sitemap
+        run: |
+          curl -s "https://www.bing.com/ping?sitemap=https://lwcn.dev/sitemap.xml" || true
+          echo "Bing sitemap ping sent"
+
+      - name: Ping IndexNow (Bing/Yandex)
+        if: ${{ vars.INDEXNOW_KEY != '' }}
+        run: |
+          curl -s -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "host": "lwcn.dev",
+              "key": "${{ vars.INDEXNOW_KEY }}",
+              "keyLocation": "https://lwcn.dev/${{ vars.INDEXNOW_KEY }}.txt",
+              "urlList": [
+                "https://lwcn.dev/",
+                "https://lwcn.dev/newsletter/",
+                "https://lwcn.dev/sitemap.xml"
+              ]
+            }' || true
+          echo "IndexNow ping sent"
+

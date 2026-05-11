@@ -1,19 +1,19 @@
 {{ define "main" }}
-<article class="newsletter-issue">
+<article class="newsletter-issue" itemscope itemtype="https://schema.org/Article">
     <header class="issue-header">
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
-        <h1>{{ .Title }}</h1>
+        <time datetime="{{ .Date.Format "2006-01-02" }}" itemprop="datePublished">{{ .Date.Format "January 2, 2006" }}</time>
+        <h1 itemprop="headline">{{ .Title }}</h1>
         {{ with .Params.summary }}
-        <p class="summary">{{ . }}</p>
+        <p class="summary" itemprop="description">{{ . }}</p>
         {{ end }}
     </header>
 
-    <div class="issue-content">
+    <div class="issue-content" itemprop="articleBody">
         {{ .Content }}
     </div>
 
     <footer class="issue-footer">
-        <nav class="issue-nav">
+        <nav class="issue-nav" aria-label="Newsletter navigation">
             {{ with .PrevInSection }}
             <a href="{{ .Permalink }}" class="prev">&larr; {{ .Title }}</a>
             {{ end }}
@@ -21,6 +21,10 @@
             <a href="{{ .Permalink }}" class="next">{{ .Title }} &rarr;</a>
             {{ end }}
         </nav>
+        <div class="issue-footer-links">
+            <a href="{{ "newsletter/" | relURL }}">← All Issues</a>
+            <a href="{{ "newsletter/feed.xml" | relURL }}">Subscribe via RSS</a>
+        </div>
     </footer>
 </article>
 {{ end }}

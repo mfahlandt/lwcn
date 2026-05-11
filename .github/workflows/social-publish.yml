@@ -9,10 +9,18 @@ name: Social Publish
 # Credentials (GitHub repo secrets — all optional, platform is skipped if unset):
 #   BLUESKY_HANDLE          e.g. "lwcn.bsky.social"
 #   BLUESKY_APP_PASSWORD    Bluesky app password (NOT your account password)
-#   X_API_KEY               X developer app consumer key
-#   X_API_SECRET            X developer app consumer secret
-#   X_ACCESS_TOKEN          X user access token (with tweet.write scope)
-#   X_ACCESS_SECRET         X user access token secret
+#
+# X (Twitter) — OAuth 1.0a user context (required for POST /2/tweets).
+# The X Developer Portal labels are DIFFERENT from our env var names:
+#   X_API_KEY         = "API Key"            (Consumer Keys section)
+#   X_API_SECRET      = "API Key Secret"     (Consumer Keys section)
+#   X_ACCESS_TOKEN    = "Access Token"       (Authentication Tokens section)
+#   X_ACCESS_SECRET   = "Access Token Secret"(Authentication Tokens section)
+# The app MUST have "Read and Write" permissions. If you change the
+# permission level after generating the Access Token, regenerate the
+# Access Token — otherwise tweeting returns 401 Unauthorized.
+# Do NOT use OAuth 2.0 Client ID/Client Secret or a Bearer Token here —
+# those are a different auth flow and will not work with this publisher.
 
 on:
   workflow_run:
@@ -94,4 +102,5 @@ jobs:
             ARGS="$ARGS -dry-run"
           fi
           ./bin/social-publisher $ARGS
+
 

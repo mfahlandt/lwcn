@@ -11,7 +11,11 @@ Disallow: /newsletter/*-linkedin-short.txt
 Disallow: /newsletter/*-tweet.txt
 Disallow: /newsletter/*-bluesky.txt
 
-# Sitemap location
+# Canonical host — tell well-behaved crawlers the preferred origin
+# (reinforces the <link rel="canonical"> already present on every page)
+Host: https://lwcn.dev
+
+# Sitemap location (absolute, non-www)
 Sitemap: {{ "sitemap.xml" | absURL }}
 
 # Crawl-delay for polite bots (not applicable to Googlebot)

@@ -359,6 +359,19 @@ body {
 }
 .issue-nav a:hover { text-decoration: underline; }
 
+.issue-footer-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    font-size: 0.9rem;
+}
+.issue-footer-links a {
+    color: var(--accent-color, #48bb78);
+    text-decoration: none;
+}
+.issue-footer-links a:hover { text-decoration: underline; }
+
 /* Articles Page */
 .issue-content h1 {
     color: var(--primary-color);
