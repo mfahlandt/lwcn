@@ -25,7 +25,28 @@ func (g *DraftGenerator) GenerateDraft(newsletter *models.Newsletter) (string, e
 	now := time.Now()
 	year, week := now.ISOWeek()
 
-	title := fmt.Sprintf("Week %d - %s", week, now.Format("January 2006"))
+	// Compute the Monday–Sunday date range for this ISO week.
+	// ISOWeek: Monday = 1 … Sunday = 7.
+	weekday := now.Weekday() // Sunday=0, Monday=1 … Saturday=6
+	if weekday == 0 {
+		weekday = 7
+	}
+	monday := now.AddDate(0, 0, -int(weekday-1))
+	sunday := monday.AddDate(0, 0, 6)
+
+	// Build a unique title with date range:
+	//   "Week 18, May 5-11, 2026"  (same month)
+	//   "Week 5, Jan 27 - Feb 2, 2026"  (cross-month)
+	var title string
+	if monday.Month() == sunday.Month() {
+		title = fmt.Sprintf("Week %d, %s %d-%d, %d",
+			week, monday.Format("Jan"), monday.Day(), sunday.Day(), year)
+	} else {
+		title = fmt.Sprintf("Week %d, %s %d - %s %d, %d",
+			week, monday.Format("Jan"), monday.Day(),
+			sunday.Format("Jan"), sunday.Day(), year)
+	}
+
 	filename := fmt.Sprintf("%d-week-%02d.md", year, week)
 
 	metadata := models.DraftMetadata{

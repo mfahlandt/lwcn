@@ -86,14 +86,13 @@ jobs:
           echo "Bing sitemap ping sent"
 
       - name: Ping IndexNow (Bing/Yandex)
-        if: ${{ vars.INDEXNOW_KEY != '' }}
         run: |
           curl -s -X POST "https://api.indexnow.org/indexnow" \
             -H "Content-Type: application/json" \
             -d '{
               "host": "lwcn.dev",
-              "key": "${{ vars.INDEXNOW_KEY }}",
-              "keyLocation": "https://lwcn.dev/${{ vars.INDEXNOW_KEY }}.txt",
+              "key": "a8975d07e68244d585659fe8808e80a0",
+              "keyLocation": "https://lwcn.dev/a8975d07e68244d585659fe8808e80a0.txt",
               "urlList": [
                 "https://lwcn.dev/",
                 "https://lwcn.dev/newsletter/",
