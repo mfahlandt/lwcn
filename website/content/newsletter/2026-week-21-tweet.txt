@@ -1,0 +1,5 @@
+🚨 K8s v1.36 removes Service ExternalIPs.
+- `externalIPs` field removed.
+- Skopeo v1.11.5: CVE-2025-65637, CVE-2026-34986 fixed.
+- Helm v3: EOL warning.
+Full breakdown:

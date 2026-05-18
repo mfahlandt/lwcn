@@ -147,6 +147,11 @@ repositories:
     repo: opa
   - category: observability
     cncf_status: graduated
+    name: OpenTelemetry
+    owner: open-telemetry
+    repo: opentelemetry-collector
+  - category: observability
+    cncf_status: graduated
     name: Prometheus
     owner: prometheus
     repo: prometheus
@@ -279,11 +284,6 @@ repositories:
     name: OpenFGA
     owner: openfga
     repo: openfga
-  - category: observability
-    cncf_status: incubating
-    name: OpenTelemetry
-    owner: open-telemetry
-    repo: opentelemetry-collector
   - category: configuration
     cncf_status: incubating
     name: OpenYurt
