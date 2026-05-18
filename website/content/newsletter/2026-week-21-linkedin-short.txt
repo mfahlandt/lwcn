@@ -1,0 +1,8 @@
+🚨 Kubernetes v1.36 removes Service ExternalIPs.
+
+Highlights this week:
+- Kubernetes v1.36: `Service.spec.externalIPs` field removed. Requires migration to LoadBalancer/NodePort.
+- Skopeo v1.11.5: Fixes CVE-2025-65637 and CVE-2026-34986.
+- Helm v3: End-of-life warning issued; upgrade to Helm v4 advised.
+
+👉 Check out the latest edition in my newsletter!

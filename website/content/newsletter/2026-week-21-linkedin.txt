@@ -1,0 +1,20 @@
+🚨 Kubernetes v1.36 Deprecates Service ExternalIPs
+
+The Kubernetes v1.36 release officially removed the Service ExternalIPs field, impacting cluster configurations that relied on this feature for service exposure. This change requires alternative methods for external service access, such as LoadBalancer or NodePort services. This week also saw critical security updates and end-of-life warnings for other key Cloud Native components.
+
+🚀 Key releases
+
+- Kubernetes v1.36: The Kubernetes v1.36 release officially deprecated and removed the Service.spec.externalIPs field. This change affects existing configurations that rely on this field for exposing services. Users must migrate to alternative service exposure mechanisms like LoadBalancer or NodePort.
+- Helm v3.21.0: This release includes a warning that Helm v3 is approaching its end-of-life. Users are advised to upgrade to Helm v4 to maintain support and access new features.
+- OPA v1.16.2: This update changes the Go version used for building OPA binaries and images to 1.26.3. This update addresses multiple underlying Go vulnerabilities.
+- Skopeo v1.11.5: This update fixes CVE-2025-65637 related to Logrus and CVE-2026-34986 by bumping Go Jose to v3.0.5.
+- Jaeger v2.18.0: This release introduces breaking changes to its metrics due to an upgrade of OpenTelemetry (OTEL) collector packages. Additionally, the min step API has been removed from the metricstore.
+
+📰 Notable news/trends summary
+
+The Kubernetes v1.36 release cycle saw several features advance, with PSI Metrics for Kubernetes graduating to General Availability (GA) and Mixed Version Proxy graduating to Beta. The CNCF blog highlighted KubeStellar achieving an 81% PR acceptance rate, indicating active project development. Discussions also emerged regarding the technical implications of AI agents in development workflows and the costs associated with AI-generated code cleanup.
+
+How do the deprecation of Service ExternalIPs and the Helm v3 end-of-life impact your current cluster maintenance and upgrade strategies?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-21/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps
