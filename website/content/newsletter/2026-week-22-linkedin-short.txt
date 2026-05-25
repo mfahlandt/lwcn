@@ -1,0 +1,6 @@
+⭐ This week in Cloud Native:
+*   OpenTelemetry graduates as a CNCF project.
+*   containerd v2.3.1, v2.2.4, v2.0.9, v1.7.32 released, fixing CVE-2026-46680 (data integrity vulnerability).
+*   OpenTelemetry Collector v0.153.0 stabilizes `configoptional.AddEnabledField`, a breaking change for experimental configs.
+*   etcd 3.7.0-beta.0 preview announced.
+👉 Check out the latest edition in my newsletter!

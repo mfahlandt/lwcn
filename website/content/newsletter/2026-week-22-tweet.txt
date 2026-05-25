@@ -1,0 +1,5 @@
+⭐ LWCN Week 22 highlights:
+*   OpenTelemetry graduates CNCF.
+*   containerd v2.3.1+ fixes CVE-2026-46680.
+*   OTel Collector v0.153.0: `configoptional.AddEnabledField` breaking change.
+Full breakdown:
