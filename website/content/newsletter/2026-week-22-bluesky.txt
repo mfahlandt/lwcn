@@ -1,0 +1,5 @@
+⭐ Last Week in Cloud Native (2026, Week 22):
+*   OpenTelemetry graduates as a CNCF project.
+*   containerd v2.3.1, v2.2.4, v2.0.9, v1.7.32 released, fixing CVE-2026-46680.
+*   OpenTelemetry Collector v0.153.0 stabilizes `configoptional.AddEnabledField`, a breaking change.
+Full breakdown:

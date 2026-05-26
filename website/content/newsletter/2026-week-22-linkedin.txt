@@ -1,0 +1,30 @@
+⭐ OpenTelemetry Graduates as CNCF Project
+
+This week, OpenTelemetry achieved graduation within the Cloud Native Computing Foundation, signifying its maturity and widespread adoption as a standard for observability data collection. This milestone reflects the project's stability and community support.
+
+🚀 Key Releases
+
+  containerd v2.3.1, v2.2.4, v2.0.9, and v1.7.32 were released, addressing CVE-2026-46680. This vulnerability affects data integrity within the container runtime. The patch fixes a bug where certain operations could lead to data corruption.
+
+  OpenTelemetry Collector v0.153.0 stabilized the `configoptional.AddEnabledField` feature gate, which is a breaking change for configurations relying on its experimental state. It also stabilized `confmap.new` functionality.
+
+  Istio 1.30.0 was released, introducing new features for service mesh traffic management and control plane operations. Patch releases 1.29.3 and 1.28.7 also became available.
+
+  Crossplane v2.3.0 introduced new high-fidelity features, focusing on enhancing existing functionality and improving reliability and performance for managing infrastructure. Patch releases v2.3.1, v2.2.2, v2.1.6, and v1.20.8 addressed security updates and bug fixes in dependencies.
+
+  NATS Server v2.14.1 released, updating its Go version requirement to 1.26.3 and including dependency updates.
+
+📰 Notable News
+
+  The Cloud Native Computing Foundation announced OpenTelemetry's graduation, solidifying its status as a de facto standard for cloud native observability.
+
+  The Kubernetes Blog announced etcd 3.7.0-beta.0, providing a preview of the next major version of the distributed key-value store.
+
+  A CNCF blog post discussed the silent evidence gap in troubleshooting with kubectl debug, detailing what the tool might not reveal during diagnostic processes.
+
+  Another CNCF blog post explored design considerations for implementing end-to-end ingress request tracing within multi-tenant SaaS platforms.
+
+❓ What technical implications do OpenTelemetry's graduation and the new etcd beta release have for your current cloud native deployments?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-22/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps
