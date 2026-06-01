@@ -1,0 +1,4 @@
+⚠️ Capsule v0.13.0 changes default webhook cert management.
+Capsule v0.13.0: Webhooks default to cert-manager self-signed certs.
+Prometheus v3.12.0: Security fixes, PromQL features, TSDB perf.
+Full breakdown:
