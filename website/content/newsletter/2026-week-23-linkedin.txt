@@ -1,0 +1,28 @@
+⚠️ Capsule v0.13.0 Changes Default for Webhook Certificates
+
+This week, Capsule v0.13.0 was released, changing the default certificate management for its admission webhooks to use cert-manager self-signed certificates. This alters the previous optional setting to the new default for Capsule deployments.
+
+🚀 Key releases
+
+Capsule v0.13.0 was released, defaulting to cert-manager self-signed certificates for its admission webhooks. This changes the previous optional setting to the new default for certificate management, impacting how Capsule deployments handle webhook security.
+
+Prometheus v3.12.0 introduced security fixes, new features in PromQL and Service Discovery, performance improvements within TSDB, and enhancements to Start Timestamp functionality. This release addresses identified vulnerabilities and expands query and monitoring capabilities.
+
+Karmada v1.18.0 was released, representing a new major version for the multi-cluster Kubernetes orchestration project. The release includes contributions from multiple developers. Patch releases v1.17.3, v1.16.6, and v1.15.9 were also published.
+
+Volcano v1.15.0 was released. According to the maintainers, this version strengthens Volcano as a unified scheduling platform for converged general-purpose and AI computing at scale, supporting batch training, inference, AI Agent, HPC, and big-data workloads.
+
+Skopeo v1.23.0 and Buildah v1.44.0 were released. Both versions include a change in the configuration file lookup behavior. Callers of functions in these projects that read configuration files should refer to the updated documentation for details on resolution.
+
+📰 Notable news/trends summary
+
+Discussions this week focused on strategies for building cloud native internal developer platforms using Kubernetes, GitOps, and supply chain security. Other topics included the "Kubernetes integration tax" related to integrating tools like Prometheus and Cilium into production environments, methods for GPU autoscaling on Kubernetes with KEDA, and how Jaeger is adapting to trace AI agents using OpenTelemetry.
+
+💬 Community highlights
+
+The Kubernetes Blog published an article addressing the reconciliation of past records for unfixed Kubernetes CVEs, detailing the process for managing historical security advisories. Separately, the CNCF Blog announced that three Technical Advisory Group (TAG) leads were appointed to the Cloud Native Computing Foundation's Technical Oversight Committee (TOC).
+
+Considering the diverse updates across orchestration, security, and tooling, what specific changes do you anticipate will have the most immediate technical impact on your cloud native deployments?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-23/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps

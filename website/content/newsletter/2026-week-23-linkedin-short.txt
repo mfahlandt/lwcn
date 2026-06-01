@@ -1,0 +1,8 @@
+⚠️ Capsule v0.13.0 changes default webhook cert management.
+
+Highlights this week:
+- Capsule v0.13.0: Defaults admission webhooks to cert-manager self-signed certificates.
+- Prometheus v3.12.0: Adds security fixes, new PromQL features, and TSDB performance improvements.
+- Skopeo v1.23.0 & Buildah v1.44.0: Configuration file lookup behavior changed.
+
+👉 Check out the latest edition in my newsletter!
