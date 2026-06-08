@@ -1,0 +1,36 @@
+🛡️ Envoy addresses HTTP/2 stream vulnerability CVE-2026-47774
+
+Multiple Envoy proxy versions (v1.38.1, v1.37.3, v1.36.7, v1.35.11) were released to mitigate CVE-2026-47774. This vulnerability involved HTTP/2 streams that violate configured maximum header list sizes. The updates reset non-compliant streams and adjust how uncompressed cookies contribute to header size limits.
+
+🚀 Key releases
+
+Envoy v1.38.1, v1.37.3, v1.36.7, v1.35.11
+  These releases include security fixes for CVE-2026-47774. HTTP/2 streams that exceed the configured maximum header list size are now reset. Uncompressed cookies are now counted towards the mutable_max_request_headers_kb limit.
+
+Longhorn v1.12.0
+  The V2 Data Engine has reached Generally Available (GA) status in this release.
+
+external-snapshotter client/v8.6.0
+  The VolumeGroupSnapshot API has been promoted to GA (v1). Controllers are updated to use v1 VolumeGroupSnapshot APIs, with v1beta2 maintained for backward compatibility.
+
+KEDA v2.20.0
+  This release updates Kubernetes dependency to 0.35. KEDA now records Kubernetes events via the events.k8s.io API group, replacing the legacy core events API.
+
+kind v0.32.0
+  This release defaults to Kubernetes 1.36.1 and includes critical dependency updates. It introduces breaking changes, requiring an upgrade of kind itself.
+
+containerd v2.1.8
+  This patch release includes a security update for CVE-2026-46680 and fixes for handling `host.containerd.io` mounts.
+
+📰 Notable news/trends summary
+
+The CNCF published an Identity and Access Management Whitepaper and guidance on securing CI/CD for open source projects. A security audit report for Inspektor Gadget was also released. The Kubernetes Blog detailed the transition from Kubernetes Dashboard to Headlamp.
+
+💬 Community highlights
+
+No purely factual community topics distinct from official blog posts were identified this week.
+
+What technical implications do the Envoy HTTP/2 stream changes have for your service mesh configurations?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-24/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps

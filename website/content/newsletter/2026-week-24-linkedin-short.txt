@@ -1,0 +1,7 @@
+🛡️ Cloud Native Security Updates & Releases (Week 24, 2026).
+
+*   Envoy v1.38.1+ mitigates CVE-2026-47774 (HTTP/2 stream header size violations).
+*   containerd v2.1.8 fixes CVE-2026-46680 and `host.containerd.io` mount handling.
+*   Longhorn v1.12.0 promotes V2 Data Engine to Generally Available (GA) status.
+
+👉 Check out the latest edition in my newsletter!
