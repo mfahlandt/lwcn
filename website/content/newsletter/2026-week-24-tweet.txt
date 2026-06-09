@@ -1,0 +1,5 @@
+🛡️ Cloud Native Security Updates (Week 24, 2026).
+Envoy v1.38.1+ mitigates CVE-2026-47774.
+containerd v2.1.8 fixes CVE-2026-46680.
+Longhorn v1.12.0: V2 Data Engine GA.
+Full breakdown:
