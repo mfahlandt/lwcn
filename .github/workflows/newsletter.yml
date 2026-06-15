@@ -2,8 +2,13 @@ name: Generate Weekly Newsletter
 
 on:
   schedule:
-    # Every Monday at 6:00 UTC
-    - cron: '0 6 * * 1'
+    # Every Monday at 05:23 UTC.
+    # NOTE: GitHub Actions runs scheduled workflows on a best-effort basis and
+    # delays them when the global queue is busy. The top of the hour (minute 0)
+    # is the most congested slot because tens of thousands of repos schedule
+    # there, which is why a "0 6 * * 1" job appeared to drift later every week.
+    # Using an odd minute (:23) just before the 06:00 peak minimizes the delay.
+    - cron: '23 5 * * 1'
   workflow_dispatch:
     inputs:
       skip_ai:
