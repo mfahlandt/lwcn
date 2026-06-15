@@ -1,0 +1,5 @@
+🛡️ LWCN 2026, Week 25:
+* Podman v5.8.3 fixes CVE-2026-44517.
+* OPA v1.17.1 addresses Go stdlib CVEs GO-2026-5039, GO-2026-5037.
+* Dapr v1.18.0 adds workflow history signing/verification.
+Full breakdown:
