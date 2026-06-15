@@ -1,0 +1,33 @@
+🛡️ Podman v5.8.3 Addresses CVE-2026-44517 in Dockerfile Builds
+
+This week, Podman v5.8.3 was released to resolve CVE-2026-44517, which previously allowed unauthorized file inclusion during Dockerfile builds using specific instructions. This update enhances build security by preventing malicious Git repositories or tar archives from accessing files outside the build context.
+
+🚀 Key Releases
+
+Podman v5.8.3
+This patch release addresses CVE-2026-44517. The vulnerability involved `ADD` or `COPY` instructions in Dockerfiles potentially including files outside the build context or copying them into the build when interacting with malicious Git repositories or tar archives. The fix prevents this unauthorized file access during the build process.
+
+Dapr v1.18.0
+This release introduces optional cryptographic signing and verification for workflow history. When enabled, workflow history is signed and verified on every state load, allowing detection of tampering. This feature enhances the integrity and security of Dapr workflows.
+
+Kuma v2.14.0
+Kuma now supports mesh-scoped zone proxies, which allows for per-mesh Zone Ingress/Egress deployments that can be individually targeted by policy. This replaces the previous single zone-wide proxy model. Additionally, sidecar containers are now the default deployment method.
+
+CoreDNS v1.14.4
+This version improves transport security for DoH3 and DoQ protocols. It also includes enhancements for DNSSEC signing behavior and adds support for the loong64 architecture. Configurable cache verification and hostname resolution for forward targets were also introduced.
+
+OPA v1.17.1
+This release updates the Go version used to build OPA to 1.26.4. This update specifically fixes standard library vulnerabilities (GO-2026-5039, GO-2026-5037) present in code utilized by OPA's HTTP handler and crypto builtins.
+
+📰 Notable News Summary
+
+Several articles provided technical guidance and updates within the Cloud Native ecosystem. The CNCF Blog published guidance on securing CI/CD pipelines for open source projects by focusing on dependency lockdown. Another CNCF Blog post detailed Dapr 1.18's verifiable execution feature, which enhances workflow integrity. The Kubernetes Blog featured a spotlight on SIG Storage, discussing its role and ongoing efforts. Additionally, a CNCF Blog article explored solutions for secret sprawl in multi-account Kubernetes environments using External Secrets Operator.
+
+💬 Community Highlights
+
+No specific community discussions or events reached a factual highlight status this week beyond the published articles.
+
+What technical challenges have you encountered with securing CI/CD pipelines in multi-account Kubernetes environments?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-25/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps
