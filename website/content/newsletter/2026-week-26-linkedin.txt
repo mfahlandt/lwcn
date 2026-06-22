@@ -1,0 +1,18 @@
+⚠️ Strimzi Kafka Operator 1.0.1 drops older CRD API support
+
+Strimzi Kafka Operator version 1.0.1 was released this week, removing support for v1beta2, v1beta1, and v1alpha1 Custom Resource Definition (CRD) APIs. This change requires users to migrate existing custom resources to the v1 API before upgrading.
+
+🚀 Key Releases
+- strimzi-kafka-operator 1.0.1: This release supports only the v1 CRD API. Older v1beta2, v1beta1, and v1alpha1 APIs are no longer supported. Upgrading requires prior conversion of existing custom resources and CRDs to v1.
+- containerd: Patch releases v2.3.2, v2.2.5, v2.1.9, v2.0.10, and v1.7.33 were published, incorporating security updates for CVE-2026-50195 and CVE-2026-53488.
+- prometheus v3.5.4: This version addresses multiple security vulnerabilities, including one that exposed secrets via the /-/config endpoint (GHSA-39j6-789q-qxvh). It also updates golang.org/x/net to v0.55.0.
+- openfga v1.18.0: A MySQL migration in this release acquires a shared lock on tuple and changelog tables, which may temporarily block Write operations.
+- OpenEBS v4.5.1: This patch release includes a fix for a critical issue identified in Replicated PV Mayastor.
+
+📰 Notable News and Trends
+A security report from The New Stack identified a vulnerability where public Sentry keys could enable hijacking of code generation services. Project Valkey outlined a change in its maintenance approach, shifting to automated processes for bug fix backporting. The CNCF announced that passing the CKS certification now extends CKA certification validity and detailed an initiative to enhance Arm64 support in CNCF projects through OCI credits.
+
+What technical considerations arise from a CRD API deprecation that requires manual resource migration?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-26/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps
