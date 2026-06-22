@@ -1,0 +1,8 @@
+⚠️ Strimzi Kafka Operator 1.0.1 removes older CRD API support.
+
+Highlights this week:
+- Strimzi Kafka Operator 1.0.1: Drops v1beta2, v1beta1, v1alpha1 CRD APIs. Requires migration to v1.
+- containerd: Patch releases fix CVE-2026-50195 and CVE-2026-53488.
+- Prometheus v3.5.4: Addresses GHSA-39j6-789q-qxvh (secrets via /-/config).
+
+👉 Check out the latest edition in my newsletter!
