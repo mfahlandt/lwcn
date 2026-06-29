@@ -1,0 +1,28 @@
+⚠️ Strimzi Kafka Operator 1.1.0 Deprecates Older CRD APIs
+
+Strimzi Kafka Operator released version 1.1.0, which removes support for `v1beta2`, `v1beta1`, and `v1alpha1` Custom Resource Definition (CRD) APIs. Users upgrading to 1.1.0 or later must convert all custom resources to the `v1` API version before proceeding with the upgrade. This impacts cluster management and resource definitions.
+
+🚀 Key releases
+
+Strimzi Kafka Operator 1.1.0: This release removes support for `v1beta2`, `v1beta1`, and `v1alpha1` Custom Resource Definition (CRD) APIs. Upgrades to 1.1.0 and above require all custom resources to be converted to the `v1` API version prior to the upgrade.
+
+Podman v6.0.0 and v5.8.4: These releases addressed CVE-2026-57231. This vulnerability allowed malicious images with malformed `Env` entries to cause host environment variables to leak into containers.
+
+Envoy (multiple versions): Patch releases, including v1.38.3, v1.37.5, v1.36.9, and v1.35.13, resolved several security vulnerabilities. These included CVE-2026-47205 (Authz per route crash), CVE-2026-47207 (ext_proc response handling in gRPC messages), and CVE-2026-47221 (router internal redirect crash).
+
+Cert-manager v1.20.3 and v1.19.6: These patch releases fixed a security issue identified as GHSA-8rvj-mm4h-c258, related to the default `cert-manager` configuration.
+
+Crossplane (multiple versions): Patch releases v2.3.3, v2.2.3, v2.1.7, and v1.20.10 included fixes for package signature verification TOCTOU vulnerabilities (GHSA-mf7q-r4rv-jv94, GHSA-wfqx-gjrf-g28r) and other security-related issues in dependencies.
+
+📰 Notable news/trends summary
+
+The CNCF blog announced that Security Profiles Operator v1 has reached stable APIs, aiming to harden security within Kubernetes. New plugins for Headlamp were introduced on the Kubernetes blog, including a Cluster API plugin, and plugins for inspecting Volcano workloads and Knative serverless functions. The CNCF blog also detailed how building Jaeger’s ClickHouse backend achieved an 8.6x compression ratio on 10 million spans.
+
+💬 Community highlights
+
+The Kubernetes blog featured a spotlight on the WG Device Management working group. Additionally, the blog contained a discussion regarding open source maintainership within the context of artificial intelligence advancements.
+
+What technical challenges do you foresee when migrating CRDs during a major operator upgrade?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-27/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps

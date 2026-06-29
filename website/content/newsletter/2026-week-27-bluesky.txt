@@ -1,0 +1,5 @@
+🛡️ LWCN Week 27: Strimzi 1.1.0 removes older CRD APIs.
+*   Strimzi Kafka Operator 1.1.0 removes support for v1beta2, v1beta1, v1alpha1 CRD APIs.
+*   Podman v6.0.0/v5.8.4 addressed CVE-2026-57231 (host env var leak).
+*   Envoy patch releases resolved CVE-2026-47205, CVE-2026-47207, CVE-2026-47221.
+Full breakdown:

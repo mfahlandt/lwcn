@@ -1,0 +1,4 @@
+🛡️ LWCN Week 27: Strimzi 1.1.0 removes older CRD APIs.
+*   Podman v6.0.0/v5.8.4 fixed CVE-2026-57231.
+*   Envoy patch versions resolved CVE-2026-47205, CVE-2026-47207, CVE-2026-47221.
+Full breakdown:
