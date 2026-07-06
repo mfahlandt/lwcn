@@ -1,0 +1,22 @@
+🛡️ Capsule v0.13.8 addresses cross-tenant privilege escalation vulnerability.
+
+This week, Capsule, a multi-tenancy operator for Kubernetes, released an update that resolves an incomplete fix from a previous security vulnerability. The update addresses potential cross-tenant privilege escalation via TenantResource RawItems and Generators, preventing unauthorized cluster-scoped resource creation.
+
+🚀 Key releases:
+
+Capsule v0.13.8: Includes a security fix (GHSA-jr6p-8pjj-mfx6) addressing an incomplete resolution of CVE-2026-22872. This fix prevents cross-tenant privilege escalation by restricting cluster-scoped resource creation through TenantResource RawItems and Generators.
+
+Gateway API v1.6.0: UDPRoute and TCPRoute APIs have graduated to GA (v1). The v1alpha2 versions of these APIs are now deprecated and are slated for future removal. This change indicates API stability and readiness for production use.
+
+Prometheus v3.13.0: This is a Long Term Support (LTS) release. It includes a security fix (CVE-2026-44990) for a cross-site scripting vulnerability in the UI. Additionally, third-party npm dependency licenses are now embedded in the Prometheus binary.
+
+OPA v1.18.1: Addresses a memory leak introduced in OPA v1.17.0. The fix resolves an AnnotationSet memory leak via a runtime.AddCleanup cycle, which could lead to increased memory usage in OPA server deployments.
+
+📰 Notable news/trends summary:
+
+The CNCF Blog reported that the etcd-operator project has joined Cozystack and introduced a new v1alpha2 API. This signifies a project transition and an update to its API surface. Another CNCF article discussed how data sovereignty requirements are influencing cloud native infrastructure design.
+
+How do graduated APIs and ongoing security updates influence your cloud native adoption strategies?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-28/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps

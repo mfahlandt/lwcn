@@ -1,0 +1,9 @@
+🛡️ Capsule v0.13.8 released with security fix for CVE-2026-22872.
+
+Highlights this week:
+*   Capsule v0.13.8: Fixes cross-tenant privilege escalation (GHSA-jr6p-8pjj-mfx6).
+*   Gateway API v1.6.0: UDPRoute & TCPRoute APIs graduated to GA (v1).
+*   Prometheus v3.13.0: Fixes XSS vulnerability (CVE-2026-44990) in UI.
+*   OPA v1.18.1: Addresses AnnotationSet memory leak.
+
+👉 Check out the latest edition in my newsletter!
