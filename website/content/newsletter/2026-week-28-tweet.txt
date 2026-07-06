@@ -1,0 +1,5 @@
+🛡️ Capsule v0.13.8 fixes CVE-2026-22872 (privilege escalation).
+Gateway API v1.6.0: UDPRoute/TCPRoute APIs GA.
+Prometheus v3.13.0: XSS fix (CVE-2026-44990).
+OPA v1.18.1: Memory leak fixed.
+Full breakdown:

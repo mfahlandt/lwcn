@@ -1,0 +1,5 @@
+🛡️ Capsule v0.13.8 addresses cross-tenant privilege escalation (CVE-2026-22872).
+Gateway API v1.6.0: UDPRoute and TCPRoute APIs graduated to GA (v1).
+Prometheus v3.13.0: Security fix for XSS in UI (CVE-2026-44990).
+OPA v1.18.1: Resolves AnnotationSet memory leak.
+Full breakdown:
