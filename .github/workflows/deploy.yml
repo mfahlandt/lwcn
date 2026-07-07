@@ -11,6 +11,14 @@ on:
 
 env:
   HUGO_VERSION: '0.158.0'
+  # TEMPORARY: GitHub deprecated Node 20 on the runners (19 Sep 2025) and now
+  # hard-fails actions that still bundle Node 20. The official GitHub Pages
+  # actions `actions/upload-pages-artifact@v3` and `actions/deploy-pages@v4`
+  # still ship a Node 20 entrypoint and have no Node 24 major release yet, so
+  # we opt in to the documented compatibility shim until GitHub bumps them.
+  # Remove this once those actions publish a Node 24 version.
+  # https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: 'true'
 
 # Sets permissions of the GITHUB_TOKEN
 permissions:
@@ -28,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
           fetch-depth: 0
@@ -41,7 +49,7 @@ jobs:
 
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
 
       - name: Build with Hugo
         working-directory: website
