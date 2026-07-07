@@ -50,7 +50,7 @@ ignoreFiles = ["content/newsletter/.*\\.txt$"]
     baseName = "feed"
 
 [params]
-  description = "Weekly newsletter covering Cloud Native releases, Kubernetes news, and CNCF ecosystem updates. Stay informed about the latest in the CNCF ecosystem, including Kubernetes, Helm, ArgoCD, and more."
+  description = "Cloud Native news every week: Kubernetes releases, CNCF project updates, security advisories, and ecosystem news. A neutral, fact-first weekly digest covering Kubernetes, Helm, Argo CD, Cilium, Prometheus, and more."
   author = "LWCN"
   ShowReadingTime = true
   ShowPostNavLinks = true

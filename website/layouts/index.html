@@ -1,10 +1,27 @@
 {{ define "main" }}
 <section class="hero">
     <h1>Last Week in Cloud Native</h1>
-    <p class="tagline">Weekly digest of CNCF releases, news, and community updates</p>
+    <p class="tagline">Cloud Native news, CNCF releases, and Kubernetes ecosystem updates - every week</p>
     <div class="hero-buttons">
         <a href="{{ "newsletter/feed.xml" | relURL }}" class="btn btn-secondary">Subscribe via RSS</a>
     </div>
+</section>
+
+<!-- SEO intro: crawlable, keyword-rich context for the homepage -->
+<section class="intro">
+    <p>
+        <strong>Last Week in Cloud Native (LWCN)</strong> is a weekly roundup of
+        <strong>Cloud Native news</strong> from across the CNCF ecosystem. Every Monday we summarize the most
+        important Kubernetes releases, CNCF project updates, security advisories (CVEs), and community news -
+        written in a neutral, fact-first tone with no marketing hype. If you want to stay current on Cloud
+        Native without reading dozens of changelogs and blogs, this is your weekly digest.
+    </p>
+    <p>
+        Coverage includes Kubernetes, Helm, Argo CD, Cilium, Prometheus, Envoy, Istio, Linkerd, Harbor,
+        Flux, OpenTelemetry and 200+ other CNCF and Cloud Native projects. Browse the
+        <a href="{{ "newsletter/" | relURL }}">newsletter archive</a> or read more
+        <a href="{{ "about/" | relURL }}">about how we curate the news</a>.
+    </p>
 </section>
 
 <!-- Newsletter Subscribe Section -->
@@ -27,7 +44,7 @@
 </section>
 
 <section class="latest">
-    <h2>Latest Issues</h2>
+    <h2>Latest Cloud Native News &amp; Releases</h2>
     <div class="newsletter-grid">
         {{ $newsletters := where .Site.RegularPages "Section" "newsletter" }}
         {{ $sorted := $newsletters.ByDate.Reverse }}
