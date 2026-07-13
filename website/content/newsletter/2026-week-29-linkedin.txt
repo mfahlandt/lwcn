@@ -1,0 +1,24 @@
+⚙️ etcd v3.7.0 Released
+etcd, the distributed key-value store foundational to Kubernetes, has released version 3.7.0. This major version introduces new features and changes, requiring users to consult the upgrade guide for potential breaking changes before upgrading etcd.
+
+🚀 Key Releases
+Prometheus v3.5.5 was released, addressing a security issue (CVE-2026-53606) in the `sanitize-html` UI dependency. This update is built with Go 1.25.12.
+
+Flux v2.9.1 is a patch release that disables Flux variable substitution on Flux CRDs by annotating them with `kustomize.toolkit.fluxcd.io/substitute: disabled`. This prevents Kustomizations with post-build substitution enabled from corrupting CRD definitions.
+
+cert-manager v1.21.0 introduces ACME Renewal Information (ARI) support and AWS IAM authentication for the Vault issuer. The release also includes security hardening changes and continued improvements to Gateway API integration.
+
+Inspektor Gadget v0.54.0 adds the capability for `advise_networkpolicy` to generate Cilium NetworkPolicy resources, in addition to Kubernetes NetworkPolicy. Users can specify the output format with `--policy-format cilium`.
+
+containerd received multiple patch releases across its v2.3, v2.2, v2.0, and v1.7 branches. containerd v2.3.3 sets the SystemTemp environment variable on Windows to ensure temporary directory overrides function for SYSTEM services. containerd v2.2.6 fixes a nil pointer dereference in NRI GetIPs during pod sandbox teardown or container exit.
+
+📰 Notable News
+The CNCF blog published an article discussing strategies for navigating the upcoming ingress-NGINX retirement, offering guidance for users planning migration paths. Another CNCF blog post introduced "The CNCF Data Storage in Cloud Native AI White Paper," a new resource detailing data storage considerations for AI workloads in cloud-native environments.
+
+💬 Community Highlights
+The CNCF blog also noted the "Two months of Open Community Groups," reporting on the progress and activities of these new community initiatives.
+
+What technical considerations do these updates introduce for your cloud-native infrastructure?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-29/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps
