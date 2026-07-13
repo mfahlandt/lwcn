@@ -204,6 +204,11 @@ repositories:
     name: Cloud Custodian
     owner: cloud-custodian
     repo: cloud-custodian
+  - category: security
+    cncf_status: incubating
+    name: Confidential Containers
+    owner: confidential-containers
+    repo: operator
   - category: networking
     cncf_status: incubating
     name: Container Network Interface (CNI)
@@ -323,11 +328,6 @@ repositories:
     name: Clusternet
     owner: clusternet
     repo: clusternet
-  - category: security
-    cncf_status: sandbox
-    name: Confidential Containers
-    owner: confidential-containers
-    repo: operator
   - category: security
     cncf_status: sandbox
     name: Dex

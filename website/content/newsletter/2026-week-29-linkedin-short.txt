@@ -1,0 +1,7 @@
+⚙️ etcd v3.7.0 released this week.
+Highlights from Last Week in Cloud Native:
+*   etcd v3.7.0: New features introduced, requires upgrade guide review for potential breaking changes.
+*   Prometheus v3.5.5: Fixes security issue CVE-2026-53606 in the `sanitize-html` UI dependency.
+*   Flux v2.9.1: Disables variable substitution on Flux CRDs to prevent definition corruption.
+
+👉 Check out the latest edition in my newsletter!
