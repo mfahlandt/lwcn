@@ -473,6 +473,10 @@ repositories:
     name: Kustomize
     owner: kubernetes-sigs
     repo: kustomize
+  - category: platform-engineering
+    name: Nora
+    owner: solomon2773
+    repo: nora
   - category: security
     name: Rekor
     owner: sigstore

@@ -66,6 +66,12 @@ additional_repositories:
     name: CSI Snapshotter
     category: storage
 
+  # AI Agent Operations
+  - owner: solomon2773
+    repo: nora
+    name: Nora
+    category: platform-engineering
+
   # Edge
   - owner: k3s-io
     repo: k3s
@@ -123,5 +129,4 @@ additional_repositories:
     repo: seebom
     name: SeeBOM
     category: security
-
 
