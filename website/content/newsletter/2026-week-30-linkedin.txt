@@ -1,0 +1,24 @@
+🚀 Envoy v1.39.0 Introduces Bazel 8 Build Requirement
+
+This week, Envoy Proxy released version 1.39.0, which updated its build system to use Bazel 8. This change requires specific configuration flags for existing build environments. Other significant updates include Jaeger removing support for Elasticsearch v6 and Flux2 addressing a Kustomization reconciliation regression.
+
+🚀 Key Releases
+
+Envoy v1.39.0: This release now uses Bazel 8 for its build process. Projects building Envoy from source will need to include `--enable_workspace` and `--noenable_bzlmod` flags in their Bazel configurations. This change impacts build system compatibility.
+
+Jaeger v2.20.0: Support for Elasticsearch v6 has been removed. Users relying on Elasticsearch v6 for Jaeger backend storage will need to upgrade their Elasticsearch instances. Additionally, Elasticsearch rotation and index-cleaner feature gates were promoted to beta status.
+
+Flux2 v2.9.2: A regression introduced in v2.9.1 was fixed, which caused Kustomizations with `openapi.path` pointing to a URL to fail reconciliation. This patch restores the expected behavior for deployments using OpenAPI schemas from external URLs.
+
+Cilium v1.19.6 and v1.18.12: These versions added support for configuring Gateway API access logs through the `spec.telemetry.accessLogs` field in CiliumGatewayClassConfig. Cilium v1.19.6 also began using L3 sockets for solicited node multicast signaling, which affects datapath communication.
+
+📰 Notable News
+
+HAMi became a CNCF incubating project this week. This marks a progression in the project's maturity and its integration within the Cloud Native Computing Foundation ecosystem.
+
+The CNCF announced Broadcom as a Platinum Member, indicating an expanded partnership. This membership supports collaborative efforts in advancing cloud native infrastructure.
+
+How do breaking changes in core components like Envoy or Jaeger affect your upgrade strategies and CI/CD pipelines?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-30/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps

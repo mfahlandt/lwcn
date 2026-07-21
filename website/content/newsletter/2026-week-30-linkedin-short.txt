@@ -1,0 +1,8 @@
+🚀 Envoy v1.39.0 released with Bazel 8 build requirement.
+
+Highlights this week:
+*   Envoy v1.39.0: Requires Bazel 8 for source builds, impacting build system compatibility.
+*   Jaeger v2.20.0: Removed support for Elasticsearch v6.
+*   Flux2 v2.9.2: Fixed Kustomization reconciliation regression for URL paths.
+
+Full breakdown in this week's Last Week in Cloud Native newsletter. 👉 Check out the latest edition in my newsletter!
