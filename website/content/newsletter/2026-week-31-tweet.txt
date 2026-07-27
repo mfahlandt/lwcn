@@ -1,0 +1,5 @@
+⚠️ OpenTelemetry Collector v0.157.0 modifies histogram metric boundaries.
+- OpenTelemetry Collector v0.157.0: Histogram bucket definitions changed. Dashboards may need updates.
+- Crossplane v2.3.4: Fixes repeated owner reference updates.
+- Flux2 v2.9.3: Addresses Helm manifest, test, and image parsing issues.
+Full breakdown:
