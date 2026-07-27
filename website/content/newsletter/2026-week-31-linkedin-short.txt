@@ -1,0 +1,9 @@
+⚠️ OpenTelemetry Collector v0.157.0 modifies histogram metric boundaries.
+
+This week's LWCN covers:
+- OpenTelemetry Collector v0.157.0: Histogram bucket definitions changed for `otelcol_exporter_queue_batch_send_size_bytes` and `otelcol_processor_batch_send_size_bytes`. Dashboards may require updates.
+- Crossplane v2.3.4 (and others): Fixes Usage controller repeatedly updating owner references, reducing API calls.
+- Flux2 v2.9.3: Addresses issues with Helm chart manifests, Helm test reporting, and `spec.images` parsing.
+- SeeBOM v0.6.0 (BOMHort): Rebranded, adds global search, fixes health probes, includes security patches.
+
+👉 Check out the latest edition in my newsletter!

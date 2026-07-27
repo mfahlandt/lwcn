@@ -1,0 +1,26 @@
+⚠️ OpenTelemetry Collector v0.157.0 modifies histogram metric boundaries.
+
+This week, OpenTelemetry Collector v0.157.0 introduced changes to the histogram bucket definitions for certain metrics, requiring users to adjust dashboards or alerts that rely on the previous metric structures. Several projects, including Crossplane, Flux2, and SeeBOM, released patch updates addressing specific bugs and security concerns.
+
+🚀 Key releases
+
+OpenTelemetry Collector v0.157.0: This release modifies the histogram bucket boundaries for `otelcol_exporter_queue_batch_send_size_bytes` and `otelcol_processor_batch_send_size_bytes` metrics. This change means that monitoring systems and dashboards configured with previous definitions for these metrics may require updates to accurately reflect new data.
+
+Crossplane v2.3.4, v2.2.4, v2.1.8, v1.20.11: Multiple patch releases across different Crossplane versions fixed an issue where the Usage controller repeatedly updated owner references for composed Usages. This correction addresses unnecessary API calls and potential reconciliation loops within the control plane.
+
+Flux2 v2.9.3: This patch release resolves several issues. It fixes empty lines vanishing from rendered Helm chart manifests, corrects a behavior where HelmReleases were marked as tested even when their Helm test hooks did not execute, and addresses a bug where `spec.images` entries would discard previously declared image fields if only a subset of fields were set.
+
+SeeBOM v0.6.0 (now BOMHort): This version includes a rebrand of the project to BOMHort. It adds a faceted global search capability, resolves issues with Kubernetes health probes, and incorporates a comprehensive security patch sweep for its Go components, UI, and dependencies.
+
+📰 Notable news/trends summary
+
+This week, Confidential Containers advanced to a CNCF incubating project, signifying its development and increasing use within the cloud native ecosystem. OpenTelemetry officially graduated within the CNCF, marking its stability and widespread adoption. Additionally, the CNCF Japan chapter launched an AI Infra SIG, holding its first meetup and issuing a call for speakers.
+
+💬 Community highlights
+
+The newly launched AI Infra SIG under the CNCF Japan chapter initiated its activities with a first meetup and an open call for speakers, indicating a growing community focus on AI infrastructure within the cloud native space.
+
+How do breaking changes in core components like OpenTelemetry Collector impact your upgrade strategies and monitoring dashboards?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-31/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps

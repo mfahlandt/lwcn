@@ -1,0 +1,5 @@
+⚠️ OpenTelemetry Collector v0.157.0 modifies histogram metric boundaries.
+- OpenTelemetry Collector v0.157.0: Histogram bucket definitions changed for specific metrics. Monitoring dashboards may require updates.
+- Crossplane v2.3.4: Fixes Usage controller repeatedly updating owner references, reducing API calls.
+- Flux2 v2.9.3: Addresses Helm manifest rendering, test reporting, and image field parsing issues.
+Full breakdown:
