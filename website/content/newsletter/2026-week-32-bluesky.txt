@@ -1,0 +1,5 @@
+🚀 LWCN Week 32: Cilium v1.20.0 released.
+- Cilium v1.20.0: Major release.
+- Prometheus v3.13.2: Security updates (CVE-2026-56852, GHSA-hrxh-6v49-42gf) + PromQL bug fix.
+- OPA v1.19.0: SQL injection vulnerability addressed, cgo-free WebAssembly runtime added.
+Full breakdown:
