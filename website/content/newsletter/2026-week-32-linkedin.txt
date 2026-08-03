@@ -1,0 +1,28 @@
+🚀 Cilium v1.20.0 Released
+
+This week, Cilium v1.20.0 was released, marking a major version update for the Cloud Native networking, observability, and security solution. This release incorporates new features and changes across its components.
+
+🚀 Key releases
+
+Cilium v1.20.0: This major release introduces new features and changes, with over 2,660 new commits. Specific details regarding new capabilities are available in the release notes.
+
+Prometheus v3.13.2: This patch release includes security updates, bumping golang.org/x/text to v0.39.0 (addressing CVE-2026-56852) and google.golang.org/grpc to v1.82.1 (addressing GHSA-hrxh-6v49-42gf). It also fixes a bug in PromQL that preallocates the active query tracker file to prevent SIGBUS crashes when the data disk is full.
+
+OPA v1.19.0: This release addresses a SQL injection vulnerability in the Compile API. It introduces stricter safety checking for Rego assignments (:=) and integrates a cgo-free, faster WebAssembly runtime by replacing wasmtime-go with wazero. Startup warnings for unknown configuration options were also added.
+
+KubeVirt v1.9.0: This minor release, following v1.8.4, includes 1653 changes contributed by 108 individuals. These changes involved 2195 files, with 209726 insertions and 38785 deletions, indicating substantial updates and new capabilities for running virtual machines on Kubernetes.
+
+cert-manager v1.21.1: This patch release fixes a controller panic that occurred for Certificates with spec.renewal.policy: Disabled. It also resolves a regression introduced in v1.21.0 which caused excessive log spam and dropped Secret informer events, as well as issues with Issuers and ClusterIssuers.
+
+📰 Notable news/trends summary
+
+Kubernetes v1.37 Sneak Peek was announced, detailing upcoming features and changes planned for the next minor release. CNCF blog posts explored runtime supply chain verification using the Node Resource Interface (NRI) and discussed how Kubernetes health checks can inadvertently wake services, providing a technical approach to mitigation. Lima v2.2 was released, introducing support for Windows guests and TPM 2.0 emulation. A Kubernetes blog post provided a technical explanation of how the controller-runtime cache operates and highlighted reasons why controllers might not crash the API server.
+
+💬 Community highlights
+
+A report from CNCF and SlashData indicated that Japan’s Cloud Native community has grown to nearly 1 million developers. Subaru was recognized in the CNCF End User Case Study Contest for its use of cloud native infrastructure to accelerate AI development. CNCF announced the schedule for the debut Observability Summit Europe.
+
+What technical changes or updates from this week do you find most impactful for your Cloud Native deployments?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-32/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps
