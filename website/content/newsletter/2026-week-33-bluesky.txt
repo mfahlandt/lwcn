@@ -1,0 +1,4 @@
+🛣️ Gateway API v1.6 graduates TCPRoute and UDPRoute to Standard.
+k3s v1.36.3+k3s1 upgrades Traefik to v40.x, includes provider name breaking change.
+cosign v3.1.3 and v2.6.5 resolve GHSA-fx35-mq7g-6g98 (verification bypass).
+Full breakdown:

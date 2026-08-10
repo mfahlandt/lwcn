@@ -1,0 +1,29 @@
+🛣️ Gateway API v1.6 Graduates TCPRoute and UDPRoute to Standard
+
+Gateway API v1.6 has been released, marking TCPRoute and UDPRoute resources as Standard. This graduation signifies stability and readiness for broad adoption of these APIs for traffic routing within Kubernetes clusters.
+
+🚀 Key Releases
+
+*   k3s v1.36.3+k3s1 (and earlier versions like v1.35.7+k3s1, v1.34.10+k3s1, v1.33.13+k3s2) upgrades the bundled Traefik chart to v40.x. This update includes a breaking change where the Traefik provider name for ingress-nginx migration changes from `kubernetesIngressNginx` to `kubernetesIngressNGINX`.
+*   cosign v3.1.3 and v2.6.5 were released, resolving GHSA-fx35-mq7g-6g98. This security fix addresses a verification bypass vulnerability that could occur by using an unexpected public key in a legacy bundle format.
+*   opentelemetry-collector v0.158.0 introduces a new `processor/queuebatch` component. This processor is designed to replace the legacy `batchprocessor` functionality for queueing and batching telemetry data.
+*   inspektor-gadget v0.55.0 adds initial support for GPU telemetry. This release includes a userspace daemon, `gpu-ebpf-bridge`, which publishes GPU telemetry data through pinned BPF maps.
+
+📰 Notable News
+
+*   The Kubernetes Blog announced Gateway API v1.6, highlighting the graduation of TCPRoute and UDPRoute to Standard status. This indicates maturity and stability for these specific traffic routing resources.
+*   K8gb has become a CNCF incubating project, marking a new stage in its development within the Cloud Native Computing Foundation.
+*   OpenCost 1.121.0 was released, adding Kubernetes inference cost tracking capabilities.
+*   The Cortex project completed an OSTIF security audit, assessing its security posture.
+*   A CNCF Blog post reported that the Kubeflow SDK has surpassed one million downloads, indicating its adoption for machine learning workflows on Kubernetes.
+*   The New Stack published an article discussing how EVPN can enable KubeVirt VMs to move between clusters, addressing current limitations.
+
+💬 Community Highlights
+
+*   The LitmusChaos project provided an update on its community activities, contributions, and project progress for Q1-Q2 2026.
+*   CNCF Blog posts explored topics such as Shadow AI in CI/CD threat modeling and observability for AI Agents.
+
+What are the technical implications of the Gateway API's TCPRoute and UDPRoute graduation for existing ingress solutions and future service mesh integrations?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-33/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps
