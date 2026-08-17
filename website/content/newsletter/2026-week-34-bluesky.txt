@@ -1,0 +1,5 @@
+☁️ Cloud Native Buildpacks graduates from CNCF.
+Antrea v2.7.0 changes default: Agent gossip traffic now authenticated/encrypted.
+Podman v5.8.6 fixes CVE-2026-19730 (file truncation).
+containerd v2.3.4 disables checkpoint restore in CreateContainer by default.
+Full breakdown:

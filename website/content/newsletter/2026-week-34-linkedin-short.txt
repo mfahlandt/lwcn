@@ -1,0 +1,8 @@
+☁️ Cloud Native Buildpacks graduates from CNCF.
+
+This week's LWCN newsletter covers:
+*   Antrea v2.7.0: Agent gossip traffic default changed to authenticated and encrypted.
+*   Podman v5.8.6: Fixes CVE-2026-19730, addressing `quadlet install --replace` file truncation.
+*   containerd v2.3.4: Checkpoint restore in CreateContainer disabled by default.
+
+👉 Check out the latest edition in my newsletter!

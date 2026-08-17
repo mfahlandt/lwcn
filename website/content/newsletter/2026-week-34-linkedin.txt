@@ -1,0 +1,28 @@
+☁️ Cloud Native Buildpacks Graduates from CNCF
+
+The Cloud Native Computing Foundation announced the graduation of Cloud Native Buildpacks. This signifies the project's maturity and widespread adoption as a standard for transforming application source code into container images.
+
+🚀 Key releases
+
+cluster-api v1.14.0: This release updates Kubernetes version support, with management clusters now supporting v1.33.x through v1.36.x and workload clusters supporting v1.31.x through v1.36.x. The project also transitioned to using Go 1.26.
+
+antrea v2.7.0: This release changes default behavior by authenticating and encrypting Antrea Agent gossip traffic. This prevents unauthorized hosts from influencing the cluster membership state, impacting features like IP ownership for Egress and ServiceExternalIP.
+
+containerd v2.3.4: The default behavior for checkpoint restore in CreateContainer has been changed to disabled. Re-enabling this functionality now requires explicit configuration via the enable_experimental_restore_via_create option.
+
+podman v5.8.6: This patch release addressed CVE-2026-19730. The vulnerability involved the podman quadlet install --replace command not truncating the file being replaced, which could result in old data remaining if a longer file was replaced by a shorter one.
+
+longhorn v1.12.1: This release introduces new features including V2 Data Engine fast volume cloning and experimental storage sharding capabilities.
+
+📰 Notable news/trends summary
+
+This week, the CNCF Blog featured articles discussing building self-healing Kubernetes upgrade pipelines, lightweight Dragonfly deployments for P2P distribution, and the intersection of LLMOps with platform engineering. Other topics included observable policy as code, advancing AI model interoperability with Docker and ModelPack, and practical approaches to mesh observability. The New Stack covered per-developer environments, AI model performance comparisons (Grok 4.6, Alibaba's model, GLM-5.3), and Apple's new AI strategy for iOS apps in China.
+
+💬 Community highlights
+
+The CNCF revealed the schedule for KubeCon + CloudNativeCon North America 2026, which will include a new AI Inference + Agentic Track.
+
+What technical implications do default security changes in network components or new experimental storage features hold for your current deployments?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-34/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps
