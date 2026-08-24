@@ -1,0 +1,18 @@
+🛡️ Multiple Cloud Native Projects Address Security Vulnerabilities
+
+This week saw several critical security updates across the Cloud Native ecosystem, with projects like Rook, Kyverno, and OPA releasing patches to address identified vulnerabilities and improve system hardening. These updates underscore the ongoing focus on maintaining secure operational environments.
+
+🚀 Key releases:
+- Rook v1.20.6, v1.19.10, v1.20.5, v1.19.9: Multiple patch releases were issued, advising users of a recently announced Ceph CVE-2025–30156. These updates focus on bug fixes and feature additions to the Ceph operator.
+- Kyverno v1.19.0: This version includes a fix for CVE-2026-32280, which addresses a vulnerability related to limiting intermediate certificates.
+- Strimzi Kafka Operator 1.2.0: This release exclusively supports the v1 Custom Resource Definition (CRD) API. Older v1beta2, v1beta1, and v1alpha1 APIs are no longer supported, requiring users to convert existing custom resources and upgrade CRDs before updating.
+- CoreDNS v1.14.7: Enhancements were made to DNS caching, forwarding, and transport reliability. This includes improved stale-cache behavior, safer upstream handling, tighter connection and overload controls, and new capabilities for ACME-managed TLS, topology-aware Kubernetes services, and HTTP/2 forwarding.
+- Prometheus v3.14.0: The `stats` query parameter for /api/v1/query and /api/v1/query_range was deprecated for values other than `true` and `all`. Other values now return a deprecation warning and will be rejected in the next major release.
+
+📰 Notable news/trends summary:
+The Cloud Native Computing Foundation announced Kubeflow's graduation this week, signifying the project's adherence to best practices in governance, community, and adoption. This milestone positions Kubeflow as a stable solution for machine learning operations within cloud native environments.
+
+How do these recent security updates and project milestones influence your current cloud native deployment strategies?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-35/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps

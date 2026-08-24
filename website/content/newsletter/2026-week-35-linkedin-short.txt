@@ -1,0 +1,7 @@
+🛡️ This week's LWCN covers security updates & key releases.
+- Rook patch releases (v1.20.6, v1.19.10, etc.) advise users of Ceph CVE-2025–30156.
+- Kyverno v1.19.0 fixes CVE-2026-32280, related to intermediate certificates.
+- Strimzi Kafka Operator 1.2.0 exclusively supports v1 CRD API, deprecating older versions.
+- Kubeflow graduates from CNCF.
+
+👉 Check out the latest edition in my newsletter!

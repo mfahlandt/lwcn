@@ -1,0 +1,5 @@
+🛡️ LWCN: Security updates & key releases.
+- Rook patches for Ceph CVE-2025–30156.
+- Kyverno v1.19.0 fixes CVE-2026-32280.
+- Strimzi Kafka Operator 1.2.0 drops older CRD APIs.
+Full breakdown:
