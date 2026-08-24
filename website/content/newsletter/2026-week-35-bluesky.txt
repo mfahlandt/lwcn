@@ -1,0 +1,5 @@
+🛡️ Last Week in Cloud Native: Security updates and key project releases.
+- Rook patch releases address Ceph CVE-2025–30156.
+- Kyverno v1.19.0 fixes CVE-2026-32280.
+- Strimzi Kafka Operator 1.2.0 exclusively supports v1 CRD API, deprecating older APIs.
+Full breakdown:
