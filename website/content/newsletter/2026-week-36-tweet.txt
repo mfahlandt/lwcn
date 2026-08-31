@@ -1,0 +1,6 @@
+🚀 Kubernetes v1.37.0 released.
+- Pod Certificates & Cluster Trust Bundles.
+- Metrics API stable.
+- Envoy fixed CVE-2026-73511.
+- K3s Traefik v40.x upgrade (ingress provider name change).
+Full breakdown:

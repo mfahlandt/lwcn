@@ -1,0 +1,24 @@
+🎉 Kubernetes v1.37.0 Released with Pod Certificates and Stable Metrics API
+
+This week saw the release of Kubernetes v1.37.0, introducing Pod Certificates and Cluster Trust Bundles, alongside the graduation of the Metrics API to stable. These changes enhance certificate management for pods and solidify the core metrics interface for Kubernetes components.
+
+🚀 Key releases
+
+Kubernetes v1.37.0: This release introduces Pod Certificates and Cluster Trust Bundles, providing a mechanism for workload identity. The Metrics API has graduated to stable, indicating API maturity and stability for collecting resource usage metrics.
+Envoy v1.39.1, v1.38.4, v1.37.6, v1.36.10: Multiple maintenance releases fixed CVE-2026-73511, a URL normalization vulnerability. This fix strips path parameters from individual path segments according to RFC 3986 section 3.3. The original behavior can be reverted via a reloadable feature flag.
+K3s v1.36.4+k3s1, v1.35.8+k3s1, v1.34.11+k3s1: These releases upgrade the embedded Traefik chart to v40.x. This introduces a breaking change for ingress-nginx migration, as the provider name shifts from kubernetesIngressNginx to kubernetesIngressNGINX.
+Volcano v1.15.2: This release addresses security vulnerability GHSA-j38h-7pfq-cxmw and includes multiple bug fixes. Upgrading from v1.15.0 or v1.15.1 is advised.
+Kind v0.33.0: This release defaults to Kubernetes 1.36.1. It includes a breaking change where the default node image is now kindest/node:v1.37.0@sha256:a1ed56cfb0e7b93589bdf97c8cd566405a265939e3620fc4f5de89adff580ae5.
+
+📰 Notable news/trends summary
+
+OpenTelemetry has achieved graduation within the CNCF, signifying its project maturity and widespread adoption for observability. The Kubernetes v1.37 release highlights the introduction of Pod Certificates and the Metrics API reaching stable status, indicating foundational enhancements. Several CNCF blog posts focused on the technical considerations for running AI and GPU workloads on Kubernetes, including discussions on predictive autoscaling strategies.
+
+💬 Community highlights
+
+The CNCF blog published governance guidance for projects, detailing appropriate structures based on a project's size and stage. This guidance provides frameworks for community organization and decision-making processes within the cloud native ecosystem.
+
+What technical implications do the new Pod Certificates and Cluster Trust Bundles in Kubernetes v1.37 have for existing service mesh implementations or internal certificate management systems?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-36/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps
