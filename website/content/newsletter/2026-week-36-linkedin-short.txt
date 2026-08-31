@@ -1,0 +1,9 @@
+🚀 Kubernetes v1.37.0 released.
+
+Highlights this week:
+- Pod Certificates and Cluster Trust Bundles introduced.
+- Metrics API graduated to stable.
+- Envoy v1.39.1+ fixed CVE-2026-73511 (URL normalization vulnerability).
+- K3s v1.36.4+k3s1+ upgraded embedded Traefik to v40.x, changing ingress provider name.
+
+👉 Check out the latest edition in my newsletter!
