@@ -1,0 +1,8 @@
+🚀 Kubernetes v1.37: KubeletInUserNamespace graduated to Beta, enabling Kubelet to run without root privileges.
+
+This week's edition covers:
+- containerd v2.3.5, v2.2.8, v2.0.12, v1.7.35 received security updates for CVE-2026-53495.
+- Podman v6.1.1 fixed CVE-2026-17106, improving archive extraction security.
+- Flux v2.9.5 hardened kubeconfig Secret handling by rejecting external file references.
+
+👉 Check out the latest edition in my newsletter!
