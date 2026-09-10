@@ -1,0 +1,4 @@
+🚀 Kubernetes v1.37: KubeletInUserNamespace graduated to Beta.
+containerd (multi-version) received security updates for CVE-2026-53495.
+Podman v6.1.1 fixed CVE-2026-17106 (archive extraction security).
+Full breakdown:

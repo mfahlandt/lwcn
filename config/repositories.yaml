@@ -117,6 +117,11 @@ repositories:
     repo: jaeger
   - category: orchestration
     cncf_status: graduated
+    name: Karmada
+    owner: karmada-io
+    repo: karmada
+  - category: orchestration
+    cncf_status: graduated
     name: KEDA
     owner: kedacore
     repo: keda
@@ -219,11 +224,6 @@ repositories:
     name: Fluid
     owner: fluid-cloudnative
     repo: fluid
-  - category: orchestration
-    cncf_status: incubating
-    name: Karmada
-    owner: karmada-io
-    repo: karmada
   - category: security
     cncf_status: incubating
     name: Keycloak
