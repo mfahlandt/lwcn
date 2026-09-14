@@ -1,0 +1,8 @@
+⚙️ Last Week in Cloud Native: Kubernetes v1.37 features advance, Kyverno & Prometheus address security. 
+
+Highlights this week:
+- Kubernetes v1.37: Native Histograms to Beta, Scheduler Preemption for In-Place Pod Resize to Alpha.
+- Kyverno v1.19.1: Addressed CVE-2026-39821 and CVE-2026-56853.
+- Prometheus v3.13.3: Addressed GO-2026-5841 and GO-2026-6303, fixed Docker Swarm service discovery panic.
+
+👉 Check out the latest edition in my newsletter!

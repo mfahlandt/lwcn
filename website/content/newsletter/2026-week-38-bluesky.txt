@@ -1,0 +1,5 @@
+⚙️ Last Week in Cloud Native (W38) update.
+- K8s v1.37: Native Histograms Beta, In-Place Pod Resize Preemption Alpha.
+- Kyverno v1.19.1 addressed CVE-2026-39821, CVE-2026-56853.
+- Prometheus v3.13.3 addressed GO-2026-5841, GO-2026-6303.
+Full breakdown:

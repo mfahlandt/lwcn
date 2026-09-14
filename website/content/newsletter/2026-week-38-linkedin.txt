@@ -1,0 +1,28 @@
+⚙️ Kubernetes v1.37 Features Advance
+
+Kubernetes v1.37 introduced several features, including Native Histograms graduating to Beta and Scheduler Preemption for In-Place Pod Resize entering Alpha. These updates enhance observability and scheduling capabilities within the platform.
+
+🚀 Key Releases
+
+Kyverno v1.19.1: Updated Go to 1.26.6 and x/net to address CVE-2026-39821, and updated Go to address CVE-2026-56853. This fixes security vulnerabilities.
+
+Cert-Manager v1.21.2: Fixed controller and webhook panics, data races, ACME renewal issues, HTTP-01 solver bugs, and a Gateway API dnsNames bug. This improves stability and certificate management reliability.
+
+Prometheus v3.13.3: Updated github.com/klauspost/compress to v1.18.7 (GO-2026-5841) and golang.org/x/crypto to v0.55.0 (GO-2026-6303). It also fixed a panic in Docker Swarm service discovery when a service runs as a plugin or network-attachment. These are security and stability fixes.
+
+Baremetal-operator v0.14.0: Deprecated the BMH Taints field and removed the separate TryInit call from the provisioner. It added a fast Redfish-based inspection mode. These are breaking changes and a new feature.
+
+Cluster-API v1.14.2: Updated supported Kubernetes versions for management clusters to v1.33.x - v1.37.x and for workload clusters to v1.31.x - v1.37.x. This expands compatibility.
+
+📰 Notable News
+
+Karmada graduated within the CNCF, signifying its project maturity. The Kubernetes v1.37 release cycle introduced Native Histograms to Beta and Scheduler Preemption for In-Place Pod Resize to Alpha, alongside new Node Lifecycle Conditions and workload-aware scheduling advancements. Multiple CNCF blog posts also addressed the integration of AI workloads with cloud-native infrastructure, covering topics such as GPU resource management and distributed AI training.
+
+💬 Community Highlights
+
+The CNCF End User Case Study Contest recognized China Merchants Bank for unifying AI training and inference on Kubernetes. A joint CNCF and SlashData report highlighted cloud-native adoption and AI momentum in China.
+
+What technical implications do the Kubernetes v1.37 scheduling and observability updates introduce for your cluster operations?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-38/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps
