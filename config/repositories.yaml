@@ -266,6 +266,11 @@ repositories:
     repo: longhorn
   - category: configuration
     cncf_status: incubating
+    name: Meshery
+    owner: meshery
+    repo: meshery
+  - category: configuration
+    cncf_status: incubating
     name: metal3-io
     owner: metal3-io
     repo: baremetal-operator
@@ -378,11 +383,6 @@ repositories:
     name: Kuma
     owner: kumahq
     repo: kuma
-  - category: configuration
-    cncf_status: sandbox
-    name: Meshery
-    owner: meshery
-    repo: meshery
   - category: storage
     cncf_status: sandbox
     name: OpenEBS

@@ -1,0 +1,4 @@
+📦 Kubernetes v1.37 features to Beta.
+🛡️ Podman, Skopeo, Buildah patched CVE-2025-11395.
+⚠️ Jaeger v2.21.0 removed v1 HTTP endpoints.
+Full breakdown:

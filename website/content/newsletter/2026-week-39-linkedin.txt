@@ -1,0 +1,24 @@
+📦 Kubernetes v1.37 Features Advance to Beta
+
+This week brought significant updates across the Cloud Native ecosystem, notably the Kubernetes v1.37 release which moved several key features to Beta. Container runtimes and associated tooling received important updates, including critical security patches, alongside notable changes in observability and GitOps tools.
+
+🚀 Key Releases
+
+ Kubernetes v1.37, integrated into k3s v1.37.0+k3s1, advanced multiple features to Beta. These include hardening container storage with bind mount options and emptyDir permissions, Pod-Level Resource Managers, and Memory QoS. The Kubernetes Changed Block Tracking API also moved to Beta.
+
+ containerd v2.4.0 was released as a regular (non-LTS) version. Its API v1.12.0 release includes updates such as media type inclusion in content create events for image storage. CRI-O v1.37.0 was also released, aligning with the Kubernetes v1.37 release cycle.
+
+ Podman v5.8.7 and v6.1.2, Skopeo v1.24.1 and v1.22.3, and Buildah v1.45.1, v1.43.4, and v1.43.3 received patches for CVE-2025-11395. This vulnerability addresses issues related to importing images containing crafted layer tarballs via `podman load` or importing volumes containing crafted symlinks.
+
+ Crossplane patch releases (v2.4.1, v2.3.6, v2.2.6, v1.20.13) included security updates for dependencies. A functional change was introduced where new package revisions now take control of established objects from the revision they replace.
+
+ Jaeger v2.21.0 introduced a breaking change by removing v1 HTTP endpoints. OpenTelemetry Collector v0.161.0 also included breaking changes, removing deprecated `AggregationTemporality`, `Duration`, and `SetDuration` from `pkg/pprofile`.
+
+📰 Notable News
+
+ The Kubernetes Blog detailed the graduation of container storage hardening features, Pod-Level Resource Managers, and Memory QoS to Beta in Kubernetes v1.37. These blog posts outlined the technical changes and their impact on resource management and security within clusters. The CNCF Blog published articles on migrating a metrics platform at scale using OpenTelemetry and running OpenBao on Kubernetes with a CloudNativePG PostgreSQL backend, detailing specific deployment patterns and technical considerations.
+
+What technical implications do the Kubernetes v1.37 Beta features or the container runtime updates have on your current deployments?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-39/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps
