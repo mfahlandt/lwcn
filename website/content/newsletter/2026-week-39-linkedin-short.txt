@@ -1,0 +1,7 @@
+📦 Kubernetes v1.37 features advanced to Beta.
+Highlights from Last Week in Cloud Native:
+*   Container storage hardening, Pod-Level Resource Managers, Memory QoS moved to Beta in K8s v1.37.
+*   Podman, Skopeo, Buildah received patches for CVE-2025-11395.
+*   Jaeger v2.21.0 removed v1 HTTP endpoints, a breaking change.
+
+👉 Check out the latest edition in my newsletter!
