@@ -1,0 +1,5 @@
+🛡️ containerd security patches for CVE-2026-53493 released.
+*   containerd: Multiple versions fixed CVE-2026-53493.
+*   KEDA v2.21.0: Three breaking changes.
+*   kubewarden-controller v1.38.2: Breaking changes, security fixes.
+Full breakdown:
