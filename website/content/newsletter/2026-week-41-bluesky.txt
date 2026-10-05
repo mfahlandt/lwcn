@@ -1,0 +1,5 @@
+🛡️ Envoy v1.39.2+ fixes CVE-2026-35189.
+- Envoy: CVE-2026-35189 (BoringSSL TLS memory fix).
+- Podman v6.1.3/v5.8.8: CVE-2026-94603 (sandboxing bypass fixed).
+- Prometheus v3.13.4: grpc update for GO-2026-6348.
+Full breakdown:

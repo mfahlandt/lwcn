@@ -1,0 +1,8 @@
+🛡️ Envoy v1.39.2+ releases fix CVE-2026-35189.
+
+Highlights this week:
+- Envoy v1.39.2, v1.38.5, v1.37.7, v1.36.11 addressed CVE-2026-35189 (BoringSSL TLS memory allocation).
+- Podman v6.1.3 and v5.8.8 fixed CVE-2026-94603, which allowed disabling sandboxing on checkpoint images.
+- Prometheus v3.13.4 updated grpc to mitigate GO-2026-6348 (HTTP/2 DATA frame fragmentation).
+
+👉 Check out the latest edition in my newsletter!
