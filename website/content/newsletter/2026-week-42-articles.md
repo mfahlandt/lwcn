@@ -1,0 +1,196 @@
+---
+title: "Week 42 Articles - October 2026"
+date: "2026-10-12"
+draft: false
+noindex: true
+url: "/newsletter/2026-week-42/articles/"
+sitemap:
+  priority: 0.3
+  changefreq: never
+build:
+  list: never
+  publishResources: true
+  render: always
+outputs:
+  - html
+---
+
+# 📚 All Articles from Week 42
+
+A complete list of all cloud native articles and news from this week.
+
+## CNCF Blog (10)
+
+- [From zero to agent builder: Running kagent on your laptop](https://www.cncf.io/blog/2026/10/12/from-zero-to-agent-builder-running-kagent-on-your-laptop/)
+- [Join Platform Engineering Day at KubeCon + CloudNativeCon North America 2026](https://www.cncf.io/blog/2026/10/09/join-platform-engineering-day-at-kubecon-cloudnativecon-north-america-2026/)
+- [Making the Golden Kubestronaut a little more golden](https://www.cncf.io/blog/2026/10/09/making-the-golden-kubestronaut-a-little-more-golden/)
+- [Who owns NIS2 and DORA on a Kubernetes platform team](https://www.cncf.io/blog/2026/10/09/who-owns-nis2-and-dora-on-a-kubernetes-platform-team/)
+- [Don’t give AI agents root. Make them propose the next system state.](https://www.cncf.io/blog/2026/10/08/dont-give-ai-agents-root-make-them-propose-the-next-system-state/)
+- [CiliumCon is back at KubeCon + CloudNativeCon North America 2026](https://www.cncf.io/blog/2026/10/07/ciliumcon-is-back-at-kubecon-cloudnativecon-north-america-2026/)
+- [BackstageCon comes to KubeCon + CloudNativeCon North America 2026 in Salt Lake City](https://www.cncf.io/blog/2026/10/07/backstagecon-comes-to-kubecon-cloudnativecon-north-america-2026-in-salt-lake-city/)
+- [Kubernetes on Edge Day returns to KubeCon + CloudNativeCon North America 2026](https://www.cncf.io/blog/2026/10/07/kubernetes-on-edge-day-returns-to-kubecon-cloudnativecon-north-america-2026/)
+- [Meshery becomes a CNCF Incubating project](https://www.cncf.io/blog/2026/10/07/meshery-becomes-a-cncf-incubating-project/)
+- [CNCF Welcomes OVHcloud, One of Europe’s Largest Independent Cloud Providers, as a Platinum Member](https://www.cncf.io/announcements/2026/10/07/cncf-welcomes-ovhcloud-a-leading-european-cloud-provider-and-global-cloud-and-ai-player-as-a-platinum-member/)
+
+## Hacker News (104)
+
+- [Show HN: K10s – A Clickable Kubernetes TUI (Go, Bubble Tea)](https://github.com/p10node/k10s)
+- [Show HN: AI SRE Arena, an Open Benchmark for AI SRE Agents on Kubernetes](https://github.com/edgedelta/project-arena)
+- [ApowerB: Deploy on Kubernetes using helm-chart](https://artifacthub.io/packages/helm/apowerb/apowerb-chart)
+- [Brewlet: Java on Kubernetes](https://brewlet.sh/)
+- [KubeNPU Per-Pod NPU/GPU Usage on Kubernetes via eBPF](https://github.com/jrzayev/kubenpu)
+- [Show HN: Brewlet is Java on Kubernetes with node-managed JDKs](https://github.com/microsoft/brewlet)
+- [The Shift to cgroup v2 in Kubernetes](https://kubernetes.io/blog/2026/10/06/kubernetes-cgroups-v2-shift/)
+- [Ask HN: Learning practical system design](https://news.ycombinator.com/item?id=50004434)
+- [Show HN: Staffcoder, hands-on practice for modern frameworks in a browser IDE](https://www.staffcoder.com)
+- [Show HN: Coolphabets – Teaching kids to read and write in their mother tongue](https://news.ycombinator.com/item?id=50022532)
+- [Docker Agent](https://github.com/docker/docker-agent)
+- [Zed Editor, Docker Agent, ACP, but in a sandbox: running the agent with sbx](https://k33g.org/p/20261004-acp-sbx-docker-agent)
+- [Show HN: Doiter – Language where pointers and stack frames are Docker containers](https://github.com/simvux/doiter)
+- [Show HN: CrowDB – an iceberg table storage single Docker container](https://buzzcrow.github.io/blog/run-iceberg-in-one-container/)
+- [Show HN: HivePaaS – Open-Source PaaS on Docker Swarm, from One VPS to a Cluster](https://github.com/hivepaas/hivepaas)
+- [Show HN: Abyss – ACP Agent Isolation with Middleware Support](https://abyss.scurry.io)
+- [Show HN: Paganel – Data migration with a receipt you can verify later](https://github.com/stanstork/paganel)
+- [Show HN: PanelAlpha Engine – Turn your VPS into a programmable hosting layer](https://engine.panelalpha.com/)
+- [Time series forecasting made easy, deploy it as a service](https://hub.docker.com/r/apowerb/th2forecast)
+- [Technical Analysis of an NSO Group WhatsApp Exploit](https://www.courtlistener.com/docket/16395340/741/45/whatsapp-inc-v-nso-group-technologies-limited/)
+- [Show HN: StatLite – Lightweight dashboard for application monitoring](https://pvrlabs.xyz/statlite/)
+- [Ask HN: Anybody else enjoying Cursor's native (xAI) models?](https://news.ycombinator.com/item?id=49966668)
+- [Show HN: Wordminos – Crosswords Meet Dominos](https://wordminos.com/play-en.html)
+- [Show HN: Pointless but mostly-exact clone of Hacker News](https://news.ycombinator.lol)
+- [Chatcasting, an Alternative to Podcasting](https://news.ycombinator.com/item?id=50039481)
+- [Ask HN: What do you think about AI generated slides for conferences?](https://news.ycombinator.com/item?id=49973382)
+- [Show HN: All Things Banana – banana news, prices, and a daily Wikipedia game](https://allthingsbanana.com/)
+- [Ask HN: Anyone accepted into OpenAI "Codex for open source"?](https://news.ycombinator.com/item?id=49968434)
+- [Show HN: Wick, a daily word game where you guess by meaning, not spelling](https://guesswick.com/)
+- [Ask HN: How do you build a reputation without social media?](https://news.ycombinator.com/item?id=50052690)
+- [Ask HN: How do you check desktop apps for malicious code?](https://news.ycombinator.com/item?id=49990079)
+- [Show HN: Durable Actors – OSS Durable Objects with configurable compute](https://github.com/TerseAI/durable-actors)
+- [Nitter: Update Oct 10th seeking funding and legal help](https://nitter.net)
+- [How did Rosalind Franklin miss the helix in her iconic DNA image? She didn't](https://www.science.org/content/article/how-did-rosalind-franklin-miss-helix-her-iconic-dna-image-she-didn-t)
+- [LLMs may have helped my RSI](https://vaughanhilts.me/2026/10/05/llms-immensely-helped-my-rsi.html)
+- [People are asking ChatGPT to help them decide how to vote in the midterms](https://www.npr.org/2026/10/05/nx-s1-5977852/ai-chatbots-midterm-election)
+- [Plastic Waste and Oceans: Banning Straws Won't Help Much](https://www.nationalreview.com/2018/09/plastic-bag-straw-bans-ocean-pollution/)
+- [My friend built this, and it helped me get past the first hiring filter](https://creatucv.ai)
+- [Firefox's chief on why he hopes a redesign will help win users from Chrome](https://arstechnica.com/gadgets/2026/09/mozillas-head-of-firefox-talks-product-priorities-ai-skepticism-and-browser-choice/)
+- [My Husband Has Found a New "Helper" During His Solo Time. It's My Nemesis](https://slate.com/advice/2026/10/sex-advice-husband-masturbation-aid.html)
+- [Show HN: I wrote a book to help developers to improve their writing](https://refactoringenglish.com)
+- [(Linus Torvalds) I did what I preach: use LLMs to help make sense of the code](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tag/?h=assoc-array-fixes)
+- [Molly Russell's father to tell UK cinemagoers: Instagram helped kill my daughter](https://www.theguardian.com/media/2026/oct/08/molly-russell-father-uk-cinemas-the-social-reckoning)
+- [Bowel Cancer in Young People Is Rising – Help Find Answers in Major New Trial](https://www.kcl.ac.uk/news/bowel-cancer-in-young-people-is-rising-uk-public-can-help-find-answers-in-major-new-trial)
+- [--help on your CLI is all you need for LLM context until you don't](https://ghuntley.com/tier/)
+- [Margaret Hamilton, whose software helped land Apollo astronauts on the moon](https://www.cnn.com/2026/10/07/science/nasa-apollo-margaret-hamilton-software)
+- [Linus Torvalds Endures a Debug Session from Hell, "Enormously Helped" by AI](https://www.phoronix.com/news/Linus-Torvalds-Debug-AI)
+- [Help Just by Shopping](https://himmelfund.com/)
+- [Helping teens learn, plan, and shape the future of AI](https://openai.com/index/teens-learn-and-plan/)
+- [D-Bus Hell](https://dbushell.com/2026/10/11/d-bus-hell/)
+- [Margaret Hamilton, whose software helped land Apollo 11 on the Moon, dies at 90](https://www.bbc.co.uk/news/articles/cx5yn46j41zpo)
+- [Looking for Help](https://news.ycombinator.com/item?id=49968927)
+- [Ask HN: I messed up my Cloudflare usage and need some support help](https://news.ycombinator.com/item?id=49990548)
+- [Show HN: Proton Drive for Linux](https://oss.lsantos.dev/proton-drive-linux-fs/)
+- [Show HN: Agent.reviews – Where AI agents read and write reviews on tools](https://agent.reviews/)
+- [Ask HN: Why aren't Americans rising up against tipping?](https://news.ycombinator.com/item?id=50038458)
+- [Show HN: OpenChart – OSS TradingView alternative with your own AI agent](https://github.com/longsurf-ai/openchart)
+- [Show HN: Pocketty – iPhone SSH terminal that pings you when an agent is blocked](https://pocketty.app/)
+- [Show HN: BraiNOTES, handwritten notes on your lecture PDFs in a browser tab](https://github.com/swimmingbrain/brainotes)
+- [You're saving one minute and now I can't know if I'm talking a human](https://news.ycombinator.com/item?id=50009712)
+- [Show HN: I'm a 14-year-old building my first startup, Titan](https://titan-ai.co/)
+- [Ask HN: Locked out of Google despite knowing password and having email access](https://news.ycombinator.com/item?id=50037004)
+- [Ask HN: Which frontier model can do code security reviews](https://news.ycombinator.com/item?id=49996594)
+- [Show HN: Woodpecker – a browser agent built with Pi and user scripts](https://news.ycombinator.com/item?id=50016052)
+- [Show HN: Git extension for controlling Git worktree mess](https://getzit.org/)
+- [Open source software is slowly turning into open slop software](https://news.ycombinator.com/item?id=50043719)
+- [Show HN: Let your AI agents paint big arrows, boxes and text on your screen](https://github.com/franzenzenhofer/big-arrow-on-the-screen)
+- [Recent AI models struggled to match a human algorithmic innovation](https://epoch.ai/publications/innovationeval)
+- [MrBeast 'spends millions reverse engineering the algorithms on each platform'](https://www.barchart.com/story/news/5472260/mrbeast-told-billionaire-mark-cuban-he-spends-millions-of-dollars-reverse-engineering-the-algorithms-on-each-platform-so-he-never-runs-out-of-ideas)
+- [Google Data Centers around the world](https://datacenters.google/locations/)
+- [I'm still around.. I'm just not writing here](https://rachelbythebay.com/w/2026/10/08/idle/)
+- [Worse than Flock: They're building the prison around us [video]](https://www.youtube.com/watch?v=ZkZwxTTZPPA)
+- [Show HN: I wrote Dependency Hell 5 years ago. Today I updated it for AI Era [pdf]](https://github.com/jaronilan/stories/blob/main/Agent%20Loop.pdf)
+- [Cats were in Poland 8k years ago](https://bigthink.com/strange-maps/cat-migration-europe/)
+- [Tell HN: I've been paying for a rural Tanzanian's education for 10 years](https://news.ycombinator.com/item?id=50006366)
+- [Ask HN: What do you run on a $5 VPS that's worth keeping online 24/7?](https://news.ycombinator.com/item?id=49985548)
+- [Show HN: I turned my iPhone and a $20 smart plug into an f-stop timer](https://peterszentkiralyi.eu/darkplug/)
+- [Ask HN: Do you want a router that has DD-WRT pre-installed?](https://news.ycombinator.com/item?id=50039291)
+- [Show HN: Atticus – Hold-to-talk voice assistant for macOS that runs on Claude -p](https://github.com/SaarthurR/atticus-mac)
+- [Ask HN: What if no AIpocalypse, no AI bubble, what if it just keeps advancing?](https://news.ycombinator.com/item?id=50020096)
+- [Show HN: World Watcher – a map to seamlessly watch public webcam streams](https://worldwatcher.live/)
+- [Super Intelligence and/or Artificial Intelligence](https://news.ycombinator.com/item?id=50009918)
+- [Ask HN: How do swarms of AI agents work?](https://news.ycombinator.com/item?id=50047180)
+- [Show HN: A replacement motherboard for the iPod mini, 3G and 4G](https://certainthings.studio/sprout/)
+- [Show HN: The mainbrella effect – AI code / Agent machines](https://news.ycombinator.com/item?id=49971503)
+- [Show HN: Aporium – A UMAP galaxy of 5800 philosophy excerpts in conversation](https://www.aporium.app/explore)
+- [Ask HN: Is there any defense against LLM-based reverse engineering?](https://news.ycombinator.com/item?id=50045579)
+- [Show HN: Krashout, multiplayer car soccer in the browser](https://ball.krashout.io)
+- [Show HN: Solarite – fast and simple web components with no signals and no build](https://eric-frost.github.io/solarite/)
+- [Scam Warning](https://news.ycombinator.com/item?id=50004192)
+- [Show HN: MarbleMD – Free collaborative alternative to Typora](https://marble.md)
+- [Show HN: What a major earthquake does to Vancouver](https://quakeimpact.ca/)
+- [Ask HN: What to do with lots of spare compute in colocation?](https://news.ycombinator.com/item?id=50045494)
+- [Show HN: Throw Alice and Bob into Sagittarius A*](https://github.com/steveking-gh/black-hole-lab)
+- [We gave an AI a phone and asked 1000 SF businesses a question](https://news.ycombinator.com/item?id=50022739)
+- [Show HN: Making a flexible "neon" t-shirt with LED filaments](http://scottbezek.blogspot.com/2026/10/making-flexible-neon-t-shirt-with-leds.html)
+- [Zephon: Fast, Flexible, Elastically Deterministic Data Loading](https://www.datologyai.com/blog/zephon)
+- [Genkit Dart 1.0: Build production-ready agentic apps with Dart and Flutter](https://flutter.dev/blog/announcing-genkit-dart-1-0)
+- [Show HN: FlowCompute – Open-source, Vulkan-based GUI for OpenFOAM fluid analysis](https://github.com/FlowComputeClient/flowcompute)
+- [Show HN: StayLeet – keeping skills sharp in AI coding era](https://stayleet.com/)
+- [Show HN: DevBoard – a simpler ClickUp for small dev teams, native apps and MCP](https://getdevboard.app/)
+- [We built an Ubuntu mirror and then made it faster](https://depot.dev/blog/faster-ubuntu-package-installs)
+- [OTel-Native by Design – Building Products That Export to Any Observability Stack](https://opentelemetry.io/blog/2026/otel-native-by-design/)
+- [Show HN: Railcode – Secure cloud for internal software](https://railcode.dev/)
+
+## Heise Cloud (7)
+
+- [SAP zwischen KI-Vision und ERP-Alltag: DSAG fordert Wahlfreiheit](https://www.heise.de/news/SAP-zwischen-KI-Vision-und-ERP-Alltag-DSAG-fordert-Wahlfreiheit-11484019.html)
+- [Massive Ausfälle bei Yandex nach ukrainischen Angriffen](https://www.heise.de/news/Massive-Ausfaelle-bei-Yandex-nach-ukrainischen-Angriffen-11483627.html)
+- [Microsoft dampft Speicherkontingent von Microsoft-365-Abos ein](https://www.heise.de/news/Microsoft-dampft-Speicherkontingent-von-Microsoft-365-Abos-ein-11482048.html)
+- [KI-Agenten, NIS2, Ransomware: Das bietet der ICC Summit 2026](https://www.heise.de/news/KI-Agenten-NIS2-Ransomware-Das-bietet-der-ICC-Summit-2026-11480270.html)
+- [Umfrage unter VMware-Kunden: 90 Prozent suchen nach Alternativen](https://www.heise.de/news/Umfrage-unter-VMware-Kunden-90-Prozent-suchen-nach-Alternativen-11479284.html)
+- [OneDrive: Microsoft killt App demnächst für ältere iPhones](https://www.heise.de/news/OneDrive-Microsoft-killt-App-demnaechst-fuer-aeltere-iPhones-11478583.html)
+- [Digitale Souveränität durch Open Source – die Datenplattform der Zukunft?](https://www.heise.de/hintergrund/Digitale-Souveraenitaet-durch-Open-Source-die-Datenplattform-der-Zukunft-11474440.html)
+
+## InfoQ Cloud Native (2)
+
+- [Presentation: You Can't Trust Your AI Bill. And Neither Can I](https://www.infoq.com/presentations/ai-cloud-cost-economics/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=Cloud+Computing)
+- [Presentation: Ontology‐Driven Observability: Building the E2E Knowledge Graph at Netflix Scale](https://www.infoq.com/presentations/netflix-observability-aiops-ontology-scale/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=Cloud+Computing)
+
+## Kubernetes Blog (2)
+
+- [The Shift to cgroup v2 in Kubernetes: What You Need to Know](https://kubernetes.io/blog/2026/10/06/kubernetes-cgroups-v2-shift/)
+- [Scaling Kubernetes Workloads with Node Swap](https://kubernetes.io/blog/2026/10/05/scaling-kubernetes-workloads-with-node-swap/)
+
+## Microsoft Open Source (1)
+
+- [Open-source databases in the AI era: Meet Microsoft at All Things Open](https://opensource.microsoft.com/blog/2026/10/08/open-source-databases-in-the-ai-era-meet-microsoft-at-all-things-open/)
+
+## The New Stack (24)
+
+- [Claude Code found my app’s shared contract in two MCP calls. Then the records ran out.](https://thenewstack.io/claude-code-mcp-records/)
+- [Claude found 29,000 possible bugs in open source. Only 516 have been fixed.](https://thenewstack.io/anthropic-oss-scanner-vulnerabilities/)
+- [How to turn AI production feedback into better agents](https://thenewstack.io/ai-agent-evaluation-loop/)
+- [Microsoft skipped OpenAI’s decision model and built its own on Alibaba’s Qwen](https://thenewstack.io/microsoft-decision-model-foundry/)
+- [Elon Musk’s Grok Bot will pick Claude over Grok when it’s better. One-model loyalty is dead.](https://thenewstack.io/musk-claude-model-triage/)
+- [Kubernetes on cgroup v1 is dead. Here’s what comes next.](https://thenewstack.io/kubernetes-node-swap-ai/)
+- [Cloudflare acquires Node.js creator’s startup that copied its serverless playbook](https://thenewstack.io/cloudflare-acquires-deno-ryan-dahl/)
+- [“Don’t use ‘open weight’ and ‘open source’ interchangeably”: Percona CEO on why AI terminology matters](https://thenewstack.io/open-weight-open-source-ai/)
+- [Harness bought Augment’s coding agents. The best feature hasn’t shipped yet.](https://thenewstack.io/harness-augment-cosmos-acquisition/)
+- [Claude can now build your dashboards](https://thenewstack.io/claude-dashboards-data-motion/)
+- [GitHub Copilot is going local — but Microsoft won’t say what gets sent to the cloud](https://thenewstack.io/https-thenewstack-io-copilot-local-inference-routing/)
+- [You can outgrow vanilla Postgres without abandoning Postgres](https://thenewstack.io/postgres-at-scale-why-it-struggles/)
+- [Most AI incident tools still leave a key decision to humans](https://thenewstack.io/ai-sre-agent-autonomy-phases/)
+- [Your AI agent just provisioned a resource. Who owns it?](https://thenewstack.io/ai-agent-cloud-ownership/)
+- [The audit log says my name: what an agent inherits when you hand it your credentials](https://thenewstack.io/ai-agent-credential-risks/)
+- [AI data lakes are driving new storage demands](https://thenewstack.io/ai-data-lakes-storage/)
+- [The API tax: Why AI agents stall without infrastructure context](https://thenewstack.io/autonomous-cloud-context-layer/)
+- [AI changed how you respond to incidents. Your tabletops haven’t caught up.](https://thenewstack.io/ai-incident-response-tabletops/)
+- [Claude Sonnet 5.5 vs. Opus 5.5: 42% cheaper and perfect on every run](https://thenewstack.io/claude-sonnet-5-5-vs-opus-5-5/)
+- [Building scalable, agent-friendly APIs for AI applications](https://thenewstack.io/building-agent-friendly-apis/)
+- [Redis by proxy: Percona targets the last major hurdle to Valkey adoption](https://thenewstack.io/valkey-proxy-redis-percona/)
+- [OpenSSH 10.6 deliberately breaks two features in the name of security](https://thenewstack.io/openssh-breaks-compression-usernames/)
+- [Claude’s cyber safeguards are getting more flexible — but not for everyone.](https://thenewstack.io/anthropic-cyber-access-tiers/)
+- [Decision models are suddenly everywhere. OpenAI’s is now public.](https://thenewstack.io/openai-decision-models-deployment/)
+
+
+---
+
+[← Back to Newsletter](https://lwcn.dev/newsletter/2026-week-42/)
