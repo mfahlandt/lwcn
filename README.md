@@ -6,7 +6,7 @@ A fully automated newsletter generation system that aggregates Cloud Native rele
 
 ## Features
 
-- 🔄 **CNCF Project Sync**: Automatically fetches the latest CNCF project list from the [Landscape API](https://landscape.cncf.io)
+- 🔄 **CNCF Project Sync**: Automatically fetches the latest CNCF project list from the official [Landscape YAML](https://github.com/cncf/landscape/blob/master/landscape.yml)
 - 🔍 **News Crawler**: Aggregates news from multiple sources
 - 📦 **GitHub Releases**: Tracks releases from CNCF ecosystem repositories + configurable additional projects
 - 🤖 **AI Processor**: Uses Google Gemini AI to generate:
@@ -46,8 +46,13 @@ go build -o bin/sync-cncf-projects ./cmd/sync-cncf-projects   # CNCF project syn
 
 The list of GitHub repositories to track is **auto-generated** from two sources:
 
-1. **CNCF Landscape API** — all graduated, incubating, and sandbox projects are fetched automatically
-2. **`config/additional-repos.yaml`** — manually curated non-CNCF repos (e.g., Podman, k9s, Trivy)
+1. **CNCF Landscape YAML** — GitHub repositories for graduated, incubating, and sandbox projects are read directly from `repo_url`; archived projects are excluded
+2. **`config/additional-repos.yaml`** — manually curated non-CNCF repos (e.g., Podman, k9s, Trivy, and selected OpenSSF and NeoNephos project repositories)
+
+Release-repository overrides in `internal/cncf/landscape.go` keep OpenTelemetry
+on `opentelemetry-collector` and Confidential Containers on `operator`, rather
+than their umbrella repositories. All other CNCF repository URLs follow the
+official landscape automatically.
 
 Run the sync to (re)generate `config/repositories.yaml`:
 
@@ -71,7 +76,7 @@ additional_repositories:
 ### News Sources Configuration
 
 Configure news sources in `config/news-sources.yaml`:
-- **RSS Feeds**: CNCF, Kubernetes, The New Stack, InfoQ, plus AWS, Azure and Google Cloud blogs (marked `vendor: true` — only items with an open-source signal are kept; see `config/news-sources.yaml`)
+- **RSS Feeds**: CNCF, Kubernetes, OpenSSF, NeoNephos, The New Stack, InfoQ and TechTarget (`require_oss: true` keeps only items with an open-source signal), plus AWS, Azure and Google Cloud blogs (marked `vendor: true` — only items with an open-source signal are kept; see `config/news-sources.yaml`)
 - **Scrape Sources**: Heise Cloud articles
 - **Hacker News**: Keyword-filtered stories (kubernetes, cloud native, cncf, docker, etc.)
 
@@ -207,7 +212,7 @@ You can manually trigger the newsletter generation:
 ```
 Monday 6:00 UTC
     ↓
-Sync CNCF projects from Landscape API
+Sync CNCF projects from Landscape YAML
     ↓
 Crawl RSS feeds, Heise, Hacker News
     ↓
@@ -235,7 +240,7 @@ make test
 make clean
 
 # CNCF Project Sync
-make sync-repos          # Sync CNCF projects from Landscape API + additional repos
+make sync-repos          # Sync CNCF projects from Landscape YAML + additional repos
 make sync-repos-dry      # Dry-run sync (preview without writing)
 
 # Crawling
@@ -290,11 +295,11 @@ lwcn/
 │   ├── github-releases/    # GitHub releases crawler CLI
 │   ├── ai-processor/       # AI newsletter generator CLI
 │   ├── backfill-newsletter/ # Tool to generate historical newsletters
-│   ├── sync-cncf-projects/ # Syncs CNCF projects from Landscape API
+│   ├── sync-cncf-projects/ # Syncs CNCF projects from Landscape YAML
 │   └── debug-heise/        # Debug tool for Heise scraping
 ├── internal/
 │   ├── ai/                 # Gemini AI integration
-│   ├── cncf/               # CNCF Landscape API client
+│   ├── cncf/               # CNCF Landscape YAML client
 │   ├── config/             # Configuration loader
 │   ├── github/             # GitHub API client
 │   ├── models/             # Data models (news, releases, newsletter)

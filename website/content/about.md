@@ -48,7 +48,7 @@ We track **200+ CNCF and Cloud Native projects** for new releases, including:
 - Incubating projects (Argo, Flux, Linkerd, etc.)
 - Sandbox projects and emerging technologies
 
-The project list is automatically synced from the official [CNCF Landscape API](https://landscape.cncf.io/) plus a manually curated list of additional repositories.
+The project list is automatically synced from the official [CNCF Landscape YAML](https://github.com/cncf/landscape/blob/master/landscape.yml) plus a manually curated list of additional repositories.
 
 #### 2. News Aggregation
 We monitor multiple sources for Cloud Native news:
@@ -124,7 +124,7 @@ LWCN is **open source**. Our curation tools, website, AI prompts, and methodolog
 - 📂 **Repository:** [github.com/mfahlandt/lwcn](https://github.com/mfahlandt/lwcn)
 - 🔧 **Tech Stack:** Hugo (PaperMod theme), Go, GitHub Actions, GitHub Pages
 - 🤖 **AI Integration:** Google Gemini API for content summarization (under strict editorial policy)
-- 📊 **Data Sources:** CNCF Landscape API, GitHub REST API, curated RSS feeds, Hacker News API
+- 📊 **Data Sources:** CNCF Landscape YAML, GitHub REST API, curated RSS feeds, Hacker News API
 
 We welcome contributions, feedback, and suggestions from the community.
 
@@ -178,4 +178,3 @@ Never miss an issue:
   }
 }
 </script>
-

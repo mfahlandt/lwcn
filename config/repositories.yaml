@@ -2,7 +2,7 @@
 # Do not edit manually - run 'make sync-repos' to update
 #
 # Sources:
-#   - CNCF Landscape API (https://landscape.cncf.io)
+#   - CNCF Landscape YAML (https://raw.githubusercontent.com/cncf/landscape/master/landscape.yml)
 #   - config/additional-repos.yaml
 
 repositories:
@@ -15,6 +15,11 @@ repositories:
     name: Argo
     owner: argoproj
     repo: argo-cd
+  - category: build
+    cncf_status: graduated
+    name: Buildpacks
+    owner: buildpacks
+    repo: pack
   - category: security
     cncf_status: graduated
     name: cert-manager
@@ -53,7 +58,7 @@ repositories:
   - category: storage
     cncf_status: graduated
     name: CubeFS
-    owner: cubefs
+    owner: cubeFS
     repo: cubefs
   - category: build
     cncf_status: graduated
@@ -64,7 +69,7 @@ repositories:
     cncf_status: graduated
     name: Dragonfly
     owner: dragonflyoss
-    repo: dragonfly2
+    repo: dragonfly
   - category: networking
     cncf_status: graduated
     name: Envoy
@@ -125,11 +130,21 @@ repositories:
     name: KEDA
     owner: kedacore
     repo: keda
+  - category: orchestration
+    cncf_status: graduated
+    name: Knative
+    owner: knative
+    repo: serving
   - category: configuration
     cncf_status: graduated
     name: KubeEdge
     owner: kubeedge
     repo: kubeedge
+  - category: orchestration
+    cncf_status: graduated
+    name: Kubeflow
+    owner: kubeflow
+    repo: kubeflow
   - category: orchestration
     cncf_status: graduated
     name: Kubernetes
@@ -196,6 +211,11 @@ repositories:
   # ============================================
   - category: build
     cncf_status: incubating
+    name: Artifact Hub
+    owner: artifacthub
+    repo: hub
+  - category: build
+    cncf_status: incubating
     name: Backstage
     owner: backstage
     repo: backstage
@@ -219,11 +239,46 @@ repositories:
     name: Container Network Interface (CNI)
     owner: containernetworking
     repo: cni
+  - category: networking
+    cncf_status: incubating
+    name: Contour
+    owner: projectcontour
+    repo: contour
+  - category: observability
+    cncf_status: incubating
+    name: Cortex
+    owner: cortexproject
+    repo: cortex
+  - category: networking
+    cncf_status: incubating
+    name: Emissary-Ingress
+    owner: emissary-ingress
+    repo: emissary
+  - category: certified-kubernetes---distribution
+    cncf_status: incubating
+    name: Flatcar Container Linux
+    owner: flatcar
+    repo: Flatcar
   - category: orchestration
     cncf_status: incubating
     name: Fluid
     owner: fluid-cloudnative
     repo: fluid
+  - category: remote-procedure-call
+    cncf_status: incubating
+    name: gRPC
+    owner: grpc
+    repo: grpc
+  - category: orchestration
+    cncf_status: incubating
+    name: HAMi
+    owner: Project-HAMi
+    repo: HAMi
+  - category: networking
+    cncf_status: incubating
+    name: k8gb
+    owner: k8gb-io
+    repo: k8gb
   - category: security
     cncf_status: incubating
     name: Keycloak
@@ -274,6 +329,11 @@ repositories:
     name: metal3-io
     owner: metal3-io
     repo: baremetal-operator
+  - category: build
+    cncf_status: incubating
+    name: Microcks
+    owner: microcks
+    repo: microcks
   - category: messaging
     cncf_status: incubating
     name: NATS
@@ -283,27 +343,47 @@ repositories:
     cncf_status: incubating
     name: Notary Project
     owner: notaryproject
-    repo: notary
+    repo: notation
   - category: ci-cd
     cncf_status: incubating
     name: OpenCost
     owner: opencost
     repo: opencost
+  - category: observability
+    cncf_status: incubating
+    name: OpenFeature
+    owner: open-feature
+    repo: spec
   - category: security
     cncf_status: incubating
     name: OpenFGA
     owner: openfga
     repo: openfga
+  - category: ci-cd
+    cncf_status: incubating
+    name: OpenKruise
+    owner: openkruise
+    repo: kruise
   - category: configuration
     cncf_status: incubating
     name: OpenYurt
     owner: openyurtio
     repo: openyurt
+  - category: build
+    cncf_status: incubating
+    name: Operator Framework
+    owner: operator-framework
+    repo: operator-sdk
   - category: messaging
     cncf_status: incubating
     name: Strimzi
     owner: strimzi
     repo: strimzi-kafka-operator
+  - category: ci-cd
+    cncf_status: incubating
+    name: Tekton
+    owner: tektoncd
+    repo: pipeline
   - category: observability
     cncf_status: incubating
     name: Thanos
@@ -314,25 +394,185 @@ repositories:
     name: Volcano
     owner: volcano-sh
     repo: volcano
+  - category: orchestration
+    cncf_status: incubating
+    name: wasmCloud
+    owner: wasmCloud
+    repo: wasmCloud
 
   # ============================================
   # SANDBOX PROJECTS
   # ============================================
+  - category: service-mesh
+    cncf_status: sandbox
+    name: Aeraki Mesh
+    owner: aeraki-mesh
+    repo: aeraki
+  - category: orchestration
+    cncf_status: sandbox
+    name: Agent Substrate
+    owner: agent-substrate
+    repo: substrate
+  - category: orchestration
+    cncf_status: sandbox
+    name: Agones
+    owner: agones-dev
+    repo: agones
+  - category: configuration
+    cncf_status: sandbox
+    name: Akri
+    owner: project-akri
+    repo: akri
   - category: networking
     cncf_status: sandbox
     name: Antrea
     owner: antrea-io
     repo: antrea
+  - category: messaging
+    cncf_status: sandbox
+    name: Apicurio Registry
+    owner: Apicurio
+    repo: apicurio-registry
+  - category: orchestration
+    cncf_status: sandbox
+    name: Armada
+    owner: armadaproject
+    repo: armada
+  - category: security
+    cncf_status: sandbox
+    name: Athenz
+    owner: AthenZ
+    repo: athenz
+  - category: configuration
+    cncf_status: sandbox
+    name: Atlantis
+    owner: runatlantis
+    repo: atlantis
+  - category: security
+    cncf_status: sandbox
+    name: Bank-Vaults
+    owner: bank-vaults
+    repo: bank-vaults
+  - category: networking
+    cncf_status: sandbox
+    name: BFE
+    owner: bfenetworks
+    repo: bfe
+  - category: container-runtime
+    cncf_status: sandbox
+    name: bootc
+    owner: bootc-dev
+    repo: bootc
+  - category: security
+    cncf_status: sandbox
+    name: bpfman
+    owner: bpfman
+    repo: bpfman
+  - category: configuration
+    cncf_status: sandbox
+    name: Cadence Workflow
+    owner: cadence-workflow
+    repo: cadence
   - category: orchestration
     cncf_status: sandbox
     name: Capsule
     owner: projectcapsule
     repo: capsule
+  - category: storage
+    cncf_status: sandbox
+    name: Carina
+    owner: carina-io
+    repo: carina
+  - category: security
+    cncf_status: sandbox
+    name: Cartography
+    owner: cartography-cncf
+    repo: cartography
+  - category: build
+    cncf_status: sandbox
+    name: Carvel
+    owner: carvel-dev
+    repo: ytt
+  - category: configuration
+    cncf_status: sandbox
+    name: CDK for Kubernetes (CDK8s)
+    owner: cdk8s-team
+    repo: cdk8s
+  - category: security
+    cncf_status: sandbox
+    name: Cedar
+    owner: cedar-policy
+    repo: cedar
+  - category: chaos-engineering
+    cncf_status: sandbox
+    name: Chaosblade
+    owner: chaosblade-io
+    repo: chaosblade
+  - category: database
+    cncf_status: sandbox
+    name: CloudNativePG
+    owner: cloudnative-pg
+    repo: cloudnative-pg
   - category: orchestration
     cncf_status: sandbox
     name: Clusternet
     owner: clusternet
     repo: clusternet
+  - category: orchestration
+    cncf_status: sandbox
+    name: Clusterpedia
+    owner: clusterpedia-io
+    repo: clusterpedia
+  - category: container-runtime
+    cncf_status: sandbox
+    name: composefs
+    owner: containers
+    repo: composefs
+  - category: remote-procedure-call
+    cncf_status: sandbox
+    name: Connect RPC
+    owner: connectrpc
+    repo: connect-go
+  - category: orchestration-&-management
+    cncf_status: sandbox
+    name: container2wasm
+    owner: container2wasm
+    repo: container2wasm
+  - category: security
+    cncf_status: sandbox
+    name: ContainerSSH
+    owner: containerssh
+    repo: containerssh
+  - category: security
+    cncf_status: sandbox
+    name: Copa
+    owner: project-copacetic
+    repo: copacetic
+  - category: orchestration
+    cncf_status: sandbox
+    name: Cozystack
+    owner: cozystack
+    repo: cozystack
+  - category: storage
+    cncf_status: sandbox
+    name: Curvine
+    owner: CurvineIO
+    repo: curvine
+  - category: build
+    cncf_status: sandbox
+    name: Dalec
+    owner: project-dalec
+    repo: dalec
+  - category: build
+    cncf_status: sandbox
+    name: Devfile
+    owner: devfile
+    repo: api
+  - category: build
+    cncf_status: sandbox
+    name: DevSpace
+    owner: devspace-sh
+    repo: devspace
   - category: security
     cncf_status: sandbox
     name: Dex
@@ -343,6 +583,21 @@ repositories:
     name: Distribution
     owner: distribution
     repo: distribution
+  - category: messaging
+    cncf_status: sandbox
+    name: Drasi
+    owner: drasi-project
+    repo: drasi-platform
+  - category: networking
+    cncf_status: sandbox
+    name: Easegress
+    owner: easegress-io
+    repo: easegress
+  - category: orchestration
+    cncf_status: sandbox
+    name: Eraser
+    owner: eraser-dev
+    repo: eraser
   - category: security
     cncf_status: sandbox
     name: external-secrets
@@ -350,59 +605,489 @@ repositories:
     repo: external-secrets
   - category: observability
     cncf_status: sandbox
+    name: Headlamp
+    owner: kubernetes-sigs
+    repo: headlamp
+  - category: networking
+    cncf_status: sandbox
+    name: Higress
+    owner: higress-group
+    repo: higress
+  - category: workflow-orchestration
+    cncf_status: sandbox
+    name: Hive Commons
+    owner: hivecommons
+    repo: hive
+  - category: observability
+    cncf_status: sandbox
+    name: HolmesGPT
+    owner: HolmesGPT
+    repo: holmesgpt
+  - category: storage
+    cncf_status: sandbox
+    name: HwameiStor
+    owner: hwameistor
+    repo: hwameistor
+  - category: container-runtime
+    cncf_status: sandbox
+    name: Hyperlight
+    owner: hyperlight-dev
+    repo: hyperlight
+  - category: container-runtime
+    cncf_status: sandbox
+    name: Inclavare Containers
+    owner: inclavare-containers
+    repo: inclavare-containers
+  - category: observability
+    cncf_status: sandbox
     name: Inspektor Gadget
     owner: inspektor-gadget
     repo: inspektor-gadget
+  - category: container-runtime
+    cncf_status: sandbox
+    name: Interlink
+    owner: interlink-hq
+    repo: interLink
+  - category: orchestration
+    cncf_status: sandbox
+    name: k0s
+    owner: k0sproject
+    repo: k0s
+  - category: certified-kubernetes---distribution
+    cncf_status: sandbox
+    name: k3s
+    owner: k3s-io
+    repo: k3s
+  - category: observability
+    cncf_status: sandbox
+    name: K8sGPT
+    owner: k8sgpt-ai
+    repo: k8sgpt
+  - category: storage
+    cncf_status: sandbox
+    name: K8up
+    owner: k8up-io
+    repo: k8up
+  - category: configuration
+    cncf_status: sandbox
+    name: kagent
+    owner: kagent-dev
+    repo: kagent
+  - category: orchestration
+    cncf_status: sandbox
+    name: KAI Scheduler
+    owner: kai-scheduler
+    repo: KAI-Scheduler
+  - category: configuration
+    cncf_status: sandbox
+    name: Kairos
+    owner: kairos-io
+    repo: kairos
+  - category: framework
+    cncf_status: sandbox
+    name: KAITO
+    owner: kaito-project
+    repo: kaito
+  - category: storage
+    cncf_status: sandbox
+    name: Kanister
+    owner: kanisterio
+    repo: kanister
+  - category: configuration
+    cncf_status: sandbox
+    name: kbind
+    owner: kbind-dev
+    repo: kbind
+  - category: configuration
+    cncf_status: sandbox
+    name: KCL
+    owner: kcl-lang
+    repo: kcl
+  - category: orchestration
+    cncf_status: sandbox
+    name: kcp
+    owner: kcp-dev
+    repo: kcp
   - category: observability
     cncf_status: sandbox
     name: Kepler
     owner: sustainable-computing-io
     repo: kepler
+  - category: security
+    cncf_status: sandbox
+    name: Keylime
+    owner: keylime
+    repo: keylime
+  - category: networking
+    cncf_status: sandbox
+    name: Kgateway
+    owner: kgateway-dev
+    repo: kgateway
+  - category: configuration
+    cncf_status: sandbox
+    name: KitOps
+    owner: kitops-ml
+    repo: kitops
+  - category: service-mesh
+    cncf_status: sandbox
+    name: Kmesh
+    owner: kmesh-net
+    repo: kmesh
+  - category: build
+    cncf_status: sandbox
+    name: ko
+    owner: ko-build
+    repo: ko
+  - category: build
+    cncf_status: sandbox
+    name: Konveyor
+    owner: konveyor
+    repo: operator
+  - category: orchestration
+    cncf_status: sandbox
+    name: Koordinator
+    owner: koordinator-sh
+    repo: koordinator
+  - category: configuration
+    cncf_status: sandbox
+    name: kpt
+    owner: kptdev
+    repo: kpt
+  - category: chaos-engineering
+    cncf_status: sandbox
+    name: Krkn
+    owner: krkn-chaos
+    repo: krkn
+  - category: networking
+    cncf_status: sandbox
+    name: Kuadrant
+    owner: kuadrant
+    repo: kuadrant-operator
+  - category: container-runtime
+    cncf_status: sandbox
+    name: Kuasar
+    owner: kuasar-io
+    repo: kuasar
+  - category: ci-cd
+    cncf_status: sandbox
+    name: Kube-burner
+    owner: kube-burner
+    repo: kube-burner
   - category: networking
     cncf_status: sandbox
     name: Kube-OVN
     owner: kubeovn
     repo: kube-ovn
+  - category: orchestration
+    cncf_status: sandbox
+    name: kube-rs
+    owner: kube-rs
+    repo: kube
   - category: networking
     cncf_status: sandbox
     name: kube-vip
     owner: kube-vip
     repo: kube-vip
+  - category: configuration
+    cncf_status: sandbox
+    name: Kubean
+    owner: kubean-io
+    repo: kubean
   - category: security
     cncf_status: sandbox
     name: KubeArmor
     owner: kubearmor
-    repo: KubeArmor
+    repo: kubearmor
+  - category: certified-kubernetes---installer
+    cncf_status: sandbox
+    name: KubeClipper
+    owner: kubeclipper
+    repo: kubeclipper
+  - category: platform
+    cncf_status: sandbox
+    name: KubeElasti
+    owner: KubeElasti
+    repo: KubeElasti
+  - category: orchestration
+    cncf_status: sandbox
+    name: KubeFleet
+    owner: kubefleet-dev
+    repo: kubefleet
+  - category: observability
+    cncf_status: sandbox
+    name: Kuberhealthy
+    owner: kuberhealthy
+    repo: kuberhealthy
+  - category: orchestration
+    cncf_status: sandbox
+    name: KubeSlice
+    owner: kubeslice
+    repo: kubeslice
+  - category: orchestration
+    cncf_status: sandbox
+    name: KubeStellar
+    owner: kubestellar
+    repo: kubestellar
   - category: security
     cncf_status: sandbox
     name: Kubewarden
     owner: kubewarden
     repo: kubewarden-controller
+  - category: build
+    cncf_status: sandbox
+    name: KUDO
+    owner: kudobuilder
+    repo: kudo
   - category: service-mesh
     cncf_status: sandbox
     name: Kuma
     owner: kumahq
     repo: kuma
+  - category: orchestration
+    cncf_status: sandbox
+    name: Kured
+    owner: kubereboot
+    repo: kured
+  - category: configuration
+    cncf_status: sandbox
+    name: KusionStack
+    owner: KusionStack
+    repo: kusion
+  - category: framework
+    cncf_status: sandbox
+    name: llm-d
+    owner: llm-d
+    repo: llm-d
+  - category: observability
+    cncf_status: sandbox
+    name: Logging Operator (Kube Logging)
+    owner: kube-logging
+    repo: logging-operator
+  - category: networking
+    cncf_status: sandbox
+    name: LoxiLB
+    owner: loxilb-io
+    repo: loxilb
+  - category: networking
+    cncf_status: sandbox
+    name: MetalLB
+    owner: metallb
+    repo: metallb
+  - category: build
+    cncf_status: sandbox
+    name: ModelPack
+    owner: modelpack
+    repo: model-spec
+  - category: networking
+    cncf_status: sandbox
+    name: Network Service Mesh
+    owner: networkservicemesh
+    repo: api
+  - category: configuration
+    cncf_status: sandbox
+    name: NMstate
+    owner: nmstate
+    repo: nmstate
+  - category: security
+    cncf_status: sandbox
+    name: OAuth2 Proxy
+    owner: oauth2-proxy
+    repo: oauth2-proxy
+  - category: orchestration
+    cncf_status: sandbox
+    name: Open Cluster Management
+    owner: open-cluster-management-io
+    repo: ocm
+  - category: security
+    cncf_status: sandbox
+    name: Open Policy Containers
+    owner: opcr-io
+    repo: policy
+  - category: build
+    cncf_status: sandbox
+    name: Open Workflow Specification
+    owner: open-workflow-specification
+    repo: specification
+  - category: ci-cd
+    cncf_status: sandbox
+    name: OpenChoreo
+    owner: openchoreo
+    repo: openchoreo
   - category: storage
     cncf_status: sandbox
     name: OpenEBS
     owner: openebs
     repo: openebs
+  - category: database
+    cncf_status: sandbox
+    name: OpenEverest
+    owner: openeverest
+    repo: openeverest
+  - category: orchestration
+    cncf_status: sandbox
+    name: OpenFunction
+    owner: OpenFunction
+    repo: OpenFunction
+  - category: database
+    cncf_status: sandbox
+    name: openGemini
+    owner: openGemini
+    repo: openGemini
+  - category: ci-cd
+    cncf_status: sandbox
+    name: OpenGitOps
+    owner: open-gitops
+    repo: project
+  - category: orchestration
+    cncf_status: sandbox
+    name: OpenShell
+    owner: NVIDIA
+    repo: OpenShell
+  - category: configuration
+    cncf_status: sandbox
+    name: OpenTofu
+    owner: opentofu
+    repo: opentofu
+  - category: build
+    cncf_status: sandbox
+    name: ORAS
+    owner: oras-project
+    repo: oras
+  - category: security
+    cncf_status: sandbox
+    name: OSCAL-COMPASS
+    owner: oscal-compass
+    repo: compliance-trestle
+  - category: networking
+    cncf_status: sandbox
+    name: OVN-Kubernetes
+    owner: ovn-kubernetes
+    repo: ovn-kubernetes
+  - category: networking
+    cncf_status: sandbox
+    name: Oxia
+    owner: oxia-db
+    repo: oxia
   - category: security
     cncf_status: sandbox
     name: Paralus
     owner: paralus
     repo: paralus
+  - category: security
+    cncf_status: sandbox
+    name: Parsec
+    owner: parallaxsecond
+    repo: parsec
+  - category: observability
+    cncf_status: sandbox
+    name: Perses
+    owner: perses
+    repo: perses
+  - category: ci-cd
+    cncf_status: sandbox
+    name: PipeCD
+    owner: pipe-cd
+    repo: pipecd
+  - category: storage
+    cncf_status: sandbox
+    name: Piraeus Datastore
+    owner: piraeusdatastore
+    repo: piraeus-operator
+  - category: observability
+    cncf_status: sandbox
+    name: Pixie
+    owner: pixie-io
+    repo: pixie
   - category: container-runtime
     cncf_status: sandbox
     name: Podman Container Tools
-    owner: containers
+    owner: podman-container-tools
     repo: podman
+  - category: build
+    cncf_status: sandbox
+    name: Podman Desktop
+    owner: podman-desktop
+    repo: podman-desktop
+  - category: build
+    cncf_status: sandbox
+    name: Porter
+    owner: getporter
+    repo: porter
+  - category: build
+    cncf_status: sandbox
+    name: Radius
+    owner: radius-project
+    repo: radius
+  - category: security
+    cncf_status: sandbox
+    name: Ratify
+    owner: ratify-project
+    repo: ratify
+  - category: configuration
+    cncf_status: sandbox
+    name: Runme Notebooks
+    owner: runmedev
+    repo: runme
+  - category: database
+    cncf_status: sandbox
+    name: SchemaHero
+    owner: schemahero
+    repo: schemahero
+  - category: build
+    cncf_status: sandbox
+    name: Score
+    owner: score-spec
+    repo: spec
+  - category: service-mesh
+    cncf_status: sandbox
+    name: Sermant
+    owner: sermant-io
+    repo: Sermant
+  - category: orchestration
+    cncf_status: sandbox
+    name: Serverless Devs
+    owner: serverless-devs
+    repo: serverless-devs
+  - category: build
+    cncf_status: sandbox
+    name: Shipwright
+    owner: shipwright-io
+    repo: build
+  - category: platform
+    cncf_status: sandbox
+    name: SlimFaaS
+    owner: SlimPlanet
+    repo: SlimFaas
+  - category: security
+    cncf_status: sandbox
+    name: SlimToolkit
+    owner: slimtoolkit
+    repo: slim
+  - category: security
+    cncf_status: sandbox
+    name: SOPS
+    owner: getsops
+    repo: sops
+  - category: networking
+    cncf_status: sandbox
+    name: Spiderpool
+    owner: spidernet-io
+    repo: spiderpool
   - category: application-frameworks
     cncf_status: sandbox
     name: Spin
-    owner: fermyon
+    owner: spinframework
     repo: spin
+  - category: orchestration-&-management
+    cncf_status: sandbox
+    name: SpinKube
+    owner: spinframework
+    repo: spin-operator
+  - category: build
+    cncf_status: sandbox
+    name: Stacker
+    owner: project-stacker
+    repo: stacker
   - category: networking
     cncf_status: sandbox
     name: Submariner
@@ -413,18 +1098,99 @@ repositories:
     name: Telepresence
     owner: telepresenceio
     repo: telepresence
+  - category: configuration
+    cncf_status: sandbox
+    name: Tinkerbell
+    owner: tinkerbell
+    repo: tinkerbell
+  - category: security
+    cncf_status: sandbox
+    name: Tokenetes
+    owner: tokenetes
+    repo: tokenetes
+  - category: messaging
+    cncf_status: sandbox
+    name: Tremor
+    owner: tremor-rs
+    repo: tremor-runtime
+  - category: observability
+    cncf_status: sandbox
+    name: Trickster
+    owner: trickstercache
+    repo: trickster
+  - category: container-runtime
+    cncf_status: sandbox
+    name: urunc
+    owner: urunc-dev
+    repo: urunc
+  - category: storage
+    cncf_status: sandbox
+    name: Velero
+    owner: velero-io
+    repo: velero
+  - category: container-runtime
+    cncf_status: sandbox
+    name: Virtual Kubelet
+    owner: virtual-kubelet
+    repo: virtual-kubelet
+  - category: build
+    cncf_status: sandbox
+    name: Visual Studio Code Kubernetes Tools
+    owner: vscode-kubernetes-tools
+    repo: vscode-kubernetes-tools
+  - category: container-runtime
+    cncf_status: sandbox
+    name: WasmEdge Runtime
+    owner: WasmEdge
+    repo: WasmEdge
+  - category: ci-cd
+    cncf_status: sandbox
+    name: werf
+    owner: werf
+    repo: werf
+  - category: build
+    cncf_status: sandbox
+    name: xRegistry
+    owner: xregistry
+    repo: server
+  - category: container-runtime
+    cncf_status: sandbox
+    name: youki
+    owner: youki-dev
+    repo: youki
+  - category: registry
+    cncf_status: sandbox
+    name: zot
+    owner: project-zot
+    repo: zot
 
   # ============================================
   # ADDITIONAL PROJECTS (non-CNCF)
   # ============================================
+  - category: security
+    name: Allstar
+    owner: ossf
+    repo: allstar
   - category: build
     name: Buildah
     owner: containers
     repo: buildah
+  - category: sustainability
+    name: Chantico
+    owner: chantico-project
+    repo: chantico
   - category: cluster-management
     name: Cluster API
     owner: kubernetes-sigs
     repo: cluster-api
+  - category: scheduling
+    name: CobaltCore Cortex
+    owner: cobaltcore-dev
+    repo: cortex
+  - category: virtualization
+    name: CobaltCore OpenStack Hypervisor Operator
+    owner: cobaltcore-dev
+    repo: openstack-hypervisor-operator
   - category: database
     name: CockroachDB
     owner: cockroachdb
@@ -441,22 +1207,42 @@ repositories:
     name: CSI Snapshotter
     owner: kubernetes-csi
     repo: external-snapshotter
+  - category: security
+    name: CVE Binary Tool
+    owner: ossf
+    repo: cve-bin-tool
   - category: scheduling
     name: Descheduler
     owner: kubernetes-sigs
     repo: descheduler
+  - category: operating-system
+    name: Garden Linux
+    owner: gardenlinux
+    repo: gardenlinux
+  - category: cluster-management
+    name: Gardener
+    owner: gardener
+    repo: gardener
   - category: networking
     name: Gateway API
     owner: kubernetes-sigs
     repo: gateway-api
-  - category: edge
-    name: K3s
-    owner: k3s-io
-    repo: k3s
+  - category: platform
+    name: Greenhouse
+    owner: cloudoperators
+    repo: greenhouse
+  - category: platform
+    name: IronCore
+    owner: ironcore-dev
+    repo: ironcore
   - category: cli-tools
     name: k9s
     owner: derailed
     repo: k9s
+  - category: networking
+    name: Katalis EWBI Operator
+    owner: neonephos-katalis
+    repo: opg-ewbi-operator
   - category: development
     name: kind
     owner: kubernetes-sigs
@@ -473,10 +1259,62 @@ repositories:
     name: Kustomize
     owner: kubernetes-sigs
     repo: kustomize
+  - category: application-framework
+    name: Luigi
+    owner: luigi-project
+    repo: luigi
+  - category: build
+    name: Open Component Model (OCM)
+    owner: open-component-model
+    repo: open-component-model
+  - category: security
+    name: Open Key Chain Manager (OpenKCM)
+    owner: openkcm
+    repo: cmk
+  - category: application-framework
+    name: Open Micro Frontend Platform Server
+    owner: openmfp
+    repo: portal-server-lib
+  - category: application-framework
+    name: Open Micro Frontend Platform UI
+    owner: openmfp
+    repo: portal-ui-lib
+  - category: service-discovery
+    name: Open Resource Discovery (ORD)
+    owner: open-resource-discovery
+    repo: specification
+  - category: platform
+    name: OpenControlPlane
+    owner: openmcp-project
+    repo: openmcp
+  - category: security
+    name: OpenSSF Package Analysis
+    owner: ossf
+    repo: package-analysis
+  - category: security
+    name: OpenSSF Scorecard
+    owner: ossf
+    repo: scorecard
+  - category: security
+    name: OpenSSF Security Baseline
+    owner: ossf
+    repo: security-baseline
+  - category: security
+    name: OSV Schema
+    owner: ossf
+    repo: osv-schema
+  - category: platform
+    name: Platform Mesh
+    owner: platform-mesh
+    repo: platform-mesh
   - category: security
     name: Rekor
     owner: sigstore
     repo: rekor
+  - category: security
+    name: Scorecard GitHub Action
+    owner: ossf
+    repo: scorecard-action
   - category: database
     name: ScyllaDB Operator
     owner: scylladb

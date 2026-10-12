@@ -15,7 +15,7 @@
 
 additional_repositories:
   # Container Tools
-  - owner: containers
+  - owner: podman-container-tools
     repo: podman
     name: Podman
     category: container-runtime
@@ -124,4 +124,98 @@ additional_repositories:
     name: SeeBOM
     category: security
 
+  # OpenSSF security projects (not part of the CNCF Landscape)
+  - owner: ossf
+    repo: scorecard
+    name: OpenSSF Scorecard
+    category: security
+  - owner: ossf
+    repo: scorecard-action
+    name: Scorecard GitHub Action
+    category: security
+  - owner: ossf
+    repo: allstar
+    name: Allstar
+    category: security
+  - owner: ossf
+    repo: osv-schema
+    name: OSV Schema
+    category: security
+  - owner: ossf
+    repo: cve-bin-tool
+    name: CVE Binary Tool
+    category: security
+  - owner: ossf
+    repo: security-baseline
+    name: OpenSSF Security Baseline
+    category: security
+  - owner: ossf
+    repo: package-analysis
+    name: OpenSSF Package Analysis
+    category: security
 
+  # NeoNephos projects: selected main repos from https://neonephos.org/project_overview
+  - owner: gardener
+    repo: gardener
+    name: Gardener
+    category: cluster-management
+  - owner: gardenlinux
+    repo: gardenlinux
+    name: Garden Linux
+    category: operating-system
+  - owner: ironcore-dev
+    repo: ironcore
+    name: IronCore
+    category: platform
+  - owner: cobaltcore-dev
+    repo: cortex
+    name: CobaltCore Cortex
+    category: scheduling
+  - owner: cobaltcore-dev
+    repo: openstack-hypervisor-operator
+    name: CobaltCore OpenStack Hypervisor Operator
+    category: virtualization
+  - owner: cloudoperators
+    repo: greenhouse
+    name: Greenhouse
+    category: platform
+  - owner: platform-mesh
+    repo: platform-mesh
+    name: Platform Mesh
+    category: platform
+  - owner: openmfp
+    repo: portal-ui-lib
+    name: Open Micro Frontend Platform UI
+    category: application-framework
+  - owner: openmfp
+    repo: portal-server-lib
+    name: Open Micro Frontend Platform Server
+    category: application-framework
+  - owner: open-resource-discovery
+    repo: specification
+    name: Open Resource Discovery (ORD)
+    category: service-discovery
+  - owner: openmcp-project
+    repo: openmcp
+    name: OpenControlPlane
+    category: platform
+  - owner: open-component-model
+    repo: open-component-model
+    name: Open Component Model (OCM)
+    category: build
+  - owner: neonephos-katalis
+    repo: opg-ewbi-operator
+    name: Katalis EWBI Operator
+    category: networking
+  - owner: luigi-project
+    repo: luigi
+    name: Luigi
+    category: application-framework
+  - owner: openkcm
+    repo: cmk
+    name: Open Key Chain Manager (OpenKCM)
+    category: security
+  - owner: chantico-project
+    repo: chantico
+    name: Chantico
+    category: sustainability

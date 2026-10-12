@@ -31,13 +31,13 @@ lwcn/
 │   │   └── main.go
 │   ├── backfill-newsletter/ # Tool to generate historical newsletters
 │   │   └── main.go
-│   ├── sync-cncf-projects/ # Syncs CNCF projects from Landscape API
+│   ├── sync-cncf-projects/ # Syncs CNCF projects from Landscape YAML
 │   │   └── main.go
 │   └── debug-heise/        # Debug tool for Heise scraping
 │       └── main.go
 ├── internal/
 │   ├── ai/                 # Gemini AI integration (draft.go, gemini.go)
-│   ├── cncf/               # CNCF Landscape API client
+│   ├── cncf/               # CNCF Landscape YAML client
 │   ├── config/             # Configuration loader
 │   ├── github/             # GitHub API client
 │   ├── models/             # Data models (news, releases, newsletter)
@@ -116,7 +116,7 @@ if err != nil {
 | `cmd/sync-cncf-projects/main.go` | Entry point for CNCF project sync |
 | `internal/ai/gemini.go` | Gemini API client |
 | `internal/ai/draft.go` | Newsletter draft generation logic |
-| `internal/cncf/landscape.go` | CNCF Landscape API client |
+| `internal/cncf/landscape.go` | CNCF Landscape YAML client with release-repo overrides |
 | `internal/news/rss.go` | RSS feed parser |
 | `internal/news/scraper.go` | Heise web scraper |
 | `internal/news/hackernews.go` | Hacker News API client |
@@ -132,7 +132,10 @@ if err != nil {
 
 ### Adding a New Repository to Track
 
-CNCF projects are auto-synced from the Landscape API. To add a **non-CNCF** repository,
+CNCF projects are auto-synced from the official `cncf/landscape` YAML using
+`repo_url` and `project` (graduated, incubating, sandbox). Release-repo overrides
+in `internal/cncf/landscape.go` preserve OpenTelemetry Collector and Confidential
+Containers Operator coverage. To add a **non-CNCF** repository,
 edit `config/additional-repos.yaml`:
 ```yaml
 additional_repositories:
@@ -202,7 +205,7 @@ flag.Parse()
 make build
 
 # CNCF Sync
-make sync-repos          # Sync CNCF projects from Landscape API + additional repos
+make sync-repos          # Sync CNCF projects from Landscape YAML + additional repos
 make sync-repos-dry      # Dry-run sync (preview without writing)
 
 # Crawling
@@ -270,6 +273,8 @@ All Gemini prompts in `internal/ai/gemini.go` include a shared
     prompt and may only be used for facts about the OSS project.
   - Other sources: titles hitting `exclude_keywords` are dropped unless the
     item carries an open-source signal.
+  - Broad editorial feeds such as TechTarget use `require_oss: true` to keep
+    only items with an open-source signal, without labeling them as vendor blogs.
 - Stale topics (rule #9): only report the last 7 days. `internal/ai/history.go`
   feeds the previous 3 editions into the prompt ("PREVIOUSLY COVERED") and
   drops follow-up articles about an already-covered Kubernetes minor release
@@ -342,7 +347,7 @@ is missing):
    - `release-crawler`: Fetches news (RSS, Heise, HackerNews) → outputs to `data/news-YYYY-MM-DD.json`
    - `github-releases`: Fetches GitHub releases → outputs to `data/releases-YYYY-MM-DD.json`
    - `ai-processor`: Generates newsletter from data files → outputs to `website/content/newsletter/`
-   - `sync-cncf-projects`: Syncs CNCF projects from Landscape API → outputs to `config/repositories.yaml`
+   - `sync-cncf-projects`: Syncs CNCF projects from Landscape YAML → outputs to `config/repositories.yaml`
 
 7. **LinkedIn Posts**: The AI processor generates two LinkedIn posts:
    - `YYYY-week-XX-linkedin.txt`: Longer newsletter article for LinkedIn Newsletter (includes link to website)
@@ -350,4 +355,3 @@ is missing):
    Use the `-linkedin` flag to generate only LinkedIn posts without the full newsletter.
 
 8. **Weekly Workflow**: The newsletter workflow runs every Monday at 6:00 UTC via GitHub Actions and creates a PR for review.
-

@@ -20,7 +20,7 @@ func main() {
 	dryRun := flag.Bool("dry-run", false, "Print the result without writing to file")
 	flag.Parse()
 
-	// Step 1: Fetch CNCF projects from Landscape API
+	// Step 1: Fetch CNCF projects from the official landscape YAML
 	cncfRepos, err := cncf.FetchCNCFProjects()
 	if err != nil {
 		log.Fatalf("Failed to fetch CNCF projects: %v", err)
@@ -155,7 +155,7 @@ func marshalRepositoriesYAML(cfg models.RepositoryConfig) ([]byte, error) {
 	buf.WriteString("# Do not edit manually - run 'make sync-repos' to update\n")
 	buf.WriteString("#\n")
 	buf.WriteString("# Sources:\n")
-	buf.WriteString("#   - CNCF Landscape API (https://landscape.cncf.io)\n")
+	buf.WriteString("#   - CNCF Landscape YAML (" + cncf.LandscapeURL + ")\n")
 	buf.WriteString("#   - config/additional-repos.yaml\n")
 	buf.WriteString("\n")
 
@@ -186,7 +186,7 @@ func marshalRepositoriesYAML(cfg models.RepositoryConfig) ([]byte, error) {
 	buf.WriteString("# Do not edit manually - run 'make sync-repos' to update\n")
 	buf.WriteString("#\n")
 	buf.WriteString("# Sources:\n")
-	buf.WriteString("#   - CNCF Landscape API (https://landscape.cncf.io)\n")
+	buf.WriteString("#   - CNCF Landscape YAML (" + cncf.LandscapeURL + ")\n")
 	buf.WriteString("#   - config/additional-repos.yaml\n")
 	buf.WriteString("\nrepositories:\n")
 

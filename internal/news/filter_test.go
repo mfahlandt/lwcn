@@ -25,17 +25,34 @@ func TestNewsFilter(t *testing.T) {
 		{models.NewsItem{Title: "Introducing TOLAP", Description: "An open-source access control library", Vendor: true}, true},
 		{models.NewsItem{Title: "Policy as code with OPA", Vendor: true}, true},
 		{models.NewsItem{Title: "Test locally with kind", Vendor: true}, false},
+		// Broad editorial feeds can require OSS without being vendor blogs.
+		{models.NewsItem{Title: "AI spending shifts beyond IT", RequireOSS: true}, false},
+		{models.NewsItem{Title: "AI coding tools run riot over SBOM controls", Description: "Open source dependency liability", RequireOSS: true}, true},
+		{models.NewsItem{Title: "Policy as code with OPA", RequireOSS: true}, true},
+		{models.NewsItem{Title: "Running Kubernetes on EKS", RequireOSS: true}, false},
 		// General sources: vendor keyword drops unless open-source signal.
 		{models.NewsItem{Title: "AWS CloudWatch: KI soll bei Incidents mit ermitteln"}, false},
 		{models.NewsItem{Title: "AWS open-sources Strands harness"}, true},
 		{models.NewsItem{Title: "Laws of distributed systems"}, true},
 		{models.NewsItem{Title: "Kubernetes v1.37: Tracking PVC usage"}, true},
 	}
+
 	for _, c := range cases {
 		kept, _ := f.Apply([]models.NewsItem{c.item})
 		if got := len(kept) == 1; got != c.keep {
 			t.Errorf("%q (vendor=%v): keep=%v, want %v", c.item.Title, c.item.Vendor, got, c.keep)
 		}
+	}
+}
+
+func TestNewsFilterRequireOSSReason(t *testing.T) {
+	f := NewNewsFilter(FilterOptions{})
+	kept, dropped := f.Apply([]models.NewsItem{{Title: "Enterprise AI budgets", RequireOSS: true}})
+	if len(kept) != 0 || len(dropped) != 1 {
+		t.Fatalf("kept=%v dropped=%v", kept, dropped)
+	}
+	if dropped[0].Reason != "feed requires open-source signal" {
+		t.Errorf("unexpected reason: %q", dropped[0].Reason)
 	}
 }
 

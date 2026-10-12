@@ -59,7 +59,7 @@ jobs:
 
       - name: Sync CNCF Projects
         run: |
-          echo "🔄 Syncing CNCF project list from Landscape API..."
+          echo "🔄 Syncing CNCF project list from official Landscape YAML..."
           ./bin/sync-cncf-projects -output config/repositories.yaml -additional config/additional-repos.yaml
 
       - name: Crawl News Sources

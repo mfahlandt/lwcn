@@ -10,7 +10,8 @@ type NewsItem struct {
 	PublishedAt time.Time `json:"published_at"`
 	Category    string    `json:"category"`
 	// Vendor marks items from vendor / cloud-provider blogs.
-	Vendor bool `json:"vendor,omitempty"`
+	Vendor     bool `json:"vendor,omitempty"`
+	RequireOSS bool `json:"require_oss,omitempty"`
 }
 
 type RSSSource struct {
@@ -18,6 +19,8 @@ type RSSSource struct {
 	URL  string `yaml:"url"`
 	// Vendor feeds only pass items that carry an open-source signal.
 	Vendor bool `yaml:"vendor"`
+	// RequireOSS restricts broad editorial feeds without labeling them as vendors.
+	RequireOSS bool `yaml:"require_oss"`
 }
 
 type ScrapeSource struct {

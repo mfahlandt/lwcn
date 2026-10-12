@@ -45,6 +45,7 @@ func (c *RSSClient) FetchFeed(ctx context.Context, source models.RSSSource) ([]m
 			PublishedAt: pubDate,
 			Category:    "news",
 			Vendor:      source.Vendor,
+			RequireOSS:  source.RequireOSS,
 		})
 	}
 

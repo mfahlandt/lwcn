@@ -23,6 +23,7 @@ type FilterOptions struct {
 
 // NewsFilter keeps LWCN focused on open source:
 //   - items from vendor feeds are kept only with an open-source signal
+//   - items from feeds requiring OSS are also kept only with an open-source signal
 //   - other items whose title hits an exclude keyword are dropped unless they
 //     carry an open-source signal
 type NewsFilter struct {
@@ -100,6 +101,8 @@ func (f *NewsFilter) Apply(items []models.NewsItem) (kept []models.NewsItem, dro
 		switch {
 		case item.Vendor && !oss:
 			dropped = append(dropped, DroppedItem{item, "vendor feed without open-source signal"})
+		case item.RequireOSS && !oss:
+			dropped = append(dropped, DroppedItem{item, "feed requires open-source signal"})
 		case !item.Vendor && !oss && matches(f.exclude, item.Title):
 			dropped = append(dropped, DroppedItem{item, "vendor keyword in title"})
 		default:

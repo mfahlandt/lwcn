@@ -17,6 +17,19 @@ rss_feeds:
   - name: "InfoQ Cloud Native"
     url: "https://feed.infoq.com/cloud-computing/"
 
+  # OpenSSF Blog
+  - name: "OpenSSF Blog"
+    url: "https://openssf.org/feed/"
+
+  # NeoNephos Foundation Blog
+  - name: "NeoNephos Blog"
+    url: "https://neonephos.org/feeds/blog/rss.xml"
+
+  # Broad editorial feed: only keep items with an open-source signal.
+  - name: "TechTarget"
+    url: "https://www.techtarget.com/cybersecurity/rss/ContentSyndication.xml"
+    require_oss: true
+
   # ------------------------------------------------------------------
   # Vendor / cloud-provider blogs (vendor: true)
   # LWCN covers open source only. Items from vendor feeds are kept ONLY if

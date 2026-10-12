@@ -48,9 +48,9 @@ clean:
 	$(RM_BIN)
 	$(RM_PUBLIC)
 
-# Sync CNCF project list from Landscape API + additional repos
+# Sync CNCF project list from Landscape YAML + additional repos
 sync-repos: build
-	@echo "Syncing CNCF project list from Landscape API..."
+	@echo "Syncing CNCF project list from Landscape YAML..."
 	$(SYNC_CNCF) -output config/repositories.yaml -additional config/additional-repos.yaml
 	@echo "Repository list updated. Review config/repositories.yaml"
 

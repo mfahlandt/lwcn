@@ -1,137 +1,54 @@
 package cncf
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 	"log"
 	"net/http"
-	"regexp"
+	"net/url"
 	"strings"
+	"time"
 
 	"github.com/mfahlandt/lwcn/internal/models"
+	"gopkg.in/yaml.v3"
 )
 
-const (
-	// LandscapeURL is the CNCF landscape page that embeds all project data
-	LandscapeURL = "https://landscape.cncf.io"
-)
+const LandscapeURL = "https://raw.githubusercontent.com/cncf/landscape/master/landscape.yml"
 
-// landscapeItem represents a single item from the embedded landscape data
 type landscapeItem struct {
-	Name        string `json:"name"`
-	Maturity    string `json:"maturity,omitempty"`
-	Category    string `json:"category"`
-	Subcategory string `json:"subcategory"`
-	OSS         bool   `json:"oss,omitempty"`
+	Name    string `yaml:"name"`
+	Project string `yaml:"project"`
+	RepoURL string `yaml:"repo_url"`
 }
 
-// baseDS represents the window.baseDS structure embedded in the landscape HTML
-type baseDS struct {
-	Items []landscapeItem `json:"items"`
+type landscapeSubcategory struct {
+	Name  string          `yaml:"name"`
+	Items []landscapeItem `yaml:"items"`
 }
 
-// knownRepos maps CNCF project names to their primary GitHub owner/repo.
-var knownRepos = map[string]struct{ Owner, Repo string }{
-	// Graduated
-	"Kubernetes":                 {"kubernetes", "kubernetes"},
-	"Prometheus":                 {"prometheus", "prometheus"},
-	"Envoy":                      {"envoyproxy", "envoy"},
-	"CoreDNS":                    {"coredns", "coredns"},
-	"containerd":                 {"containerd", "containerd"},
-	"etcd":                       {"etcd-io", "etcd"},
-	"Flux":                       {"fluxcd", "flux2"},
-	"Argo":                       {"argoproj", "argo-cd"},
-	"Helm":                       {"helm", "helm"},
-	"Harbor":                     {"goharbor", "harbor"},
-	"TiKV":                       {"tikv", "tikv"},
-	"Vitess":                     {"vitessio", "vitess"},
-	"Jaeger":                     {"jaegertracing", "jaeger"},
-	"Linkerd":                    {"linkerd", "linkerd2"},
-	"Fluentd":                    {"fluent", "fluentd"},
-	"CRI-O":                      {"cri-o", "cri-o"},
-	"Rook":                       {"rook", "rook"},
-	"SPIRE":                      {"spiffe", "spire"},
-	"Open Policy Agent (OPA)":    {"open-policy-agent", "opa"},
-	"Cilium":                     {"cilium", "cilium"},
-	"Crossplane":                 {"crossplane", "crossplane"},
-	"cert-manager":               {"cert-manager", "cert-manager"},
-	"Falco":                      {"falcosecurity", "falco"},
-	"in-toto":                    {"in-toto", "in-toto"},
-	"The Update Framework (TUF)": {"theupdateframework", "python-tuf"},
-	"Kyverno":                    {"kyverno", "kyverno"},
-	"CubeFS":                     {"cubefs", "cubefs"},
-	"Dragonfly":                  {"dragonflyoss", "dragonfly2"},
-	"KubeEdge":                   {"kubeedge", "kubeedge"},
-	"SPIFFE":                     {"spiffe", "spiffe"},
-	// Incubating
-	"Dapr":                              {"dapr", "dapr"},
-	"KEDA":                              {"kedacore", "keda"},
-	"KubeVirt":                          {"kubevirt", "kubevirt"},
-	"Longhorn":                          {"longhorn", "longhorn"},
-	"Knative Serving":                   {"knative", "serving"},
-	"Knative Eventing":                  {"knative", "eventing"},
-	"Thanos":                            {"thanos-io", "thanos"},
-	"Istio":                             {"istio", "istio"},
-	"NATS":                              {"nats-io", "nats-server"},
-	"Strimzi":                           {"strimzi", "strimzi-kafka-operator"},
-	"Backstage":                         {"backstage", "backstage"},
-	"Karmada":                           {"karmada-io", "karmada"},
-	"Volcano":                           {"volcano-sh", "volcano"},
-	"Notary Project":                    {"notaryproject", "notary"},
-	"OpenFGA":                           {"openfga", "openfga"},
-	"Keycloak":                          {"keycloak", "keycloak"},
-	"Kubescape":                         {"kubescape", "kubescape"},
-	"Cloud Custodian":                   {"cloud-custodian", "cloud-custodian"},
-	"metal3-io":                         {"metal3-io", "baremetal-operator"},
-	"Container Network Interface (CNI)": {"containernetworking", "cni"},
-	"OpenYurt":                          {"openyurtio", "openyurt"},
-	"Fluid":                             {"fluid-cloudnative", "fluid"},
-	"Lima":                              {"lima-vm", "lima"},
-	"KServe":                            {"kserve", "kserve"},
-	// Sandbox (notable)
-	"OpenTelemetry":           {"open-telemetry", "opentelemetry-collector"},
-	"Fluent Bit":              {"fluent", "fluent-bit"},
-	"CloudEvents":             {"cloudevents", "spec"},
-	"Tekton Pipelines":        {"tektoncd", "pipeline"},
-	"Chaos Mesh":              {"chaos-mesh", "chaos-mesh"},
-	"Litmus":                  {"litmuschaos", "litmus"},
-	"OpenCost":                {"opencost", "opencost"},
-	"Kepler":                  {"sustainable-computing-io", "kepler"},
-	"Inspektor Gadget":        {"inspektor-gadget", "inspektor-gadget"},
-	"kube-vip":                {"kube-vip", "kube-vip"},
-	"Dex":                     {"dexidp", "dex"},
-	"Distribution":            {"distribution", "distribution"},
-	"OpenEBS":                 {"openebs", "openebs"},
-	"Kuma":                    {"kumahq", "kuma"},
-	"Meshery":                 {"meshery", "meshery"},
-	"Telepresence":            {"telepresenceio", "telepresence"},
-	"Gateway API":             {"kubernetes-sigs", "gateway-api"},
-	"external-secrets":        {"external-secrets", "external-secrets"},
-	"Paralus":                 {"paralus", "paralus"},
-	"Confidential Containers": {"confidential-containers", "operator"},
-	"Clusternet":              {"clusternet", "clusternet"},
-	"ChaosBlade":              {"chaosblade-io", "chaosblade"},
-	"Keptn":                   {"keptn", "lifecycle-toolkit"},
-	"KubeVela":                {"kubevela", "kubevela"},
-	"OpenObserve":             {"openobserve", "openobserve"},
-	"Podman Container Tools":  {"containers", "podman"},
-	"Capsule":                 {"projectcapsule", "capsule"},
-	"KubeArmor":               {"kubearmor", "KubeArmor"},
-	"Kubewarden":              {"kubewarden", "kubewarden-controller"},
-	"Antrea":                  {"antrea-io", "antrea"},
-	"Submariner":              {"submariner-io", "submariner"},
-	"Kube-OVN":                {"kubeovn", "kube-ovn"},
-	"Spin":                    {"fermyon", "spin"},
-	"Cloud Native Buildpacks": {"buildpacks", "pack"},
+type landscapeCategory struct {
+	Name          string                 `yaml:"name"`
+	Subcategories []landscapeSubcategory `yaml:"subcategories"`
 }
 
-// FetchCNCFProjects fetches the list of all CNCF projects from the Landscape page
-// by parsing the embedded window.baseDS JSON data.
+type landscape struct {
+	Categories []landscapeCategory `yaml:"landscape"`
+}
+
+// These projects publish releases in a different repo than their landscape entry.
+var releaseRepoOverrides = map[string]string{
+	"OpenTelemetry":           "https://github.com/open-telemetry/opentelemetry-collector",
+	"Confidential Containers": "https://github.com/confidential-containers/operator",
+}
+
+// FetchCNCFProjects reads active projects and their repos from the official landscape YAML.
 func FetchCNCFProjects() ([]models.Repository, error) {
-	log.Println("Fetching CNCF projects from Landscape...")
+	return fetchCNCFProjects(&http.Client{Timeout: 30 * time.Second}, LandscapeURL)
+}
 
-	resp, err := http.Get(LandscapeURL)
+func fetchCNCFProjects(client *http.Client, source string) ([]models.Repository, error) {
+	log.Println("Fetching CNCF projects from landscape.yml...")
+	resp, err := client.Get(source)
 	if err != nil {
 		return nil, fmt.Errorf("failed to fetch CNCF landscape: %w", err)
 	}
@@ -143,78 +60,84 @@ func FetchCNCFProjects() ([]models.Repository, error) {
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return nil, fmt.Errorf("failed to read response body: %w", err)
+		return nil, fmt.Errorf("failed to read landscape response: %w", err)
 	}
+	return parseLandscape(body)
+}
 
-	// Extract window.baseDS JSON from the HTML
-	data, err := extractBaseDS(string(body))
-	if err != nil {
-		return nil, fmt.Errorf("failed to extract landscape data: %w", err)
+func parseLandscape(body []byte) ([]models.Repository, error) {
+	var data landscape
+	if err := yaml.Unmarshal(body, &data); err != nil {
+		return nil, fmt.Errorf("failed to parse landscape YAML: %w", err)
 	}
-
-	log.Printf("Found %d items in CNCF Landscape", len(data.Items))
 
 	var repos []models.Repository
 	seen := make(map[string]bool)
-	var unmapped []string
+	for _, category := range data.Categories {
+		for _, subcategory := range category.Subcategories {
+			for _, item := range subcategory.Items {
+				switch item.Project {
+				case "graduated", "incubating", "sandbox":
+				default:
+					continue
+				}
 
-	for _, item := range data.Items {
-		// Only include CNCF projects (items with maturity field)
-		if item.Maturity == "" || item.Maturity == "archived" {
-			continue
+				repoURL := item.RepoURL
+				if override, ok := releaseRepoOverrides[item.Name]; ok {
+					repoURL = override
+				}
+				owner, repo, err := parseGitHubRepoURL(repoURL)
+				if err != nil {
+					log.Printf("Skipping CNCF project %q: %v", item.Name, err)
+					continue
+				}
+				if strings.TrimSpace(item.Name) == "" {
+					return nil, fmt.Errorf("CNCF landscape has an unnamed project at %s", repoURL)
+				}
+
+				key := strings.ToLower(owner + "/" + repo)
+				if seen[key] {
+					continue
+				}
+				seen[key] = true
+				repos = append(repos, models.Repository{
+					Owner:      owner,
+					Repo:       repo,
+					Name:       item.Name,
+					Category:   normalizeCategory(subcategory.Name, category.Name),
+					CNCFStatus: item.Project,
+				})
+			}
 		}
-
-		repoInfo, ok := knownRepos[item.Name]
-		if !ok {
-			unmapped = append(unmapped, fmt.Sprintf("%s (%s)", item.Name, item.Maturity))
-			continue
-		}
-
-		key := strings.ToLower(repoInfo.Owner + "/" + repoInfo.Repo)
-		if seen[key] {
-			continue
-		}
-		seen[key] = true
-
-		category := normalizeCategory(item.Subcategory, item.Category)
-
-		repos = append(repos, models.Repository{
-			Owner:      repoInfo.Owner,
-			Repo:       repoInfo.Repo,
-			Name:       item.Name,
-			Category:   category,
-			CNCFStatus: item.Maturity,
-		})
 	}
 
-	if len(unmapped) > 0 {
-		log.Printf("Note: %d CNCF projects not in known repos mapping (add to landscape.go knownRepos if needed):", len(unmapped))
-		for _, name := range unmapped {
-			log.Printf("  - %s", name)
-		}
+	if len(repos) == 0 {
+		return nil, fmt.Errorf("CNCF landscape contains no active projects with valid GitHub repositories")
 	}
-
 	log.Printf("Extracted %d GitHub repositories from CNCF projects", len(repos))
 	return repos, nil
 }
 
-// extractBaseDS parses the window.baseDS JSON from the landscape HTML page
-func extractBaseDS(html string) (*baseDS, error) {
-	re := regexp.MustCompile(`window\.baseDS\s*=\s*(\{.+?\});\s*\n`)
-	matches := re.FindStringSubmatch(html)
-	if len(matches) < 2 {
-		return nil, fmt.Errorf("could not find window.baseDS in landscape HTML")
+func parseGitHubRepoURL(raw string) (string, string, error) {
+	u, err := url.Parse(raw)
+	if err != nil {
+		return "", "", fmt.Errorf("invalid repository URL %q: %w", raw, err)
 	}
-
-	var data baseDS
-	if err := json.Unmarshal([]byte(matches[1]), &data); err != nil {
-		return nil, fmt.Errorf("failed to parse baseDS JSON: %w", err)
+	if (u.Scheme != "https" && u.Scheme != "http") || !strings.EqualFold(u.Host, "github.com") || u.User != nil {
+		return "", "", fmt.Errorf("not a GitHub repository URL: %q", raw)
 	}
-
-	return &data, nil
+	parts := strings.Split(strings.Trim(u.Path, "/"), "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		return "", "", fmt.Errorf("expected GitHub owner/repo URL: %q", raw)
+	}
+	repo := strings.TrimSuffix(parts[1], ".git")
+	if repo == "" || parts[0] == "." || parts[0] == ".." || repo == "." || repo == ".." {
+		return "", "", fmt.Errorf("invalid GitHub owner/repo URL: %q", raw)
+	}
+	return parts[0], repo, nil
 }
 
-// normalizeCategory converts CNCF landscape categories to simpler categories
+// normalizeCategory converts CNCF landscape categories to simpler categories.
 func normalizeCategory(subcategory, category string) string {
 	sub := strings.ToLower(subcategory)
 
@@ -252,7 +175,7 @@ func normalizeCategory(subcategory, category string) string {
 		return mapped
 	}
 	if sub != "" {
-		return strings.ReplaceAll(strings.ToLower(sub), " ", "-")
+		return strings.ReplaceAll(sub, " ", "-")
 	}
 	if category != "" {
 		return strings.ReplaceAll(strings.ToLower(category), " ", "-")
