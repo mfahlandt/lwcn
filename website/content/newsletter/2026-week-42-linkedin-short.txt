@@ -1,0 +1,8 @@
+🛡️ Harbor blocks webhooks to internal addresses by default.
+
+Highlights this week:
+• Harbor v2.15.3+ mitigates SSRF (GHSA-2phj-cp9f-qq6w).
+• Envoy v1.39.3+ patch releases fix OAuth2 filter crash (GHSA-8vc2-jrm4-835w).
+• Dapr v1.18.6/v1.17.16 fixes spoofed caller identity and actor reminder issues.
+
+👉 Check out the latest edition in my newsletter!

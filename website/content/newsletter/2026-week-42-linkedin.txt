@@ -1,0 +1,22 @@
+🛡️ Harbor Blocks Webhooks to Internal Addresses by Default
+
+This week in Cloud Native, several projects released updates addressing security vulnerabilities and introducing changes to default behaviors. Harbor implemented a default block on webhooks targeting internal addresses to mitigate a security vulnerability, followed by a refinement in a subsequent patch. Other projects like Envoy and Dapr also issued security patches.
+
+🚀 Key releases:
+
+- Harbor (v2.15.3, v2.14.5, v2.13.6): Introduced a breaking change where webhooks to internal addresses were blocked by default. This change mitigated a server-side request forgery security vulnerability (GHSA-2phj-cp9f-qq6w). Subsequently, v2.15.4 changed the default to allow private network access for webhooks.
+- Envoy (v1.39.3, v1.38.6, v1.37.8, v1.36.12): Multiple patch releases included security fixes. The OAuth2 filter now rejects requests without a `:path` header with a 400 status code, preventing a potential crash (GHSA-8vc2-jrm4-835w).
+- Dapr (v1.18.6, v1.17.16): Released security fixes addressing spoofed caller identity headers in service invocation and unauthorized actor reminder targeting by the scheduler.
+- Inspektor Gadget v0.57.0: Added rootless `ig run` functionality. This allows gadgets to run with reduced privileges, requiring only `cap_bpf` and `cap_perfmon` instead of `CAP_SYS_ADMIN`.
+- Rook v1.21.0: Changed Helm OCI chart tags by removing the `v` prefix (e.g., `1.21.0` instead of `v1.21.0`). This constitutes a breaking change for automation scripts relying on the previous tag format.
+
+📰 Notable news/trends summary:
+
+- Meshery became a CNCF Incubating project. This signifies increased project maturity and a commitment to open governance under the Cloud Native Computing Foundation.
+- The Kubernetes Blog published an article detailing the ongoing shift to cgroup v2. This outlines the technical implications for resource management and monitoring within Kubernetes clusters.
+- A Kubernetes Blog post also discussed scaling Kubernetes workloads using Node Swap, providing insights into new strategies for resource allocation and cluster optimization.
+
+What technical implications do the security updates and breaking changes in projects like Harbor and Envoy introduce for your Cloud Native deployments?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-42/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps
