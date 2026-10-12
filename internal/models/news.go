@@ -9,11 +9,15 @@ type NewsItem struct {
 	Description string    `json:"description"`
 	PublishedAt time.Time `json:"published_at"`
 	Category    string    `json:"category"`
+	// Vendor marks items from vendor / cloud-provider blogs.
+	Vendor bool `json:"vendor,omitempty"`
 }
 
 type RSSSource struct {
 	Name string `yaml:"name"`
 	URL  string `yaml:"url"`
+	// Vendor feeds only pass items that carry an open-source signal.
+	Vendor bool `yaml:"vendor"`
 }
 
 type ScrapeSource struct {
@@ -31,4 +35,13 @@ type NewsSourceConfig struct {
 	RSSFeeds      []RSSSource      `yaml:"rss_feeds"`
 	ScrapeSources []ScrapeSource   `yaml:"scrape_sources"`
 	HackerNews    HackerNewsConfig `yaml:"hackernews"`
+	// ExcludeKeywords drops items whose title mentions one of these terms,
+	// unless the item carries an open-source signal.
+	ExcludeKeywords []string `yaml:"exclude_keywords"`
+	// OSSKeywords are terms (title or description) that mark an item as
+	// open-source news.
+	OSSKeywords []string `yaml:"oss_keywords"`
+	// ProjectNameIgnore lists tracked project names too generic to count as
+	// an open-source signal.
+	ProjectNameIgnore []string `yaml:"project_name_ignore"`
 }

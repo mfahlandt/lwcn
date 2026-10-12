@@ -71,7 +71,7 @@ additional_repositories:
 ### News Sources Configuration
 
 Configure news sources in `config/news-sources.yaml`:
-- **RSS Feeds**: CNCF, Kubernetes, The New Stack, InfoQ, AWS, Azure, Google Cloud blogs
+- **RSS Feeds**: CNCF, Kubernetes, The New Stack, InfoQ, plus AWS, Azure and Google Cloud blogs (marked `vendor: true` — only items with an open-source signal are kept; see `config/news-sources.yaml`)
 - **Scrape Sources**: Heise Cloud articles
 - **Hacker News**: Keyword-filtered stories (kubernetes, cloud native, cncf, docker, etc.)
 

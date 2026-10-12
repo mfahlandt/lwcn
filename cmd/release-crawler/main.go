@@ -18,6 +18,7 @@ import (
 func main() {
 	configPath := flag.String("config", "config/news-sources.yaml", "Path to news sources config")
 	outputDir := flag.String("output", "data", "Output directory for news")
+	reposPath := flag.String("repos", "config/repositories.yaml", "Tracked projects; their names count as open-source signal")
 	flag.Parse()
 
 	cfg, err := config.LoadNewsSources(*configPath)
@@ -59,6 +60,28 @@ func main() {
 			allNews = append(allNews, hnNews...)
 			log.Printf("Found %d Hacker News items", len(hnNews))
 		}
+	}
+
+	var projectNames []string
+	if repos, err := config.LoadRepositories(*reposPath); err != nil {
+		log.Printf("Could not load tracked projects from %s (project names won't count as open-source signal): %v", *reposPath, err)
+	} else {
+		for _, r := range repos.Repositories {
+			projectNames = append(projectNames, r.Name)
+		}
+	}
+
+	filter := news.NewNewsFilter(news.FilterOptions{
+		ExcludeKeywords:   cfg.ExcludeKeywords,
+		OSSKeywords:       cfg.OSSKeywords,
+		ProjectNames:      projectNames,
+		ProjectNameIgnore: cfg.ProjectNameIgnore,
+	})
+	var dropped []news.DroppedItem
+	allNews, dropped = filter.Apply(allNews)
+	log.Printf("Dropped %d vendor / non-open-source news items", len(dropped))
+	for _, d := range dropped {
+		log.Printf("  - [%s] %s (%s)", d.Item.Source, d.Item.Title, d.Reason)
 	}
 
 	log.Printf("Total: %d news items", len(allNews))

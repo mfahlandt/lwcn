@@ -66,6 +66,25 @@ or vendor. Your output MUST read like a factual changelog / tech news brief.
    "changes the default", "introduces", "requires".
 
 7. If you are unsure whether something is a fact or a pitch, OMIT IT.
+
+8. OPEN SOURCE ONLY. LWCN covers open-source projects and their communities.
+   Do NOT report on proprietary / commercial products, managed cloud services
+   or vendor business news. This includes AWS / Amazon (EKS, ECS, Lambda,
+   CloudWatch, Bedrock, ...), Microsoft Azure (AKS, ...), Google Cloud (GKE,
+   Vertex AI, ...), other cloud providers, closed-source AI products, analyst
+   rankings (Gartner, Forrester), pricing changes, partnerships and funding.
+   A company may only be mentioned when it released or changed an
+   OPEN-SOURCE project — then report the project, never the commercial service.
+   Items marked "VENDOR BLOG" come from cloud-provider / vendor blogs: use
+   them ONLY for facts about the open-source project itself (new project,
+   release, donation to a foundation, upstream contribution). Skip
+   "how to run X on <managed service>" tutorials and customer stories.
+
+9. ONLY LAST WEEK. Report what happened in the last 7 days. Follow-up or
+   retrospective articles about an event that was already reported in a
+   previous edition (e.g. feature deep-dive blog posts published weeks after
+   a Kubernetes release) are NOT news. Skip them unless they contain a
+   genuinely new fact (new CVE, regression, changed timeline).
 `
 
 type GeminiClient struct {
@@ -184,12 +203,12 @@ func (c *GeminiClient) GenerateLinkedInShortPost(ctx context.Context, longPost s
 	return s.LinkedInShort, nil
 }
 
-func (c *GeminiClient) GenerateNewsletter(ctx context.Context, releases []models.Release, news []models.NewsItem, stats []models.RepoStats) (*models.Newsletter, error) {
+func (c *GeminiClient) GenerateNewsletter(ctx context.Context, releases []models.Release, news []models.NewsItem, stats []models.RepoStats, previous *PreviousCoverage) (*models.Newsletter, error) {
 	// Create a context with timeout for the API call
 	apiCtx, cancel := context.WithTimeout(ctx, DefaultAPITimeout)
 	defer cancel()
 
-	prompt := buildPrompt(releases, news, stats)
+	prompt := buildPrompt(releases, news, stats, previous)
 
 	resp, err := c.model.GenerateContent(apiCtx, genai.Text(prompt))
 	if err != nil {
@@ -211,7 +230,7 @@ func (c *GeminiClient) GenerateNewsletter(ctx context.Context, releases []models
 	return newsletter, nil
 }
 
-func buildPrompt(releases []models.Release, news []models.NewsItem, stats []models.RepoStats) string {
+func buildPrompt(releases []models.Release, news []models.NewsItem, stats []models.RepoStats, previous *PreviousCoverage) string {
 	// Filter out pre-releases (RC, alpha, beta, test)
 	stableReleases := filterStableReleases(releases)
 
@@ -230,6 +249,8 @@ IMPORTANT GUIDELINES:
 8. IMPORTANT: For each release, include a LINK to the release using the provided URL
 9. For the news summary sections, report WHAT HAPPENED and technical implications only — no opinions, no hype, no vendor pitches
 10. DO NOT insert sponsored, partner, promotional, advertising or "brought to you by" content of any kind. Do NOT add "[Sponsored]", "[Partner]", "Ad:", "Promoted:", "Sponsor:" tags, shortcodes ({{< sponsored ... >}}), or any block framed as paid placement. Sponsored/partner snippets are added post-generation by a human editor in a separate, clearly labeled block — NEVER by you.
+11. NO REPEATS: The "PREVIOUSLY COVERED" section at the end lists what earlier editions already reported. Do NOT report those topics again in "Welcome" or "This Week in Cloud Native". If a news item only re-covers such a topic (e.g. another blog post about features of an already-covered Kubernetes release), skip it.
+12. OPEN SOURCE ONLY: Skip news about commercial products, managed cloud services (AWS, Azure, Google Cloud, ...) and vendor business news, even if present in the news items (see editorial policy rule 8).
 
 STRUCTURE:
 
@@ -246,8 +267,8 @@ Example:
 ## 📰 This Week in Cloud Native
 Write 3-5 paragraphs summarizing the major themes and news from this week. DO NOT list individual articles.
 Group related news into coherent narratives about:
-- Major announcements and product launches
-- Industry trends and developments  
+- Major open-source project announcements and milestones
+- Industry trends in the open-source cloud native ecosystem
 - Security news and vulnerabilities
 - Community and ecosystem updates
 
@@ -296,12 +317,15 @@ STABLE RELEASES (pre-filtered, no RC/alpha/beta):
 		title := sanitizeUTF8(n.Title)
 		desc := sanitizeUTF8(n.Description)
 		prompt += fmt.Sprintf("\n- [%s] %s\n  URL: %s\n  Description: %s\n",
-			n.Source, title, n.URL, truncateText(desc, 200))
+			newsSourceLabel(n), title, n.URL, truncateText(desc, 200))
 	}
 
 	// Inject neutral, pre-computed activity metrics for the "Numbers of the Week" section.
 	prompt += "\n\nREPO ACTIVITY STATS (authoritative numbers — use EXACTLY these values, do not modify):\n"
 	prompt += formatStatsForPrompt(stats)
+
+	prompt += "\n\nPREVIOUSLY COVERED (summaries of earlier editions — do NOT repeat these topics):\n"
+	prompt += formatPreviousCoverage(previous)
 
 	prompt += "\n\nGenerate the newsletter content in Markdown (no code blocks, raw markdown only):"
 
@@ -341,6 +365,14 @@ func formatStatsForPrompt(stats []models.RepoStats) string {
 		fmt.Fprintf(&b, "  %d. %s/%s — %d merged PRs\n", i+1, s.RepoOwner, s.RepoName, s.MergedPRs)
 	}
 	return b.String()
+}
+
+// newsSourceLabel tags vendor-blog items so the model applies rule 8.
+func newsSourceLabel(n models.NewsItem) string {
+	if n.Vendor {
+		return n.Source + ", VENDOR BLOG"
+	}
+	return n.Source
 }
 
 // filterStableReleases removes release candidates, alpha, beta, and test releases
@@ -489,7 +521,7 @@ THIS WEEK'S RELEASES:
 	for _, n := range news {
 		if n.Source != "Hacker News" && newsCount < 15 {
 			title := sanitizeUTF8(n.Title)
-			prompt += fmt.Sprintf("- [%s] %s\n", n.Source, title)
+			prompt += fmt.Sprintf("- [%s] %s\n", newsSourceLabel(n), title)
 			newsCount++
 		}
 	}

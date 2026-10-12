@@ -58,6 +58,19 @@ func main() {
 
 	ctx := context.Background()
 
+	// Earlier editions: used to skip news that only re-covers old topics.
+	previous, err := ai.LoadPreviousCoverage(*outputDir, time.Now(), 3)
+	if err != nil {
+		log.Printf("No previous coverage loaded: %v", err)
+	} else {
+		log.Printf("Loaded %d previous editions, covered Kubernetes minors: %v", len(previous.Editions), previous.CoveredK8sMinors)
+	}
+	editorialNews, dropped := ai.FilterRepeatedReleaseNews(news, previous)
+	log.Printf("Dropped %d news items about already-covered Kubernetes releases", len(dropped))
+	for _, d := range dropped {
+		log.Printf("  - [%s] %s", d.Source, d.Title)
+	}
+
 	gemini, err := ai.NewGeminiClient(ctx, apiKey)
 	if err != nil {
 		log.Fatalf("Failed to create Gemini client: %v", err)
@@ -66,16 +79,18 @@ func main() {
 
 	// Generate LinkedIn post
 	if *linkedinOnly {
-		generateLinkedInPosts(ctx, gemini, releases, news, *outputDir)
+		generateLinkedInPosts(ctx, gemini, releases, editorialNews, *outputDir)
 		return
 	}
 
 	// Generate full newsletter
 	log.Println("Generating newsletter with Gemini...")
-	newsletter, err := gemini.GenerateNewsletter(ctx, releases, news, stats)
+	newsletter, err := gemini.GenerateNewsletter(ctx, releases, editorialNews, stats, previous)
 	if err != nil {
 		log.Fatalf("Failed to generate newsletter: %v", err)
 	}
+	// The articles page still lists everything crawled this week.
+	newsletter.NewsItems = news
 
 	generator := ai.NewDraftGenerator(*outputDir)
 	draftPath, err := generator.GenerateDraft(newsletter)
@@ -86,7 +101,7 @@ func main() {
 	log.Printf("Newsletter draft created: %s", draftPath)
 
 	// Also generate LinkedIn posts (newsletter + short teaser)
-	generateLinkedInPosts(ctx, gemini, releases, news, *outputDir)
+	generateLinkedInPosts(ctx, gemini, releases, editorialNews, *outputDir)
 }
 
 func generateLinkedInPosts(ctx context.Context, gemini *ai.GeminiClient, releases []models.Release, news []models.NewsItem, outputDir string) {

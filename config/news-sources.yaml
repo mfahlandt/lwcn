@@ -17,29 +17,88 @@ rss_feeds:
   - name: "InfoQ Cloud Native"
     url: "https://feed.infoq.com/cloud-computing/"
 
-  # AWS Blogs
+  # ------------------------------------------------------------------
+  # Vendor / cloud-provider blogs (vendor: true)
+  # LWCN covers open source only. Items from vendor feeds are kept ONLY if
+  # they carry an open-source signal (see oss_keywords / tracked project
+  # names below). Pure product / managed-service posts are dropped.
+  # ------------------------------------------------------------------
   - name: "AWS Open Source"
     url: "https://aws.amazon.com/blogs/opensource/feed/"
+    vendor: true
 
   - name: "AWS Containers"
     url: "https://aws.amazon.com/blogs/containers/feed/"
+    vendor: true
 
   - name: "AWS Compute"
     url: "https://aws.amazon.com/blogs/compute/feed/"
+    vendor: true
 
-  # Microsoft / Azure Blogs
   - name: "Microsoft Open Source"
     url: "https://cloudblogs.microsoft.com/opensource/feed/"
+    vendor: true
 
   - name: "Azure DevOps Blog"
     url: "https://devblogs.microsoft.com/devops/feed/"
+    vendor: true
 
   - name: "Azure Updates"
     url: "https://azure.microsoft.com/en-us/updates/feed/"
+    vendor: true
 
-  # Google Cloud
   - name: "Google Cloud Blog"
     url: "https://cloud.google.com/blog/rss"
+    vendor: true
+
+# Open-source signal. An item counts as open-source news if its title or
+# description says "open source" (all spellings are built in), matches one of
+# these terms (case-insensitive, whole word), or if its TITLE names a tracked
+# project from config/repositories.yaml.
+oss_keywords:
+  - "CNCF"
+  - "Cloud Native Computing Foundation"
+  - "Linux Foundation"
+  - "Apache License"
+  - "Apache 2.0"
+
+# Tracked project names that are too generic to count as an open-source
+# signal on their own (e.g. every EKS / AKS / GKE post mentions Kubernetes).
+project_name_ignore:
+  - "Kubernetes"
+  - "Distribution"
+  - "Fluid"
+  - "Volcano"
+  - "Capsule"
+  - "Harbor"
+  - "Spin"
+  - "Lima"
+  - "kind"
+  - "ko"
+
+# News items whose TITLE contains one of these terms (case-insensitive, whole
+# word) are dropped — unless they also carry an open-source signal (e.g.
+# "AWS open-sources X"). Catches vendor / managed-service news that slips in
+# via general sources (Heise, The New Stack, InfoQ, Hacker News).
+exclude_keywords:
+  - "AWS"
+  - "Amazon"
+  - "Azure"
+  - "Google Cloud"
+  - "GCP"
+  - "GKE"
+  - "EKS"
+  - "AKS"
+  - "ECS"
+  - "Lambda"
+  - "CloudWatch"
+  - "Bedrock"
+  - "Vertex AI"
+  - "Oracle Cloud"
+  - "IBM Cloud"
+  - "Alibaba Cloud"
+  - "Gartner"
+  - "Forrester"
 
 scrape_sources:
   # Heise with cloud filter

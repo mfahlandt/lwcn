@@ -259,6 +259,22 @@ All Gemini prompts in `internal/ai/gemini.go` include a shared
 - Sponsored or partner content (rule #10 of the newsletter prompt) —
   sponsors are **never** inserted by the AI; they are added manually
   post-generation via the `{{< sponsored >}}` shortcode.
+- Vendor / commercial news (rule #8): LWCN covers **open source only** — no
+  managed cloud services (AWS, Azure, Google Cloud, …), no closed-source
+  products, no analyst rankings. Enforced at crawl time by
+  `internal/news/filter.go`, configured in `config/news-sources.yaml`:
+  - Feeds marked `vendor: true` only pass items with an open-source signal
+    ("open source" in any spelling, `oss_keywords`, or a tracked project
+    name from `config/repositories.yaml` in the title, minus
+    `project_name_ignore`). These items are labeled `VENDOR BLOG` in the
+    prompt and may only be used for facts about the OSS project.
+  - Other sources: titles hitting `exclude_keywords` are dropped unless the
+    item carries an open-source signal.
+- Stale topics (rule #9): only report the last 7 days. `internal/ai/history.go`
+  feeds the previous 3 editions into the prompt ("PREVIOUSLY COVERED") and
+  drops follow-up articles about an already-covered Kubernetes minor release
+  (e.g. the "Kubernetes v1.37: <feature>" blog series) before the AI sees them.
+  The articles page still lists everything crawled.
 
 The "Numbers of the Week" section is fed **exact, pre-computed numbers**
 from `internal/github/stats.go`. The AI must render them verbatim and
