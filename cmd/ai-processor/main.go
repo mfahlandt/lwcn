@@ -29,6 +29,10 @@ func main() {
 	flag.Parse()
 
 	log.Println("Starting AI Newsletter Generator...")
+	windowStart, windowEnd, err := models.CompletedWeek(time.Now())
+	if err != nil {
+		log.Fatalf("Failed to determine publication window: %v", err)
+	}
 
 	apiKey := os.Getenv("GEMINI_API_KEY")
 	if apiKey == "" {
@@ -47,6 +51,18 @@ func main() {
 		log.Fatalf("Failed to load news: %v", err)
 	}
 	log.Printf("Loaded %d news items", len(news))
+	releases, droppedReleases := models.FilterReleasesInRange(releases, windowStart, windowEnd)
+	news, droppedNews := models.FilterNewsInRange(news, windowStart, windowEnd)
+	log.Printf("Publication window [%s, %s]: dropped %d releases and %d news items", windowStart.Format(time.RFC3339), windowEnd.Format(time.RFC3339), len(droppedReleases), len(droppedNews))
+	for _, item := range droppedReleases {
+		log.Printf("  - %s/%s %s (published: %s)", item.RepoOwner, item.RepoName, item.TagName, item.PublishedAt.Format(time.RFC3339))
+	}
+	for _, item := range droppedNews {
+		log.Printf("  - [%s] %s (published: %s)", item.Source, item.Title, item.PublishedAt.Format(time.RFC3339))
+	}
+	if len(releases) == 0 && len(news) == 0 {
+		log.Fatal("No dated releases or news within the completed UTC calendar week; refusing to generate a newsletter")
+	}
 
 	// Load neutral activity stats (optional — missing file is OK)
 	stats, err := loadStats("")
@@ -54,6 +70,9 @@ func main() {
 		log.Printf("No stats file loaded: %v", err)
 	} else {
 		log.Printf("Loaded %d repo stats entries", len(stats))
+		var droppedStats []models.RepoStats
+		stats, droppedStats = models.FilterStatsInRange(stats, windowStart, windowEnd)
+		log.Printf("Dropped %d stats entries outside the completed UTC calendar week", len(droppedStats))
 	}
 
 	ctx := context.Background()

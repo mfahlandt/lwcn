@@ -281,6 +281,14 @@ All Gemini prompts in `internal/ai/gemini.go` include a shared
   (e.g. the "Kubernetes v1.37: <feature>" blog series) before the AI sees them.
   The articles page still lists everything crawled.
 
+Weekly publication dates are enforced in code via `internal/models/period.go`:
+only valid timestamps in the previous completed UTC calendar week
+(Monday 00:00 inclusive to Monday 00:00 exclusive) are accepted, with a second
+filter in `ai-processor` before editorial generation, article listings, and
+LinkedIn output. Never substitute crawl or update dates for publication dates.
+Stats windows must fit entirely within the publication period. Historical
+backfills filter against the selected historical week instead.
+
 The "Numbers of the Week" section is fed **exact, pre-computed numbers**
 from `internal/github/stats.go`. The AI must render them verbatim and
 never invent stats.

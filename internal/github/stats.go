@@ -10,7 +10,7 @@ import (
 	"github.com/mfahlandt/lwcn/internal/models"
 )
 
-// GetRepoStats fetches neutral activity metrics for a repo in [start, end]:
+// GetRepoStats fetches neutral activity metrics for a repo in [start, end):
 // number of commits on the default branch and number of merged pull requests.
 // Counts only — no sentiment, no opinion.
 func (c *Client) GetRepoStats(ctx context.Context, owner, repo, category string, start, end time.Time) (models.RepoStats, error) {
@@ -23,9 +23,11 @@ func (c *Client) GetRepoStats(ctx context.Context, owner, repo, category string,
 	}
 
 	// --- Commits on default branch ---
+	// GitHub date ranges are inclusive and timestamps have second precision.
+	lastSecond := end.Add(-time.Second)
 	commitOpts := &github.CommitsListOptions{
 		Since:       start,
-		Until:       end,
+		Until:       lastSecond,
 		ListOptions: github.ListOptions{PerPage: 100},
 	}
 
@@ -49,7 +51,7 @@ func (c *Client) GetRepoStats(ctx context.Context, owner, repo, category string,
 
 	// --- Merged PRs (via search, returns TotalCount in a single call) ---
 	// GitHub search rate limit is 30 req/min authenticated; caller adds delay.
-	dateRange := fmt.Sprintf("%s..%s", start.UTC().Format("2006-01-02T15:04:05Z"), end.UTC().Format("2006-01-02T15:04:05Z"))
+	dateRange := fmt.Sprintf("%s..%s", start.UTC().Format("2006-01-02T15:04:05Z"), lastSecond.UTC().Format("2006-01-02T15:04:05Z"))
 	mergedQuery := fmt.Sprintf("repo:%s/%s is:pr is:merged merged:%s", owner, repo, dateRange)
 	if res, _, err := c.gh.Search.Issues(ctx, mergedQuery, &github.SearchOptions{ListOptions: github.ListOptions{PerPage: 1}}); err == nil && res != nil {
 		stats.MergedPRs = res.GetTotal()

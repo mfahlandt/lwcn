@@ -41,7 +41,10 @@ func NewHackerNewsClient() *HackerNewsClient {
 
 func (c *HackerNewsClient) Search(ctx context.Context, keywords []string) ([]models.NewsItem, error) {
 	var allItems []models.NewsItem
-	oneWeekAgo := time.Now().AddDate(0, 0, -7)
+	oneWeekAgo, now, err := models.CompletedWeek(time.Now())
+	if err != nil {
+		return nil, fmt.Errorf("determine publication window: %w", err)
+	}
 	timestamp := oneWeekAgo.Unix()
 
 	// Strategy 1: Search by individual keywords
@@ -80,7 +83,9 @@ func (c *HackerNewsClient) Search(ctx context.Context, keywords []string) ([]mod
 		allItems = append(allItems, relevantItems...)
 	}
 
-	deduplicated := deduplicate(allItems)
+	recent, dropped := models.FilterNewsInRange(allItems, oneWeekAgo, now)
+	log.Printf("HN: Dropped %d items outside the publication window", len(dropped))
+	deduplicated := deduplicate(recent)
 	log.Printf("HN: Total unique items after deduplication: %d", len(deduplicated))
 	return deduplicated, nil
 }
@@ -88,7 +93,7 @@ func (c *HackerNewsClient) Search(ctx context.Context, keywords []string) ([]mod
 func (c *HackerNewsClient) searchKeyword(ctx context.Context, keyword string, timestamp int64) ([]models.NewsItem, error) {
 	query := url.QueryEscape(keyword)
 	// Use search for recent items - numericFilters needs proper URL encoding
-	numericFilter := url.QueryEscape(fmt.Sprintf("created_at_i>%d", timestamp))
+	numericFilter := url.QueryEscape(fmt.Sprintf("created_at_i>=%d", timestamp))
 	apiURL := fmt.Sprintf(
 		"https://hn.algolia.com/api/v1/search?query=%s&tags=story&numericFilters=%s&hitsPerPage=50",
 		query, numericFilter,
@@ -128,7 +133,11 @@ func (c *HackerNewsClient) searchKeyword(ctx context.Context, keyword string, ti
 			itemURL = fmt.Sprintf("https://news.ycombinator.com/item?id=%s", hit.ObjectID)
 		}
 
-		pubTime, _ := time.Parse(time.RFC3339, hit.CreatedAt)
+		pubTime, err := time.Parse(time.RFC3339, hit.CreatedAt)
+		if err != nil {
+			log.Printf("HN: skipping %q with invalid publication date %q: %v", hit.Title, hit.CreatedAt, err)
+			continue
+		}
 
 		items = append(items, models.NewsItem{
 			Title:       hit.Title,
@@ -145,7 +154,7 @@ func (c *HackerNewsClient) searchKeyword(ctx context.Context, keyword string, ti
 
 func (c *HackerNewsClient) searchFrontPage(ctx context.Context, timestamp int64) ([]models.NewsItem, error) {
 	// Get recent popular stories - numericFilters needs URL encoding
-	numericFilter := url.QueryEscape(fmt.Sprintf("created_at_i>%d", timestamp))
+	numericFilter := url.QueryEscape(fmt.Sprintf("created_at_i>=%d", timestamp))
 	apiURL := fmt.Sprintf(
 		"https://hn.algolia.com/api/v1/search?tags=front_page&numericFilters=%s&hitsPerPage=100",
 		numericFilter,
@@ -180,7 +189,11 @@ func (c *HackerNewsClient) searchFrontPage(ctx context.Context, timestamp int64)
 			itemURL = fmt.Sprintf("https://news.ycombinator.com/item?id=%s", hit.ObjectID)
 		}
 
-		pubTime, _ := time.Parse(time.RFC3339, hit.CreatedAt)
+		pubTime, err := time.Parse(time.RFC3339, hit.CreatedAt)
+		if err != nil {
+			log.Printf("HN: skipping %q with invalid publication date %q: %v", hit.Title, hit.CreatedAt, err)
+			continue
+		}
 
 		items = append(items, models.NewsItem{
 			Title:       hit.Title,

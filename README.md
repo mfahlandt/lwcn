@@ -75,6 +75,21 @@ additional_repositories:
 
 ### News Sources Configuration
 
+Weekly generation covers the **previous completed calendar week in UTC**:
+Monday 00:00 inclusive to the following Monday 00:00 exclusive. News, releases,
+and activity stats share this fixed window even if the workflow runs late.
+The window is always 168 hours, unaffected by daylight saving transitions.
+The window is enforced
+including a second date check on loaded JSON before generating the newsletter,
+articles page, or LinkedIn posts. News and releases with missing or invalid
+publication dates or dates outside this window are excluded. Crawl dates and
+article update dates are not substitutes for publication dates. Activity stats
+are used only if their entire measurement window fits within this period.
+Historical backfills use their explicitly selected week's publication window.
+For Hacker News, the timestamp refers to submission of the discussion, not
+publication of its linked article. Such items are context for Community Buzz,
+not evidence that a linked release or announcement is new.
+
 Configure news sources in `config/news-sources.yaml`:
 - **RSS Feeds**: CNCF, Kubernetes, OpenSSF, NeoNephos, The New Stack, InfoQ and TechTarget (`require_oss: true` keeps only items with an open-source signal), plus AWS, Azure and Google Cloud blogs (marked `vendor: true` — only items with an open-source signal are kept; see `config/news-sources.yaml`)
 - **Scrape Sources**: Heise Cloud articles

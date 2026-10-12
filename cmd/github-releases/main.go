@@ -13,6 +13,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/mfahlandt/lwcn/internal/config"
 	"github.com/mfahlandt/lwcn/internal/github"
+	"github.com/mfahlandt/lwcn/internal/models"
 )
 
 func main() {
@@ -36,11 +37,15 @@ func main() {
 	}
 
 	ctx := context.Background()
+	start, end, err := models.CompletedWeek(time.Now())
+	if err != nil {
+		log.Fatalf("Failed to determine publication window: %v", err)
+	}
 	client := github.NewClient(token)
 
 	log.Printf("Fetching releases from %d repositories...", len(cfg.Repositories))
 
-	releases, err := client.FetchAllReleases(ctx, cfg.Repositories)
+	releases, err := client.FetchReleasesInRange(ctx, cfg.Repositories, start, end)
 	if err != nil {
 		log.Fatalf("Failed to fetch releases: %v", err)
 	}
@@ -76,8 +81,6 @@ func main() {
 
 	// --- Neutral activity stats (commits, merged PRs) for "Numbers of the Week" ---
 	if *collectStats {
-		end := time.Now()
-		start := end.AddDate(0, 0, -7)
 		stats := client.FetchAllStats(ctx, cfg.Repositories, start, end)
 
 		statsFile := fmt.Sprintf("stats-%s.json", time.Now().Format("2006-01-02"))

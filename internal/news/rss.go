@@ -2,10 +2,13 @@ package news
 
 import (
 	"context"
+	"fmt"
+	"log"
 	"time"
 
 	"github.com/mfahlandt/lwcn/internal/models"
 	"github.com/mmcdole/gofeed"
+	"github.com/mmcdole/gofeed/atom"
 )
 
 type RSSClient struct {
@@ -13,9 +16,30 @@ type RSSClient struct {
 }
 
 func NewRSSClient() *RSSClient {
+	parser := gofeed.NewParser()
+	parser.AtomTranslator = &publicationAtomTranslator{}
 	return &RSSClient{
-		parser: gofeed.NewParser(),
+		parser: parser,
 	}
+}
+
+type publicationAtomTranslator struct{}
+
+func (t *publicationAtomTranslator) Translate(raw interface{}) (*gofeed.Feed, error) {
+	source, ok := raw.(*atom.Feed)
+	if !ok {
+		return nil, fmt.Errorf("expected Atom feed, got %T", raw)
+	}
+	feed, err := (&gofeed.DefaultAtomTranslator{}).Translate(source)
+	if err != nil {
+		return nil, err
+	}
+	// gofeed otherwise substitutes updated for missing or invalid published dates.
+	for i, entry := range source.Entries {
+		feed.Items[i].Published = entry.Published
+		feed.Items[i].PublishedParsed = entry.PublishedParsed
+	}
+	return feed, nil
 }
 
 func (c *RSSClient) FetchFeed(ctx context.Context, source models.RSSSource) ([]models.NewsItem, error) {
@@ -24,16 +48,20 @@ func (c *RSSClient) FetchFeed(ctx context.Context, source models.RSSSource) ([]m
 		return nil, err
 	}
 
-	oneWeekAgo := time.Now().AddDate(0, 0, -7)
+	oneWeekAgo, now, err := models.CompletedWeek(time.Now())
+	if err != nil {
+		return nil, fmt.Errorf("determine publication window: %w", err)
+	}
 	var items []models.NewsItem
 
 	for _, item := range feed.Items {
-		pubDate := time.Now()
-		if item.PublishedParsed != nil {
-			pubDate = *item.PublishedParsed
+		if item.PublishedParsed == nil {
+			log.Printf("RSS [%s]: skipping %q without a valid publication date", source.Name, item.Title)
+			continue
 		}
+		pubDate := *item.PublishedParsed
 
-		if pubDate.Before(oneWeekAgo) {
+		if !models.PublishedInRange(pubDate, oneWeekAgo, now) {
 			continue
 		}
 
@@ -58,6 +86,7 @@ func (c *RSSClient) FetchAllFeeds(ctx context.Context, sources []models.RSSSourc
 	for _, source := range sources {
 		items, err := c.FetchFeed(ctx, source)
 		if err != nil {
+			log.Printf("RSS [%s]: fetch failed: %v", source.Name, err)
 			continue
 		}
 		allItems = append(allItems, items...)

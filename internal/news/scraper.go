@@ -2,6 +2,7 @@ package news
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"strings"
@@ -49,7 +50,10 @@ func (s *Scraper) ScrapeHeise(ctx context.Context, source models.ScrapeSource) (
 	}
 
 	var items []models.NewsItem
-	oneWeekAgo := time.Now().AddDate(0, 0, -7)
+	oneWeekAgo, now, err := models.CompletedWeek(time.Now())
+	if err != nil {
+		return nil, fmt.Errorf("determine publication window: %w", err)
+	}
 
 	// Heise uses data-component="TeaserContainer" for article teasers
 	// Try multiple selectors for different page layouts
@@ -123,7 +127,11 @@ func (s *Scraper) ScrapeHeise(ctx context.Context, source models.ScrapeSource) (
 		}
 
 		// Skip if no date found or older than 7 days
-		if pubDate.IsZero() || pubDate.Before(oneWeekAgo) {
+		if pubDate.IsZero() {
+			log.Printf("Heise [%s]: skipping %q without a valid publication date", source.Name, title)
+			return
+		}
+		if !models.PublishedInRange(pubDate, oneWeekAgo, now) {
 			return
 		}
 

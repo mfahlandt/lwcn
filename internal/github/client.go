@@ -2,6 +2,7 @@ package github
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"time"
 
@@ -27,8 +28,11 @@ func NewClient(token string) *Client {
 }
 
 func (c *Client) GetReleasesLastWeek(ctx context.Context, owner, repo, category string) ([]models.Release, error) {
-	oneWeekAgo := time.Now().AddDate(0, 0, -7)
-	return c.GetReleasesInRange(ctx, owner, repo, category, oneWeekAgo, time.Now())
+	start, end, err := models.CompletedWeek(time.Now())
+	if err != nil {
+		return nil, fmt.Errorf("determine publication window: %w", err)
+	}
+	return c.GetReleasesInRange(ctx, owner, repo, category, start, end)
 }
 
 // GetReleasesInRange fetches releases published within the given time range
@@ -58,7 +62,7 @@ func (c *Client) GetReleasesInRange(ctx context.Context, owner, repo, category s
 
 		// Check if release is within the time range
 		publishedAt := r.PublishedAt.Time
-		if publishedAt.Before(start) || publishedAt.After(end) {
+		if !models.PublishedInRange(publishedAt, start, end) {
 			continue
 		}
 
@@ -84,8 +88,11 @@ func (c *Client) GetReleasesInRange(ctx context.Context, owner, repo, category s
 }
 
 func (c *Client) FetchAllReleases(ctx context.Context, repos []models.Repository) ([]models.Release, error) {
-	oneWeekAgo := time.Now().AddDate(0, 0, -7)
-	return c.FetchReleasesInRange(ctx, repos, oneWeekAgo, time.Now())
+	start, end, err := models.CompletedWeek(time.Now())
+	if err != nil {
+		return nil, fmt.Errorf("determine publication window: %w", err)
+	}
+	return c.FetchReleasesInRange(ctx, repos, start, end)
 }
 
 // FetchReleasesInRange fetches all releases from all repos within the given time range

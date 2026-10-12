@@ -27,6 +27,10 @@ func main() {
 	}
 
 	ctx := context.Background()
+	windowStart, windowEnd, err := models.CompletedWeek(time.Now())
+	if err != nil {
+		log.Fatalf("Failed to determine publication window: %v", err)
+	}
 	var allNews []models.NewsItem
 
 	// RSS Feeds
@@ -60,6 +64,12 @@ func main() {
 			allNews = append(allNews, hnNews...)
 			log.Printf("Found %d Hacker News items", len(hnNews))
 		}
+	}
+
+	allNews, outsideWindow := models.FilterNewsInRange(allNews, windowStart, windowEnd)
+	log.Printf("Dropped %d news items outside publication window [%s, %s]", len(outsideWindow), windowStart.Format(time.RFC3339), windowEnd.Format(time.RFC3339))
+	for _, item := range outsideWindow {
+		log.Printf("  - [%s] %s (published: %s)", item.Source, item.Title, item.PublishedAt.Format(time.RFC3339))
 	}
 
 	var projectNames []string

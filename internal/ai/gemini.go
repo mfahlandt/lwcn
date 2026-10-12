@@ -251,6 +251,7 @@ IMPORTANT GUIDELINES:
 10. DO NOT insert sponsored, partner, promotional, advertising or "brought to you by" content of any kind. Do NOT add "[Sponsored]", "[Partner]", "Ad:", "Promoted:", "Sponsor:" tags, shortcodes ({{< sponsored ... >}}), or any block framed as paid placement. Sponsored/partner snippets are added post-generation by a human editor in a separate, clearly labeled block — NEVER by you.
 11. NO REPEATS: The "PREVIOUSLY COVERED" section at the end lists what earlier editions already reported. Do NOT report those topics again in "Welcome" or "This Week in Cloud Native". If a news item only re-covers such a topic (e.g. another blog post about features of an already-covered Kubernetes release), skip it.
 12. OPEN SOURCE ONLY: Skip news about commercial products, managed cloud services (AWS, Azure, Google Cloud, ...) and vendor business news, even if present in the news items (see editorial policy rule 8).
+13. Publication dates do not make older events new. Skip retrospective announcements or old releases described in recently published articles. Hacker News dates are discussion submission dates, not publication dates of linked articles: use these only for Community Buzz, never as proof of a new release or announcement.
 
 STRUCTURE:
 
@@ -305,8 +306,8 @@ STABLE RELEASES (pre-filtered, no RC/alpha/beta):
 		// Sanitize all fields to remove invalid UTF-8 characters
 		body := sanitizeUTF8(r.Body)
 		name := sanitizeUTF8(r.Name)
-		prompt += fmt.Sprintf("\n- %s/%s %s (%s)\n  URL: %s\n  Name: %s\n  Notes: %s\n",
-			r.RepoOwner, r.RepoName, r.TagName, r.Category, r.URL, name, truncateText(body, 500))
+		prompt += fmt.Sprintf("\n- %s/%s %s (%s)\n  Published: %s\n  URL: %s\n  Name: %s\n  Notes: %s\n",
+			r.RepoOwner, r.RepoName, r.TagName, r.Category, r.PublishedAt.Format(time.RFC3339), r.URL, name, truncateText(body, 500))
 	}
 
 	prompt += fmt.Sprintf("\nTotal: %d stable releases\n", len(stableReleases))
@@ -316,8 +317,8 @@ STABLE RELEASES (pre-filtered, no RC/alpha/beta):
 	for _, n := range news {
 		title := sanitizeUTF8(n.Title)
 		desc := sanitizeUTF8(n.Description)
-		prompt += fmt.Sprintf("\n- [%s] %s\n  URL: %s\n  Description: %s\n",
-			newsSourceLabel(n), title, n.URL, truncateText(desc, 200))
+		prompt += fmt.Sprintf("\n- [%s] %s\n  Published (HN: submitted): %s\n  URL: %s\n  Description: %s\n",
+			newsSourceLabel(n), title, n.PublishedAt.Format(time.RFC3339), n.URL, truncateText(desc, 200))
 	}
 
 	// Inject neutral, pre-computed activity metrics for the "Numbers of the Week" section.
@@ -489,6 +490,7 @@ IMPORTANT:
 - NO markdown formatting (no ** or ## ) - plain text with emojis only
 - Do NOT duplicate topics across sections
 - Do NOT copy promotional phrasing from release notes or vendor blogs
+- Publication dates do not make older events new. Skip retrospective announcements or old releases described in recently published articles.
 - MUST include at the bottom before the hashtags: "📖 Read the full newsletter with all releases and articles: NEWSLETTER_URL"
 
 Replace NEWSLETTER_URL with: ` + newsletterURL + `
@@ -508,7 +510,7 @@ THIS WEEK'S RELEASES:
 		prompt += fmt.Sprintf("\n%s:\n", strings.ToUpper(category))
 		for _, r := range releases {
 			body := sanitizeUTF8(r.Body)
-			prompt += fmt.Sprintf("- %s %s: %s\n", r.RepoName, r.TagName, truncateText(body, 300))
+			prompt += fmt.Sprintf("- %s %s (published %s): %s\n", r.RepoName, r.TagName, r.PublishedAt.Format(time.RFC3339), truncateText(body, 300))
 		}
 	}
 
@@ -521,7 +523,7 @@ THIS WEEK'S RELEASES:
 	for _, n := range news {
 		if n.Source != "Hacker News" && newsCount < 15 {
 			title := sanitizeUTF8(n.Title)
-			prompt += fmt.Sprintf("- [%s] %s\n", newsSourceLabel(n), title)
+			prompt += fmt.Sprintf("- [%s] %s (published %s)\n", newsSourceLabel(n), title, n.PublishedAt.Format(time.RFC3339))
 			newsCount++
 		}
 	}

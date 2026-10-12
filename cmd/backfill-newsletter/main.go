@@ -73,7 +73,11 @@ func main() {
 	// Calculate week ranges
 	// We generate for past completed weeks
 	now := time.Now()
-	currentYear, currentWeek := now.ISOWeek()
+	_, currentMonday, err := models.CompletedWeek(now)
+	if err != nil {
+		log.Fatalf("Failed to determine publication window: %v", err)
+	}
+	currentYear, currentWeek := currentMonday.ISOWeek()
 
 	// Determine which weeks to generate
 	var weeksToGenerate []int
@@ -93,7 +97,7 @@ func main() {
 	for _, targetWeek := range weeksToGenerate {
 		// Calculate the Monday of the target week
 		weekStart := getWeekStartForWeek(currentYear, targetWeek)
-		weekEnd := weekStart.AddDate(0, 0, 7).Add(-time.Second) // Sunday 23:59:59
+		weekEnd := weekStart.AddDate(0, 0, 7)
 
 		year, week := weekStart.ISOWeek()
 
@@ -143,6 +147,13 @@ func main() {
 			continue
 		}
 
+		releases, dropped := models.FilterReleasesInRange(releases, weekStart, weekEnd)
+		log.Printf("Dropped %d releases outside the historical publication window", len(dropped))
+		if len(releases) == 0 {
+			log.Printf("No dated releases within week %d, skipping newsletter generation", week)
+			continue
+		}
+
 		// Generate newsletter
 		log.Printf("Generating newsletter with Gemini AI...")
 		newsletter, err := gemini.GenerateNewsletter(ctx, releases, nil, nil, nil)
@@ -186,7 +197,7 @@ func getWeekStart(now time.Time, weeksAgo int) time.Time {
 // getWeekStartForWeek returns the Monday of a specific ISO week number
 func getWeekStartForWeek(year, week int) time.Time {
 	// Find January 4th of the year (always in week 1 per ISO 8601)
-	jan4 := time.Date(year, time.January, 4, 0, 0, 0, 0, time.Local)
+	jan4 := time.Date(year, time.January, 4, 0, 0, 0, 0, time.UTC)
 
 	// Find the Monday of week 1
 	weekday := int(jan4.Weekday())
