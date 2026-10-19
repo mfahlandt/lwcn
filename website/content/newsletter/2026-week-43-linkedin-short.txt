@@ -1,0 +1,8 @@
+🚀 Kuma 3.0 released this week, removing legacy APIs.
+
+Highlights:
+- containerd patch releases address CVE-2026-95839 and GHSA-hc94-p972-ch66.
+- Envoy v1.40.0 build system transitioned to bzlmod, requiring downstream migration.
+- Strimzi-kafka-operator 1.3.0 now supports Kubernetes 1.32+ and enforces v1 CRD API.
+
+👉 Check out the latest edition in my newsletter!
