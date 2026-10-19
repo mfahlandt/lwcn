@@ -1013,6 +1013,11 @@ repositories:
     name: Porter
     owner: getporter
     repo: porter
+  - category: networking
+    cncf_status: sandbox
+    name: Praxis
+    owner: praxis-proxy
+    repo: praxis
   - category: build
     cncf_status: sandbox
     name: Radius

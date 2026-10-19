@@ -1,0 +1,4 @@
+🚀 Kuma 3.0 released, removes legacy APIs.
+🛡️ containerd patches fix CVE-2026-95839, GHSA-hc94-p972-ch66.
+⚙️ Envoy v1.40.0 build system changed to bzlmod.
+Full breakdown:
