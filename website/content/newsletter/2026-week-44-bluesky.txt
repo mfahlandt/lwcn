@@ -1,0 +1,4 @@
+🛡️ Cloud Native projects released security updates for eMudhra CA compromise.
+- Crossplane v2.4.3+ and Cilium v1.20.4+ upgraded Go, distrusting eMudhra intermediate CAs.
+- Capsule v0.15.0 fixed an authorization bypass (GHSA-p8j8-x28r-3c9v).
+Full breakdown:

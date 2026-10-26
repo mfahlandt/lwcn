@@ -1,0 +1,5 @@
+🛡️ Cloud Native projects released security updates addressing the eMudhra CA compromise.
+- Crossplane v2.4.3+ and Cilium v1.20.4+ upgraded Go to distrust eMudhra intermediate CAs.
+- Capsule v0.15.0 fixed an authorization bypass (GHSA-p8j8-x28r-3c9v).
+- Atlantis v0.49.0 removed Terraform/OpenTofu binaries, requiring user-provided binaries.
+👉 Check out the latest edition in my newsletter!
