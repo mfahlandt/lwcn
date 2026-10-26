@@ -1,0 +1,20 @@
+🛡️ Cloud Native Projects Address eMudhra CA Compromise with Security Updates
+
+This week, multiple open-source Cloud Native projects released security updates to distrust compromised eMudhra intermediate CA certificates, following a widespread advisory. These updates involve upgrading Go toolchains or updating CA certificate bundles. Additionally, significant releases included critical authorization fixes and changes to build processes for infrastructure-as-code tools.
+
+🚀 Key releases:
+- Crossplane v2.4.3, v2.3.7, v2.2.7, v1.20.14: Patch releases updated the Go toolchain to 1.26.10. This update incorporates crypto/x509 changes that reject compromised eMudhra intermediate certificates. This enhances TLS security by preventing trust in invalid certificates.
+- Capsule v0.15.0: Introduced a critical security fix for authorization bypass via namespaces/status and namespaces/finalize (GHSA-p8j8-x28r-3c9v). The vulnerability allowed bypassing ownership checks in the mutating webhook. This resolves a critical security flaw.
+- Atlantis v0.49.0: This release removes Terraform and OpenTofu binaries from its Docker images. It also includes fixes for 12 security advisories, which may alter existing behavior. Users are now required to provide their own Terraform or OpenTofu binaries, and configurations might need adjustments due to security fix implications.
+- Cilium v1.20.4, v1.19.10, v1.18.16: Security patch releases upgraded Go to 1.26.10. This update distrusts the compromised eMudhra intermediate CA certificates. This improves network security by removing trust in the identified compromised certificates for TLS connections.
+
+📰 Notable news/trends summary:
+Recent discussions focused on integrating AI workloads with Kubernetes. A CNCF blog post detailed methods for deploying multi-tenant GPU Kubernetes on simulated hardware using Kamaji and HAMi. Another CNCF blog explored filtering and reducing AI agent telemetry with the OpenTelemetry Collector, outlining technical approaches for observability in AI-driven environments.
+
+💬 Community highlights:
+Technical discussions within the community continued regarding efficient GPU resource allocation and autoscaling strategies for AI workloads on Kubernetes. These conversations address challenges in maximizing utilization and responsiveness for compute-intensive tasks.
+
+How do widespread certificate authority compromises influence your organization's patch management and supply chain security strategies?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-44/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps
