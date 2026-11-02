@@ -1,0 +1,20 @@
+📰 Cloud Native Week: Widespread Security Updates Address eMudhra CA Compromise
+
+This week, several prominent open-source Cloud Native projects released updates addressing the eMudhra intermediate CA compromise, reinforcing the security of certificate validation. Concurrently, API stabilizations and GitOps capabilities advanced, alongside the formation of new Kubernetes working groups.
+
+🚀 Key releases:
+- Security Patches: cert-manager v1.20.5, Envoy v1.40.2 (and earlier versions), and NATS Server v2.15.2 (and v2.14.9) were released. These updates include measures to distrust the compromised eMudhra intermediate CA, which enhances the integrity of certificate validation within affected components and updates base images to include patched `ca-certificates` packages.
+- Gateway API v1.7.0: The HTTPRoute Retries feature (GEP-1731) graduated to the Standard channel. This stabilizes the configuration for defining retry policies within HTTPRoute rules, including `codes`, `attempts`, and `backoff` parameters.
+- Flux v2.10.0: This release promotes Object identity to general availability, retiring the `ObjectLevelWorkloadIdentity` feature gate. It also introduces SPIFFE mTLS for inter-controller communication, enhancing the security posture of GitOps deployments.
+- OPA v1.22.0: This version introduces a new `rego.v2` import and implements stricter handling of bundle signature filenames, which constitutes a breaking change. It also adds configurable log levels for HTTP access logs.
+
+📰 Notable news/trends summary:
+The Kubernetes project formalized new areas of focus with the formation of the AI Conformance SIG and the Workload Conformance Working Group. These groups are established to define and validate consistent behaviors and standards for AI workloads and general application workloads within Kubernetes environments. Separately, Volcano v1.16 was released, adding NamespaceQueue for resource isolation and fairshare scheduling capabilities to its batch scheduling system.
+
+💬 Community highlights:
+No specific factual community highlights (e.g., discussions reaching consensus, new formal proposals) beyond release announcements and SIG/WG formations were identified this week that fit the strict neutrality and fact-only policy.
+
+Considering the technical implications of these updates, how do the new API stabilizations and security enhancements impact your current Cloud Native deployment strategies?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-45/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps

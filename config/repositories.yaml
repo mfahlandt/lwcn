@@ -832,7 +832,7 @@ repositories:
     cncf_status: sandbox
     name: Kubewarden
     owner: kubewarden
-    repo: kubewarden-controller
+    repo: adm-controller
   - category: build
     cncf_status: sandbox
     name: KUDO

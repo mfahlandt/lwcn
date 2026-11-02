@@ -1,0 +1,5 @@
+🛡️ Security updates for cert-manager, Envoy, NATS Server released.
+• Distrust eMudhra CA.
+• Gateway API v1.7.0: HTTPRoute Retries → Standard.
+• Flux v2.10.0: Object identity GA; SPIFFE mTLS.
+Full breakdown:
