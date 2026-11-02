@@ -1,0 +1,9 @@
+🛡️ Widespread security updates for cert-manager, Envoy, and NATS Server released this week.
+
+Highlights:
+• cert-manager v1.20.5, Envoy v1.40.2, NATS Server v2.15.2 distrust eMudhra CA.
+• Gateway API v1.7.0: HTTPRoute Retries (GEP-1731) graduates to Standard channel.
+• Flux v2.10.0: Object identity promoted to GA; introduces SPIFFE mTLS.
+• OPA v1.22.0: `rego.v2` import; stricter bundle signature handling (breaking).
+
+👉 Check out the latest edition in my newsletter!
