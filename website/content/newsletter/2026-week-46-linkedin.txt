@@ -1,0 +1,20 @@
+⚙️ Kube-OVN v1.17.0 Introduces ClusterNetworkPolicy API Breaking Changes
+
+This week in Cloud Native, Kube-OVN released version 1.17.0, which includes breaking changes to its ClusterNetworkPolicy API. This update also introduces service-scoped load balancing and VPC egress capabilities, alongside general reliability and security enhancements.
+
+🚀 Key releases
+
+ Kube-OVN v1.17.0 includes breaking changes to the ClusterNetworkPolicy API. This release also upgrades the networking stack and adds service-scoped load balancing and VPC egress features.
+ K3s v1.35.10+k3s1 and v1.34.13+k3s1 upgrade the bundled Traefik chart to v40.x. This change modifies the ingress provider name from kubernetesIngressNginx to kubernetesIngressNGINX, requiring configuration updates for existing deployments.
+ OpenTelemetry Collector v0.165.0 removes deprecated fields IdleConnTimeout, MaxIdleConns, MaxIdleConnsPerHost, and DisableKeepAlives from its pkg/confighttp package. Implementations using these fields must update their configurations.
+ Trivy v0.76.2 bundles security fixes. Its official container images are rebuilt on Alpine 3.24.3, addressing CVE-2026-107891 in musl and CVE-2026-92392 in libcurl, among other vulnerabilities.
+ Lima v2.3.0 adds experimental HCS driver support for Windows hosts, which eliminates the QEMU dependency. It also introduces the ability to attach host block devices to VZ guests on macOS hosts.
+
+📰 Notable news/trends summary
+
+The kpt configuration management tool reached its v1.0.0 milestone. This release signifies API stability for its core functionality. Additionally, OpenKruise Agents released v0.6.0, which focuses on agent sandbox security and automation enhancements.
+
+What technical challenges have you encountered with API breaking changes in cluster networking solutions?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-46/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps

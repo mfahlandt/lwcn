@@ -1,0 +1,8 @@
+⚙️ Kube-OVN v1.17.0 introduces ClusterNetworkPolicy API breaking changes.
+
+This week's updates:
+⚙️ Kube-OVN v1.17.0: ClusterNetworkPolicy API breaking changes, adds service-scoped load balancing.
+🛡️ Trivy v0.76.2: Addresses CVE-2026-107891 (musl) and CVE-2026-92392 (libcurl).
+📦 K3s v1.35.10+k3s1: Upgrades Traefik chart to v40.x, modifies ingress provider name.
+
+👉 Check out the latest edition in my newsletter!

@@ -1,0 +1,4 @@
+⚙️ Kube-OVN v1.17.0 introduces ClusterNetworkPolicy API breaking changes.
+🛡️ Trivy v0.76.2 addresses CVE-2026-107891 (musl) and CVE-2026-92392 (libcurl) with security fixes.
+📦 K3s v1.35.10+k3s1 upgrades Traefik chart to v40.x, modifying the ingress provider name.
+Full breakdown:
