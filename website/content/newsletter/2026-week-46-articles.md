@@ -1,0 +1,185 @@
+---
+title: "Week 46 Articles - November 2026"
+date: "2026-11-09"
+draft: false
+noindex: true
+url: "/newsletter/2026-week-46/articles/"
+sitemap:
+  priority: 0.3
+  changefreq: never
+build:
+  list: never
+  publishResources: true
+  render: always
+outputs:
+  - html
+---
+
+# 📚 All Articles from Week 46
+
+A complete list of all cloud native articles and news from this week.
+
+## CNCF Blog (6)
+
+- [Lima v2.3: Native on Windows, VMnet on Linux, and menu TUI](https://www.cncf.io/blog/2026/11/08/lima-v2-3-native-on-windows-vmnet-on-linux-and-menu-tui/)
+- [We organized Sustainability Month. Here’s what we learned. 🌱](https://www.cncf.io/blog/2026/11/07/we-organized-sustainability-month-heres-what-we-learned-%f0%9f%8c%b1/)
+- [Faster LLM inference startup: What you need to know](https://www.cncf.io/blog/2026/11/06/faster-llm-inference-startup-what-you-need-to-know/)
+- [kpt v1.0.0 is released](https://www.cncf.io/blog/2026/11/05/kpt-v1-0-0-is-released/)
+- [OpenKruise Agents v0.6.0: Leaping ahead in agent Sandbox security and automation](https://www.cncf.io/blog/2026/11/03/openkruise-agents-v0-6-0-leaping-ahead-in-agent-sandbox-security-and-automation/)
+- [The Linkerd Story: The People Behind The Service Mesh — A new documentary premieres at KubeCon + CloudNativeCon North America 2026](https://www.cncf.io/blog/2026/11/02/the-linkerd-story-the-people-behind-the-service-mesh-a-new-documentary-premieres-at-kubecon-cloudnativecon-north-america-2026/)
+
+## Hacker News (101)
+
+- [Nvidia Kubernetes Engine (NVKE)](https://github.com/dsx-ai-factory/nvke)
+- [Show HN: K8sman – A Native Kubernetes IDE](https://github.com/matty234/k8sman)
+- [Why Is My Kubernetes Job Still Pending? Tracing Kueue Admission with Headlamp](https://headlamp.dev/blog/2026/10/12/tracing-kueue-admission-with-headlamp/)
+- [Show HN: DevBox – Open-source engineering harness from RudderStack](https://github.com/rudderlabs/devbox)
+- [Show HN: Nico – a two-agent type personal agent on your Mac](https://nico.app/)
+- [Show HN: Infinity – Git-style branching for AI chats](https://infinitychat.app/)
+- [Show HN: Nomos – A Go harness that stops coding agents from cheating on tests](https://github.com/mgantlett/nomos)
+- [Show HN: Conductor sold to Meta. Rebuilding the app (3 days, $170) (MIT)](https://github.com/jahala/conducted/)
+- [Show HN: Subvocal – Talk to your computer without making noise](https://news.ycombinator.com/item?id=50340088)
+- [Google Donates Agent Substrate and GVisor to the CNCF](https://opensource.googleblog.com/2026/11/sandboxing-untrusted-ai-agents-at-scale.html)
+- [Show HN: Hyperbutler – Docker on Windows without WSL, 320 MB at idle](https://hyperbutler.dev/)
+- [Show HN: Hyperbutler – Docker on Windows 11 Without WSL or Docker Desktop](https://github.com/Higangssh/hyperbutler)
+- [The Docker group is root access, my agent used it to write to /etc.](https://jeena.net/notes/1497)
+- [Show HN: Kairos – Open-source risk and fraud decisioning platform](https://github.com/finic-ai/kairos)
+- [Show HN: Gauge – Open-Source CLI to recursively improve your docs](https://github.com/gauge-sh/gauge-cli)
+- [Show HN: Spooler – a simple, managed message queue](https://spooler.sh/)
+- [Show HN: Zenith, a developer platform for shipping and selling your app](https://zenith.hosting/developers)
+- [Show HN: Botel – always reachable agents you pay for only while they're working](https://botel.dev)
+- [Show HN: FELF – AppImage-like single binaries without FUSE, root, or a runtime](https://github.com/Rucadi/FELF)
+- [Show HN: HackerX – Hacker News front page docked in x.com, newest first](https://mllearnerakash.github.io/HackerX/)
+- [Promethevs: Full DeepSeek-v4.1-Flash-1017, locally, on 12GB of VRAM](https://github.com/Magnvs7/Promethevs)
+- [Ask HN: Does anyone enjoy work anymore?](https://news.ycombinator.com/item?id=50344065)
+- [Show HN: Hacker Times, a New York Times-inspired version of Hacker News](https://hackertimes.ca/)
+- [Show HN: Wikihack – HackerTube, but for Wikipedia articles mentioned on HN](https://wikihack.netlify.app)
+- [Show HN: Unclickbait – Replace clickbait YouTube thumbnails](https://unclickbait.app/)
+- [Ask HN: How to Keep the Edge as an Engineer?](https://news.ycombinator.com/item?id=50362698)
+- [Show HN: HackerRepos – HackerTube for repos mentioned on HN](https://HackerRepos.fyi/)
+- [Show HN: Election.run – election night in one window](https://election.run/)
+- [Show HN: Hacker Living – HN's most recommended places](https://hacker.living)
+- [Show HN: Strive and Seek – original merch for builders, hackers and founders](https://shopstriveandseek.com/)
+- [Show HN: Remedy – Prompt stuff out of your feeds](https://getremedyapp.com)
+- [Show HN: An Open Source Superhuman Email Client Clone](https://github.com/michaelmagan/OpenHuman)
+- [Show HN: Lost and Fought – a 90s Style RTS – browser with multiplayer](https://lostandfought.com/)
+- [Show HN: My first project, an AI-powered financial news analyzer](https://github.com/lamarcol/NotBot)
+- [Show HN: Self-Annotating Stock Charts](https://portfoliogenius.ai/features/ai-annotated-charts)
+- ["No human at the helm": Delaware plan would let AI agents run businesses](https://arstechnica.com/tech-policy/2026/10/no-human-at-the-helm-delaware-plan-would-let-ai-agents-run-entire-businesses/)
+- [Delaware plan would let AI agents run businesses](https://arstechnica.com/tech-policy/2026/10/no-human-at-the-helm-delaware-plan-would-let-ai-agents-run-entire-businesses/)
+- [Goodbye Claude, hello Pi](https://caleb.software/posts/claude-to-pi.html)
+- [A Jev that can ask Opus for help gives Opus accuracy at 4x lower cost](https://hightouch.com/blog/llm-judges-identity-resolution)
+- [Apple’s grey list: Words and phrases your iPhone won’t help you spell](https://www.theguardian.com/technology/2026/nov/06/struggling-to-spell-male-chauvinist-pig-apple-grey-list-means-your-iphone-wont-help-you)
+- [Show HN: An offline desktop companion to help maintain a healthy blink rhythm](https://eyesrhythm.com/)
+- [Budget offers $50B jolt to help Canada double its electricity grid](https://www.cbc.ca/news/politics/electricity-budget-new-money-9.7410949)
+- [Vibrating mattress helps clear Alzheimer's protein from the brain](https://www.newscientist.com/article/2597081-vibrating-mattress-helps-clear-alzheimers-protein-from-the-brain/)
+- [Grokipedia offers lessons in how AI can help Wikipedia](https://www.niemanlab.org/2026/11/elon-musks-grokipedia-is-littered-with-mistakes-but-wikipedia-could-still-learn-some-things-from-it/)
+- [Did Claude Help an Amateur Astronomer Discover a New Planet?](https://gizmodo.com/did-claude-help-an-amateur-astronomer-discover-a-new-planet-2000824393)
+- [Epistemic Learned Helplessness](https://slatestarcodex.com/2019/06/03/repost-epistemic-learned-helplessness/)
+- [Ask HN: How do AI agents help you in your daily life?](https://news.ycombinator.com/item?id=50385157)
+- [Show HN: I built Postraid to help founders create social media content with AI](https://www.postraid.com)
+- [4.2-Kiloyear Event May Have Helped Cause the Collapse of Egyptian Old Kingdom](https://www.iflscience.com/the-42-kiloyear-event-may-have-helped-cause-the-collapse-of-the-egyptian-old-kingdom-and-the-indus-valley-civilization-83103)
+- [A painting went missing 20 years ago. Police tracked it down with the help of AI](https://www.bbc.com/future/article/20261027-this-painting-went-missing-20-years-ago-police-tracked-it-down-with-the-help-of-ai)
+- [Help your friends get ADHD and depression meds](https://www.lesswrong.com/posts/8qYuy9Cr6BNpgjJjT/help-your-friends-get-adhd-and-depression-meds)
+- [Have a 401(k)? Help ProPublica Investigate What's Happening to Your Money](https://www.propublica.org/getinvolved/share-401k-fees-retirement-investment)
+- [A woman possibly using AI to help murder her husband – a play](http://awbvious.com/LittleRose.html)
+- [NHS breach helpline left staff carrying a 'significant emotional burden'](https://www.theregister.com/security/2026/11/07/nhs-breach-helpline-left-staff-carrying-a-significant-emotional-burden/5308201)
+- [Democratic sweep could slow AI growth in US – and help China's ambitions](https://www.scmp.com/tech/big-tech/article/3373295/how-democratic-sweep-could-slow-ai-growth-us-and-help-chinas-ambitions)
+- [Does a code knowledge graph help coding agents? 360 trials found no clear gain](https://www.srijans.space/graphify-benchmark)
+- ["Jumping genes" helped ants evolve after the extinction of the dinosaurs](https://www.uni-muenster.de/news/view.php?cmdid=15659&utm_source=join1440&utm_medium=email&utm_placement=newsletter&user_id=66c4bf745d78644b3aa57b08)
+- [Can AI slop help us save the internet?](https://news.spencer.place/p/can-ai-slop-help-us-save-the-internet)
+- [A former volunteer is attempting to sue Skyblivion and we need your help [video]](https://www.youtube.com/watch?v=cbECoFxtaI4)
+- [What Does Your Data Reveal About Sports Betting Apps? Help ProPublica Find Out](https://projects.propublica.org/sports-betting-uploader/)
+- [For learning self help content, deciding what to believe is most important](https://www.milanmecklenburg.com/p/for-learning-self-help-content-deciding)
+- [Want to fly to the moon? NASA is looking for new astronauts to help grow its Art](https://phys.org/news/2026-11-fly-moon-nasa-astronauts-artemis.html)
+- [Ask HN: Can you help me design my YouTube feed?](https://news.ycombinator.com/item?id=50344418)
+- [Show HN: Help me pick a logo animation for my in-browser AI creature game](https://id-le.com/review/intro-logo-animation)
+- [Modernising 40-year-old scientific code with Gemini 4 Argon](https://antigravity.google/blog/modernizing-40-year-old-scientific-code-with-gemini-4-argon/)
+- [Show HN: My compact, bio inspired distributed edge detection algorithm](https://github.com/RenderBear/haci)
+- [Sailing Solo Around Britain](https://sites.google.com/view/sailing-solo-around-britain/leisure-27-dark-star)
+- [The Pnyx and the Agora (2016)](https://www.readingdesign.org/the-pnyx-and-the-agora)
+- [Why a pink potato-like robot is wheeling around Philadelphia](https://www.popsci.com/science/orifice-awebot-robot-philadelphia/)
+- [Meteorite found in the Sahara shows what Mars was like 4.1 billion years ago](https://www.cnn.com/2026/11/06/science/mars-meteorite-sahara-teghaza-discovery)
+- [More Than 30M Years Ago, Monkeys Rafted Across the Atlantic to South America](https://www.smithsonianmag.com/science-nature/monkeys-raft-across-atlantic-twice-180974637/)
+- [Choice of Agonies [pdf]](https://freebsdfoundation.org/wp-content/uploads/2026/09/FreeBSDJournal.2026.Fall_.Lucas_.LettersChoiceofAgonies.pdf)
+- [Ask HN: What's your current AI agentic setup?](https://news.ycombinator.com/item?id=50366117)
+- [Show HN: HackerTV – HN's most-recommended Youtube videos as 24/7 TV channels](https://hackertv.org)
+- [Launch HN: Kino AI (YC S23) – AI media manager and video editor](https://news.ycombinator.com/item?id=50368804)
+- [Show HN: Waymark – A workflow engine that compiles jobs instead of replaying](https://github.com/piercefreeman/waymark)
+- [Show HN: Agents infer Lego mechanisms from sources, then animate them](https://github.com/anteloc/ldraw-mecha/tree/v0.5.0)
+- [Tell HN: You now need a government id in order to create an Anthropic account](https://news.ycombinator.com/item?id=50356209)
+- [Show HN: 13M opinions on 48k products extracted from Reddit and HN](https://www.trustmebro.reviews/)
+- [We're bringing back the HN meeting in Mexico City](https://news.ycombinator.com/item?id=50407115)
+- [Tell HN: Google Play will public-share your address and phone if you sell in EU](https://news.ycombinator.com/item?id=50375898)
+- [Show HN: AI Gude – my feeds as a daily podcast, revived with AI](https://github.com/alex0ptr/aigude)
+- [Ask HN: What are the fundamentals of agentic coding?](https://news.ycombinator.com/item?id=50376478)
+- [Show HN: Get Better at Piano with Noodle](https://news.ycombinator.com/item?id=50377933)
+- [Show HN: Aggregate Finance, your financial data in a spreadsheet you own](https://app.aggregatefi.com/)
+- [Ask HN: How are companies hiring developers nowadays?](https://news.ycombinator.com/item?id=50392710)
+- [Ask HN: How's your home-cooked software revolution going?](https://news.ycombinator.com/item?id=50391446)
+- [Show HN: Who and where are your anagranames?](https://louisabraham.github.io/anagranames/)
+- [Show HN: KeepPlain – ask your coding agent why a line of code exists](https://keepplain.com)
+- [Show HN: Plugin to Create Product Videos](https://github.com/Flux-AI-Agent/fluxcut-plugin)
+- [What Is a Complicated/Complex/Wicked Problem](https://www.fluxlinks.com/blog/what-is-a-complex-problem)
+- [Need for Speed Underground 2 online in the browser](https://nfsu2.xyz/)
+- [No brother of mine will play the flute](https://homosabiens.substack.com/p/no-brother-of-mine-will-play-the)
+- [Wing: Port Forwarding Tool with Built-In Flutter Build and Forwarding Support](https://wingserver.vercel.app)
+- [Launch HN: Rivet (YC W23) – Scale and Orchestrate Agents on S3](https://github.com/rivet-dev/rivet)
+- [Show HN: An online shop where your friends can hurry the courier](https://www.dopaminechic.com/)
+- [Show HN: MxRaven – Programmable email infra for nothing in particular](https://sandbox.mxraven.com/)
+- [Spreading Liquid with Three.js](https://mofu-dev.com/en/blog/fluid-foundation/)
+- [Show HN: Enmetu – Git auto-commit that holds conflicts](https://codefloe.com/fluado/enmetu)
+- [Show HN: A table view for all your Trello cards](https://trello.com/power-ups/6ae62312ef3825846d6e2499/table-view-%E2%9D%A4%EF%B8%8F)
+- [Agent memory needs its OpenTelemetry moment](https://www.lorekit.io/blog/open-agent-memory-format)
+
+## Heise Cloud (5)
+
+- [Neue Datenschutzklausel bei M365 sorgt für Verwirrung](https://www.heise.de/news/Neue-Datenschutzklausel-bei-M365-sorgt-fuer-Verwirrung-11516122.html)
+- [Public IT 2027: c't-Konferenz für den öffentlichen Sektor sucht Vorträge](https://www.heise.de/news/Public-IT-2027-c-t-Konferenz-fuer-den-oeffentlichen-Sektor-sucht-Vortraege-11513451.html)
+- [Bye-bye Microsoft: Nextcloud und Ionos starten Bildungsplattform für Schulen](https://www.heise.de/news/Nextcloud-und-Ionos-Open-Source-Bildungsplattform-fuer-sechs-Bundeslaender-11510231.html)
+- [Trotz Rekordwachstum: Deutsche Rechenzentren global abgehängt](https://www.heise.de/news/KI-treibt-Rechenzentren-doch-Deutschland-hinkt-global-hinterher-11509550.html)
+- [Amutable: Wer falsch konfiguriert ist, fliegt aus dem Linux-Cluster](https://www.heise.de/news/Amutable-Foundations-Linux-das-seinen-Zustand-beweist-11508260.html)
+
+## InfoQ Cloud Native (1)
+
+- [Presentation: Zero Trust Agent Systems that Pass Audits and Still Ship](https://www.infoq.com/presentations/zero-trust-ai-agents-production-security/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=Cloud+Computing)
+
+## OpenSSF Blog (5)
+
+- [OpenSSF Community Day Europe 2026: Driving Systemic Security and Operational Resilience in Open Source](https://openssf.org/blog/2026/11/06/openssf-community-day-europe-2026-driving-systemic-security-and-operational-resilience-in-open-source/)
+- [From Sigstore to CRA readiness: Sylva’s journey with OpenSSF](https://openssf.org/blog/2026/11/06/from-sigstore-to-cra-readiness-sylvas-journey-with-openssf/)
+- [Case Study: Kubescape Completes All Six Security Slam Badges with OpenSSF](https://openssf.org/blog/2026/11/05/case-study-kubescape-completes-all-six-security-slam-badges-with-openssf/)
+- [The PHP Security Wake-Up Call: Fixes Are Only the Beginning](https://openssf.org/blog/2026/11/03/the-php-security-wake-up-call-fixes-are-only-the-beginning/)
+- [What’s in the SOSS? Podcast #77 – S3E29 Baking Security into the Toolchain: Accurate Swift SBOMs with Apple’s Ev Cheng and Sam Khouri](https://openssf.org/podcast/2026/11/03/whats-in-the-soss-podcast-77-s3e29-baking-security-into-the-toolchain-accurate-swift-sboms-with-apples-ev-cheng-and-sam-khouri/)
+
+## The New Stack (24)
+
+- [Moving from AI adoption to an AI operating model: How Docusign engineering went beyond tool rollout](https://thenewstack.io/docusign-ai-engineering-adoption/)
+- [Scaling an autonomous agent from one team to fifty: A serverless-to-container decision framework](https://thenewstack.io/scaling-autonomous-agents-framework/)
+- [Perplexity’s AI agents keep working after you close the tab](https://thenewstack.io/perplexity-teammates-agent-orchestration/)
+- [How we review 4x more AI code without reading every line](https://thenewstack.io/scale-ai-code-reviews/)
+- [In the software factory, engineers become process engineers](https://thenewstack.io/engineers-become-process-engineers/)
+- [AI agents are getting more complex. Developers shouldn’t have to babysit them.](https://thenewstack.io/harness-engineering-coding-agents/)
+- [Cognition turned an open model into a coding beast. But it won’t release the weights.](https://thenewstack.io/cognition-flash-private-weights/)
+- [Meta’s best AI model now trains the one most of its users get](https://thenewstack.io/meta-muse-specialized-models/)
+- [“Most apps never make it off localhost”: Cursor takes on Lovable and Replit with fully managed app deployment](https://thenewstack.io/cursor-ai-app-deployment/)
+- [Kubernetes, mark II? Why Google’s giving away gVisor, a code sandbox used by Anthropic and OpenAI](https://thenewstack.io/gvisor-cncf-kubernetes-open-source/)
+- [HumanLayer just got acquired by Factory. But it gave users a way out first.](https://thenewstack.io/factory-acquires-humanlayer-agents/)
+- [OpenAI’s new GPT-6 Cyber is better at hacking and better at staying in its lane](https://thenewstack.io/openai-gpt6-cyber-exploits/)
+- [Together AI let coding agents rewrite its GPU code. Then it kept humans on the deploy button.](https://thenewstack.io/together-compiler-gpu-optimization/)
+- [Raindrop simulates your agent’s world to catch what your changes break](https://thenewstack.io/raindrop-simulations-ai-agents/)
+- [Groundcover automates Kubernetes sizing. Engineers set the bounds.](https://thenewstack.io/groundcover-autonomous-kubernetes-rightsizing/)
+- [AI failures threaten incident management: Here are 4 ways to avoid them.](https://thenewstack.io/ai-failures-incident-management/)
+- [Postcards from tomorrow: Powering the agentic era through open source](https://thenewstack.io/kubernetes-ai-learning-loop/)
+- [I broke a working agent seven ways. The metric I was watching caught two of them.](https://thenewstack.io/monitoring-production-ai-agents/)
+- [From open beta to global GA: What Docusign learned by bringing contract AI workflows to agents](https://thenewstack.io/docusign-mcp-server-agents/)
+- [How the new streamhouse architecture solves agentic AI’s data problem](https://thenewstack.io/streamhouse-architecture-ai-agents/)
+- [Postgres and ClickHouse can share tables. EnterpriseDB wants one set of rules to govern them.](https://thenewstack.io/edb-altinity-postgres-clickhouse/)
+- [Anthropic found a way to prove which AI model answered you — but there’s a costly catch](https://thenewstack.io/anthropic-flashprove-model-verification/)
+- [Render just removed its AI sandbox time limit — and Vercel still has a 24-hour cap](https://thenewstack.io/render-vercel-ai-sandboxes/)
+- [Fortra says AI could save file transfer admins up to 160 hours a year](https://thenewstack.io/failed-file-transfer-ai-troubleshooting/)
+
+
+---
+
+[← Back to Newsletter](https://lwcn.dev/newsletter/2026-week-46/)

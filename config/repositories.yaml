@@ -150,6 +150,11 @@ repositories:
     name: Kubernetes
     owner: kubernetes
     repo: kubernetes
+  - category: build
+    cncf_status: graduated
+    name: KubeVirt
+    owner: kubevirt
+    repo: kubevirt
   - category: security
     cncf_status: graduated
     name: Kyverno
@@ -160,6 +165,11 @@ repositories:
     name: Linkerd
     owner: linkerd
     repo: linkerd2
+  - category: messaging
+    cncf_status: graduated
+    name: NATS
+    owner: nats-io
+    repo: nats-server
   - category: security
     cncf_status: graduated
     name: Open Policy Agent (OPA)
@@ -229,6 +239,11 @@ repositories:
     name: Cloud Custodian
     owner: cloud-custodian
     repo: cloud-custodian
+  - category: database
+    cncf_status: incubating
+    name: CloudNativePG
+    owner: cloudnative-pg
+    repo: cloudnative-pg
   - category: security
     cncf_status: incubating
     name: Confidential Containers
@@ -299,11 +314,6 @@ repositories:
     name: KubeVela
     owner: kubevela
     repo: kubevela
-  - category: build
-    cncf_status: incubating
-    name: KubeVirt
-    owner: kubevirt
-    repo: kubevirt
   - category: container-runtime
     cncf_status: incubating
     name: Lima
@@ -334,16 +344,16 @@ repositories:
     name: Microcks
     owner: microcks
     repo: microcks
-  - category: messaging
-    cncf_status: incubating
-    name: NATS
-    owner: nats-io
-    repo: nats-server
   - category: security
     cncf_status: incubating
     name: Notary Project
     owner: notaryproject
     repo: notation
+  - category: orchestration
+    cncf_status: incubating
+    name: Open Cluster Management
+    owner: open-cluster-management-io
+    repo: ocm
   - category: ci-cd
     cncf_status: incubating
     name: OpenCost
@@ -508,11 +518,6 @@ repositories:
     name: Chaosblade
     owner: chaosblade-io
     repo: chaosblade
-  - category: database
-    cncf_status: sandbox
-    name: CloudNativePG
-    owner: cloudnative-pg
-    repo: cloudnative-pg
   - category: orchestration
     cncf_status: sandbox
     name: Clusternet
@@ -893,11 +898,6 @@ repositories:
     name: OAuth2 Proxy
     owner: oauth2-proxy
     repo: oauth2-proxy
-  - category: orchestration
-    cncf_status: sandbox
-    name: Open Cluster Management
-    owner: open-cluster-management-io
-    repo: ocm
   - category: security
     cncf_status: sandbox
     name: Open Policy Containers
