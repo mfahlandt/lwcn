@@ -1,0 +1,20 @@
+🛡️ OPA v1.22.4 Addresses Go HTTP/1 Server Vulnerability
+
+Open Policy Agent (OPA) released version 1.22.4 this week, which includes a fix for CVE-2026-97054. This vulnerability in Go's HTTP/1 server could lead to a server crash due to a header race when MaxBytesReader's limit was exceeded, impacting OPA instances utilizing this server.
+
+🚀 Key releases:
+
+*   OPA v1.22.4: Fixed CVE-2026-97054, a vulnerability in Go's HTTP/1 server that could cause a server crash due to a header race when MaxBytesReader's limit was exceeded. This improves the stability of OPA deployments.
+*   Podman v6.2.0 and v5.8.10: Included fixes for CVE-2026-121885 and CVE-2026-111361. CVE-2026-121885 addressed a flaw where untrusted image labels could manipulate podman auto-update into restarting incorrect systemd units. CVE-2026-111361 fixed an issue where malicious containers could affect host filesystems.
+*   Kube-OVN v1.17.1: Introduced a breaking change where direct logical-port traffic no longer skips conntrack by default. This alters default network policy enforcement behavior, requiring review for existing network configurations.
+*   Kuberhealthy v3.1.0: Added built-in HTTP and TCP HealthChecks that execute directly from the Kuberhealthy controller. This removes the need to create separate checker pods for these basic health checks, reducing resource consumption.
+*   Harbor v2.16.0: Added a source column to artifact_accessory for identifying accessory sources and replaced Redis with Valkey for internal caching. This changes how artifact metadata is stored and updates an internal dependency.
+
+📰 Notable news/trends summary:
+
+KubeRay, a Kubernetes operator for Ray, a framework for AI applications, was donated to the Cloud Native Computing Foundation (CNCF). The CNCF also announced the introduction of CNCF User Groups, intended as long-lived communities for end-user collaboration. Discussions within the CNCF ecosystem highlighted advancements in gang scheduling and topology-aware placement for AI training workloads in Kubernetes.
+
+What technical considerations arise when upgrading Kube-OVN given the change in default conntrack behavior for direct logical-port traffic?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-47/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps

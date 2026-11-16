@@ -1,0 +1,8 @@
+🛡️ OPA v1.22.4 released.
+
+Highlights this week:
+• Fixed CVE-2026-97054 in Go's HTTP/1 server.
+• Podman v6.2.0/v5.8.10 fixed CVE-2026-121885, CVE-2026-111361.
+• Kube-OVN v1.17.1 changed default conntrack behavior for logical-port traffic.
+
+👉 Check out the latest edition in my newsletter!
