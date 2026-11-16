@@ -1,0 +1,4 @@
+🛡️ OPA v1.22.4 fixes CVE-2026-97054.
+Podman v6.2.0/v5.8.10 fixes CVE-2026-121885, CVE-2026-111361.
+Kube-OVN v1.17.1 alters default conntrack behavior.
+Full breakdown:

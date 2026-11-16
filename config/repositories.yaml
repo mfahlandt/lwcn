@@ -483,6 +483,11 @@ repositories:
     name: Cadence Workflow
     owner: cadence-workflow
     repo: cadence
+  - category: configuration
+    cncf_status: sandbox
+    name: CAIPE
+    owner: caipe-io
+    repo: ai-platform-engineering
   - category: orchestration
     cncf_status: sandbox
     name: Capsule
@@ -818,6 +823,11 @@ repositories:
     name: KubeFleet
     owner: kubefleet-dev
     repo: kubefleet
+  - category: orchestration-and-scheduling
+    cncf_status: sandbox
+    name: KubeRay
+    owner: ray-project
+    repo: kuberay
   - category: observability
     cncf_status: sandbox
     name: Kuberhealthy
@@ -873,6 +883,11 @@ repositories:
     name: LoxiLB
     owner: loxilb-io
     repo: loxilb
+  - category: model-asset-and-registry
+    cncf_status: sandbox
+    name: MatrixHub
+    owner: matrixhub-ai
+    repo: matrixhub
   - category: networking
     cncf_status: sandbox
     name: MetalLB
@@ -938,7 +953,7 @@ repositories:
     name: OpenGitOps
     owner: open-gitops
     repo: project
-  - category: orchestration
+  - category: security
     cncf_status: sandbox
     name: OpenShell
     owner: NVIDIA
@@ -1143,6 +1158,11 @@ repositories:
     name: Visual Studio Code Kubernetes Tools
     owner: vscode-kubernetes-tools
     repo: vscode-kubernetes-tools
+  - category: build
+    cncf_status: sandbox
+    name: VMAPI
+    owner: vm-api
+    repo: vm-api
   - category: container-runtime
     cncf_status: sandbox
     name: WasmEdge Runtime
