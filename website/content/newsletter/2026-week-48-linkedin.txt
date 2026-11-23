@@ -1,0 +1,20 @@
+⚠️ Kubernetes Project Schedules Kube-Proxy IPVS Backend Removal
+
+The Kubernetes project announced the planned removal of the IPVS backend for kube-proxy. This change will impact users who rely on IPVS for in-cluster service load balancing, requiring a transition to alternative kube-proxy modes.
+
+🚀 Key releases
+
+*   Atlantis v0.50.0 fixed a high-severity security advisory and introduced a breaking change. API and drift detection features now require an explicit experiment opt-in.
+*   KubeVela v1.11.2 included security patches. Images shipped by default now avoid compromised eMudhra CA chains (GO-2026-6809). Vela-core generates its own webhook and cluster-gateway certificates, and outbound HTTP from workflows is guarded against cloud-metadata addresses.
+*   Cedar Policy SymCC v0.9.0 introduced a breaking change: CompiledPolicy::compile() and CompiledPolicySet::compile() now require a CompiledSchema parameter instead of a Schema. This change avoids redundant symbolic entity computation when compiling multiple policies.
+*   bootc v1.17.5 fixed a security issue in sealed composefs where meta.json on disk could override UKI-defined verity enforcement. The release also hardened the system to prevent root filesystem mounting as a fallback during verification failures.
+*   Cortex v1.22.0 removed deprecated flags and implemented stricter configuration checks, aiming to improve configuration management and prevent future issues.
+
+📰 Notable news/trends summary
+
+The Kubernetes blog published an article scheduling the removal of the kube-proxy IPVS backend, outlining the future deprecation timeline. In security news, Scorecard v5.7.0 was released, built with Go 1.27.4, which rejects TLS certificate chains through the distrusted eMudhra intermediate CAs (GO-2026-6809). CNCF blog posts explored optimizing Kubernetes admission control, specifically analyzing Kyverno's CEL admission cost, and detailed a technical incident involving Argo CD's self-heal mechanism skipping a migration hook. Another article discussed the technical role of runtime security tools within cloud-native environments.
+
+What technical considerations do you foresee with the planned removal of the kube-proxy IPVS backend for your cluster deployments?
+
+📖 Read the full newsletter with all releases and articles: https://lwcn.dev/newsletter/2026-week-48/
+#Kubernetes #CloudNative #OpenSource #K8s #DevOps
