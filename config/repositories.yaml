@@ -428,6 +428,11 @@ repositories:
     name: Agones
     owner: agones-dev
     repo: agones
+  - category: framework
+    cncf_status: sandbox
+    name: AI Runway
+    owner: ai-runway
+    repo: airunway
   - category: configuration
     cncf_status: sandbox
     name: Akri
@@ -613,6 +618,11 @@ repositories:
     name: external-secrets
     owner: external-secrets
     repo: external-secrets
+  - category: container-runtime
+    cncf_status: sandbox
+    name: gVisor
+    owner: gvisor
+    repo: gvisor
   - category: observability
     cncf_status: sandbox
     name: Headlamp
@@ -663,6 +673,11 @@ repositories:
     name: k0s
     owner: k0sproject
     repo: k0s
+  - category: orchestration
+    cncf_status: sandbox
+    name: K2s
+    owner: k2s-project
+    repo: k2s
   - category: certified-kubernetes---distribution
     cncf_status: sandbox
     name: k3s
@@ -826,7 +841,7 @@ repositories:
   - category: orchestration-and-scheduling
     cncf_status: sandbox
     name: KubeRay
-    owner: ray-project
+    owner: kuberay-project
     repo: kuberay
   - category: observability
     cncf_status: sandbox
@@ -953,6 +968,11 @@ repositories:
     name: OpenGitOps
     owner: open-gitops
     repo: project
+  - category: post-training
+    cncf_status: sandbox
+    name: OpenRL
+    owner: openrl-dev
+    repo: openrl
   - category: security
     cncf_status: sandbox
     name: OpenShell
@@ -1058,6 +1078,11 @@ repositories:
     name: Score
     owner: score-spec
     repo: spec
+  - category: configuration
+    cncf_status: sandbox
+    name: SDC
+    owner: sdcio
+    repo: docs
   - category: service-mesh
     cncf_status: sandbox
     name: Sermant

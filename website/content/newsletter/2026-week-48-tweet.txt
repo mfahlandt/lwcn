@@ -1,0 +1,4 @@
+⚠️ Kubernetes schedules kube-proxy IPVS backend removal.
+* Atlantis v0.50.0: high-severity security fix, breaking change.
+* KubeVela v1.11.2: security patches, eMudhra CA (GO-2026-6809) addressed.
+Full breakdown:
